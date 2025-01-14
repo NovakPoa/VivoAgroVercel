@@ -1,17 +1,13 @@
 import React, { useEffect } from 'react';
-import { useThree, useLoader } from '@react-three/fiber';
-import * as THREE from 'three';
-
-import px from '/textures/px.jpg'; // right
-import nx from '/textures/nx.jpg'; // left
-import py from '/textures/py.jpg'; // top
-import pz from '/textures/pz.jpg'; // front
-import ny from '/textures/ny.jpg'; // bottom
-import nz from '/textures/nz.jpg'; // back
+import { useThree } from '@react-three/fiber';
+import { useCubeTexture } from '@react-three/drei';
 
 const Background = () => {
   const { scene } = useThree();
-  const texture = useLoader(THREE.CubeTextureLoader, [[px, nx, py, ny, pz, nz]]);
+  const texture = useCubeTexture(
+    ['px.jpg', 'nx.jpg', 'py.jpg', 'ny.jpg', 'pz.jpg', 'nz.jpg'],
+    { path: '/textures/' }
+  );
 
   useEffect(() => {
     scene.background = texture;
