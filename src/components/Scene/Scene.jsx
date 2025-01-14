@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Canvas } from '@react-three/fiber';
+import Background from './Background';
 import Box from '../Objects/Box';
 
 const Scene = () => {
@@ -10,11 +11,14 @@ const Scene = () => {
   };
 
   return (
-    <Canvas>
-      <ambientLight intensity={0.1} />
-      <directionalLight color={lightColor} position={[0, 0, 5]} />
-      <Box onClick={handleClick} color={lightColor} />
-    </Canvas>
+    <div className='canvas-container'>
+      <Canvas className="canvas" >
+        <ambientLight intensity={0.1} />
+        <directionalLight color={lightColor} position={[0, 0, 5]} />
+        <Box onClick={handleClick} color={lightColor} />
+        <Background />
+      </Canvas>
+    </div>
   );
 };
 
