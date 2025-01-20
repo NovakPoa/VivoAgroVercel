@@ -37,7 +37,7 @@ body {
   height: 100%;
 }
 
-.canvas-container {
+.scene-container {
   position: fixed;
   top: 0;
   left: 0;

@@ -1,0 +1,42 @@
+.card {
+  display: flex;
+  max-width: 800px;
+  height: 400px;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10; /* Ensure it is on top of the canvas */
+}
+
+.card-content h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.card-content p {
+  font-size: 16px;
+  color: #777;
+  margin-bottom: 20px;
+}
+
+.card-button {
+  align-self: flex-start;
+  background-color: #6a0dad;
+  color: white;
+  font-size: 16px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
