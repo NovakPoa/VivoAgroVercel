@@ -3,7 +3,8 @@ import AgroCoberturaCard from './AgroCoberturaCard';
 import { SceneContext } from '../../../context/SceneContext';
 
 const AgroCobertura = ({ isVisible }) => {
-  const cameraAnimDuration = 2000;
+  const cameraAnimDuration = 8000;
+  const showCardDelay = 2000;
 
   const [showCard, setShowCard] = useState(false);
   const { setCameraTarget } = useContext(SceneContext);
@@ -28,7 +29,7 @@ const AgroCobertura = ({ isVisible }) => {
       startCameraAnimation();
       timer = setTimeout(() => {
         setShowCard(true);
-      }, cameraAnimDuration - 500);
+      }, showCardDelay);
     } else {
       setShowCard(false);
     }
