@@ -1,15 +1,13 @@
 import React, { useContext } from 'react';
-import AgroCobertura from '../Products/AgroCobertura';
-import GestaoMaquinario from '../Products/GestaoMaquinario';
-import { CardsContext } from '../../context/ProductsContext';
+import AgroCobertura from '../Products/AgroCobertura/AgroCobertura';
+import { SceneContext } from '../../context/SceneContext';
 
 const Products = () => {
-  const { showAgroCobertura, showGestaoMaquinario } = useContext(CardsContext);
+  const { startAgroCobertura } = useContext(SceneContext);
 
   return (
     <div className="products-container">
-      <AgroCobertura isVisible={showAgroCobertura} />
-      <GestaoMaquinario isVisible={showGestaoMaquinario} />
+      <AgroCobertura isVisible={startAgroCobertura} />
     </div>
   );
 };

@@ -6,7 +6,7 @@ import { SceneContext } from '../../context/SceneContext';
 
 const Camera = () => {
   const { camera, gl } = useThree();
-  const { targetPoint, animate, setAnimate } = useContext(SceneContext);
+  const { targetPoint, animate, setAnimate, animationDuration } = useContext(SceneContext);
   const controlsRef = useRef();
 
   useEffect(() => {
@@ -14,7 +14,7 @@ const Camera = () => {
       const target = { x: targetPoint[0], y: targetPoint[1], z: targetPoint[2] };
 
       gsap.to(controlsRef.current.target, {
-        duration: 2,
+        duration: animationDuration,
         x: target.x,
         y: target.y,
         z: target.z,

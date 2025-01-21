@@ -5,8 +5,9 @@ import Camera from './Camera';
 import UIMenu from '../UIs/Menu/UIMenu';
 import Box from '../Objects/Box';
 import Intro from '../Intro/Intro';
+import Products from '../Products/Products';
 import { SceneContext, SceneProvider } from '../../context/SceneContext';
-import { IntroContext, IntroProvider } from '../../context/IntroContext';
+
 
 const SceneContent = () => {
   const { lightColor } = useContext(SceneContext);
@@ -26,7 +27,7 @@ const SceneContent = () => {
         <Background />
       </Canvas>
       <Intro />
-      {/* <UIMenu /> */}
+      <Products />
     </div>
   );
 };
@@ -34,9 +35,7 @@ const SceneContent = () => {
 const Scene = () => {
   return (
     <SceneProvider>
-      <IntroProvider>
-        <SceneContent />
-      </IntroProvider>
+      <SceneContent />
     </SceneProvider>
   );
 };

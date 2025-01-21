@@ -1,13 +1,40 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import IntroCard from '../Intro/IntroCard';
-import { IntroContext } from '../../context/IntroContext';
+import { SceneContext } from '../../context/SceneContext';
 
 const Intro = () => {
-  const { showIntroCard } = useContext(IntroContext);
+  const startIntroDelay = 1000;
+  const showIntroCardDelay = 1000;
+
+  const { showIntroCard, setShowIntroCard, setStartAgroCobertura } = useContext(SceneContext);
+
+  const startAnimation = () => {
+    console.log("Animation started");
+    ///
+  }
+
+  const onButtonClick = () => {
+    console.log("Button Clicked");
+    setShowIntroCard(false);
+    setStartAgroCobertura(true);
+  }
+
+  const startIntroTimer = () => {
+    setTimeout(() => {
+      startAnimation();
+      setTimeout(() => {
+        setShowIntroCard(true);
+      }, showIntroCardDelay);      
+    }, startIntroDelay);
+  }
+
+  useEffect(() => {
+    startIntroTimer();
+  } , []);
 
   return (
     <div className="intro-container">
-      <IntroCard isVisible={showIntroCard} />
+      <IntroCard isVisible={showIntroCard} onButtonClick={onButtonClick} />
     </div>
   );
 };

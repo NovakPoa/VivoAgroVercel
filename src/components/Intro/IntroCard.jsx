@@ -1,7 +1,7 @@
 import React from 'react';
 import './IntroCard.css';
 
-const Intro = ({ isVisible }) => {
+const Intro = ({ isVisible, onButtonClick }) => {
   if (!isVisible) return null;
 
   return (
@@ -9,7 +9,7 @@ const Intro = ({ isVisible }) => {
       <div className="card-content">
         <h2>Intro</h2>
         <p>Aqui Intro Card.</p>
-        <button className="card-button">Start</button>
+        <button className="card-button" onClick={onButtonClick}>Start</button>
       </div>
     </div>
   );
