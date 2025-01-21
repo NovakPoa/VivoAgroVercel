@@ -1,10 +1,10 @@
-import React, { useRef, useEffect, useContext } from 'react';
+import React, { useRef, useEffect, useContext, useState } from 'react';
 import { gsap } from 'gsap';
-import { SceneContext } from '../../../../context/SceneContext';
+import useIntroStore from '../../../../stores/IntroStore';
 
 const IntroObject = () => {
   const meshRef = useRef();
-  const { introObjectVisible, introObjectAnimate, setIntroObjectAnimate } = useContext(SceneContext);
+  const { introObjectVisible, introObjectAnimate, setIntroObjectAnimate } = useIntroStore();
 
   const target = { x: -5, y: 2, z: -15 };
   const duration = 2; 

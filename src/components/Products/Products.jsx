@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
 import AgroCobertura from '../Products/AgroCobertura/AgroCobertura';
-import { SceneContext } from '../../context/SceneContext';
+import useAgroCoberturaStore from '../../stores/AgroCoberturaStore';
 
 const Products = () => {
-  const { startAgroCobertura } = useContext(SceneContext);
+  const { agroCoberturaObjectVisible } = useAgroCoberturaStore();
 
   return (
     <div className="products-container">
-      <AgroCobertura isVisible={startAgroCobertura} />
+      <AgroCobertura isVisible={agroCoberturaObjectVisible} />
     </div>
   );
 };

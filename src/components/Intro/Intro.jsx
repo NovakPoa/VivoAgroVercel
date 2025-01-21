@@ -1,13 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react';
 import IntroCard from '../Intro/IntroCard';
-import { SceneContext } from '../../context/SceneContext';
+import useIntroStore from '../../stores/IntroStore';
+import useAgroCoberturaStore from '../../stores/AgroCoberturaStore';
 
 const Intro = () => {
   const startIntroDelay = 4000;
   const showIntroCardDelay = 4000;
 
   const [showCard, setShowCard] = useState(false);
-  const { setIntroObjectAnimate, setStartAgroCobertura, setIntroObjectVisible } = useContext(SceneContext);
+  const { setIntroObjectAnimate, setIntroObjectVisible } = useIntroStore();
+  const { setAgroCoberturaObjectVisible } = useAgroCoberturaStore();
 
   const startAnimation = () => {
     setIntroObjectAnimate(true);
@@ -15,7 +17,7 @@ const Intro = () => {
 
   const onButtonClick = () => {
     setShowCard(false);
-    setStartAgroCobertura(true);
+    setAgroCoberturaObjectVisible(true);
     setIntroObjectVisible(false);
   }
 
