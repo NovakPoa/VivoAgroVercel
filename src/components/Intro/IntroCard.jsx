@@ -1,5 +1,4 @@
 import React from 'react';
-import './IntroCard.css';
 
 const Intro = ({ isVisible, onButtonClick }) => {
   if (!isVisible) return null;

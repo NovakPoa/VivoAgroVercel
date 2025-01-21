@@ -2,8 +2,7 @@ import React, { useContext } from 'react';
 import { Canvas } from '@react-three/fiber';
 import Background from './Background';
 import Camera from './Camera';
-import UIMenu from '../UIs/Menu/UIMenu';
-import Box from '../Objects/Box';
+import AnimatedObjects from './Objects/AnimatedObjects/AnimatedObjects';
 import Intro from '../Intro/Intro';
 import Products from '../Products/Products';
 import { SceneProvider } from '../../context/SceneContext';
@@ -14,14 +13,9 @@ const SceneContent = () => {
       <Canvas className="canvas" camera={{ position: [0, 1.7, 5] }}>
         <ambientLight intensity={0.1} />
         <directionalLight position={[0, 0, 5]} />
-        <Box position={[0, 0, -20]}/>
-{/*         <Box color={lightColor} position={[30, 0, -8]}/>
-        <Box color={lightColor} position={[-30, 0, -8]}/>
-        <Box color={lightColor} position={[30, 0, 8]}/>
-        <Box color={lightColor} position={[-30, 0, 8]}/>   
-        <Box color={lightColor} position={[0, 0, 20]}/>    */}  
         <Camera />
         <Background />
+        <AnimatedObjects />
       </Canvas>
       <Intro />
       <Products />

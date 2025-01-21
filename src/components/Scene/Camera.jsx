@@ -6,15 +6,15 @@ import { SceneContext } from '../../context/SceneContext';
 
 const Camera = () => {
   const { camera, gl } = useThree();
-  const { targetPoint, animate, setAnimate, animationDuration } = useContext(SceneContext);
+  const { cameraTargetPoint, cameraAnimate, setCameraAnimate, cameraAnimationDuration } = useContext(SceneContext);
   const controlsRef = useRef();
 
   useEffect(() => {
-    if (animate) {
-      const target = { x: targetPoint[0], y: targetPoint[1], z: targetPoint[2] };
+    if (cameraAnimate) {
+      const target = { x: cameraTargetPoint[0], y: cameraTargetPoint[1], z: cameraTargetPoint[2] };
 
       gsap.to(controlsRef.current.target, {
-        duration: animationDuration,
+        duration: cameraAnimationDuration,
         x: target.x,
         y: target.y,
         z: target.z,
@@ -22,11 +22,11 @@ const Camera = () => {
           controlsRef.current.update();
         },
         onComplete: () => {
-          setAnimate(false);
+          setCameraAnimate(false);
         }
       });
     }
-  }, [animate, targetPoint, setAnimate]);
+  }, [cameraAnimate, cameraTargetPoint, setCameraAnimate]);
 
   return <OrbitControls ref={controlsRef} args={[camera, gl.domElement]} />;
 };

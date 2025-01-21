@@ -3,20 +3,20 @@ import IntroCard from '../Intro/IntroCard';
 import { SceneContext } from '../../context/SceneContext';
 
 const Intro = () => {
-  const startIntroDelay = 1000;
-  const showIntroCardDelay = 1000;
+  const startIntroDelay = 4000;
+  const showIntroCardDelay = 4000;
 
   const [showCard, setShowCard] = useState(false);
-  const { setStartAgroCobertura } = useContext(SceneContext);
+  const { setIntroObjectAnimate, setStartAgroCobertura, setIntroObjectVisible } = useContext(SceneContext);
 
   const startAnimation = () => {
-    console.log("Animation started");
-    ///
+    setIntroObjectAnimate(true);
   }
 
   const onButtonClick = () => {
     setShowCard(false);
     setStartAgroCobertura(true);
+    setIntroObjectVisible(false);
   }
 
   const startIntroTimer = () => {

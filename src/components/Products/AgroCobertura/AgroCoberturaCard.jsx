@@ -1,5 +1,4 @@
 import React from 'react';
-import './AgroCoberturaCard.css';
 
 const AgroCoberturaCard = ({ isVisible, onContinueClick, onSkipClick }) => {
   if (!isVisible) return null;

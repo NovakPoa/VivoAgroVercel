@@ -4,26 +4,32 @@ export const SceneContext = createContext();
 
 export const SceneProvider = ({ children }) => {
 
-  const [animate, setAnimate] = useState(false);
-  const [targetPoint, setTargetPoint] = useState([0, 0, 0]);
-  const [animationDuration, setAnimationDuration] = useState(2);
+  const [cameraAnimate, setCameraAnimate] = useState(false);
+  const [cameraTargetPoint, setTargetPoint] = useState([0, 0, 0]);
+  const [cameraAnimationDuration, setCameraAnimationDuration] = useState(2);
   const [startAgroCobertura, setStartAgroCobertura] = useState(false);
+  const [introObjectVisible, setIntroObjectVisible] = useState(true);
+  const [introObjectAnimate, setIntroObjectAnimate] = useState(false);
 
   const setCameraTarget = ({ point, duration }) => {
     setTargetPoint(point);
-    setAnimationDuration(duration);
-    setAnimate(true);
+    setCameraAnimationDuration(duration);
+    setCameraAnimate(true);
   };
 
   return (
     <SceneContext.Provider value={{ 
-        targetPoint, 
+        cameraTargetPoint, 
         setCameraTarget, 
-        animate, 
-        setAnimate, 
-        animationDuration, 
+        cameraAnimate, 
+        setCameraAnimate, 
+        cameraAnimationDuration, 
         startAgroCobertura, 
-        setStartAgroCobertura 
+        setStartAgroCobertura ,
+        introObjectVisible,
+        setIntroObjectVisible,
+        introObjectAnimate,
+        setIntroObjectAnimate,
       }}>
       {children}
     </SceneContext.Provider>
