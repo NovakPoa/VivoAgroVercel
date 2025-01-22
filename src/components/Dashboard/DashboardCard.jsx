@@ -2,7 +2,10 @@ import React from 'react';
 import './DashboardCard.css';
 import ImageButton from '../UIs/ImageButton/ImageButton';
 import { RiResetRightFill } from "react-icons/ri";
-const DashboardCard = () => {
+
+const DashboardCard = ({isVisible}) => {
+  if (!isVisible) return null;
+
   return (
     <div className="dashboard-card">
       <div className="sidebar-buttons">
