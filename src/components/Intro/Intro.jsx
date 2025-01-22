@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import IntroCard from '../Intro/IntroCard';
 import useIntroStore from '../../stores/IntroStore';
-import useAgroCoberturaStore from '../../stores/AgroCoberturaStore';
+import useProductsStore from '../../stores/ProductsStore';
 
 const Intro = () => {
   const startIntroDelay = 1000;
@@ -9,7 +9,7 @@ const Intro = () => {
 
   const [showCard, setShowCard] = useState(false);
   const { setIntroObjectAnimate, setIntroObjectVisible } = useIntroStore();
-  const { setStartAgroCobertura } = useAgroCoberturaStore();
+  const { setCurrentProduct, setStartProduct } = useProductsStore();
 
   const startAnimation = () => {
     setIntroObjectAnimate(true);
@@ -17,7 +17,8 @@ const Intro = () => {
 
   const onButtonClick = () => {
     setShowCard(false);
-    setStartAgroCobertura(true);
+    setCurrentProduct('agro-cobertura');
+    setStartProduct(true);
   }
 
   const startIntroTimer = () => {
