@@ -18,7 +18,6 @@ const Intro = () => {
   const onButtonClick = () => {
     setShowCard(false);
     setStartAgroCobertura(true);
-    setIntroObjectVisible(false);
   }
 
   const startIntroTimer = () => {

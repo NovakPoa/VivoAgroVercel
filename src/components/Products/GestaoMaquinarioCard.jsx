@@ -1,0 +1,24 @@
+import React from 'react';
+import Card from '../../UIs/Card/Card';
+
+const GestaoMaquinarioCard = ({ isVisible, onContinueClick, onSkipClick }) => {
+  if (!isVisible) return null;
+
+  return (
+    <div className="card-container">
+      <Card 
+        title="Contratando Gestão de Maquinário" 
+        description="Monitore e controle toda sua frota em tempo real, aumentando a produtividade e reduzindo custos." 
+        showImage={true}
+        imageUrl="/textures/gestaoMaquinario.jpg"
+        fistButtonText="Contratar"
+        fistButtonOnClick={onContinueClick}
+        secondButton={true}
+        secondButtonText="Não possuo maquinário"
+        secondButtonOnClick={onSkipClick}        
+      />
+    </div>
+  );
+};
+
+export default GestaoMaquinarioCard;
