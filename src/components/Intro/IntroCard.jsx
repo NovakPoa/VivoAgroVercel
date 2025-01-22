@@ -1,19 +1,21 @@
 import React from 'react';
-import PrimaryButton from '../UIs/PrimaryButton/PrimaryButton';
-import SecondaryButton from '../UIs/SecondaryButton/SecondaryButton';
+import Card from '../UIs/Card/Card';
 
-const Intro = ({ isVisible, onButtonClick }) => {
+const IntroCard = ({ isVisible, onButtonClick }) => {
   if (!isVisible) return null;
 
   return (
-    <div className="card">
-      <div className="card-content">
-        <h2>Intro</h2>
-        <p>Aqui Intro Card.</p>
-        <PrimaryButton text="Começar" onClick={onButtonClick} />
-      </div>
+    <div className="card-container">
+      <Card 
+        title="Bem-vindo à Imersão Vivo Agro" 
+        description="Embarque nessa experiência para descobrir o que a tecnologia pode fazer pela sua fazenda." 
+        showImage={false}
+        secondButton={false}
+        fistButtonText="Começar"
+        fistButtonOnClick={onButtonClick}
+      />
     </div>
   );
 };
 
-export default Intro;
+export default IntroCard;
