@@ -1,0 +1,62 @@
+.dashboard-card {
+  max-width: 720px;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;   
+}
+
+.sidebar-buttons {
+  display: flex;
+  flex-direction: column;
+  padding: 24px 0px 24px 24px;
+  gap: 8px;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.sidebar-button {
+  background-color: #fff;
+  border: 0px solid #ccc;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.sidebar-button.active {
+  background-color: #ebebeb;
+}
+
+.sidebar-button img {
+  width: 28px;
+  height: 28px;
+}
+
+.main-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  padding: 24px;
+  flex-grow: 1;
+}
+
+/* Media Query for smaller screens */
+@media (max-width: 768px) {
+  .main-buttons {
+    grid-template-columns: 1fr;
+  }
+}
