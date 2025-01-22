@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import GestaoMaquinarioCard from './GestaoMaquinarioCard';
+import GestaoMaquinarioCard from '../GestaoMaquinarioCard';
 import useCameraStore from '../../../stores/CameraStore';
 
 const GestaoMaquinario = ({ isVisible }) => {

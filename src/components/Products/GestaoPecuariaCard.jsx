@@ -1,5 +1,5 @@
 import React from 'react';
-import Card from '../../UIs/Card/Card';
+import Card from '../UIs/Card/Card';
 
 const GestaoPecuariaCard = ({ isVisible, onContinueClick, onSkipClick }) => {
   if (!isVisible) return null;

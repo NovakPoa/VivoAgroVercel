@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import AgroCoberturaCard from './AgroCoberturaCard';
+import AgroCoberturaCard from '../AgroCoberturaCard';
 import useCameraStore from '../../../stores/CameraStore';
 
 const AgroCobertura = ({ isVisible }) => {
