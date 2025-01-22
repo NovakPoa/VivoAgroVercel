@@ -11,8 +11,9 @@ const GestaoMaquinarioCard = ({ isVisible, onContinueClick, onSkipClick }) => {
         description="Monitore e controle toda sua frota em tempo real, aumentando a produtividade e reduzindo custos." 
         showImage={true}
         imageUrl="/textures/gestaoMaquinario.jpg"
-        fistButtonText="Contratar"
-        fistButtonOnClick={onContinueClick}
+        firstButton={true}
+        firstButtonText="Contratar"
+        firstButtonOnClick={onContinueClick}
         secondButton={true}
         secondButtonText="Não possuo maquinário"
         secondButtonOnClick={onSkipClick}        

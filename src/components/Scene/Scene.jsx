@@ -8,6 +8,7 @@ import Intro from '../Intro/Intro';
 import Products from '../Products/Products';
 import DashboardCard from '../Dashboard/DashboardCard';
 import EndCard from '../End/EndCard';
+import AgroCoberturaInstruction1 from '../Instructions/AgroCoberturaInstruction1';
 
 const SceneContent = () => {
   return (
@@ -18,8 +19,7 @@ const SceneContent = () => {
         <Background />
         <AnimatedObjects />
       </Canvas>
-      <Intro />
-      <Products /> 
+      <AgroCoberturaInstruction1 isVisible={true} />
       
     </div>
   );

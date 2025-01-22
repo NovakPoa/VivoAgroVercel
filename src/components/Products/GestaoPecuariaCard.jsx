@@ -11,8 +11,9 @@ const GestaoPecuariaCard = ({ isVisible, onContinueClick, onSkipClick }) => {
         description="Analise a performance individual dos animais e maximize a produtividade do seu rebanho." 
         showImage={true}
         imageUrl="/textures/gestaoPecuaria.png"
-        fistButtonText="Contratar"
-        fistButtonOnClick={onContinueClick}
+        firstButton={true}
+        firstButtonText="Contratar"
+        firstButtonOnClick={onContinueClick}
         secondButton={true}
         secondButtonText="Não possuo gado"
         secondButtonOnClick={onSkipClick}        

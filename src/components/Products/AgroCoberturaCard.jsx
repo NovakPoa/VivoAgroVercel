@@ -11,8 +11,9 @@ const AgroCoberturaCard = ({ isVisible, onContinueClick, onSkipClick }) => {
         description="Conectividade é o primeiro passo para sua fazenda tecnológica, saiba mais sobre nossa solução:" 
         showImage={true}
         imageUrl="/textures/agroCobertura.png"
-        fistButtonText="Contratar"
-        fistButtonOnClick={onContinueClick}
+        firstButton={true}
+        firstButtonText="Contratar"
+        firstButtonOnClick={onContinueClick}
         secondButton={true}
         secondButtonText="Já possuo conectividade"
         secondButtonOnClick={onSkipClick}        

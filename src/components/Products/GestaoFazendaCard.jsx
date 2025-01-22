@@ -11,8 +11,9 @@ const GestaoFazendaCard = ({ isVisible, onContinueClick, onSkipClick }) => {
         description="Obtenha controle completo das atividades financeiras e operacionais da sua propriedade." 
         showImage={true}
         imageUrl="/textures/gestaoFazenda.jpg"
-        fistButtonText="Contratar"
-        fistButtonOnClick={onContinueClick}
+        firstButton={true}
+        firstButtonText="Contratar"
+        firstButtonOnClick={onContinueClick}
         secondButton={true}
         secondButtonText="Já possuo um sistema de gestão"
         secondButtonOnClick={onSkipClick}        

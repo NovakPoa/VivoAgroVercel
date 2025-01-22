@@ -11,8 +11,9 @@ const ClimaInteligenteCard = ({ isVisible, onContinueClick, onSkipClick }) => {
         description="Previsões precisas sobre seu microclima, ajudando você a otimizar seu manejo, irrigação e produção." 
         showImage={true}
         imageUrl="/textures/climaInteligente.jpg"
-        fistButtonText="Contratar"
-        fistButtonOnClick={onContinueClick}
+        firstButton={true}
+        firstButtonText="Contratar"
+        firstButtonOnClick={onContinueClick}
         secondButton={true}
         secondButtonText="Já possuo análise de microclima"
         secondButtonOnClick={onSkipClick}        
