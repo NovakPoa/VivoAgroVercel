@@ -7,6 +7,7 @@ import AnimatedObjects from './Objects/AnimatedObjects/AnimatedObjects';
 import Intro from '../Intro/Intro';
 import Products from '../Products/Products';
 import DashboardCard from '../Dashboard/DashboardCard';
+import EndCard from '../End/EndCard';
 
 const SceneContent = () => {
   return (
@@ -17,9 +18,9 @@ const SceneContent = () => {
         <Background />
         <AnimatedObjects />
       </Canvas>
-{/*       <Intro />
-      <Products /> */}
-      <DashboardCard />
+      <Intro />
+      <Products /> 
+      
     </div>
   );
 };
