@@ -28,7 +28,7 @@ const Camera = () => {
     }
   }, [cameraAnimate]);
 
-  return <OrbitControls ref={controlsRef} args={[camera, gl.domElement]} />;
+  return <OrbitControls ref={controlsRef} args={[camera, gl.domElement]} enablePan={false} enableRotate={false} enableZoom={false} />;
 };
 
 export default Camera;
