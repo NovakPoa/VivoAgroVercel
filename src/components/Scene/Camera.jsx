@@ -6,7 +6,7 @@ import useCameraStore from '../../stores/CameraStore';
 
 const Camera = () => {
   const { camera, gl } = useThree();
-  const { cameraTargetPoint, cameraAnimate, setCameraAnimate, cameraAnimationDuration } = useCameraStore();
+  const { cameraTargetPoint, cameraAnimate, setCameraAnimate } = useCameraStore();
   const controlsRef = useRef();
 
   useEffect(() => {
@@ -14,7 +14,7 @@ const Camera = () => {
       const target = { x: cameraTargetPoint[0], y: cameraTargetPoint[1], z: cameraTargetPoint[2] };
 
       gsap.to(controlsRef.current.target, {
-        duration: cameraAnimationDuration,
+        duration: 2,
         x: target.x,
         y: target.y,
         z: target.z,
@@ -22,7 +22,7 @@ const Camera = () => {
           controlsRef.current.update();
         },
         onComplete: () => {
-          setCameraAnimate(false);
+          setCameraAnimate(false, cameraTargetPoint);
         }
       });
     }

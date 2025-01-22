@@ -7,11 +7,10 @@ const AgroCobertura = ({ isVisible }) => {
   const showCardDelay = 2000;
 
   const [showCard, setShowCard] = useState(false);
-  const { setCameraTarget, setCameraAnimate } = useCameraStore();
+  const { setCameraAnimate } = useCameraStore();
 
   const startCameraAnimation = () => {
-    setCameraTarget({ point: [-30, 0, -8], duration: cameraAnimDuration / 1000 });
-    setCameraAnimate(true);
+    setCameraAnimate({ animate:true, point:[-30, 0, -8]});
   }
 
   const onContinueClick = () => {

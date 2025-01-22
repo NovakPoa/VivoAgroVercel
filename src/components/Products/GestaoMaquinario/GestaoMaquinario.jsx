@@ -10,8 +10,7 @@ const GestaoMaquinario = ({ isVisible }) => {
   const { setCameraTarget, setCameraAnimate } = useCameraStore();
 
   const startCameraAnimation = () => {
-    setCameraTarget({ point: [30, 0, -8], duration: cameraAnimDuration / 1000 });
-    setCameraAnimate(true);
+    setCameraAnimate({ animate:true, point:[30, 0, -8]});
   }
 
   const onContinueClick = () => {

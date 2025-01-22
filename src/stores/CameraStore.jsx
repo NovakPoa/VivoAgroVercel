@@ -3,12 +3,10 @@ import { create } from 'zustand';
 const cameraStore = (set) => ({
   cameraTargetPoint: [0, 0, 0],
   cameraAnimate: false,
-  cameraAnimationDuration: 2,
-  setCameraTarget: ({ point, duration }) => set({
+  setCameraAnimate: ({animate, point}) => set({
     cameraTargetPoint: point,
-    cameraAnimationDuration: duration,
+    cameraAnimate: animate,
   }),
-  setCameraAnimate: (animate) => set({ cameraAnimate: animate }),
 });
 
 const useCameraStore = create(cameraStore);
