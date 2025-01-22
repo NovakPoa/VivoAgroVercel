@@ -2,11 +2,11 @@ import { useEffect, useContext, useRef } from 'react';
 import { useThree } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { gsap } from 'gsap';
-import { SceneContext } from '../../context/SceneContext';
+import useCameraStore from '../../stores/CameraStore';
 
 const Camera = () => {
   const { camera, gl } = useThree();
-  const { cameraTargetPoint, cameraAnimate, setCameraAnimate, cameraAnimationDuration } = useContext(SceneContext);
+  const { cameraTargetPoint, cameraAnimate, setCameraAnimate, cameraAnimationDuration } = useCameraStore();
   const controlsRef = useRef();
 
   useEffect(() => {
@@ -26,7 +26,7 @@ const Camera = () => {
         }
       });
     }
-  }, [cameraAnimate, cameraTargetPoint, setCameraAnimate]);
+  }, [cameraAnimate]);
 
   return <OrbitControls ref={controlsRef} args={[camera, gl.domElement]} />;
 };

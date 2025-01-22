@@ -9,7 +9,7 @@ const Intro = () => {
 
   const [showCard, setShowCard] = useState(false);
   const { setIntroObjectAnimate, setIntroObjectVisible } = useIntroStore();
-  const { setAgroCoberturaObjectVisible } = useAgroCoberturaStore();
+  const { setStartAgroCobertura } = useAgroCoberturaStore();
 
   const startAnimation = () => {
     setIntroObjectAnimate(true);
@@ -17,7 +17,7 @@ const Intro = () => {
 
   const onButtonClick = () => {
     setShowCard(false);
-    setAgroCoberturaObjectVisible(true);
+    setStartAgroCobertura(true);
     setIntroObjectVisible(false);
   }
 

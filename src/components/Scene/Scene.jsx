@@ -5,7 +5,6 @@ import Camera from './Camera';
 import AnimatedObjects from './Objects/AnimatedObjects/AnimatedObjects';
 import Intro from '../Intro/Intro';
 import Products from '../Products/Products';
-import { SceneProvider } from '../../context/SceneContext';
 
 const SceneContent = () => {
   return (
@@ -25,9 +24,7 @@ const SceneContent = () => {
 
 const Scene = () => {
   return (
-    <SceneProvider>
-      <SceneContent />
-    </SceneProvider>
+    <SceneContent />
   );
 };
 

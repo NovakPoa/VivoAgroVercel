@@ -1,16 +1,17 @@
 import React, { useContext, useEffect, useState } from 'react';
 import AgroCoberturaCard from './AgroCoberturaCard';
-import { SceneContext } from '../../../context/SceneContext';
+import useCameraStore from '../../../stores/CameraStore';
 
 const AgroCobertura = ({ isVisible }) => {
   const cameraAnimDuration = 8000;
   const showCardDelay = 2000;
 
   const [showCard, setShowCard] = useState(false);
-  const { setCameraTarget } = useContext(SceneContext);
+  const { setCameraTarget, setCameraAnimate } = useCameraStore();
 
   const startCameraAnimation = () => {
     setCameraTarget({ point: [-30, 0, -8], duration: cameraAnimDuration / 1000 });
+    setCameraAnimate(true);
   }
 
   const onContinueClick = () => {

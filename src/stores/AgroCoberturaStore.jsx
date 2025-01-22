@@ -1,10 +1,10 @@
 import { create } from 'zustand';
 
 const agroCoberturaStore = (set) => ({
-  agroCoberturaObjectVisible: false,
-  agroCoberturaObjectAnimate: false,
-  setAgroCoberturaObjectAnimate: (animate) => set({ agroCoberturaObjectVisible: animate }),
-  setAgroCoberturaObjectVisible: (visible) => set({ agroCoberturaObjectAnimate: visible }),
+  startAgroCobertura: false,
+  agroCoberturaAnimate: false,
+  setStartAgroCobertura: (start) => set({ startAgroCobertura: start }),
+  setAgroCoberturaAnimate: (animate) => set({ agroCoberturaAnimate: animate }),
 });
 
 const useAgroCoberturaStore = create(agroCoberturaStore);
