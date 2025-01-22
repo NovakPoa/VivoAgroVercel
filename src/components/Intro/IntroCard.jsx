@@ -1,4 +1,6 @@
 import React from 'react';
+import PrimaryButton from '../UIs/PrimaryButton/PrimaryButton';
+import SecondaryButton from '../UIs/SecondaryButton/SecondaryButton';
 
 const Intro = ({ isVisible, onButtonClick }) => {
   if (!isVisible) return null;
@@ -8,7 +10,7 @@ const Intro = ({ isVisible, onButtonClick }) => {
       <div className="card-content">
         <h2>Intro</h2>
         <p>Aqui Intro Card.</p>
-        <button className="card-button" onClick={onButtonClick}>Start</button>
+        <PrimaryButton text="Começar" onClick={onButtonClick} />
       </div>
     </div>
   );

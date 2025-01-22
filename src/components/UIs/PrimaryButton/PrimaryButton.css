@@ -1,0 +1,29 @@
+.primary-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #660099;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100%;
+  max-width: 300px;
+  transition: background-color 0.3s ease;
+}
+
+.primary-button:hover {
+  background-color: #4b007a; /* Cor mais escura no hover */
+}
+
+.button-icon {
+  width: 20px; /* Define largura do ícone */
+  height: 20px; /* Define altura do ícone */
+  margin-right: 8px;
+}
+
+.button-text {
+  white-space: nowrap;
+}

@@ -4,8 +4,8 @@ import useIntroStore from '../../stores/IntroStore';
 import useAgroCoberturaStore from '../../stores/AgroCoberturaStore';
 
 const Intro = () => {
-  const startIntroDelay = 4000;
-  const showIntroCardDelay = 4000;
+  const startIntroDelay = 1000;
+  const showIntroCardDelay = 1000;
 
   const [showCard, setShowCard] = useState(false);
   const { setIntroObjectAnimate, setIntroObjectVisible } = useIntroStore();
