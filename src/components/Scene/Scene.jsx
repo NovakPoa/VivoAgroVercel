@@ -19,8 +19,9 @@ const SceneContent = () => {
         <Background />
         <AnimatedObjects />
       </Canvas>
+   {/*    <Intro />
+      <Products />  */}
       <AgroCoberturaInstruction1 isVisible={true} />
-      
     </div>
   );
 };
