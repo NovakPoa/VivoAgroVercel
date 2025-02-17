@@ -4,11 +4,17 @@ import { RiLock2Fill } from "react-icons/ri";
 import { FaCheck } from "react-icons/fa6";
 
 const ImageButton = ({ imageUrl, title, status, onClick }) => {
+  const handleClick = () => {
+    if (status !== 'locked') {
+      onClick();
+    }
+  };
+
   return (
     <div
       className={`image-button ${status}`}
       style={{ backgroundImage: `url(${imageUrl})` }}
-      onClick={onClick}
+      onClick={handleClick}
     >
       {status === 'locked' && (
         <div className="overlay locked-overlay">
@@ -16,7 +22,7 @@ const ImageButton = ({ imageUrl, title, status, onClick }) => {
         </div>
       )}
       {status === 'completed' && (
-        <FaCheck color="#007D1E" className="icon check-icon"/>
+        <FaCheck color="#007D1E" className="icon check-icon" />
       )}
       <div className="title">{title}</div>
     </div>

@@ -3,9 +3,11 @@ import { create } from 'zustand';
 const cameraStore = (set) => ({
   cameraTargetPoint: [0, 0, 0],
   cameraAnimate: false,
-  setCameraAnimate: ({animate, point}) => set({
-    cameraTargetPoint: point,
+  animationDuration: 2,
+  setCameraAnimate: ({ animate, point, duration }) => set({
     cameraAnimate: animate,
+    cameraTargetPoint: point,
+    animationDuration: duration,
   }),
 });
 
