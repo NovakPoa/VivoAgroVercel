@@ -12,6 +12,8 @@ const productsStore = (set) => ({
     'clima-inteligente': 'locked',
     'gestao-fazenda': 'locked',
   },
+  showFirstInstruction: false,
+  showSecondInstruction: false,
   setStartProduct: (start) => set({ startProduct: start }),
   setCurrentProduct: (name) => set({ currentProduct: name }),
   setLastProductName: (name) => set({ lastProductName: name }),
@@ -21,6 +23,8 @@ const productsStore = (set) => ({
       [name]: status,
     },
   })),
+  setShowFirstInstruction: (show) => set({ showFirstInstruction: show }),
+  setShowSecondInstruction: (show) => set({ showSecondInstruction: show }),
 });
 
 const useProductsStore = create(productsStore);

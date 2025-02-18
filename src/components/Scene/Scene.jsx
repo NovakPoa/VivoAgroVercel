@@ -7,8 +7,7 @@ import AnimatedObjects from './Objects/AnimatedObjects/AnimatedObjects';
 import Intro from '../Intro/Intro';
 import Products from '../Products/Products';
 import DashboardCard from '../Dashboard/DashboardCard';
-import EndCard from '../End/EndCard';
-import AgroCoberturaInstruction1 from '../Instructions/AgroCoberturaInstruction1';
+import Instructions from '../Instructions/Instructions';
 
 const SceneContent = () => {
   return (
@@ -22,6 +21,7 @@ const SceneContent = () => {
       <Intro />
       <Products />  
       <DashboardCard/>
+      <Instructions />
     </div>
   );
 };
