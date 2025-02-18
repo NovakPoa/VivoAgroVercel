@@ -1,5 +1,5 @@
 import React from 'react';
-import Instruction from '../UIs/Instruction/Instruction';
+import Instruction from '../../../UIs/Instruction/Instruction';
 
 const AgroCoberturaInstruction1 = ({ isVisible }) => {
   if (!isVisible) return null;
@@ -7,8 +7,8 @@ const AgroCoberturaInstruction1 = ({ isVisible }) => {
   return (
     <div className="instruction-container">
       <Instruction 
-        title="Aplique o dispositivo no gado" 
-        description="Arraste o dispositivo abaixo para começar a receber os dados da Gestão Pecuária." 
+        title="Instale o sistema" 
+        description="Arraste a esfera abaixo para instalar o sistema Gestão da Fazenda e integrar todas suas soluções." 
       />
     </div>
   );

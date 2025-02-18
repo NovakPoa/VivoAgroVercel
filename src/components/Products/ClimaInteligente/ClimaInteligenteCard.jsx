@@ -1,5 +1,5 @@
 import React from 'react';
-import Card from '../UIs/Card/Card';
+import Card from '../../UIs/Card/Card';
 
 const ClimaInteligenteCard = ({ isVisible, onContinueClick, onSkipClick }) => {
   if (!isVisible) return null;

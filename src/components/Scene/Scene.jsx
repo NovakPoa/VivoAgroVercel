@@ -7,7 +7,6 @@ import AnimatedObjects from './Objects/AnimatedObjects/AnimatedObjects';
 import Intro from '../Intro/Intro';
 import Products from '../Products/Products';
 import DashboardCard from '../Dashboard/DashboardCard';
-import Instructions from '../Instructions/Instructions';
 
 const SceneContent = () => {
   return (
@@ -21,7 +20,6 @@ const SceneContent = () => {
       <Intro />
       <Products />  
       <DashboardCard/>
-      <Instructions />
     </div>
   );
 };

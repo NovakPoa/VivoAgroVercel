@@ -1,5 +1,5 @@
 import React from 'react';
-import Instruction from '../UIs/Instruction/Instruction';
+import Instruction from '../../../UIs/Instruction/Instruction';
 
 const AgroCoberturaInstruction2 = ({ isVisible }) => {
   if (!isVisible) return null;
@@ -7,8 +7,8 @@ const AgroCoberturaInstruction2 = ({ isVisible }) => {
   return (
     <div className="instruction-container">
       <Instruction 
-        title="Ative sua estação meteorológica" 
-        description="Pressione o botão para ativar sua estação e começar a receber dados do seu microclima." 
+        title="Integre todas as tecnologias" 
+        description="Pressione o botão para ativar o Gestão de Fazenda e integrar todas as tecnologias da sua fazenda." 
       />
     </div>
   );

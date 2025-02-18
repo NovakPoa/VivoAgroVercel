@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import useProductsStore from '../../stores/ProductsStore';
 import useDashboardStore from '../../stores/DashboardStore';
 import useCameraStore from '../../stores/CameraStore';
-import AgroCoberturaCard from './AgroCoberturaCard';
-import GestaoMaquinarioCard from './GestaoMaquinarioCard';
-import GestaoPecuariaCard from './GestaoPecuariaCard';
-import GestaoFazendaCard from './GestaoFazendaCard';
-import ClimaInteligenteCard from './ClimaInteligenteCard';
+import AgroCoberturaCard from './AgroCobertura/AgroCoberturaCard';
+import GestaoMaquinarioCard from './GestaoMaquinario/GestaoMaquinarioCard';
+import GestaoPecuariaCard from './GestaoPecuaria/GestaoPecuariaCard';
+import GestaoFazendaCard from './GestaoFazenda/GestaoFazendaCard';
+import ClimaInteligenteCard from './ClimaInteligente/ClimaInteligenteCard';
 
 const Products = () => {
   const { startProduct, currentProduct, setStartProduct, setProductStatus, setLastProductName, productsOrder, productsStatus, lastProductName } = useProductsStore();
