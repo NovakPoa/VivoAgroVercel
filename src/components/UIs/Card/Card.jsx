@@ -1,6 +1,5 @@
 import React from 'react';
-import PrimaryButton from '../PrimaryButton/PrimaryButton';
-import SecondaryButton from '../SecondaryButton/SecondaryButton';
+import Button from '../Button/Button';
 import './Card.css';
 
 const Card = ({ title, description, showImage = true, imageUrl, firstButton = true, secondButton = true, firstButtonText, secondButtonText, firstButtonOnClick, secondButtonOnClick }) => {
@@ -18,10 +17,10 @@ const Card = ({ title, description, showImage = true, imageUrl, firstButton = tr
         {(firstButton || secondButton) && (
           <div className="card-buttons">
             {firstButton && (
-              <PrimaryButton text={firstButtonText} onClick={firstButtonOnClick} />
+              <Button text={firstButtonText} onClick={firstButtonOnClick} type="primary" />
             )}
             {secondButton && (
-              <SecondaryButton text={secondButtonText} onClick={secondButtonOnClick} />
+              <Button text={secondButtonText} onClick={secondButtonOnClick} showIcon={false} type="secondary" />
             )}
           </div>
         )}

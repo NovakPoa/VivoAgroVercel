@@ -1,9 +1,7 @@
-.primary-button {
+.primary-button, .secondary-button {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #660099;
-  color: white;
   border: none;
   border-radius: 20px;
   padding: 10px 20px;
@@ -14,8 +12,22 @@
   transition: background-color 0.3s ease, width 0.3s ease, padding 0.3s ease, font-size 0.3s ease;
 }
 
+.primary-button {
+  background-color: #660099;
+  color: white;
+}
+
 .primary-button:hover {
   background-color: #4b007a; 
+}
+
+.secondary-button {
+  background-color: #e0e0e0;
+  color: white;
+}
+
+.secondary-button:hover {
+  background-color: #660099; 
 }
 
 .button-icon {
@@ -29,7 +41,7 @@
 }
 
 @media (max-width: 400px) {
-  .primary-button {
+  .primary-button, .secondary-button {
     width: 60%; 
     padding: 6px 12px;
     font-size: 0.8rem;

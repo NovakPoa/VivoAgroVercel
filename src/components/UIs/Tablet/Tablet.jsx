@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 //import PropTypes from 'prop-types';
-import PrimaryButton from '../PrimaryButton/PrimaryButton';
+import Button from '../Button/Button';
 import './tablet.css';
 
 const Tablet = ({ images, onFinish }) => {
@@ -19,9 +19,10 @@ const Tablet = ({ images, onFinish }) => {
       <div className="tablet-image-wrapper">
         <img src={images[currentScreen]} alt={`Screen ${currentScreen + 1}`} className="tablet-screen" />
         <div className="tablet-button-wrapper">
-          <PrimaryButton
+          <Button
             text={currentScreen < images.length - 1 ? 'Avançar' : 'Concluir'}
             onClick={handleNextScreen}
+            type="primary"
           />
         </div>
       </div>
