@@ -20,6 +20,7 @@ const SceneContent = () => {
       <Intro />
       <Products />  
       <DashboardCard/>
+
     </div>
   );
 };
