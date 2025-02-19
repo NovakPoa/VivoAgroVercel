@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import useProductsStore from '../../stores/ProductsStore';
 import useDashboardStore from '../../stores/DashboardStore';
 import useCameraStore from '../../stores/CameraStore';
+import useInteractionStore from '../../stores/InteractionStore';
 import AgroCoberturaCard from './AgroCobertura/AgroCoberturaCard';
 import GestaoMaquinarioCard from './GestaoMaquinario/GestaoMaquinarioCard';
 import GestaoPecuariaCard from './GestaoPecuaria/GestaoPecuariaCard';
@@ -12,6 +13,7 @@ const Products = () => {
   const { startProduct, currentProduct, setStartProduct, setProductStatus, setLastProductName, productsOrder, productsStatus, lastProductName } = useProductsStore();
   const { setShowDashboard } = useDashboardStore();
   const { setCameraAnimate } = useCameraStore();
+  const { setInteraction } = useInteractionStore();
   const [showCard, setShowCard] = useState(false);
   
   const startCameraAnimation = (point, duration = 2) => {
@@ -35,7 +37,7 @@ const Products = () => {
 
   const onContinueClick = () => {
     setShowCard(false);
-    // libera interaçao
+    setInteraction(currentProduct);
   };
 
   const onSkipClick = () => {
@@ -83,7 +85,7 @@ const Products = () => {
     }
   }, [startProduct, setStartProduct]);
 
-  const productComponents = {
+  const productCards = {
     'agro-cobertura': AgroCoberturaCard,
     'gestao-maquinario': GestaoMaquinarioCard,
     'gestao-pecuaria': GestaoPecuariaCard,
@@ -91,12 +93,12 @@ const Products = () => {
     'gestao-fazenda': GestaoFazendaCard,
   };
 
-  const ProductComponent = productComponents[currentProduct] || null;
+  const ProductCard = productCards[currentProduct] || null;
 
   return (
     <div className="products-container">
-      {ProductComponent && (
-        <ProductComponent
+      {ProductCard && (
+        <ProductCard
           isVisible={showCard}
           onContinueClick={onContinueClick}
           onSkipClick={onSkipClick}

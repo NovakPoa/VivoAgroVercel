@@ -7,6 +7,7 @@ import AnimatedObjects from './Objects/AnimatedObjects/AnimatedObjects';
 import Intro from '../Intro/Intro';
 import Products from '../Products/Products';
 import DashboardCard from '../Dashboard/DashboardCard';
+import InteractionObjects from './Objects/interactionObjects/InteractionObjects';
 
 const SceneContent = () => {
  
@@ -17,6 +18,7 @@ const SceneContent = () => {
         <Camera />
         <Background />
         <AnimatedObjects />
+        <InteractionObjects />
       </Canvas>
       <Intro />
       <Products />  
