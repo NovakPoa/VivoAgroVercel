@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-//import PropTypes from 'prop-types';
 import Button from '../Button/Button';
 import './tablet.css';
 
@@ -22,6 +21,8 @@ const Tablet = ({ images, onFinish }) => {
           <Button
             text={currentScreen < images.length - 1 ? 'Avançar' : 'Concluir'}
             onClick={handleNextScreen}
+            showIcon={currentScreen >= images.length - 1}
+            iconUrl="./textures/check-icon.png"
             type="primary"
           />
         </div>
@@ -29,10 +30,5 @@ const Tablet = ({ images, onFinish }) => {
     </div>
   );
 };
-
-/* Tablet.propTypes = {
-  images: PropTypes.arrayOf(PropTypes.string).isRequired,
-  onFinish: PropTypes.func.isRequired,
-}; */
 
 export default Tablet;

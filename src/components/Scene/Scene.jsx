@@ -9,6 +9,7 @@ import Products from '../Products/Products';
 import DashboardCard from '../Dashboard/DashboardCard';
 
 const SceneContent = () => {
+ 
   return (
     <div className='scene-container'>
       <Canvas className="canvas" camera={{ position: [0, 1.7, 5] }}>
@@ -20,7 +21,6 @@ const SceneContent = () => {
       <Intro />
       <Products />  
       <DashboardCard/>
-
     </div>
   );
 };
