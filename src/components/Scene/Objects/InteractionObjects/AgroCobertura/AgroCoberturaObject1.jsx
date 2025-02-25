@@ -1,24 +1,22 @@
-import React, { useRef } from 'react';
-import { useFrame } from '@react-three/fiber';
-import { useDrag } from '@use-gesture/react';
+import React from 'react';
+import DraggableObject from '../DraggableObject';
 
 const AgroCoberturaObject1 = () => {
-  const meshRef = useRef();
-
-  const bind = useDrag(({ offset: [x, y] }) => {
-    meshRef.current.position.x = x / 100;
-    meshRef.current.position.y = -y / 100;
-  });
-
-  useFrame(() => {
-    meshRef.current.rotation.y += 0.01;
-  });
+  const initialPosition = [-5, 0, 5];
+  const dropPoints = [
+    [-5, 2, 8],
+    [-5, 2, 5],
+    [-5, 2, -8],
+    initialPosition
+  ];
 
   return (
-    <mesh ref={meshRef} {...bind()} position={[0, 0, -5]}>
-      <boxGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial color={'blue'} />
-    </mesh>
+    <DraggableObject
+      initialPosition={initialPosition}
+      dropPoints={dropPoints}
+      geometry={<boxGeometry args={[1, 1, 1]} />}
+      material={<meshStandardMaterial color={'blue'} />}
+    />
   );
 };
 

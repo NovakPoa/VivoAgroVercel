@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useContext, useState } from 'react';
 import { gsap } from 'gsap';
-import useIntroStore from '../../../../stores/IntroStore';
+import useIntroStore from '../../../../../stores/IntroStore';
 
 const IntroObject = () => {
   const meshRef = useRef();

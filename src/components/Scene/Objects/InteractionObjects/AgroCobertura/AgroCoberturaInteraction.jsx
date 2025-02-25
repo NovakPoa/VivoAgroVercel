@@ -6,7 +6,7 @@ const AgroCoberturaInteraction = () => {
   return (
     <>
       <AgroCoberturaObject1 />
-      <AgroCoberturaObject2 /> 
+      {/* <AgroCoberturaObject2 />  */}
     </>
   );
 };

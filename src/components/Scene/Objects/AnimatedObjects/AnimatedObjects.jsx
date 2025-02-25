@@ -1,5 +1,5 @@
 import React from 'react';
-import IntroObject from './IntroObject';
+import IntroObject from './Intro/IntroObject';
 
 const AnimatedObjects = () => {
   return (
