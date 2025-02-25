@@ -1,15 +1,13 @@
 import React from 'react';
 import './DashboardCard.css';
-import ImageButton from '../UIs/ImageButton/ImageButton';
+import ImageButton from '../../Commons/UI/ImageButton/ImageButton';
 import { RiResetRightFill } from "react-icons/ri";
-import useProductsStore from '../../stores/ProductsStore';
-import useDashboardStore from '../../stores/DashboardStore';
+import useProductsStore from '../../../stores/ProductsStore';
+import useDashboardStore from '../../../stores/DashboardStore';
 
 const DashboardCard = () => {
   const { productsStatus, setCurrentProduct, setStartProduct } = useProductsStore();
-  const { showDashboard, setShowDashboard } = useDashboardStore();
-
-  if (!showDashboard) return null;
+  const { setShowDashboard } = useDashboardStore();
 
   const handleProductClick = (productName) => {
     setShowDashboard(false);

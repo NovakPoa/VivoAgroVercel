@@ -3,11 +3,11 @@ import { Canvas } from '@react-three/fiber';
 import Background from './Background';
 import Camera from './Camera';
 import Lights from './Lights';
-import AnimatedObjects from './Objects/AnimatedObjects/AnimatedObjects';
 import Intro from '../Intro/Intro';
 import Products from '../Products/Products';
-import DashboardCard from '../Dashboard/DashboardCard';
+import Dashboard from '../Dashboard/Dashboard';
 import InteractionObjects from './Objects/interactionObjects/InteractionObjects';
+import AnimatedObjects from './Objects/AnimatedObjects/AnimatedObjects';
 
 const SceneContent = () => {
  
@@ -22,7 +22,7 @@ const SceneContent = () => {
       </Canvas>
       <Intro />
       <Products />  
-      <DashboardCard/>
+      <Dashboard />
     </div>
   );
 };

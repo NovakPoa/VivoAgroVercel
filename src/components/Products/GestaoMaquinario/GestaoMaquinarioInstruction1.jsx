@@ -1,5 +1,5 @@
 import React from 'react';
-import Instruction from '../../../UIs/Instruction/Instruction';
+import Instruction from '../../../Commons/UI/Instruction/Instruction';
 
 const AgroCoberturaInstruction1 = ({ isVisible }) => {
   if (!isVisible) return null;

@@ -1,5 +1,5 @@
 import React from 'react';
-import DraggableObject from '../DraggableObject';
+import DraggableObject from '../../../../Commons/Interactables/DraggableObject';
 
 const AgroCoberturaObject1 = () => {
   const initialPosition = [-5, 0, 5];

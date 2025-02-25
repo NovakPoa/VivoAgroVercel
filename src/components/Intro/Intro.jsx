@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import IntroCard from '../Intro/IntroCard';
+import IntroCard from './UI/IntroCard';
 import useIntroStore from '../../stores/IntroStore';
 import useProductsStore from '../../stores/ProductsStore';
 
