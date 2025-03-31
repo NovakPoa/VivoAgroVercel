@@ -4,24 +4,24 @@ import { useFrame } from '@react-three/fiber';
 const Placeholder = ({ position, onClick, color = "#660099", opacity = 0.5 }) => {
   const meshRef = useRef();
   
-  useFrame(() => {
-    if (meshRef.current) {
-      // Rotação suave para chamar atenção
-      meshRef.current.rotation.y += 0.01;
-    }
-  });
-  
+  const cylinderHeight = 30;
+  const halfHeight = cylinderHeight / 2;
+
+  const adjustedPosition = [position[0], position[1] + halfHeight, position[2]];
+
   return (
     <mesh 
       ref={meshRef} 
-      position={position} 
+      position={adjustedPosition} 
       onClick={onClick}
     >
-      <cylinderGeometry args={[1, 1, 0.1, 32]} />
+      <cylinderGeometry args={[1.5, 0, 30, 32]} />
       <meshStandardMaterial 
         color={color}
         transparent={true} 
-        opacity={opacity} 
+        opacity={opacity}
+        emissive={color}  
+        emissiveIntensity={0.5} 
       />
     </mesh>
   );

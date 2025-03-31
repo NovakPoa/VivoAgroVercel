@@ -10,9 +10,9 @@ const AgroCoberturaInteraction = () => {
   const [selectedPosition, setSelectedPosition] = useState(null);
   
   const placeholderPositions = [
-    [-5, 0, -8],
+    [-15, 0, -8],
     [0, 0, -8],
-    [5, 0, -8],
+    [5, 0, -58],
   ];
   
   const handlePlaceholderClick = (position) => {
