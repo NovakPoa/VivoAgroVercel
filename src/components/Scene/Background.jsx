@@ -5,8 +5,8 @@ import { useCubeTexture } from '@react-three/drei';
 const Background = () => {
   const { scene } = useThree();
   const texture = useCubeTexture(
-    ['px.jpg', 'nx.jpg', 'py.jpg', 'ny.jpg', 'pz.jpg', 'nz.jpg'],
-    { path: '/textures/' }
+    ['px.png', 'nx.png', 'py.png', 'ny.png', 'pz.png', 'nz.png'],
+    { path: '/skybox/' }
   );
 
   useEffect(() => {
