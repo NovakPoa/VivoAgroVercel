@@ -1,13 +1,18 @@
 import React from 'react';
-import Terrain from './BaseObjects/Terrain';
-//import Buildings from './Buildings';
-//import Trees from './Trees';
+import Solo from './BaseObjects/Solo';
+import Casa from './BaseObjects/Casa';
+import Cercas from './BaseObjects/Cercas';
+import Galpao from './BaseObjects/Galpao';
+import Ornamentos from './BaseObjects/Ornamentos';
 
 const BaseObjects = () => {
   return (
     <group>
-      <Terrain />
-      {/* <Buildings /> */}
+      <Solo />
+      <Casa />
+      <Cercas />
+      <Galpao />
+      <Ornamentos />      
     </group>
   );
 };
