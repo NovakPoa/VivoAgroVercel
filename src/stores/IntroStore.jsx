@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 
 const introStore = (set) => ({
-  introObjectVisible: true,
+  introObjectVisible: false,
   introObjectAnimate: false,
   setIntroObjectAnimate: (animate) => set({ introObjectAnimate: animate }),
   setIntroObjectVisible: (visible) => set({ introObjectVisible: visible }),
