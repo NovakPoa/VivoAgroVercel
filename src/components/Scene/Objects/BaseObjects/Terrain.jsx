@@ -36,9 +36,7 @@ const Terrain = () => {
             child.material.forEach((mat, index) => {
               console.log(`Material ${index}:`, mat.name);
               
-              // Tenta encontrar a textura correspondente pelo nome do material
-              // Se não encontrar, usa o índice como fallback
-              const texturePath = materialTextureMap[mat.name] || Object.values(materialTextureMap)[index % Object.values(materialTextureMap).length];
+              const texturePath = materialTextureMap[mat.name];
               
               if (texturePath) {
                 const texture = textureLoader.load(texturePath);
@@ -48,9 +46,9 @@ const Terrain = () => {
                 mat.map = texture;
                 
                 // Configurações adicionais do material
-                mat.roughness = 0.8;
-                mat.metalness = 0.2;
-                mat.needsUpdate = true;
+                //mat.roughness = 0.8;
+                //mat.metalness = 0.2;
+                //mat.needsUpdate = true;
               }
             });
           }
