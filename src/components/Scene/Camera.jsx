@@ -4,13 +4,15 @@ import { OrbitControls } from '@react-three/drei';
 import { gsap } from 'gsap';
 import useCameraStore from '../../stores/CameraStore';
 
+const ENABLE_DEBUG_CONTROLS = true;
+
 const Camera = () => {
   const { camera, gl } = useThree();
   const { cameraTargetPoint, cameraAnimate, animationDuration, setCameraAnimate } = useCameraStore();
   const controlsRef = useRef();
 
   useEffect(() => {
-    if (cameraAnimate) {
+    if (cameraAnimate && !ENABLE_DEBUG_CONTROLS) {
       const target = { x: cameraTargetPoint[0], y: cameraTargetPoint[1], z: cameraTargetPoint[2] };
 
       const onComplete = () => {
@@ -28,9 +30,17 @@ const Camera = () => {
         onComplete: onComplete,
       });
     }
-  }, [cameraAnimate, cameraTargetPoint, setCameraAnimate]);
+  }, [cameraAnimate, cameraTargetPoint, setCameraAnimate, animationDuration]);
 
-  return <OrbitControls ref={controlsRef} args={[camera, gl.domElement]} enablePan={false} enableRotate={false} enableZoom={false} />;
+  return (
+    <OrbitControls 
+      ref={controlsRef} 
+      args={[camera, gl.domElement]} 
+      enablePan={ENABLE_DEBUG_CONTROLS}
+      enableRotate={ENABLE_DEBUG_CONTROLS}
+      enableZoom={ENABLE_DEBUG_CONTROLS}
+    />
+  );
 };
 
 export default Camera;
