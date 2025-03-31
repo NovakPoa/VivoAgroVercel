@@ -14,7 +14,7 @@ const SceneContent = () => {
  
   return (
     <div className='scene-container'>
-      <Canvas className="canvas" camera={{ position: [0, 1.7, 5] }}>
+      <Canvas className="canvas">
         <Lights />
         <Camera />
         <Background />
