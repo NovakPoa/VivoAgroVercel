@@ -55,7 +55,7 @@ const Products = () => {
     const delay = duration * 1000 + showCardOffset;
     switch (currentProduct) {
       case 'agro-cobertura':
-        startCameraAnimation([-30, 0, -8], duration);
+        startCameraAnimation([0, 0, 0], duration);
         break;
       case 'gestao-maquinario':
         startCameraAnimation([30, 0, -8], duration);

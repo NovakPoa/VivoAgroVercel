@@ -4,8 +4,8 @@ import useIntroStore from '../../stores/IntroStore';
 import useProductsStore from '../../stores/ProductsStore';
 
 const Intro = () => {
-  const startIntroDelay = 1000;
-  const showIntroCardDelay = 1000;
+  const startProductsDelay = 2000;
+  const showIntroCardDelay = 0;
 
   const [showCard, setShowCard] = useState(false);
   const { setIntroObjectAnimate, setIntroObjectVisible } = useIntroStore();
@@ -16,22 +16,22 @@ const Intro = () => {
   }
 
   const onButtonClick = () => {
+    startAnimation();
     setShowCard(false);
-    setCurrentProduct('agro-cobertura');
-    setStartProduct(true);
+    startProductsTimer();
   }
 
-  const startIntroTimer = () => {
+  const startProductsTimer = () => {
     setTimeout(() => {
-      startAnimation();
-      setTimeout(() => {
-        setShowCard(true);
-      }, showIntroCardDelay);      
-    }, startIntroDelay);
+      setCurrentProduct('agro-cobertura');
+      setStartProduct(true);
+    }, startProductsDelay);
   }
 
   useEffect(() => {
-    startIntroTimer();
+    setTimeout(() => {
+      setShowCard(true);
+    }, showIntroCardDelay);  
   } , []);
 
   return (
