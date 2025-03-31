@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import { StrictMode } from 'react';
 import { Canvas } from '@react-three/fiber';
 import Background from './Background';
 import Camera from './Camera';
@@ -15,16 +14,14 @@ const SceneContent = () => {
  
   return (
     <div className='scene-container'>
-      <StrictMode>
-        <Canvas className="canvas" camera={{ position: [0, 1.7, 5] }}>
-          <Lights />
-          <Camera />
-          <Background />
-          <InteractionObjects />
-          <BaseObjects />
-          <AnimatedObjects />
-        </Canvas>
-      </StrictMode>
+      <Canvas className="canvas" camera={{ position: [0, 1.7, 5] }}>
+        <Lights />
+        <Camera />
+        <Background />
+        <InteractionObjects />
+        <BaseObjects />
+        <AnimatedObjects />
+      </Canvas>
       <Intro />
       <Products />  
       <Dashboard />
