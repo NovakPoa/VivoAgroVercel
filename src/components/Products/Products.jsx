@@ -1,99 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import useProductsStore from '../../stores/ProductsStore';
-import useDashboardStore from '../../stores/DashboardStore';
-import useCameraStore from '../../stores/CameraStore';
 import useInteractionStore from '../../stores/InteractionStore';
-import AgroCoberturaCard from './AgroCobertura/AgroCoberturaCard';
-import GestaoMaquinarioCard from './GestaoMaquinario/GestaoMaquinarioCard';
-import GestaoPecuariaCard from './GestaoPecuaria/GestaoPecuariaCard';
-import GestaoFazendaCard from './GestaoFazenda/GestaoFazendaCard';
-import ClimaInteligenteCard from './ClimaInteligente/ClimaInteligenteCard';
+import useProductNavigation from '../../hooks/useProductNavigation';
+import productRegistry from '../../config/productRegistry';
+import ProductInstructions from './ProductInstructions';
 
 const Products = () => {
-  const { startProduct, currentProduct, setStartProduct, setProductStatus, setLastProductName, productsOrder, productsStatus, lastProductName } = useProductsStore();
-  const { setShowDashboard } = useDashboardStore();
-  const { setCameraAnimate } = useCameraStore();
+  const { currentProduct, setShowFirstInstruction } = useProductsStore();
   const { setInteraction } = useInteractionStore();
-  const [showCard, setShowCard] = useState(false);
+  const { showCard, setShowCard, endProduct } = useProductNavigation();
   
-  const startCameraAnimation = (point, duration = 2) => {
-    setCameraAnimate({ animate: true, point, duration });
-  };
-
-  const endProduct = () => {
-    setProductStatus(currentProduct, 'completed');
-    setShowCard(false);
-    setShowDashboard(true);
-    setLastProductName(currentProduct);
-
-    const currentIndex = productsOrder.indexOf(currentProduct);
-    if (currentIndex !== -1 && currentIndex < productsOrder.length - 1) {
-      const nextProduct = productsOrder[currentIndex + 1];
-      if (productsStatus[nextProduct] === 'locked') {
-        setProductStatus(nextProduct, 'unlocked');
-      }
-    }
-  };
-
   const onContinueClick = () => {
     setShowCard(false);
     setInteraction(currentProduct);
+    setShowFirstInstruction(true);
   };
 
   const onSkipClick = () => {
     endProduct();
   };
 
-  const startProductHandler = () => {
-    if (currentProduct === lastProductName) {
-      setShowCard(true);
-      return;
-    }
-
-    const showCardOffset = -500;
-    const duration = 2;
-    const delay = duration * 1000 + showCardOffset;
-    switch (currentProduct) {
-      case 'agro-cobertura':
-        startCameraAnimation([0, 0, 0], duration);
-        break;
-      case 'gestao-maquinario':
-        startCameraAnimation([30, 0, -8], duration);
-        break;
-      case 'gestao-pecuaria':
-        startCameraAnimation([-30, 0, -16], duration);
-        break;    
-      case 'clima-inteligente':
-        startCameraAnimation([30, 0, -16], duration);
-        break;  
-      case 'gestao-fazenda':
-        startCameraAnimation([0, 0, -16], duration);
-        break;                   
-      default:
-        break;
-    } 
-
-    setTimeout(() => {
-      setShowCard(true);
-    }, delay);
-  }
-
-  useEffect(() => {
-    if (startProduct) {
-      startProductHandler();
-      setStartProduct(false);
-    }
-  }, [startProduct, setStartProduct]);
-
-  const productCards = {
-    'agro-cobertura': AgroCoberturaCard,
-    'gestao-maquinario': GestaoMaquinarioCard,
-    'gestao-pecuaria': GestaoPecuariaCard,
-    'clima-inteligente': ClimaInteligenteCard,
-    'gestao-fazenda': GestaoFazendaCard,
-  };
-
-  const ProductCard = productCards[currentProduct] || null;
+  const ProductCard = productRegistry[currentProduct]?.card;
 
   return (
     <div className="products-container">
@@ -104,6 +31,8 @@ const Products = () => {
           onSkipClick={onSkipClick}
         />
       )}
+
+      <ProductInstructions />
     </div>
   );
 };

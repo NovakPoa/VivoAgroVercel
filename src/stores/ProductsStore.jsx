@@ -25,6 +25,11 @@ const productsStore = (set) => ({
   })),
   setShowFirstInstruction: (show) => set({ showFirstInstruction: show }),
   setShowSecondInstruction: (show) => set({ showSecondInstruction: show }),
+
+  resetInstructions: () => set({ 
+    showFirstInstruction: false, 
+    showSecondInstruction: false 
+  }),
 });
 
 const useProductsStore = create(productsStore);

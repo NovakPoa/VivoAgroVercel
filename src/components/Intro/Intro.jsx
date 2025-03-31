@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import IntroCard from './UI/IntroCard';
 import useIntroStore from '../../stores/IntroStore';
 import useProductsStore from '../../stores/ProductsStore';
@@ -8,7 +8,7 @@ const Intro = () => {
   const showIntroCardDelay = 0;
 
   const [showCard, setShowCard] = useState(false);
-  const { setIntroObjectAnimate, setIntroObjectVisible } = useIntroStore();
+  const { setIntroObjectAnimate } = useIntroStore();
   const { setCurrentProduct, setStartProduct } = useProductsStore();
 
   const startAnimation = () => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import Instruction from '../../../Commons/UI/Instruction/Instruction';
 
-const AgroCoberturaInstruction1 = ({ isVisible }) => {
+const GestaoMaquinarioInstruction1 = ({ isVisible }) => {
   if (!isVisible) return null;
 
   return (
@@ -14,4 +14,4 @@ const AgroCoberturaInstruction1 = ({ isVisible }) => {
   );
 };
 
-export default AgroCoberturaInstruction1;
+export default GestaoMaquinarioInstruction1;
