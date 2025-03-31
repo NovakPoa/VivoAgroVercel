@@ -1,7 +1,6 @@
 // src/components/Products/AgroCobertura/Interaction/AgroCoberturaInteraction.jsx
 import React, { useState } from 'react';
-import Tower from '../../../Scene/Objects/InteractiveObjects/Tower';
-import Placeholder from '../../../Scene/Objects/PlaceholderObjects/Placeholder';
+import Antena from '../../../Scene/Objects/InteractiveObjects/Antena';
 import ProductInteraction from '../../../Commons/Interactables/ProductInteraction';
 import useProductsStore from '../../../../stores/ProductsStore';
 
@@ -10,9 +9,9 @@ const AgroCoberturaInteraction = () => {
   const [selectedPosition, setSelectedPosition] = useState(null);
   
   const placeholderPositions = [
-    [-15, 0, -8],
-    [0, 0, -8],
-    [5, 0, -58],
+    [-20, 0, -50],
+    [5, 0, -50],
+    [35, 0, -50],
   ];
   
   const handlePlaceholderClick = (position) => {
@@ -29,7 +28,7 @@ const AgroCoberturaInteraction = () => {
         onPlaceholderClick={handlePlaceholderClick}
       />
       
-      {selectedPosition && <Tower position={selectedPosition} />}
+      {selectedPosition && <Antena position={selectedPosition} />}
     </>
   );
 };
