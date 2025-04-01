@@ -26,12 +26,12 @@ const assets = {
     '/models/fazenda/Cercas/Textures/acbd.png',
     
     // Galpao
-    '/models/fazenda/Galpao/Textures/Galpao_Baked-1001.png',
+    '/models/fazenda/Galpao/Textures/Galpao-madeira-bordas_Bake.png',
     '/models/fazenda/Galpao/Textures/Galpao-Telhado_Bake.png',
     
     // Ornamentos
     '/models/fazenda/Ornamentos/Textures/Balde_Bake.png',
-    '/models/fazenda/Ornamentos/Textures/Image_12.png',
+    '/models/fazenda/Ornamentos/Textures/Image_12.jpg',
     
     // Skybox
     '/skybox/px.png',
