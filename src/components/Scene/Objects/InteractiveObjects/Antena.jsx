@@ -1,11 +1,13 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { useFBX } from '@react-three/drei';
 import * as THREE from 'three';
+import { gsap } from 'gsap';
 
 const Antena = ({position}) => {
   const fbx = useFBX('/models/products/AgroCobertura/Antena.fbx');
   const meshRef = useRef();
- 
+  const [isAnimating, setIsAnimating] = useState(true);
+
   useEffect(() => {
     if (fbx) {
       console.log("Modelo de Antena carregado:", fbx);
@@ -53,13 +55,33 @@ const Antena = ({position}) => {
       //fbx.scale.set(0.01, 0.01, 0.01);
     }
   }, [fbx]);
-   
+
+  // Animação de scale-in
+  useEffect(() => {
+    if (meshRef.current && isAnimating) {
+      setIsAnimating(false);
+      meshRef.current.scale.set(0.001, 0.001, 0.001);
+      
+      gsap.to(meshRef.current.scale, {
+        x: 0.04,
+        y: 0.04,
+        z: 0.04,
+        duration: 1, 
+        ease: "back.out(2.5)",
+        onComplete: () => {
+          setIsAnimating(false);
+          console.log("Animação de scale-in completa");
+        }
+      });
+    }
+  }, [isAnimating]);
+
   return (
     <primitive 
       object={fbx} 
       ref={meshRef}
       position={position}
-      scale={0.05}
+      /* scale={0.05} */
     />
   );
 };
