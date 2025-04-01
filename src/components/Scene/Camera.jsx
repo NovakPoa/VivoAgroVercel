@@ -21,15 +21,12 @@ const Camera = () => {
       initialCameraPosition[1],
       initialCameraPosition[2]
     );
-    
     camera.lookAt(
       initialLookAt[0],
       initialLookAt[1],
       initialLookAt[2]
     );
-    
     camera.updateProjectionMatrix();
-    
   }, [camera]);
 
   useEffect(() => {
@@ -37,7 +34,7 @@ const Camera = () => {
       const target = { x: cameraTargetPoint[0], y: cameraTargetPoint[1], z: cameraTargetPoint[2] };
 
       const onComplete = () => {
-        setCameraAnimate({ animate: false, point: cameraTargetPoint });
+        setCameraAnimate({ animate: false, point: cameraTargetPoint, duration: animationDuration });
       };
 
       gsap.to(controlsRef.current.target, {
@@ -51,7 +48,7 @@ const Camera = () => {
         onComplete: onComplete,
       });
     }
-  }, [cameraAnimate, cameraTargetPoint, setCameraAnimate, animationDuration]);
+  }, [cameraAnimate]);
 
   return (
     <OrbitControls 

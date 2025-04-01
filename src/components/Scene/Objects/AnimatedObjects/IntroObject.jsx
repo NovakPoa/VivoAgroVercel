@@ -21,7 +21,7 @@ const IntroObject = () => {
         }
       });
     }
-  }, [introObjectAnimate, setIntroObjectAnimate]);
+  }, []);
 
   return (
     <mesh ref={meshRef} position={[0, 0, -20]} rotation={[5, 5, 3]}>

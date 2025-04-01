@@ -1,19 +1,38 @@
 import React, { useEffect } from 'react';
 import { useThree } from '@react-three/fiber';
-import { useCubeTexture } from '@react-three/drei';
+import * as THREE from 'three';
+import useAssetsStore from '../../stores/AssetsStore';;
 
 const Background = () => {
   const { scene } = useThree();
-  const texture = useCubeTexture(
-    ['px.png', 'nx.png', 'py.png', 'ny.png', 'pz.png', 'nz.png'],
-    { path: '/skybox/' }
-  );
+  const { getTexture, isLoading } = useAssetsStore();  
 
   useEffect(() => {
-    scene.background = texture;
-    scene.backgroundIntensity = 1.05;
-    scene.backgroundBlurriness = 0;
-  }, [scene, texture]);
+    if (!isLoading) {
+      const px = getTexture('/skybox/px.png');
+      const nx = getTexture('/skybox/nx.png');
+      const py = getTexture('/skybox/py.png');
+      const ny = getTexture('/skybox/ny.png');
+      const pz = getTexture('/skybox/pz.png');
+      const nz = getTexture('/skybox/nz.png');
+      
+      if (px && nx && py && ny && pz && nz) {
+        const cubeTexture = new THREE.CubeTexture();
+        
+        cubeTexture.images = [
+          px.image, nx.image, py.image, 
+          ny.image, pz.image, nz.image
+        ];
+        
+        cubeTexture.needsUpdate = true;
+        
+        scene.background = cubeTexture;
+        scene.backgroundIntensity = 1.05;
+        scene.backgroundBlurriness = 0;
+      
+      }
+    }
+  }, [scene, isLoading]);
 
   return null;
 };
