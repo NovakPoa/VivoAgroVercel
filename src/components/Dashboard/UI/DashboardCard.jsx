@@ -30,7 +30,6 @@ const DashboardCard = () => {
         <ImageButton status={productsStatus['gestao-maquinario']} title="GESTÃO DE MAQUINÁRIO" onClick={() => handleProductClick('gestao-maquinario')} imageUrl="/textures/gestaoMaquinario.jpg" />
         <ImageButton status={productsStatus['gestao-pecuaria']} title="GESTÃO PECUÁRIA" onClick={() => handleProductClick('gestao-pecuaria')} imageUrl="/textures/gestaoPecuaria.png" />
         <ImageButton status={productsStatus['clima-inteligente']} title="CLIMA INTELIGENTE" onClick={() => handleProductClick('clima-inteligente')} imageUrl="/textures/climaInteligente.jpg" />
-        <ImageButton status={productsStatus['gestao-fazenda']} title="GESTÃO DE FAZENDA" onClick={() => handleProductClick('gestao-fazenda')} imageUrl="/textures/gestaoFazenda.jpg" />
       </div>
     </div>
   );

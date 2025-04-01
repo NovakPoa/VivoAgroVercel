@@ -1,7 +1,6 @@
 import AgroCoberturaCard from '../components/Products/AgroCobertura/UI/AgroCoberturaCard';
 import GestaoMaquinarioCard from '../components/Products/GestaoMaquinario/UI/GestaoMaquinarioCard';
 import GestaoPecuariaCard from '../components/Products/GestaoPecuaria/UI/GestaoPecuariaCard';
-import GestaoFazendaCard from '../components/Products/GestaoFazenda/UI/GestaoFazendaCard';
 import ClimaInteligenteCard from '../components/Products/ClimaInteligente/UI/ClimaInteligenteCard';
 
 import AgroCoberturaInstruction1 from '../components/Products/AgroCobertura/UI/AgroCoberturaInstruction1';
@@ -10,8 +9,6 @@ import ClimaInteligenteInstruction1 from '../components/Products/ClimaInteligent
 import ClimaInteligenteInstruction2 from '../components/Products/ClimaInteligente/UI/ClimaInteligenteInstruction2';
 import GestaoMaquinarioInstruction1 from '../components/Products/GestaoMaquinario/UI/GestaoMaquinarioInstruction1';
 import GestaoMaquinarioInstruction2 from '../components/Products/GestaoMaquinario/UI/GestaoMaquinarioInstruction2';
-import GestaoFazendaInstruction1 from '../components/Products/GestaoFazenda/UI/GestaoFazendaInstruction1';
-import GestaoFazendaInstruction2 from '../components/Products/GestaoFazenda/UI/GestaoFazendaInstruction2';
 import GestaoPecuariaInstruction1 from '../components/Products/GestaoPecuaria/UI/GestaoPecuariaInstruction1';
 import GestaoPecuariaInstruction2 from '../components/Products/GestaoPecuaria/UI/GestaoPecuariaInstruction2';
 
@@ -44,13 +41,6 @@ const productRegistry = {
       second: ClimaInteligenteInstruction2
     }
   },
-  'gestao-fazenda': {
-    card: GestaoFazendaCard,
-    instructions: {
-      first: GestaoFazendaInstruction1,
-      second: GestaoFazendaInstruction2
-    }
-  }
 };
 
 export default productRegistry;
