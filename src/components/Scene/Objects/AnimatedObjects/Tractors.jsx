@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+/* import React, { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 
@@ -26,4 +26,4 @@ const Tractors = () => {
   );
 };
 
-export default Tractors;
+export default Tractors; */

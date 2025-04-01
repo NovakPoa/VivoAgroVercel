@@ -15,7 +15,7 @@ const Antena = ({position}) => {
 
   useEffect(() => {
     if (fbx) {
-      console.log("Modelo de Antena carregado:", fbx);
+      /* console.log("Modelo de Antena carregado:", fbx); */
 
       // Mapeamento de materiais para texturas
       const materialTextureMap = {
@@ -25,7 +25,7 @@ const Antena = ({position}) => {
 
       fbx.traverse((child) => {
         if (child.isMesh) {
-          console.log("Mesh encontrado:", child.name);
+          /* console.log("Mesh encontrado:", child.name); */
           
           child.castShadow = true;
           child.receiveShadow = true;
@@ -43,12 +43,12 @@ const Antena = ({position}) => {
                 if (texture) {
                   texture.encoding = THREE.sRGBEncoding;
                   mat.map = texture;
+                  mat.needsUpdate = true;
                 }                
 
                 // Configurações adicionais do material
                 //mat.roughness = 0.8;
                 //mat.metalness = 0.2;
-                //mat.needsUpdate = true;
               }
             });
           }

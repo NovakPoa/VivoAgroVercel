@@ -12,7 +12,7 @@ const BaseObjects = () => {
       <Casa />
       <Cercas />
       <Galpao />
-      <Ornamentos />      
+      <Ornamentos />    
     </group>
   );
 };
