@@ -1,19 +1,22 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { useFBX } from '@react-three/drei';
 import * as THREE from 'three';
 import { gsap } from 'gsap';
+import useAssetsStore from '../../../../stores/AssetsStore';
 
 const Antena = ({position}) => {
-  const fbx = useFBX('/models/products/AgroCobertura/Antena.fbx');
   const meshRef = useRef();
-  const [isAnimating, setIsAnimating] = useState(true);
+  const [shouldScale, setShouldScale] = useState(true);
+/*   const [reset, setReset] = useState(false); */
+  const { getModel, getTexture } = useAssetsStore();
+
+  const fbx = React.useMemo(
+    () => getModel('/models/products/AgroCobertura/Antena.fbx'),[] 
+  );
 
   useEffect(() => {
     if (fbx) {
       console.log("Modelo de Antena carregado:", fbx);
-      
-      const textureLoader = new THREE.TextureLoader();
-      
+
       // Mapeamento de materiais para texturas
       const materialTextureMap = {
         'Antena': '/models/fazenda/Solo/Textures/Solo_Baked-1001.png',     /// alterar
@@ -28,20 +31,20 @@ const Antena = ({position}) => {
           child.receiveShadow = true;
           
           if (Array.isArray(child.material)) {
-            console.log(`Objeto com ${child.material.length} materiais`);
+           /*  console.log(`Objeto com ${child.material.length} materiais`); */
             
             child.material.forEach((mat, index) => {
-              console.log(`Material ${index}:`, mat.name);
+              /* console.log(`Material ${index}:`, mat.name); */
               
               const texturePath = materialTextureMap[mat.name];
               
               if (texturePath) {
-                const texture = textureLoader.load(texturePath);
-                texture.encoding = THREE.sRGBEncoding;
-                
-                // Aplicar textura ao material
-                mat.map = texture;
-                
+                const texture = getTexture(texturePath);
+                if (texture) {
+                  texture.encoding = THREE.sRGBEncoding;
+                  mat.map = texture;
+                }                
+
                 // Configurações adicionais do material
                 //mat.roughness = 0.8;
                 //mat.metalness = 0.2;
@@ -51,37 +54,44 @@ const Antena = ({position}) => {
           }
         }
       });
-      
-      //fbx.scale.set(0.01, 0.01, 0.01);
+
+      // Escala incial
+      meshRef.current.scale.set(0.0001, 0.0001, 0.0001);
     }
-  }, [fbx]);
+  }, []);
 
   // Animação de scale-in
   useEffect(() => {
-    if (meshRef.current && isAnimating) {
-      setIsAnimating(false);
-      meshRef.current.scale.set(0.001, 0.001, 0.001);
-      
+    if (fbx && meshRef.current && shouldScale) {
       gsap.to(meshRef.current.scale, {
         x: 0.04,
         y: 0.04,
         z: 0.04,
-        duration: 1, 
-        ease: "back.out(2.5)",
+        duration: 1.8, 
+        ease: "back.out(2.5)",     
         onComplete: () => {
-          setIsAnimating(false);
-          console.log("Animação de scale-in completa");
+          setShouldScale(false);
+          console.log("Animação completa, escala final:", meshRef.current.scale.x);
         }
       });
     }
-  }, [isAnimating]);
+  }, [shouldScale]);
+
+  // Reset
+/*   useEffect(() => {
+    if (reset) {
+      setReset(false);
+      meshRef.current.scale.set(0.0001, 0.0001, 0.0001);
+    }
+  }, [reset]);
+ */
+  if (!fbx) return null;
 
   return (
     <primitive 
       object={fbx} 
       ref={meshRef}
       position={position}
-      /* scale={0.05} */
     />
   );
 };

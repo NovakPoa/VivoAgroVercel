@@ -5,7 +5,8 @@ import App from './components/App/App.jsx'
 
 const root = createRoot(document.getElementById('root'));
 root.render(
-  <StrictMode>
+/*   <StrictMode>
     <App />
-  </StrictMode>
+  </StrictMode> */
+  <App />
 );
