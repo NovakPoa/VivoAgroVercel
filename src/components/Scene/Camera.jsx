@@ -3,7 +3,6 @@ import { useThree } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { gsap } from 'gsap';
 import useCameraStore from '../../stores/CameraStore';
-import * as THREE from 'three';
 
 const ENABLE_DEBUG_CONTROLS = true;
 
@@ -26,16 +25,22 @@ const Camera = () => {
       initialLookAt[1],
       initialLookAt[2]
     );
+
     camera.updateProjectionMatrix();
+
+    if (controlsRef.current) {
+      controlsRef.current.target.set(
+        initialLookAt[0],
+        initialLookAt[1],
+        initialLookAt[2]
+      );
+      controlsRef.current.update();
+    }
   }, [camera]);
 
   useEffect(() => {
     if (cameraAnimate) {
       const target = { x: cameraTargetPoint[0], y: cameraTargetPoint[1], z: cameraTargetPoint[2] };
-
-      const onComplete = () => {
-        setCameraAnimate({ animate: false, point: cameraTargetPoint, duration: animationDuration });
-      };
 
       gsap.to(controlsRef.current.target, {
         duration: animationDuration,
@@ -45,8 +50,10 @@ const Camera = () => {
         onUpdate: () => {
           controlsRef.current.update();
         },
-        onComplete: onComplete,
-      });
+        onComplete: () => {
+          setCameraAnimate({ animate: false, point: cameraTargetPoint, duration: animationDuration });
+        },
+      }); 
     }
   }, [cameraAnimate]);
 
@@ -57,7 +64,6 @@ const Camera = () => {
       enablePan={ENABLE_DEBUG_CONTROLS}
       enableRotate={ENABLE_DEBUG_CONTROLS}
       enableZoom={ENABLE_DEBUG_CONTROLS}
-      target={new THREE.Vector3(initialLookAt[0], initialLookAt[1], initialLookAt[2])}
     />
   );
 };
