@@ -6,7 +6,7 @@ const IntroObject = () => {
   const meshRef = useRef();
   const { introObjectAnimate, setIntroObjectAnimate } = useIntroStore();
 
-  const target = { x: -5, y: 2, z: -15 };
+  const target = { x: 15, y: 2, z: -10 };
   const duration = 2; 
 
   useEffect(() => {
@@ -24,7 +24,7 @@ const IntroObject = () => {
   }, []);
 
   return (
-    <mesh ref={meshRef} position={[0, 0, -20]} rotation={[5, 5, 3]}>
+    <mesh ref={meshRef} position={[20, 0, 0]} rotation={[5, 5, 3]}>
       <boxGeometry args={[2, 2, 2]} />
       <meshStandardMaterial color={'green'} />
     </mesh>

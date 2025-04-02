@@ -54,8 +54,8 @@ const Cercas = () => {
     <primitive 
       object={fbx} 
       ref={meshRef}
-      position={[3, 0, 3]} 
-      rotation={[0, 1.57, 0]}
+/*       position={[3, 0, 3]} 
+      rotation={[0, 1.57, 0]} */
       scale={0.01}
     />
   );

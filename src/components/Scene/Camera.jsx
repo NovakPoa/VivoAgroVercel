@@ -7,7 +7,7 @@ import useCameraStore from '../../stores/CameraStore';
 const ENABLE_DEBUG_CONTROLS = true;
 
 const initialCameraPosition = [0, 1.7, 0];
-const initialLookAt = [0, 0, -8];
+const initialLookAt = [8, 0, 0];
 
 const Camera = () => {
   const { camera, gl } = useThree();

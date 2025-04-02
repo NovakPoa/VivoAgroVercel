@@ -21,7 +21,7 @@ export default function useProductNavigation() {
 
   // Define pontos de câmera por produto
   const cameraPositions = {
-    'agro-cobertura': [0, 0, -8],
+    'agro-cobertura': [8, 0, 0],
     'gestao-maquinario': [30, 0, -8],
     'gestao-pecuaria': [-30, 0, -16],
     'clima-inteligente': [30, 0, -16],

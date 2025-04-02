@@ -55,8 +55,8 @@ const Galpao = () => {
     <primitive 
       object={fbx} 
       ref={meshRef}
-      position={[0, 0, -5]} 
-      rotation={[0, 1.55, 0]}
+/*       position={[0, 0, -5]} 
+      rotation={[0, 1.55, 0]} */
       scale={0.01}
     />
   );
