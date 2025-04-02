@@ -1,5 +1,5 @@
 import React from 'react';
-import IntroObject from './AnimatedObjects/IntroObject';
+import IntroLogo from './AnimatedObjects/IntroLogo';
 //import Tractors from './Tractors';
 //import Cows from './Cows';
 import useIntroStore from '../../../stores/IntroStore';
@@ -9,7 +9,7 @@ const AnimatedObjects = () => {
   
   return (
     <group>
-      {introObjectVisible && <IntroObject />}
+      {introObjectVisible && <IntroLogo />}
       {/* <Tractors /> */}
       {/* <Cows /> */}
     </group>

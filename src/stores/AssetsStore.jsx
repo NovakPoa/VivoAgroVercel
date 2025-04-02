@@ -9,7 +9,8 @@ const assets = {
     '/models/fazenda/Cercas/Cercas.fbx',
     '/models/fazenda/Galpao/Galpao.fbx',
     '/models/fazenda/Ornamentos/Ornamentos-2.fbx',
-    '/models/products/AgroCobertura/Antena.fbx'
+    '/models/products/AgroCobertura/Antena.fbx',
+    '/models/intro/LogoVivoAgro.fbx',
   ],
   textures3D: [
     // Solo
