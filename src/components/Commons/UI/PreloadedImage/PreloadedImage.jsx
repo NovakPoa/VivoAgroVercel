@@ -12,7 +12,6 @@ const PreloadedImage = ({ src, alt, className = '' }) => {
     if (cachedImage) {
       setImageSrc(src);
       setIsLoaded(true);
-      console.log(`Imagem encontrada no cache: ${src}`);
     } else {
       console.log(`Imagem não encontrada no cache, carregando: ${src}`);
       setIsLoaded(false);
