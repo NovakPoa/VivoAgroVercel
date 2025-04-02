@@ -19,17 +19,17 @@ const DashboardCard = () => {
     <div className="dashboard-card">
       <div className="sidebar-buttons">
         <button className="sidebar-button active">
-          <img src="./textures/vivo-icon-dark.png" alt="Vivo Icon" />
+          <img src="./icons/vivo-icon-dark.png" alt="Vivo Icon" />
         </button>
         <button className="sidebar-button">
           <RiResetRightFill color="#283943" size={28} />
         </button>
       </div>
       <div className="main-buttons">
-        <ImageButton status={productsStatus['agro-cobertura']} title="AGRO COBERTURA MÓVEL" onClick={() => handleProductClick('agro-cobertura')} imageUrl="/textures/agroCobertura.png" />
-        <ImageButton status={productsStatus['gestao-maquinario']} title="GESTÃO DE MAQUINÁRIO" onClick={() => handleProductClick('gestao-maquinario')} imageUrl="/textures/gestaoMaquinario.jpg" />
-        <ImageButton status={productsStatus['gestao-pecuaria']} title="GESTÃO PECUÁRIA" onClick={() => handleProductClick('gestao-pecuaria')} imageUrl="/textures/gestaoPecuaria.png" />
-        <ImageButton status={productsStatus['clima-inteligente']} title="CLIMA INTELIGENTE" onClick={() => handleProductClick('clima-inteligente')} imageUrl="/textures/climaInteligente.jpg" />
+        <ImageButton status={productsStatus['agro-cobertura']} title="AGRO COBERTURA MÓVEL" onClick={() => handleProductClick('agro-cobertura')} imageUrl="/ui/agroCobertura.png" />
+        <ImageButton status={productsStatus['gestao-maquinario']} title="GESTÃO DE MAQUINÁRIO" onClick={() => handleProductClick('gestao-maquinario')} imageUrl="/ui/gestaoMaquinario.jpg" />
+        <ImageButton status={productsStatus['gestao-pecuaria']} title="GESTÃO PECUÁRIA" onClick={() => handleProductClick('gestao-pecuaria')} imageUrl="/ui/gestaoPecuaria.png" />
+        <ImageButton status={productsStatus['clima-inteligente']} title="CLIMA INTELIGENTE" onClick={() => handleProductClick('clima-inteligente')} imageUrl="/ui/climaInteligente.jpg" />
       </div>
     </div>
   );

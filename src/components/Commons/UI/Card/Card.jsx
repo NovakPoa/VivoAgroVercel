@@ -1,15 +1,15 @@
 import React from 'react';
 import Button from '../Button/Button';
+import PreloadedImage from '../PreloadedImage/PreloadedImage';
 import './Card.css';
 
 const Card = ({ title, description, showImage = true, imageUrl, firstButton = true, secondButton = true, firstButtonText, secondButtonText, firstButtonOnClick, secondButtonOnClick }) => {
   return (
     <div className="card">
       {showImage && (
-        <div 
-          className="card-image-wrapper" 
-          style={{ backgroundImage: `url(${imageUrl})` }}
-        ></div>
+        <div className="card-image-wrapper">
+          <PreloadedImage src={imageUrl} alt={title} />
+        </div>
       )}
       <div className="card-content">
         <h2 className="card-title">{title}</h2>

@@ -11,7 +11,7 @@ const assets = {
     '/models/fazenda/Ornamentos/Ornamentos-2.fbx',
     '/models/products/AgroCobertura/Antena.fbx'
   ],
-  textures: [
+  textures3D: [
     // Solo
     '/models/fazenda/Solo/Textures/Solo_Baked-1001.png',
     '/models/fazenda/Solo/Textures/Solo_Baked-1002.png',
@@ -40,23 +40,26 @@ const assets = {
     '/skybox/ny.png',
     '/skybox/pz.png',
     '/skybox/nz.png',
-    
+
+  ],
+  texturesUI: [
     // Product images
-    '/textures/agroCobertura.png',
-    '/textures/climaInteligente.jpg',
-    '/textures/gestaoMaquinario.jpg',
-    '/textures/gestaoPecuaria.png'
-  ]
+    '/ui/agroCobertura.png',
+    '/ui/climaInteligente.jpg',
+    '/ui/gestaoMaquinario.jpg',
+    '/ui/gestaoPecuaria.png'
+  ]  
 };
 
 const useAssetsStore = create((set, get) => ({
   isLoading: true,
   loadingProgress: 0,
-  totalAssets: assets.models.length + assets.textures.length,
+  totalAssets: assets.models.length + assets.textures3D.length + assets.texturesUI.length,
   loadedAssets: 0,
   
   modelCache: {},
   textureCache: {},
+  uiImageCache: {},
 
   loadAllAssets: () => {
     const { incrementLoadedAssets } = get();
@@ -81,8 +84,8 @@ const useAssetsStore = create((set, get) => ({
       );
     });
 
-    // Carregar texturas
-    assets.textures.forEach(texturePath => {
+    // Carregar 3D texturas
+    assets.textures3D.forEach(texturePath => {
       textureLoader.load(
         texturePath,
         (loadedTexture) => {
@@ -93,11 +96,31 @@ const useAssetsStore = create((set, get) => ({
           // 
         },
         (error) => {
-          console.error(`Erro carregando textura ${texturePath}:`, error);
+          console.error(`Erro carregando 3D textura ${texturePath}:`, error);
           incrementLoadedAssets();
         }
       );
     });
+
+    // Carregar UI texturas  
+    assets.texturesUI.forEach(imagePath => {
+      const img = new Image();
+      
+      img.onload = () => {
+        // Armazenar a imagem carregada no cache
+        get().uiImageCache[imagePath] = img;
+        incrementLoadedAssets();
+        console.log(`UI imagem carregada: ${imagePath}`);
+      };
+      
+      img.onerror = () => {
+        console.error(`Erro ao carregar imagem de UI: ${imagePath}`);
+        incrementLoadedAssets();
+      };
+      
+      img.src = imagePath;
+    });
+
   },
 
   // Atualizar o progresso
@@ -128,6 +151,16 @@ const useAssetsStore = create((set, get) => ({
   // Obter textura 
   getTexture: (path) => {
     return get().textureCache[path] || null;
+  },
+
+  // Obter imagem UI
+  getUIImage: (path) => {
+    const cachedImage = get().uiImageCache[path];
+    if (cachedImage) {
+      return cachedImage;
+    }
+    console.warn(`Imagem UI não encontrada no cache: ${path}`);
+    return null;
   }
 }));
 

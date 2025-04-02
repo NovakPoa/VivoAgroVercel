@@ -22,7 +22,7 @@ const Tablet = ({ images, onFinish }) => {
             text={currentScreen < images.length - 1 ? 'Avançar' : 'Concluir'}
             onClick={handleNextScreen}
             showIcon={currentScreen >= images.length - 1}
-            iconUrl="./textures/check-icon.png"
+            iconUrl="./icons/check-icon.png"
             type="primary"
           />
         </div>

@@ -47,7 +47,7 @@ const LoadingScreen = () => {
   return (
     <div className="loading-screen">
       <div className="loading-content">
-        <img src="/textures/vivo-icon.png" alt="Vivo Agro" className="loading-logo" />
+        <img src="/icons/vivo-icon.png" alt="Vivo Agro" className="loading-logo" />
         <h1>Vivo Agro</h1>
         <p>Carregando</p>
         <div className="loading-bar-container">

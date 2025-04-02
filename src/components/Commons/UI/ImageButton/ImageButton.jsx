@@ -2,6 +2,7 @@ import React from 'react';
 import './ImageButton.css';
 import { RiLock2Fill } from "react-icons/ri";
 import { FaCheck } from "react-icons/fa6";
+import PreloadedImage from '../PreloadedImage/PreloadedImage';
 
 const ImageButton = ({ imageUrl, title, status, onClick }) => {
   const handleClick = () => {
@@ -13,9 +14,16 @@ const ImageButton = ({ imageUrl, title, status, onClick }) => {
   return (
     <div
       className={`image-button ${status}`}
-      style={{ backgroundImage: `url(${imageUrl})` }}
       onClick={handleClick}
     >
+      <div className="image-container">
+        <PreloadedImage 
+          src={imageUrl} 
+          alt={title} 
+          className="preloaded-image" 
+        />
+      </div>
+      
       {status === 'locked' && (
         <div className="overlay locked-overlay">
           <RiLock2Fill color="#fff" className="icon center-icon" />

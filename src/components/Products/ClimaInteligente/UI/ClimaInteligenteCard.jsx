@@ -2,6 +2,9 @@ import React from 'react';
 import Card from '../../../Commons/UI/Card/Card';
 
 const ClimaInteligenteCard = ({ isVisible, onContinueClick, onSkipClick }) => {
+
+  const imageUrl = "/ui/climaInteligente.jpg";
+
   if (!isVisible) return null;
 
   return (
@@ -10,7 +13,7 @@ const ClimaInteligenteCard = ({ isVisible, onContinueClick, onSkipClick }) => {
         title="Contratando Clima Inteligente" 
         description="Previsões precisas sobre seu microclima, ajudando você a otimizar seu manejo, irrigação e produção." 
         showImage={true}
-        imageUrl="/textures/climaInteligente.jpg"
+        imageUrl={imageUrl}
         firstButton={true}
         firstButtonText="Contratar"
         firstButtonOnClick={onContinueClick}
