@@ -1,46 +1,35 @@
 import React, { useRef, useCallback } from 'react';
 import useIntroStore from '../../../../stores/IntroStore';
-import { useProcessedModel } from '../../../../hooks/useProcessedModel';
-import { useFBXAnimations } from '../../../../hooks/useFBXAnimations';
+import { useGLTFAnimations } from '../../../../hooks/useGLTFAnimations';
+
+const MODEL_PATH = '/models/intro/LogoVivoAgro.glb';
 
 const IntroLogo = () => {
   const groupRef = useRef();
-  const meshRef = useRef();
-  const { introObjectAnimate, setIntroObjectAnimate } = useIntroStore();
-
-  const textureMapping = {
-    'Galpao-estrutura': '/models/fazenda/Galpao/Textures/Galpao_Baked-1001.png', // alterar
-    'Galpao-Telhado': '/models/fazenda/Galpao/Textures/Galpao-Telhado_Bake.png', // alterar
-  };
-  
-  const fbx = useProcessedModel('/models/intro/LogoVivoAgro.fbx', textureMapping);
+  const { introObjectAnimate } = useIntroStore();
 
   const handleAnimationFinish = useCallback((event) => {
-    //console.log(`Animação finalizada: ${event.clipName}`);
+    //console.log(`Animação finalizada gvb: ${event.clipName}`);
   }, []);
   
-  const animationOptions = {
+  const { scene, isPlaying, controlAnimation } = useGLTFAnimations(MODEL_PATH, introObjectAnimate, {
     loop: false,
     clampWhenFinished: true,
     onFinish: handleAnimationFinish
-  };
+  });
 
-  const { animations, controlAnimation } = useFBXAnimations(fbx, introObjectAnimate, animationOptions);
+  // Se não tiver cena, não renderiza nada
+  if (!scene) return null;
 
-  if (!fbx) return null;  
-  
   return (
-    <group
+    <group 
       ref={groupRef}
-      scale={0.005}
-      position={[4.088, 0.2, -8.377]}
-      rotation={[0, 2.0982, 0]} 
-      >
-        <primitive 
-          object={fbx} 
-          ref={meshRef}
-        />
-    </group> 
+      position={[4, 0.24, -8]} 
+      rotation={[0, -0.0982, 0]}
+      scale={1.4}
+    >
+      <primitive object={scene} />
+    </group>
   );
 };
 

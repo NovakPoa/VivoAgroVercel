@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader';
 import { TextureLoader } from 'three';
+import { useGLTF } from '@react-three/drei';
 
 const assets = {
   models: [
@@ -49,7 +50,10 @@ const assets = {
     '/ui/climaInteligente.jpg',
     '/ui/gestaoMaquinario.jpg',
     '/ui/gestaoPecuaria.png'
-  ]  
+  ],
+  gltfModels: [
+    '/models/intro/LogoVivoAgro.glb',
+  ],  
 };
 
 const useAssetsStore = create((set, get) => ({
@@ -121,6 +125,11 @@ const useAssetsStore = create((set, get) => ({
       img.src = imagePath;
     });
 
+    // Carregar GLB models
+    assets.gltfModels.forEach(modelPath => {
+      useGLTF.preload(modelPath);
+      incrementLoadedAssets();
+    });
   },
 
   // Atualizar o progresso
@@ -140,12 +149,7 @@ const useAssetsStore = create((set, get) => ({
 
   // Obter modelo
   getModel: (path) => {
-    const model = get().modelCache[path];
-    if (model) {
-      return model.clone();
-    }
-    console.warn(`Modelo não encontrado no cache: ${path}`);
-    return null;
+    return get().modelCache[path];
   },
 
   // Obter textura 
