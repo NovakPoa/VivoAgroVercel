@@ -9,7 +9,7 @@ const IntroLogo = () => {
   const { introObjectAnimate } = useIntroStore();
 
   const handleAnimationFinish = useCallback((event) => {
-    //console.log(`Animação finalizada gvb: ${event.clipName}`);
+    console.log(`Animação GLB finalizada: ${event.clipName}`);
   }, []);
   
   const { scene, isPlaying, controlAnimation } = useGLTFAnimations(MODEL_PATH, introObjectAnimate, {
