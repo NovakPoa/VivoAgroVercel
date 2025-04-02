@@ -1,55 +1,18 @@
-import React, { useRef, useEffect } from 'react';
-import * as THREE from 'three';
-import useAssetsStore from '../../../../stores/AssetsStore';
+import React, { useRef } from 'react';
+import { useProcessedModel } from '../../../../hooks/useProcessedModel';
 
 const Ornamentos = () => {
   const meshRef = useRef();
-  const { getModel, getTexture } = useAssetsStore();
-  const fbx = React.useMemo(
-    () => getModel('/models/fazenda/Ornamentos/Ornamentos-2.fbx'),[] 
-  );
 
-  useEffect(() => {
-    if (fbx) {
-      // Mapeamento de materiais para texturas
-      const materialTextureMap = {
-        'Marble': '/models/fazenda/Ornamentos/Textures/Balde_Bake.png',
-        'Plants_Set_cone': '/models/fazenda/Ornamentos/Textures/Image_12.png',
-        'Material.001': '/models/fazenda/Ornamentos/Textures/Balde_Bake.png',
-        'Plants_Set_leaf_2': '/models/fazenda/Ornamentos/Textures/Image_12.png',
-      };
-      
-      fbx.traverse((child) => {
-        if (child.isMesh) {
-
-          child.castShadow = true;
-          child.receiveShadow = true;
-
-          if (Array.isArray(child.material)) {
-
-            child.material.forEach((mat, index) => {
-              
-              const texturePath = materialTextureMap[mat.name];
-              
-              if (texturePath) {
-                const texture = getTexture(texturePath);
-                if (texture) {
-                  texture.encoding = THREE.sRGBEncoding;
-                  mat.map = texture;
-                  mat.needsUpdate = true;
-                }                
-
-                // Configurações adicionais do material
-                //mat.roughness = 0.8;
-                //mat.metalness = 0.2;
-              }
-            });
-          }
-        }
-      });
-    }
-  }, []);
+  const textureMapping = {
+    'Marble': '/models/fazenda/Ornamentos/Textures/Balde_Bake.png',
+    'Plants_Set_cone': '/models/fazenda/Ornamentos/Textures/Image_12.png',
+    'Material.001': '/models/fazenda/Ornamentos/Textures/Balde_Bake.png',
+    'Plants_Set_leaf_2': '/models/fazenda/Ornamentos/Textures/Image_12.png',
+  };
   
+  const fbx = useProcessedModel('/models/fazenda/Ornamentos/Ornamentos-2.fbx', textureMapping);
+
   if (!fbx) return null;  
   
   return (

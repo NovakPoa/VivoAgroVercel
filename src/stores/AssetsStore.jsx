@@ -110,7 +110,6 @@ const useAssetsStore = create((set, get) => ({
         // Armazenar a imagem carregada no cache
         get().uiImageCache[imagePath] = img;
         incrementLoadedAssets();
-        console.log(`UI imagem carregada: ${imagePath}`);
       };
       
       img.onerror = () => {

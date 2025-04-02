@@ -1,53 +1,16 @@
-import React, { useRef, useEffect } from 'react';
-import * as THREE from 'three';
-import useAssetsStore from '../../../../stores/AssetsStore';
+import React, { useRef } from 'react';
+import { useProcessedModel } from '../../../../hooks/useProcessedModel';
 
 const Galpao = () => {
   const meshRef = useRef();
-  const { getModel, getTexture } = useAssetsStore();
-  const fbx = React.useMemo(
-    () => getModel('/models/fazenda/Galpao/Galpao.fbx'),[] 
-  );
 
-  useEffect(() => {
-    if (fbx) {             
-      // Mapeamento de materiais para texturas
-      const materialTextureMap = {
-        'Galpao-estrutura': '/models/fazenda/Galpao/Textures/Galpao_Baked-1001.png',
-        'Galpao-Telhado': '/models/fazenda/Galpao/Textures/Galpao-Telhado_Bake.png',
-        'Galpao-interno': '/models/fazenda/Galpao/Textures/Galpao_Baked-1003.png'
-      };
-      
-      fbx.traverse((child) => {
-        if (child.isMesh) {
-
-          child.castShadow = true;
-          child.receiveShadow = true;
-
-          if (Array.isArray(child.material)) {
-
-            child.material.forEach((mat, index) => {
-              
-              const texturePath = materialTextureMap[mat.name];
-              
-              if (texturePath) {
-                const texture = getTexture(texturePath);
-                if (texture) {
-                  texture.encoding = THREE.sRGBEncoding;
-                  mat.map = texture;
-                  mat.needsUpdate = true;
-                }                
-
-                // Configurações adicionais do material
-                //mat.roughness = 0.8;
-                //mat.metalness = 0.2;
-              }
-            });
-          }
-        }
-      });
-    }
-  }, []);
+  const textureMapping = {
+    'Galpao-estrutura': '/models/fazenda/Galpao/Textures/Galpao_Baked-1001.png',
+    'Galpao-Telhado': '/models/fazenda/Galpao/Textures/Galpao-Telhado_Bake.png',
+    'Galpao-interno': '/models/fazenda/Galpao/Textures/Galpao_Baked-1003.png'
+  };
+  
+  const fbx = useProcessedModel('/models/fazenda/Galpao/Galpao.fbx', textureMapping);
   
   if (!fbx) return null;  
   
