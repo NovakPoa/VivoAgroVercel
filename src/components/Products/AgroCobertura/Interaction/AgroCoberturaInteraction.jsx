@@ -1,4 +1,3 @@
-// src/components/Products/AgroCobertura/Interaction/AgroCoberturaInteraction.jsx
 import React, { useState } from 'react';
 import Antena from '../../../Scene/Objects/InteractiveObjects/Antena';
 import ProductInteraction from '../../../Commons/Interactables/ProductInteraction';
