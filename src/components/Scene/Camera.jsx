@@ -11,10 +11,12 @@ const initialLookAt = [8, 0, 0];
 
 const Camera = () => {
   const { camera, gl } = useThree();
-  const { cameraTargetPoint, cameraAnimate, animationDuration, setCameraAnimate } = useCameraStore();
+  const { cameraTargetPoint, cameraAnimate, animationDuration, setCameraAnimate, fov } = useCameraStore();
   const controlsRef = useRef();
 
   useEffect(() => {
+    camera.fov = fov;
+
     camera.position.set(
       initialCameraPosition[0],
       initialCameraPosition[1],

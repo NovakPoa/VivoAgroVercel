@@ -1,25 +1,37 @@
-import React, { useRef } from 'react';
-import { useProcessedModel } from '../../../../hooks/useProcessedModel';
+import React, { useRef, useEffect } from 'react';
+import { useGLTF } from '@react-three/drei';
+
+const MODEL_PATH = '/models/fazenda/Casa.glb';
 
 const Casa = () => {
   const meshRef = useRef();
-
-  const textureMapping = {
-    'Sede-madeira-bordas': '/models/fazenda/Casa/Textures/Sede-Madeira-Bordas-Bake.png',
-    'Material': '/models/fazenda/Casa/Textures/madeira-clara_Bake.png',
-  };
-
-  const fbx = useProcessedModel('/models/fazenda/Casa/Casa.fbx', textureMapping);
+  const { scene } = useGLTF(MODEL_PATH);
   
-  if (!fbx) return null;
+  useEffect(() => {
+    if (scene) {
+      console.log('Estrutura do modelo:', scene);
+      
+      // Percorrer todas as meshes e imprimir suas posições
+      scene.traverse((object) => {
+        if (object.isMesh) {
+          console.log(`Mesh: ${object.name}`);
+          console.log(` - Posição: ${object.position.x}, ${object.position.y}, ${object.position.z}`);
+          console.log(` - Rotação: ${object.rotation.x}, ${object.rotation.y}, ${object.rotation.z}`);
+          console.log(` - Escala: ${object.scale.x}, ${object.scale.y}, ${object.scale.z}`);
+        }
+      });
+    }
+  }, [scene]);
+
+  if (!scene) return null;
   
   return (
     <primitive 
-      object={fbx} 
+      object={scene} 
       ref={meshRef}
-/*       position={[0, 0, -5]}
-      rotation={[0, 1.55, 0]} */
-      scale={0.02}
+      position={[0, 0, 0]}
+      rotation={[0, 0, 0]}
+      scale={1}
     />
   );
 };

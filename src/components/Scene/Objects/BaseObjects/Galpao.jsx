@@ -1,26 +1,21 @@
 import React, { useRef } from 'react';
-import { useProcessedModel } from '../../../../hooks/useProcessedModel';
+import { useGLTF } from '@react-three/drei';
+
+const MODEL_PATH = '/models/fazenda/Galpao.glb';
 
 const Galpao = () => {
   const meshRef = useRef();
-
-  const textureMapping = {
-    'Galpao-estrutura': '/models/fazenda/Galpao/Textures/Galpao_Baked-1001.png',
-    'Galpao-Telhado': '/models/fazenda/Galpao/Textures/Galpao-Telhado_Bake.png',
-    'Galpao-interno': '/models/fazenda/Galpao/Textures/Galpao_Baked-1003.png'
-  };
+  const { scene } = useGLTF(MODEL_PATH);
   
-  const fbx = useProcessedModel('/models/fazenda/Galpao/Galpao.fbx', textureMapping);
-  
-  if (!fbx) return null;  
+  if (!scene) return null;
   
   return (
     <primitive 
-      object={fbx} 
+      object={scene} 
       ref={meshRef}
-/*       position={[0, 0, -5]} 
-      rotation={[0, 1.55, 0]} */
-      scale={0.01}
+      position={[0, 0, 0]} 
+      rotation={[0, 0, 0]}
+      scale={1}
     />
   );
 };

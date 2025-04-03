@@ -1,40 +1,23 @@
 import { create } from 'zustand';
-import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader';
 import { TextureLoader } from 'three';
 import { useGLTF } from '@react-three/drei';
 
 const assets = {
   models: [
-    '/models/fazenda/Solo/Solo.fbx',
-    '/models/fazenda/Casa/Casa.fbx',
-    '/models/fazenda/Cercas/Cercas.fbx',
-    '/models/fazenda/Galpao/Galpao.fbx',
-    '/models/fazenda/Ornamentos/Ornamentos-2.fbx',
-    '/models/products/AgroCobertura/Antena.fbx',
-    '/models/intro/LogoVivoAgro.fbx',
+    // Fazenda
+    '/models/fazenda/Solo/Solo.glb',
+    '/models/fazenda/Casa/Casa.glb',
+    '/models/fazenda/Cercas/Cercas.glb',
+    '/models/fazenda/Galpao/Galpao.glb',
+    '/models/fazenda/Ornamentos/Ornamentos-2.glb',
+
+    // Products
+    '/models/products/AgroCobertura/Antena.glb',
+
+    // Intro
+    '/models/intro/LogoVivoAgro.glb',
   ],
-  textures3D: [
-    // Solo
-    '/models/fazenda/Solo/Textures/Solo_Baked-1001.png',
-    '/models/fazenda/Solo/Textures/Solo_Baked-1002.png',
-    '/models/fazenda/Solo/Textures/Solo_Baked-1003.png',
-    
-    // Casa
-    '/models/fazenda/Casa/Textures/Sede-Madeira-Bordas-Bake.png',
-    '/models/fazenda/Casa/Textures/madeira-clara_Bake.png',
-    
-    // Cercas
-    '/models/fazenda/Cercas/Textures/Cerca-arame_CercaMadeira_BaseColor.png',
-    '/models/fazenda/Cercas/Textures/acbd.png',
-    
-    // Galpao
-    '/models/fazenda/Galpao/Textures/Galpao-madeira-bordas_Bake.png',
-    '/models/fazenda/Galpao/Textures/Galpao-Telhado_Bake.png',
-    
-    // Ornamentos
-    '/models/fazenda/Ornamentos/Textures/Balde_Bake.png',
-    '/models/fazenda/Ornamentos/Textures/Image_12.jpg',
-    
+  textures: [
     // Skybox
     '/skybox/px.png',
     '/skybox/nx.png',
@@ -42,55 +25,38 @@ const assets = {
     '/skybox/ny.png',
     '/skybox/pz.png',
     '/skybox/nz.png',
-
-  ],
-  texturesUI: [
+  ],   
+  images: [
     // Product images
     '/ui/agroCobertura.png',
     '/ui/climaInteligente.jpg',
     '/ui/gestaoMaquinario.jpg',
     '/ui/gestaoPecuaria.png'
-  ],
-  gltfModels: [
-    '/models/intro/LogoVivoAgro.glb',
-  ],  
+  ], 
 };
 
 const useAssetsStore = create((set, get) => ({
   isLoading: true,
   loadingProgress: 0,
-  totalAssets: assets.models.length + assets.textures3D.length + assets.texturesUI.length,
+  totalAssets: assets.models.length + assets.textures.length + assets.images.length,
   loadedAssets: 0,
   
   modelCache: {},
   textureCache: {},
-  uiImageCache: {},
+  imageCache: {},
 
   loadAllAssets: () => {
     const { incrementLoadedAssets } = get();
-    const fbxLoader = new FBXLoader();
     const textureLoader = new TextureLoader();
 
     // Carregar modelos
     assets.models.forEach(modelPath => {
-      fbxLoader.load(
-        modelPath,
-        (loadedModel) => {
-          get().modelCache[modelPath] = loadedModel;
-          incrementLoadedAssets();
-        },
-        (progress) => {
-          // 
-        },
-        (error) => {
-          console.error(`Erro carregando modelo ${modelPath}:`, error);
-          incrementLoadedAssets();
-        }
-      );
-    });
+      useGLTF.preload(modelPath);
+      incrementLoadedAssets();
+    });    
 
-    // Carregar 3D texturas
-    assets.textures3D.forEach(texturePath => {
+    // Carregar texturas
+    assets.textures.forEach(texturePath => {
       textureLoader.load(
         texturePath,
         (loadedTexture) => {
@@ -107,28 +73,22 @@ const useAssetsStore = create((set, get) => ({
       );
     });
 
-    // Carregar UI texturas  
-    assets.texturesUI.forEach(imagePath => {
+    // Carregar images 
+    assets.images.forEach(imagePath => {
       const img = new Image();
       
       img.onload = () => {
         // Armazenar a imagem carregada no cache
-        get().uiImageCache[imagePath] = img;
+        get().imageCache[imagePath] = img;
         incrementLoadedAssets();
       };
       
       img.onerror = () => {
-        console.error(`Erro ao carregar imagem de UI: ${imagePath}`);
+        console.error(`Erro ao carregar imagem: ${imagePath}`);
         incrementLoadedAssets();
       };
       
       img.src = imagePath;
-    });
-
-    // Carregar GLB models
-    assets.gltfModels.forEach(modelPath => {
-      useGLTF.preload(modelPath);
-      incrementLoadedAssets();
     });
   },
 
@@ -154,17 +114,12 @@ const useAssetsStore = create((set, get) => ({
 
   // Obter textura 
   getTexture: (path) => {
-    return get().textureCache[path] || null;
+    return get().textureCache[path];
   },
 
-  // Obter imagem UI
+  // Obter imagem
   getUIImage: (path) => {
-    const cachedImage = get().uiImageCache[path];
-    if (cachedImage) {
-      return cachedImage;
-    }
-    console.warn(`Imagem UI não encontrada no cache: ${path}`);
-    return null;
+    return get().imageCache[path];
   }
 }));
 

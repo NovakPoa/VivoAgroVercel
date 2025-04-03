@@ -1,49 +1,22 @@
-import React, { useRef, useEffect, useState } from 'react';
-import { gsap } from 'gsap';
-import { useProcessedModel } from '../../../../hooks/useProcessedModel';
+import React, { useRef } from 'react';
+import { useGLTF } from '@react-three/drei';
+
+const MODEL_PATH = '/models/products/AgroCobertura/Antena.glb';
 
 const Antena = ({position}) => {
   const meshRef = useRef();
-  const [shouldScale, setShouldScale] = useState(true);
 
-  const textureMapping = {
-    'Antena': '/models/fazenda/Solo/Textures/Solo_Baked-1001.png',     /// alterar
-    'Antena.001': '/models/fazenda/Solo/Textures/Solo_Baked-1002.png', /// alterar
-  };
-  const fbx = useProcessedModel('/models/products/AgroCobertura/Antena.fbx', textureMapping); 
-
-  // Definir escala inicial
-  useEffect(() => {
-    if (meshRef.current) {
-      meshRef.current.scale.set(0.0001, 0.0001, 0.0001);
-    }
-  }, []);
-
-  // Animação de scale-in
-  useEffect(() => {
-    if (fbx && meshRef.current && shouldScale) {
-      gsap.to(meshRef.current.scale, {
-        x: 0.04,
-        y: 0.04,
-        z: 0.04,
-        duration: 1.8, 
-        ease: "back.out(2.5)",     
-        onComplete: () => {
-          setShouldScale(false);
-          /* console.log("Animação completa, escala final:", meshRef.current.scale.x); */
-        }
-      });
-    }
-  }, [shouldScale]);
-
-
-  if (!fbx) return null;
+  const { scene } = useGLTF(MODEL_PATH);
+  
+  if (!scene) return null;
 
   return (
     <primitive 
-      object={fbx} 
+      object={scene} 
       ref={meshRef}
       position={position}
+      rotation={[0, 0, 0]}
+      scale={1}      
     />
   );
 };

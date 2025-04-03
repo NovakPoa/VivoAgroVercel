@@ -1,26 +1,37 @@
-import React, { useRef } from 'react';
-import { useProcessedModel } from '../../../../hooks/useProcessedModel';
+import React, { useRef, useEffect } from 'react';
+import { useGLTF } from '@react-three/drei';
+
+const MODEL_PATH = '/models/fazenda/Solo.glb';
 
 const Solo = () => {
   const meshRef = useRef();
+  const { scene } = useGLTF(MODEL_PATH);
+  
+  useEffect(() => {
+    if (scene) {
+      console.log('Estrutura do modelo:', scene);
+      
+      // Percorrer todas as meshes e imprimir suas posições
+      scene.traverse((object) => {
+        if (object.isMesh) {
+          console.log(`Mesh: ${object.name}`);
+          console.log(` - Posição: ${object.position.x}, ${object.position.y}, ${object.position.z}`);
+          console.log(` - Rotação: ${object.rotation.x}, ${object.rotation.y}, ${object.rotation.z}`);
+          console.log(` - Escala: ${object.scale.x}, ${object.scale.y}, ${object.scale.z}`);
+        }
+      });
+    }
+  }, [scene]);
 
-  const textureMapping = {
-    'Solo-1': '/models/fazenda/Solo/Textures/Solo_Baked-1001.png',
-    'Solo-2': '/models/fazenda/Solo/Textures/Solo_Baked-1002.png',
-    'Solo-3': '/models/fazenda/Solo/Textures/Solo_Baked-1003.png'
-  };
-  
-  const fbx = useProcessedModel('/models/fazenda/Solo/Solo.fbx', textureMapping);
-  
-  if (!fbx) return null;
+  if (!scene) return null;
 
   return (
     <primitive 
-      object={fbx} 
+      object={scene} 
       ref={meshRef}
-/*       position={[0, 0, 0]}
-      rotation={[0, 0, 0]} */
-      scale={0.05}
+      position={[0, 0, 0]}
+      rotation={[0, 0, 0]}
+      scale={1}
     />
   );
 };

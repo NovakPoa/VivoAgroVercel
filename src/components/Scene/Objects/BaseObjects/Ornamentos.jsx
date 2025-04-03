@@ -1,27 +1,21 @@
 import React, { useRef } from 'react';
-import { useProcessedModel } from '../../../../hooks/useProcessedModel';
+import { useGLTF } from '@react-three/drei';
+
+const MODEL_PATH = '/models/fazenda/Ornamentos.glb';
 
 const Ornamentos = () => {
   const meshRef = useRef();
-
-  const textureMapping = {
-    'Marble': '/models/fazenda/Ornamentos/Textures/Balde_Bake.png',
-    'Plants_Set_cone': '/models/fazenda/Ornamentos/Textures/Image_12.png',
-    'Material.001': '/models/fazenda/Ornamentos/Textures/Balde_Bake.png',
-    'Plants_Set_leaf_2': '/models/fazenda/Ornamentos/Textures/Image_12.png',
-  };
+  const { scene } = useGLTF(MODEL_PATH);
   
-  const fbx = useProcessedModel('/models/fazenda/Ornamentos/Ornamentos-2.fbx', textureMapping);
-
-  if (!fbx) return null;  
+  if (!scene) return null;
   
   return (
     <primitive 
-      object={fbx} 
+      object={scene} 
       ref={meshRef}
-/*       position={[0, 0, -5]}
-      rotation={[0, 1.55, 0]} */
-      scale={0.01}
+      position={[0, 0, 0]}
+      rotation={[0, 0, 0]}
+      scale={1}
     />
   );
 };
