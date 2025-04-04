@@ -11,6 +11,10 @@ const assets = {
     '/models/fazenda/Galpao/Galpao.glb',
     '/models/fazenda/Ornamentos/Ornamentos-2.glb',
 
+    // Vegetação
+    '/models/vegetaçao/Grama.glb',
+    '/models/vegetaçao/PlantaçaoDeSoja.glb',
+    
     // Products
     '/models/products/AgroCobertura/Antena.glb',
 

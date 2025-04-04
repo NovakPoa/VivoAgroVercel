@@ -4,6 +4,7 @@ import Casa from './BaseObjects/Casa';
 import Cercas from './BaseObjects/Cercas';
 import Galpao from './BaseObjects/Galpao';
 import Ornamentos from './BaseObjects/Ornamentos';
+import Vegetaçao from './BaseObjects/Vegetaçao';
 
 const BaseObjects = () => {
   return (
@@ -12,7 +13,8 @@ const BaseObjects = () => {
       <Casa />
       <Cercas />
       <Galpao />
-      <Ornamentos />    
+      <Ornamentos />   
+      <Vegetaçao /> 
     </group>
   );
 };
