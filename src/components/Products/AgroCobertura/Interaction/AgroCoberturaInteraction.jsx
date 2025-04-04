@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Antena from '../../../Scene/Objects/InteractiveObjects/Antena';
-import ProductFirstInteraction from '../../../Scene/Interactions/ProductFirstInteraction';
-import ProductSecondInteraction from '../../../Scene/Interactions/ProductSecondInteraction';
+import ProductFirstInteraction from '../../../Scene/Objects/Interactions/ProductFirstInteraction';
+import ProductSecondInteraction from '../../../Scene/Objects/Interactions/ProductSecondInteraction';
 import useProductsStore from '../../../../stores/ProductsStore';
 
 const AgroCoberturaInteraction = () => {

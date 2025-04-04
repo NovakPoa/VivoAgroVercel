@@ -1,5 +1,5 @@
 import React from 'react';
-import Placeholder from '../../Scene/Objects/Interactions/PlaceholderObjects/Placeholder';
+import Placeholder from './PlaceholderObjects/Placeholder';
 import Slot from './Slot/Slot';
 
 const ProductFirstInteraction = ({ 
