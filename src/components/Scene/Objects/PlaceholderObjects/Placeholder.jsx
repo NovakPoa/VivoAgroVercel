@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 
-const Placeholder = ({ position, onClick, color = "#660099", opacity = 0.5 }) => {
+const Placeholder = ({ position, color = "#660099", opacity = 0.5 }) => {
   const meshRef = useRef();
   
   const cylinderHeight = 20;
@@ -13,7 +13,6 @@ const Placeholder = ({ position, onClick, color = "#660099", opacity = 0.5 }) =>
     <mesh 
       ref={meshRef} 
       position={adjustedPosition} 
-      onClick={onClick}
     >
       <cylinderGeometry args={[2.5, 0, 30, 32]} />
       <meshStandardMaterial 

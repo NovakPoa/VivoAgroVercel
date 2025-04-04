@@ -1,10 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Antena from '../../../Scene/Objects/InteractiveObjects/Antena';
-import ProductInteraction from '../../../Commons/Interactables/ProductInteraction';
+import ProductFirstInteraction from '../../../Commons/Interactables/ProductFirstInteraction';
 import useProductsStore from '../../../../stores/ProductsStore';
 
 const AgroCoberturaInteraction = () => {
-  const { setShowSecondInstruction } = useProductsStore();
+  const { 
+    setShowFirstInstruction, 
+    setShowSecondInstruction,
+    showFirstInteraction,
+    showSecondInteraction,
+    setShowFirstInteraction,
+    setShowSecondInteraction
+  } = useProductsStore();
   const [selectedPosition, setSelectedPosition] = useState(null);
   
   const placeholderPositions = [
@@ -13,19 +20,35 @@ const AgroCoberturaInteraction = () => {
     [50, 0, 35],
   ];
   
-  const handlePlaceholderClick = (position) => {
+  const slotPositions = [
+    [50, 0, -20],
+    [50, 0, 5], 
+    [50, 0, 35], 
+  ];
+
+  useEffect(() => {
+    setShowFirstInstruction(true);
+    setShowFirstInteraction(true);
+  }, []);
+
+  const handleSlotClick = (position) => {
     setSelectedPosition(position);
+    setShowFirstInstruction(false);
+    setShowFirstInteraction(false);
     setTimeout(() => {
       setShowSecondInstruction(true);
+      setShowSecondInteraction(true);
     }, 1000);
   };
   
   return (
     <>
-      <ProductInteraction 
+      {showFirstInteraction && (
+        <ProductFirstInteraction 
         placeholderPositions={placeholderPositions}
-        onPlaceholderClick={handlePlaceholderClick}
-      />
+        onSlotClick={handleSlotClick}
+        />
+      )}
       
       {selectedPosition && <Antena position={selectedPosition} />}
     </>

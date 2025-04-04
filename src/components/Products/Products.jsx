@@ -13,7 +13,6 @@ const Products = () => {
   const onContinueClick = () => {
     setShowCard(false);
     setInteraction(currentProduct);
-    setShowFirstInstruction(true);
   };
 
   const onSkipClick = () => {

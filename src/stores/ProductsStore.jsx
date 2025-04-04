@@ -12,7 +12,9 @@ const productsStore = (set) => ({
     'clima-inteligente': 'locked',
   },
   showFirstInstruction: false,
+  showFirstInteraction: false,
   showSecondInstruction: false,
+  showSecondInteraction: false,
   setStartProduct: (start) => set({ startProduct: start }),
   setCurrentProduct: (name) => set({ currentProduct: name }),
   setLastProductName: (name) => set({ lastProductName: name }),
@@ -24,11 +26,8 @@ const productsStore = (set) => ({
   })),
   setShowFirstInstruction: (show) => set({ showFirstInstruction: show }),
   setShowSecondInstruction: (show) => set({ showSecondInstruction: show }),
-
-  resetInstructions: () => set({ 
-    showFirstInstruction: false, 
-    showSecondInstruction: false 
-  }),
+  setShowFirstInteraction: (show) => set({ showFirstInteraction: show }),
+  setShowSecondInteraction: (show) => set({ showSecondInteraction: show }),  
 });
 
 const useProductsStore = create(productsStore);
