@@ -6,7 +6,7 @@ import Lights from './Lights';
 import Intro from '../Intro/Intro';
 import Products from '../Products/Products';
 import Dashboard from '../Dashboard/Dashboard';
-import InteractionObjects from './Objects/InteractionObjects';
+import InteractionObjects from './Objects/Interactions/InteractionObjects';
 import AnimatedObjects from './Objects/AnimatedObjects';
 import BaseObjects from './Objects/BaseObjects';
 

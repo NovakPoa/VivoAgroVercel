@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Antena from '../../../Scene/Objects/InteractiveObjects/Antena';
-import ProductFirstInteraction from '../../../Commons/Interactables/ProductFirstInteraction';
+import ProductFirstInteraction from '../../../Scene/Interactions/ProductFirstInteraction';
+import ProductSecondInteraction from '../../../Scene/Interactions/ProductSecondInteraction';
 import useProductsStore from '../../../../stores/ProductsStore';
 
 const AgroCoberturaInteraction = () => {
@@ -20,12 +21,6 @@ const AgroCoberturaInteraction = () => {
     [50, 0, 35],
   ];
   
-  const slotPositions = [
-    [50, 0, -20],
-    [50, 0, 5], 
-    [50, 0, 35], 
-  ];
-
   useEffect(() => {
     setShowFirstInstruction(true);
     setShowFirstInteraction(true);
@@ -41,6 +36,14 @@ const AgroCoberturaInteraction = () => {
     }, 1000);
   };
   
+  const handleButtonClick = () => {
+    setShowSecondInstruction(false);
+    setShowSecondInteraction(false);
+    setTimeout(() => {
+      // show tablet
+    }, 1000);
+  };
+
   return (
     <>
       {showFirstInteraction && (
@@ -50,6 +53,13 @@ const AgroCoberturaInteraction = () => {
         />
       )}
       
+      {showSecondInteraction && (
+        <ProductSecondInteraction 
+        buttonPosition={placeholderPositions}
+        onButtonClick={handleButtonClick}
+        />
+      )}   
+
       {selectedPosition && <Antena position={selectedPosition} />}
     </>
   );

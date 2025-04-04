@@ -1,7 +1,7 @@
 import React from 'react';
-import useInteractionStore from '../../../stores/InteractionStore';
+import useInteractionStore from '../../../../stores/InteractionStore';
 
-import AgroCoberturaInteraction from '../../Products/AgroCobertura/Interaction/AgroCoberturaInteraction';
+import AgroCoberturaInteraction from '../../../Products/AgroCobertura/Interaction/AgroCoberturaInteraction';
 //import GestaoMaquinarioInteraction from '../../Products/GestaoMaquinario/Interaction/GestaoMaquinarioInteraction';
 // ... outros imports
 
