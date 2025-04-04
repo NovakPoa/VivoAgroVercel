@@ -13,7 +13,19 @@ const MODELS = [
     position: [15, 0, 5],
     rotation: [0, 0, 0],
     scale: 0.8
-  }
+  },
+  {
+    path: '/models/vegetaçao/ArvoresDistantes.glb',
+    position: [0, 0, 0],
+    rotation: [0, 0, 0],
+    scale: 1
+  },
+  {
+    path: '/models/vegetaçao/VegetaçaoPerto.glb',
+    position: [0, 0, 0],
+    rotation: [0, 0, 0],
+    scale: 1
+  }  
 ];
 
 const Vegetaçao = () => {
