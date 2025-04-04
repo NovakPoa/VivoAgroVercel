@@ -16,6 +16,7 @@ const assets = {
     '/models/vegetaçao/PlantaçaoDeSoja.glb',
     
     // Products
+    '/models/products/BigButton.glb',
     '/models/products/AgroCobertura/Antena.glb',
 
     // Intro

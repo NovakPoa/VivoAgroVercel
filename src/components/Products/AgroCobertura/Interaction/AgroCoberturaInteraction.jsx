@@ -55,7 +55,7 @@ const AgroCoberturaInteraction = () => {
       
       {showSecondInteraction && (
         <ProductSecondInteraction 
-        buttonPosition={placeholderPositions}
+        buttonPosition={[0, 0, 0]}
         onButtonClick={handleButtonClick}
         />
       )}   
