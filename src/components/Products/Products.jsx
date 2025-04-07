@@ -1,13 +1,11 @@
 import React from 'react';
 import useProductsStore from '../../stores/ProductsStore';
-import useInteractionStore from '../../stores/InteractionStore';
 import useProductNavigation from '../../hooks/useProductNavigation';
 import productRegistry from '../../config/productRegistry';
 import ProductInstructions from './ProductInstructions';
 
 const Products = () => {
   const { currentProduct, setShowInteraction } = useProductsStore();
-  const { setInteraction } = useInteractionStore();
   const { showCard, setShowCard, endProduct } = useProductNavigation();
   
   const onContinueClick = () => {

@@ -1,5 +1,4 @@
 import React from 'react';
-import useInteractionStore from '../../../../stores/InteractionStore';
 import useProductsStore from '../../../../stores/ProductsStore';
 
 import AgroCoberturaInteraction from '../../../Products/AgroCobertura/Interaction/AgroCoberturaInteraction';
@@ -7,7 +6,6 @@ import AgroCoberturaInteraction from '../../../Products/AgroCobertura/Interactio
 // ... outros imports
 
 const InteractionObjects = () => {
-  const { currentInteraction } = useInteractionStore();
   const { currentProduct, showInteraction } = useProductsStore();
 
   const interactionComponents = {
