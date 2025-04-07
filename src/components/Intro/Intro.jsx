@@ -8,12 +8,12 @@ const Intro = () => {
   const showIntroCardDelay = 0;
 
   const [showCard, setShowCard] = useState(false);
-  const { setIntroObjectAnimate, setIntroObjectVisible } = useIntroStore();
+  const { setStartIntro, setIntroVisibility } = useIntroStore();
   const { setCurrentProduct, setStartProduct } = useProductsStore();
 
   const onButtonClick = () => {
-    setIntroObjectVisible(true);
-    setIntroObjectAnimate(true);
+    setIntroVisibility(true);
+    setStartIntro(true);
     setShowCard(false);
     startProductsTimer();
   }

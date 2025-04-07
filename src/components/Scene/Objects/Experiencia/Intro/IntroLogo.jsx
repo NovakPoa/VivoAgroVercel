@@ -6,13 +6,13 @@ const MODEL_PATH = '/models/intro/LogoVivoAgro.glb';
 
 const IntroLogo = () => {
   const groupRef = useRef();
-  const { introObjectAnimate } = useIntroStore();
+  const { startIntro } = useIntroStore();
 
   const handleAnimationFinish = useCallback((event) => {
-    console.log(`Animação GLB finalizada: ${event.clipName}`);
+    //console.log(`Animação GLB finalizada: ${event.clipName}`);
   }, []);
   
-  const { scene, isPlaying, controlAnimation } = useGLTFAnimations(MODEL_PATH, introObjectAnimate, {
+  const { scene, isPlaying, controlAnimation } = useGLTFAnimations(MODEL_PATH, startIntro, {
     loop: false,
     clampWhenFinished: true,
     onFinish: handleAnimationFinish

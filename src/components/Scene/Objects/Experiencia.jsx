@@ -1,19 +1,15 @@
 import React from 'react';
-import InteractionObjects from './Interactions/InteractionObjects';
-import IntroLogo from './Experiencia/Intro/IntroLogo';
-//import Tractors from './Tractors';
-//import Cows from './Cows';
-import useIntroStore from '../../../stores/IntroStore';
+import IntroScene from '../../Intro/Scene/IntroScene';
+import AgroCoberturaScene from '../../Products/AgroCobertura/Scene/AgroCoberturaScene';
+import GestaoMaquinarioScene from '../../Products/GestaoMaquinario/Scene/GestaoMaquinarioScene';
 
 const Experiencia = () => {
-  const { introObjectVisible } = useIntroStore();
-  
+
   return (
     <group>
-      <InteractionObjects />
-      {introObjectVisible && <IntroLogo />}
-      {/* <Tractors /> */}
-      {/* <Cows /> */}
+      <IntroScene />
+      <AgroCoberturaScene />
+      <GestaoMaquinarioScene />
     </group>
   );
 };
