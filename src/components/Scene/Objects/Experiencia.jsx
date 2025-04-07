@@ -1,14 +1,16 @@
 import React from 'react';
-import IntroLogo from './AnimatedObjects/IntroLogo';
+import InteractionObjects from './Interactions/InteractionObjects';
+import IntroLogo from './Experiencia/Intro/IntroLogo';
 //import Tractors from './Tractors';
 //import Cows from './Cows';
 import useIntroStore from '../../../stores/IntroStore';
 
-const AnimatedObjects = () => {
+const Experiencia = () => {
   const { introObjectVisible } = useIntroStore();
   
   return (
     <group>
+      <InteractionObjects />
       {introObjectVisible && <IntroLogo />}
       {/* <Tractors /> */}
       {/* <Cows /> */}
@@ -16,4 +18,4 @@ const AnimatedObjects = () => {
   );
 };
 
-export default AnimatedObjects;
+export default Experiencia;

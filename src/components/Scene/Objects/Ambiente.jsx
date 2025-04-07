@@ -1,9 +1,9 @@
 import React from 'react';
 import Fazenda from './Ambiente/Fazenda';
 import Vegetaçao from './Ambiente/Vegetaçao';
-import Mesa from './BaseObjects/Mesa';
+import Mesa from './Ambiente/Mesa';
 
-const BaseObjects = () => {
+const Ambiente = () => {
   return (
     <group>
       <Fazenda />  
@@ -13,4 +13,4 @@ const BaseObjects = () => {
   );
 };
 
-export default BaseObjects;
+export default Ambiente;

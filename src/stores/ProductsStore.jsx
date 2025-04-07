@@ -2,6 +2,7 @@ import { create } from 'zustand';
 
 const productsStore = (set) => ({
   startProduct: false,
+  showInteraction: false,
   currentProduct: 'agro-cobertura',
   lastProductName: '',
   productsOrder: ['agro-cobertura', 'gestao-maquinario', 'gestao-pecuaria', 'clima-inteligente'],
@@ -16,6 +17,7 @@ const productsStore = (set) => ({
   showSecondInstruction: false,
   showSecondInteraction: false,
   setStartProduct: (start) => set({ startProduct: start }),
+  setShowInteraction: (value) => set({ showInteraction: value }),
   setCurrentProduct: (name) => set({ currentProduct: name }),
   setLastProductName: (name) => set({ lastProductName: name }),
   setProductStatus: (name, status) => set((state) => ({

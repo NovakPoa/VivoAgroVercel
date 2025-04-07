@@ -6,13 +6,13 @@ import productRegistry from '../../config/productRegistry';
 import ProductInstructions from './ProductInstructions';
 
 const Products = () => {
-  const { currentProduct, setShowFirstInstruction } = useProductsStore();
+  const { currentProduct, setShowInteraction } = useProductsStore();
   const { setInteraction } = useInteractionStore();
   const { showCard, setShowCard, endProduct } = useProductNavigation();
   
   const onContinueClick = () => {
     setShowCard(false);
-    setInteraction(currentProduct);
+    setShowInteraction(true);
   };
 
   const onSkipClick = () => {

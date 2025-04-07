@@ -1,6 +1,6 @@
 import React, { useRef, useCallback } from 'react';
-import useIntroStore from '../../../../stores/IntroStore';
-import { useGLTFAnimations } from '../../../../hooks/useGLTFAnimations';
+import useIntroStore from '../../../../../stores/IntroStore';
+import { useGLTFAnimations } from '../../../../../hooks/useGLTFAnimations';
 
 const MODEL_PATH = '/models/intro/LogoVivoAgro.glb';
 
