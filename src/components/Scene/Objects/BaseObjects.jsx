@@ -5,6 +5,7 @@ import Cercas from './BaseObjects/Cercas';
 import Galpao from './BaseObjects/Galpao';
 import Ornamentos from './BaseObjects/Ornamentos';
 import Vegetaçao from './BaseObjects/Vegetaçao';
+import Mesa from './BaseObjects/Mesa';
 
 const BaseObjects = () => {
   return (
@@ -15,6 +16,7 @@ const BaseObjects = () => {
       <Galpao />
       <Ornamentos />   
       <Vegetaçao /> 
+      {/* <Mesa />  */}
     </group>
   );
 };

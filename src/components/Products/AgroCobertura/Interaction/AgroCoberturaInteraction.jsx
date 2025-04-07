@@ -55,11 +55,10 @@ const AgroCoberturaInteraction = () => {
       
       {showSecondInteraction && (
         <ProductSecondInteraction 
-        buttonPosition={[0, 0, 0]}
+        buttonPosition={[0.5, 1.2, 0]}
         onButtonClick={handleButtonClick}
         />
       )}   
-
       {selectedPosition && <Antena position={selectedPosition} />}
     </>
   );

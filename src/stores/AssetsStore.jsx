@@ -17,6 +17,7 @@ const assets = {
     
     // Products
     '/models/products/BigButton.glb',
+    '/models/products/Mesa.glb',
     '/models/products/AgroCobertura/Antena.glb',
 
     // Intro
