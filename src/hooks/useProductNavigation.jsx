@@ -24,9 +24,8 @@ export default function useProductNavigation() {
   const cameraPositions = {
     'agro-cobertura': [8, 0, 0],
     'gestao-maquinario': [0, 0, 8],
-    'gestao-pecuaria': [-30, 0, -16],
-    'clima-inteligente': [30, 0, -16],
-    'gestao-fazenda': [0, 0, -16]
+    'gestao-pecuaria': [0, 0, -8],
+    'clima-inteligente': [0, 0, 9],
   };
 
   const startCameraAnimation = (point, duration = 2) => {
