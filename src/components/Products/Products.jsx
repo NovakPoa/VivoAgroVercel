@@ -3,11 +3,12 @@ import useProductsStore from '../../stores/ProductsStore';
 import useProductNavigation from '../../hooks/useProductNavigation';
 import productRegistry from '../../config/productRegistry';
 import ProductInstructions from './ProductInstructions';
+import Slots from '../Commons/UI/Slots/Slots';
 
 const Products = () => {
   const { currentProduct, setShowInteraction } = useProductsStore();
   const { showCard, setShowCard, endProduct } = useProductNavigation();
-  
+
   const onContinueClick = () => {
     setShowCard(false);
     setShowInteraction(true);
@@ -30,6 +31,7 @@ const Products = () => {
       )}
 
       <ProductInstructions />
+      <Slots />
     </div>
   );
 };

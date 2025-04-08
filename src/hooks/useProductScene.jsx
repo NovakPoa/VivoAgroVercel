@@ -8,9 +8,8 @@ const useProductScene = (productId) => {
     showInteraction,
     setShowFirstInstruction, 
     setShowSecondInstruction,
-  } = useProductsStore();  
+  } = useProductsStore();   
   const { endProduct } = useProductNavigation();
-  
   const [enableObject, setEnableObject] = useState(false);
   const [showFirstInteraction, setShowFirstInteraction] = useState(false);
   const [showSecondInteraction, setShowSecondInteraction] = useState(false);

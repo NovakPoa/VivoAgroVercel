@@ -1,11 +1,7 @@
 import React from 'react';
 import Placeholder from './Placeholder/Placeholder';
-import Slot from './Slot/Slot';
 
-const ProductFirstInteraction = ({ 
-  placeholderPositions, 
-  onSlotClick 
-}) => {
+const ProductFirstInteraction = ({ placeholderPositions }) => {
     
   const renderPlaceholders = () => {
     return placeholderPositions.map((position, index) => (
@@ -15,25 +11,10 @@ const ProductFirstInteraction = ({
       />
     ));
   };
-  
-  const renderSlots = () => {
-    return (
-      <group position={[0, 0, 0]}>
-        {placeholderPositions.map((position, index) => (
-          <Slot 
-            key={index}
-            position={position}
-            onClick={() => onSlotClick(position)}
-          />
-        ))}
-      </group>
-    );
-  };
     
   return (
     <>
-      {renderPlaceholders()}
-      {renderSlots()}   
+      {renderPlaceholders()} 
     </>    
   );
 };

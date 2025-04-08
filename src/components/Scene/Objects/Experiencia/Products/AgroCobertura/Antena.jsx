@@ -3,9 +3,8 @@ import { useGLTF } from '@react-three/drei';
 
 const MODEL_PATH = '/models/products/AgroCobertura/Antena.glb';
 
-const Antena = ({position}) => {
+const Antena = ({position, rotation = [0, 0, 0], scale = 1}) => {
   const meshRef = useRef();
-
   const { scene } = useGLTF(MODEL_PATH);
   
   if (!scene) return null;
@@ -15,8 +14,8 @@ const Antena = ({position}) => {
       object={scene} 
       ref={meshRef}
       position={position}
-      rotation={[0, 0, 0]}
-      scale={1}      
+      rotation={rotation}
+      scale={scale}     
     />
   );
 };
