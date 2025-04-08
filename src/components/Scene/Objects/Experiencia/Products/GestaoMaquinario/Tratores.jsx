@@ -1,9 +1,6 @@
-import React, { useRef, useEffect, useState } from 'react';
-import { useFrame } from '@react-three/fiber';
+import React, { useRef, forwardRef } from 'react';
 import { useGLTFAnimations } from '../../../../../../hooks/useGLTFAnimations';
-import * as THREE from 'three';
 
-// Definir posições iniciais para cada trator
 const MODELS = [
   {
     path: '/models/products/GestaoMaquinario/TratorA3.glb',
@@ -25,7 +22,32 @@ const MODELS = [
   },
 ];
 
+const Trator = forwardRef(({ path, position, rotation, scale }, ref) => {
+  const { scene, isPlaying, controlAnimation } = useGLTFAnimations(path, false, {
+    loop: true,
+  });
+  
+  if (!scene) return null;
+  
+  return (
+    <primitive 
+      ref={ref}
+      object={scene} 
+      position={position}
+      rotation={rotation}
+      scale={scale}
+    />
+  );
+});
+
+
 const Tratores = () => {
+  const tratorRefs = useRef([]);
+  
+  if (!tratorRefs.current || tratorRefs.current.length !== MODELS.length) {
+    tratorRefs.current = MODELS.map(() => null);
+  }
+  
   return (
     <group name="tratores">
       {MODELS.map((model, index) => (
@@ -36,28 +58,9 @@ const Tratores = () => {
           position={model.position}
           rotation={model.rotation}
           scale={model.scale}
-          index={index}
         />
       ))}
     </group>
-  );
-};
-
-const Trator = ({ path, position, rotation, scale }) => {
-  
-  const { scene, isPlaying, controlAnimation } = useGLTFAnimations(path, false, {
-    loop: true,
-  });
-  
-  if (!scene) return null;
-  
-  return (
-    <primitive 
-      object={scene} 
-      position={position}
-      rotation={rotation}
-      scale={scale}
-    />
   );
 };
 
