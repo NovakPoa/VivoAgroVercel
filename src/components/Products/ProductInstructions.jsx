@@ -1,14 +1,14 @@
 import React from 'react';
 import useProductsStore from '../../stores/ProductsStore';
+import useInteractionStore from '../../stores/InteractionStore';
 import productRegistry from '../../config/productRegistry';
 
 const ProductInstructions = () => {
+  const { currentProduct } = useProductsStore();
   const { 
-    currentProduct,
     showFirstInstruction,
     showSecondInstruction
-  } = useProductsStore();
-
+  } = useInteractionStore();
   const productComponents = productRegistry[currentProduct]?.instructions || {};
   const FirstInstruction = productComponents.first;
   const SecondInstruction = productComponents.second;

@@ -7,6 +7,10 @@ const interactionStore = (set, get) => ({
   timerDuration: 10,
   timerRemaining: 0,
   
+  showInteraction: false,
+  showFirstInstruction: false,
+  showSecondInstruction: false,
+  
   startTimer: (duration = 10) => {
     // Limpar timer anterior se existir
     if (timerInterval) {
@@ -72,7 +76,11 @@ const interactionStore = (set, get) => ({
       timerActive: false,
       timerRemaining: 0
     });
-  }
+  },
+
+  setShowInteraction: (value) => set({ showInteraction: value }),
+  setShowFirstInstruction: (show) => set({ showFirstInstruction: show }),
+  setShowSecondInstruction: (show) => set({ showSecondInstruction: show }),  
 });
 
 const useInteractionStore = create(interactionStore);

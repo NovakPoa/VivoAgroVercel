@@ -4,12 +4,12 @@ import useInteractionStore from '../stores/InteractionStore';
 import useProductNavigation from './useProductNavigation';
 
 const useProductScene = (productId) => {
-  const { 
-    currentProduct, 
+  const { currentProduct}  = useProductsStore();  
+  const {
     showInteraction,
     setShowFirstInstruction, 
-    setShowSecondInstruction,
-  } = useProductsStore();   
+    setShowSecondInstruction
+  } = useInteractionStore(); 
   const { endProduct } = useProductNavigation();
   const { setTimerCompleteCallback } = useInteractionStore();
   const [enableObject, setEnableObject] = useState(false);

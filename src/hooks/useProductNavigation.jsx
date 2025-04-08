@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import useProductsStore from '../stores/ProductsStore';
+import useInteractionStore from '../stores/InteractionStore';
 import useCameraStore from '../stores/CameraStore';
 import useDashboardStore from '../stores/DashboardStore';
 
@@ -11,12 +12,11 @@ export default function useProductNavigation() {
     setStartProduct, 
     setProductStatus,
     setLastProductName,
-    setShowInteraction,
     productsOrder,
     productsStatus,
     lastProductName
   } = useProductsStore();
-  
+  const { setShowInteraction } = useInteractionStore();
   const { setShowDashboard } = useDashboardStore();
   const { setCameraAnimate } = useCameraStore();
 
