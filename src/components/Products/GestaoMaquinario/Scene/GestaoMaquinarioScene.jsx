@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import ProductFirstInteraction from '../../../Commons/Scene/ProductFirstInteraction';
 import ProductSecondInteraction from '../../../Commons/Scene/ProductSecondInteraction';
 import useProductScene from '../../../../hooks/useProductScene';
+import Tratores from '../../../Scene/Objects/Experiencia/Products/GestaoMaquinario/Tratores';
 
 const GestaoMaquinarioScene = () => {
   const {
@@ -14,25 +15,25 @@ const GestaoMaquinarioScene = () => {
     handleButtonClick,
   } = useProductScene('gestao-maquinario');
   
-  const placeholderPositions = [
-    [-20, 0, 50],
-    [0, 0, 50],
-    [20, 0, 50],
-  ];
+  const [placeholderPositions, setPlaceholderPositions] = useState([
+    [-10, 0, 15],
+    [0, 0, 30],
+    [13, 0, 20],
+  ]);
   
   const buttonPosition = [0, 1.2, 0.5];
 
   return (
     <group>
-{/*       {enableObject && selectedPosition && (
-        <Dispositivo position={selectedPosition} />
-      )} */}
+      <Tratores />
+
       {showFirstInteraction && isCurrentProduct && (
         <ProductFirstInteraction 
           placeholderPositions={placeholderPositions}
           onSlotClick={handleSlotClick}
         />
       )}
+      
       {showSecondInteraction && isCurrentProduct && (
         <ProductSecondInteraction 
           buttonPosition={buttonPosition}
@@ -44,4 +45,3 @@ const GestaoMaquinarioScene = () => {
 };
 
 export default GestaoMaquinarioScene;
-  
