@@ -78,9 +78,20 @@ export default function useProductNavigation() {
     }
   }, [startProduct]);
 
+  const onContinueClick = () => {
+    setShowCard(false);
+    setShowInteraction(true);
+  };
+
+  const onSkipClick = () => {
+    endProduct();
+  };
+
   return {
     showCard,
     setShowCard,
-    endProduct
+    endProduct,
+    onContinueClick,
+    onSkipClick
   };
 }

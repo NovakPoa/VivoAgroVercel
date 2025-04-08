@@ -59,10 +59,6 @@ const useProductScene = (productId) => {
     }, 1000);
   }; 
 
-/*   const handleButtonClick = () => {
-    endSecondInteraction();
-  }; */
-
   return {
     enableObject,
     showFirstInteraction,
@@ -71,7 +67,7 @@ const useProductScene = (productId) => {
     selectedPosition,
     setSelectedPosition,
     handleSlotClick,
-    /* handleButtonClick, */
+    endSecondInteraction
   };
 };
 

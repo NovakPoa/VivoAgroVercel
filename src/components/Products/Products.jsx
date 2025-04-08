@@ -7,16 +7,7 @@ import Slots from '../Commons/UI/Slots/Slots';
 
 const Products = () => {
   const { currentProduct, setShowInteraction } = useProductsStore();
-  const { showCard, setShowCard, endProduct } = useProductNavigation();
-
-  const onContinueClick = () => {
-    setShowCard(false);
-    setShowInteraction(true);
-  };
-
-  const onSkipClick = () => {
-    endProduct();
-  };
+  const { showCard, onContinueClick, onSkipClick } = useProductNavigation();
 
   const ProductCard = productRegistry[currentProduct]?.card;
 
