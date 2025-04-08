@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import ProductFirstInteraction from '../../../Commons/Scene/ProductFirstInteraction';
-import ProductSecondInteraction from '../../../Commons/Scene/ProductSecondInteraction';
 import useProductScene from '../../../../hooks/useProductScene';
 import useSlotsStore from '../../../../stores/SlotsStore';
 import Antena from '../../../Scene/Objects/Experiencia/Products/AgroCobertura/Antena';
@@ -55,12 +54,6 @@ const AgroCoberturaScene = () => {
         <Antena position={smallObjectPosition} scale={0.015} />
     </>
       )}
-{/*       {showSecondInteraction && isCurrentProduct && (
-        <ProductSecondInteraction 
-          buttonPosition={smallObjectPosition}
-          onButtonClick={handleButtonClick}
-        />
-      )} */}
     </group>
   );
 };

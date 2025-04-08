@@ -1,6 +1,5 @@
 import React from 'react';
 import ProductFirstInteraction from '../../../Commons/Scene/ProductFirstInteraction';
-import ProductSecondInteraction from '../../../Commons/Scene/ProductSecondInteraction';
 import useProductScene from '../../../../hooks/useProductScene';
 
 const ClimaInteligenteScene = () => {
@@ -31,12 +30,6 @@ const ClimaInteligenteScene = () => {
         <ProductFirstInteraction 
           placeholderPositions={placeholderPositions}
           onSlotClick={handleSlotClick}
-        />
-      )}
-      {showSecondInteraction && isCurrentProduct && (
-        <ProductSecondInteraction 
-          buttonPosition={buttonPosition}
-          onButtonClick={handleButtonClick}
         />
       )}
     </group>
