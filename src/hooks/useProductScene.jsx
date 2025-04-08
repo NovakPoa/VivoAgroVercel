@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import useProductsStore from '../stores/ProductsStore';
+import useInteractionStore from '../stores/InteractionStore';
 import useProductNavigation from './useProductNavigation';
 
 const useProductScene = (productId) => {
@@ -10,6 +11,7 @@ const useProductScene = (productId) => {
     setShowSecondInstruction,
   } = useProductsStore();   
   const { endProduct } = useProductNavigation();
+  const { setTimerCompleteCallback } = useInteractionStore();
   const [enableObject, setEnableObject] = useState(false);
   const [showFirstInteraction, setShowFirstInteraction] = useState(false);
   const [showSecondInteraction, setShowSecondInteraction] = useState(false);
@@ -42,14 +44,24 @@ const useProductScene = (productId) => {
     }, 1000);
   };
 
-  const handleButtonClick = () => {
+  useEffect(() => {
+    if (showSecondInteraction && isCurrentProduct) {
+      setTimerCompleteCallback(endSecondInteraction);
+    }
+  }, [showSecondInteraction, isCurrentProduct]);
+
+  const endSecondInteraction = () => {
     setShowSecondInstruction(false);
     setShowSecondInteraction(false);
     setTimeout(() => {
       // mostrar tablet
       endProduct();
     }, 1000);
-  };
+  }; 
+
+/*   const handleButtonClick = () => {
+    endSecondInteraction();
+  }; */
 
   return {
     enableObject,
@@ -59,7 +71,7 @@ const useProductScene = (productId) => {
     selectedPosition,
     setSelectedPosition,
     handleSlotClick,
-    handleButtonClick,
+    /* handleButtonClick, */
   };
 };
 

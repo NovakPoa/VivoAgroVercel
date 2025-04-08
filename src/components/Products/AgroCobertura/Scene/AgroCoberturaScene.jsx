@@ -55,12 +55,12 @@ const AgroCoberturaScene = () => {
         <Antena position={smallObjectPosition} scale={0.015} />
     </>
       )}
-      {showSecondInteraction && isCurrentProduct && (
+{/*       {showSecondInteraction && isCurrentProduct && (
         <ProductSecondInteraction 
           buttonPosition={smallObjectPosition}
           onButtonClick={handleButtonClick}
         />
-      )}
+      )} */}
     </group>
   );
 };
