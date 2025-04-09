@@ -10,8 +10,7 @@ const GestaoMaquinarioScene = () => {
     showSecondInteraction,
     isCurrentProduct,
     selectedPosition,
-    handleSlotClick,
-    handleButtonClick,
+    handleSlotClick
   } = useProductScene('gestao-maquinario');
   
   const [placeholderPositions, setPlaceholderPositions] = useState([
@@ -19,12 +18,22 @@ const GestaoMaquinarioScene = () => {
     [0, 0, 30],
     [13, 0, 20],
   ]);
-  
-  const buttonPosition = [0, 1.2, 0.5];
+
+  const handleObjectPositionUpdat = (position, tratorIndex) => {
+    if (position) {
+      setPlaceholderPositions(prevPositions => {
+        const newPositions = [...prevPositions];
+        if (tratorIndex >= 0 && tratorIndex < newPositions.length) {
+          newPositions[tratorIndex] = [position.x, position.y, position.z];
+        }
+        return newPositions;
+      });
+    }
+  };
 
   return (
     <group>
-      <Tratores />
+      <Tratores onObjectPositionUpdate={handleObjectPositionUpdat} />
 
       {showFirstInteraction && isCurrentProduct && (
         <ProductFirstInteraction 

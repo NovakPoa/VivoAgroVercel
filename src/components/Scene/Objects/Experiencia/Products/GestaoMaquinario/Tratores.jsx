@@ -1,5 +1,8 @@
-import React, { useRef, forwardRef } from 'react';
+import React, { useRef, forwardRef, useEffect } from 'react';
+import { useFrame } from '@react-three/fiber';
 import { useGLTFAnimations } from '../../../../../../hooks/useGLTFAnimations';
+import useProductsStore from '../../../../../../stores/ProductsStore';
+import * as THREE from 'three';
 
 const MODELS = [
   {
@@ -22,11 +25,47 @@ const MODELS = [
   },
 ];
 
-const Trator = forwardRef(({ path, position, rotation, scale }, ref) => {
-  const { scene, isPlaying, controlAnimation } = useGLTFAnimations(path, false, {
-    loop: true,
+const findObjectMesh = (object) => {
+  let targetMesh = null;
+  
+  object.traverse((child) => {
+    if (child.isMesh && child.name === 'Roçadeira_-_ok_Procedural') {
+      targetMesh = child;
+    }
   });
   
+  return targetMesh;
+};
+
+const Trator = forwardRef(({ path, position, rotation, scale, onMeshFound, index }, ref) => {
+  const { scene, controlAnimation } = useGLTFAnimations(path, true, { loop: true });
+  const meshRef = useRef(null);
+  const frameCounter = useRef(0);
+  const { currentProduct } = useProductsStore();
+
+  useEffect(() => {
+    if (scene) {
+      const objectMesh = findObjectMesh(scene);
+      if (objectMesh) {
+        meshRef.current = objectMesh;
+        controlAnimation.play();
+      }
+    }
+  }, [scene, controlAnimation]);
+  
+  useFrame(() => {
+    if (meshRef.current && currentProduct === 'gestao-maquinario') {
+      frameCounter.current += 1;
+      
+      const worldPos = new THREE.Vector3();
+      meshRef.current.getWorldPosition(worldPos);
+      
+      if (onMeshFound) {
+        onMeshFound(worldPos, index);
+      }
+    }
+  });
+
   if (!scene) return null;
   
   return (
@@ -40,24 +79,21 @@ const Trator = forwardRef(({ path, position, rotation, scale }, ref) => {
   );
 });
 
-
-const Tratores = () => {
+const Tratores = ({ onObjectPositionUpdate }) => {
   const tratorRefs = useRef([]);
-  
-  if (!tratorRefs.current || tratorRefs.current.length !== MODELS.length) {
-    tratorRefs.current = MODELS.map(() => null);
-  }
   
   return (
     <group name="tratores">
       {MODELS.map((model, index) => (
         <Trator 
           key={index}
+          index={index}
           ref={el => tratorRefs.current[index] = el}
           path={model.path}
           position={model.position}
           rotation={model.rotation}
           scale={model.scale}
+          onMeshFound={onObjectPositionUpdate}
         />
       ))}
     </group>
