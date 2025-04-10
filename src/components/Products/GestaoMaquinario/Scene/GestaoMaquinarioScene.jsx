@@ -9,8 +9,8 @@ const INITIAL_PLACEHOLDER_POSITIONS = [
   [50, 0, 5],
   [50, 0, 35],
 ];
-
 const INTERACTION_OBJECT_POSITION = [0, 1.2, 0.5];
+const CAMERA_ROTATION = [0, -180, 0];
 
 const GestaoMaquinarioScene = () => {
   const {
@@ -20,7 +20,7 @@ const GestaoMaquinarioScene = () => {
     selectedPosition,
     placeholderPositions,
     setPlaceholderPositions
-  } = useProductScene('gestao-maquinario', INITIAL_PLACEHOLDER_POSITIONS);
+  } = useProductScene('gestao-maquinario', INITIAL_PLACEHOLDER_POSITIONS, CAMERA_ROTATION);
   
   const handleObjectPositionUpdate = (position, tratorIndex) => {
     if (position) {

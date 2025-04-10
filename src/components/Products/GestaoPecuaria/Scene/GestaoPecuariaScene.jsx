@@ -9,8 +9,8 @@ const INITIAL_PLACEHOLDER_POSITIONS = [
   [-20, 0, 10],
   [5, 0, 10],
 ];
-
 const INTERACTION_OBJECT_POSITION = [0, 1.2, -0.5];
+const CAMERA_ROTATION = [0, 0, 0];
 
 const GestaoPecuariaScene = () => {
   const {
@@ -20,7 +20,7 @@ const GestaoPecuariaScene = () => {
     selectedPosition,
     placeholderPositions,
     setPlaceholderPositions
-  } = useProductScene('gestao-pecuaria', INITIAL_PLACEHOLDER_POSITIONS);
+  } = useProductScene('gestao-pecuaria', INITIAL_PLACEHOLDER_POSITIONS, CAMERA_ROTATION);
   
   const handleObjectPositionUpdate = (position, vacaIndex) => {
     if (position) {

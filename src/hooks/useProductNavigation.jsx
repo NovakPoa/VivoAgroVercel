@@ -18,19 +18,7 @@ export default function useProductNavigation() {
   } = useProductsStore();
   const { setShowInteraction } = useInteractionStore();
   const { setShowDashboard } = useDashboardStore();
-  const { setCameraAnimate } = useCameraStore();
-
-  // Define pontos de câmera por produto
-  const cameraPositions = {
-    'agro-cobertura': [8, 0, 0],
-    'gestao-maquinario': [0, 0, 8],
-    'gestao-pecuaria': [0, 0, -8],
-    'clima-inteligente': [0, 0, 9],
-  };
-
-  const startCameraAnimation = (point, duration = 2) => {
-    setCameraAnimate({ animate: true, point, duration });
-  };
+  const { animateToProduct } = useCameraStore();
 
   const endProduct = () => {
     setProductStatus(currentProduct, 'completed');
@@ -59,13 +47,8 @@ export default function useProductNavigation() {
     const duration = 2;
     const delay = duration * 1000 + showCardOffset;
     
-    // Animar câmera para posição do produto atual
-    const targetPosition = cameraPositions[currentProduct];
-    if (targetPosition) {
-      startCameraAnimation(targetPosition, duration);
-    }
+    animateToProduct(currentProduct, duration);
 
-    // Mostrar card após animação da câmera
     setTimeout(() => {
       setShowCard(true);
     }, delay);

@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react';
 import useProductsStore from '../stores/ProductsStore';
 import useInteractionStore from '../stores/InteractionStore';
 import useSlotsStore from '../stores/SlotsStore';
+import useCameraStore from '../stores/CameraStore';
 import useProductNavigation from './useProductNavigation';
 
-const useProductScene = (productId, initialPlaceholderPositions) => {
+const useProductScene = (productId, initialPlaceholderPositions, cameraRotation) => {
   const { currentProduct}  = useProductsStore();  
   const {
     showInteraction,
@@ -14,6 +15,7 @@ const useProductScene = (productId, initialPlaceholderPositions) => {
   const { endProduct } = useProductNavigation();
   const { setTimerCompleteCallback } = useInteractionStore();
   const { setSlotsLength, setShowSlots, setSelectedIndex, selectedIndex } = useSlotsStore();
+  const { registerProductRotation } = useCameraStore();
 
   const [enableObject, setEnableObject] = useState(false);
   const [showFirstInteraction, setShowFirstInteraction] = useState(false);
@@ -22,6 +24,12 @@ const useProductScene = (productId, initialPlaceholderPositions) => {
   const [selectedPosition, setSelectedPosition] = useState(null);
   const [placeholderPositions, setPlaceholderPositions] = useState(initialPlaceholderPositions || []);
 
+  useEffect(() => {
+    if (cameraRotation) {
+      registerProductRotation(productId, cameraRotation);
+    }
+  }, [productId, cameraRotation, registerProductRotation]);
+  
   useEffect(() => {
     if (showInteraction && currentProduct === productId) {
       setShowFirstInstruction(true);
