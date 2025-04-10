@@ -1,58 +1,37 @@
 import React, { useEffect } from 'react';
 import ProductFirstInteraction from '../../../Commons/Scene/ProductFirstInteraction';
 import useProductScene from '../../../../hooks/useProductScene';
-import useSlotsStore from '../../../../stores/SlotsStore';
 import Antena from '../../../Scene/Objects/Experiencia/Products/AgroCobertura/Antena';
+
+const INITIAL_PLACEHOLDER_POSITIONS = [
+  [50, 0, -20],
+  [50, 0, 5],
+  [50, 0, 35],
+];
+
+const INTERACTION_OBJECT_POSITION = [0.5, 1.2, 0];
 
 const AgroCoberturaScene = () => {
   const {
     enableObject,
     showFirstInteraction,
-    showSecondInteraction,
     isCurrentProduct,
     selectedPosition,
-    handleSlotClick,
-    handleButtonClick,
-  } = useProductScene('agro-cobertura');
+    placeholderPositions
+  } = useProductScene('agro-cobertura', INITIAL_PLACEHOLDER_POSITIONS);
   
-  const { setSlotsLength, setShowSlots, setSelectedIndex, selectedIndex } = useSlotsStore();
-
-  const placeholderPositions = [
-    [50, 0, -20],
-    [50, 0, 5],
-    [50, 0, 35],
-  ];
-  
-  const smallObjectPosition = [0.5, 1.2, 0];
-  
-  useEffect(() => {
-    if (selectedIndex > -1) {
-      handleSlotClick(placeholderPositions[selectedIndex]);
-    }
-  }, [selectedIndex]);
-
-  useEffect(() => {
-    if (showFirstInteraction && isCurrentProduct) {
-      setSlotsLength(placeholderPositions.length);
-      setShowSlots(true);
-    } else {
-      setShowSlots(false);
-      setSelectedIndex(-1);
-    }
-  }, [showFirstInteraction, isCurrentProduct, setSlotsLength, setShowSlots]);
-
   return (
     <group>
       {enableObject && selectedPosition && (
         <Antena position={selectedPosition} />
       )}    
       {showFirstInteraction && isCurrentProduct && (
-      <>
-        <ProductFirstInteraction 
-          placeholderPositions={placeholderPositions}
-        />
-        <Antena position={smallObjectPosition} scale={0.015} />
-    </>
+        <>
+          <ProductFirstInteraction 
+            placeholderPositions={placeholderPositions}
+          />
+          <Antena position={INTERACTION_OBJECT_POSITION} scale={0.015} />
+        </>
       )}
     </group>
   );

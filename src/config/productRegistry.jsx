@@ -4,7 +4,7 @@ import GestaoPecuariaCard from '../components/Products/GestaoPecuaria/UI/GestaoP
 import ClimaInteligenteCard from '../components/Products/ClimaInteligente/UI/ClimaInteligenteCard';
 
 import AgroCoberturaInstruction1 from '../components/Products/AgroCobertura/UI/AgroCoberturaInstruction1';
-import AgroCoberturaInstructionWithTimer from '../components/Products/AgroCobertura/UI/AgroCoberturaInstructionWithTimer/AgroCoberturaInstructionWithTimer';
+import AgroCoberturaInstruction2 from '../components/Products/AgroCobertura/UI/AgroCoberturaInstruction2';
 import ClimaInteligenteInstruction1 from '../components/Products/ClimaInteligente/UI/ClimaInteligenteInstruction1';
 import ClimaInteligenteInstruction2 from '../components/Products/ClimaInteligente/UI/ClimaInteligenteInstruction2';
 import GestaoMaquinarioInstruction1 from '../components/Products/GestaoMaquinario/UI/GestaoMaquinarioInstruction1';
@@ -17,7 +17,7 @@ const productRegistry = {
     card: AgroCoberturaCard,
     instructions: {
       first: AgroCoberturaInstruction1,
-      second: AgroCoberturaInstructionWithTimer
+      second: AgroCoberturaInstruction2
     }
   },
   'gestao-maquinario': {

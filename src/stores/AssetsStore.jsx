@@ -15,12 +15,18 @@ const assets = {
     // Vegetação
     '/models/vegetaçao/Grama.glb',
     '/models/vegetaçao/PlantaçaoDeSoja.glb',
+    '/models/vegetaçao/ArvoresDistantes.glb',
+    '/models/vegetaçao/VegetaçaoPerto.glb',
     
-    // Products
-    '/models/products/AgroCobertura/Antena.glb',
-
     // Intro
     '/models/intro/LogoVivoAgro.glb',
+
+    // Products
+    '/models/products/AgroCobertura/Antena.glb',
+    '/models/products/GestaoMaquinario/DispositivoMaquinario.glb',
+    '/models/products/GestaoMaquinario/TratorA3.glb',
+    '/models/products/GestaoMaquinario/TratorB3.glb',
+    '/models/products/GestaoMaquinario/TratorC3.glb',
   ],
   textures: [
     // Skybox
@@ -46,7 +52,7 @@ const useAssetsStore = create((set, get) => ({
   totalAssets: assets.models.length + assets.textures.length + assets.images.length,
   loadedAssets: 0,
   
-  modelCache: {},
+  //modelCache: {},
   textureCache: {},
   imageCache: {},
 
@@ -113,9 +119,9 @@ const useAssetsStore = create((set, get) => ({
   },
 
   // Obter modelo
-  getModel: (path) => {
+/*   getModel: (path) => {
     return get().modelCache[path];
-  },
+  }, */
 
   // Obter textura 
   getTexture: (path) => {

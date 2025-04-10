@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import useProductsStore from '../stores/ProductsStore';
 import useInteractionStore from '../stores/InteractionStore';
+import useSlotsStore from '../stores/SlotsStore';
 import useProductNavigation from './useProductNavigation';
 
-const useProductScene = (productId) => {
+const useProductScene = (productId, initialPlaceholderPositions) => {
   const { currentProduct}  = useProductsStore();  
   const {
     showInteraction,
@@ -12,12 +13,15 @@ const useProductScene = (productId) => {
   } = useInteractionStore(); 
   const { endProduct } = useProductNavigation();
   const { setTimerCompleteCallback } = useInteractionStore();
+  const { setSlotsLength, setShowSlots, setSelectedIndex, selectedIndex } = useSlotsStore();
+
   const [enableObject, setEnableObject] = useState(false);
   const [showFirstInteraction, setShowFirstInteraction] = useState(false);
   const [showSecondInteraction, setShowSecondInteraction] = useState(false);
   const [isCurrentProduct, setIsCurrentProduct] = useState(false);
   const [selectedPosition, setSelectedPosition] = useState(null);
-  
+  const [placeholderPositions, setPlaceholderPositions] = useState(initialPlaceholderPositions || []);
+
   useEffect(() => {
     if (showInteraction && currentProduct === productId) {
       setShowFirstInstruction(true);
@@ -34,21 +38,39 @@ const useProductScene = (productId) => {
     }
   }, [currentProduct, productId]);
 
-  const handleSlotClick = (position) => {
-    setSelectedPosition(position);
-    setShowFirstInstruction(false);
-    setShowFirstInteraction(false);
-    setTimeout(() => {
-      setShowSecondInstruction(true);
-      setShowSecondInteraction(true);
-    }, 1000);
-  };
+  useEffect(() => {
+    if (selectedIndex > -1 && isCurrentProduct) {
+      handleSlotClick(placeholderPositions[selectedIndex]);
+    }
+  }, [selectedIndex, isCurrentProduct, placeholderPositions]);
+
+  useEffect(() => {
+    if (showFirstInteraction && isCurrentProduct) {
+      setSlotsLength(placeholderPositions.length);
+      setShowSlots(true);
+    } else {
+      setShowSlots(false);
+      setSelectedIndex(-1);
+    }
+  }, [showFirstInteraction, isCurrentProduct, setSlotsLength, setShowSlots, placeholderPositions.length]);
 
   useEffect(() => {
     if (showSecondInteraction && isCurrentProduct) {
       setTimerCompleteCallback(endSecondInteraction);
     }
   }, [showSecondInteraction, isCurrentProduct]);
+
+  const handleSlotClick = (position) => {
+    if (isCurrentProduct) {
+      setSelectedPosition(position);
+      setShowFirstInstruction(false);
+      setShowFirstInteraction(false);
+      setTimeout(() => {
+        setShowSecondInstruction(true);
+        setShowSecondInteraction(true);
+      }, 1000);
+    }
+  };
 
   const endSecondInteraction = () => {
     setShowSecondInstruction(false);
@@ -67,7 +89,9 @@ const useProductScene = (productId) => {
     selectedPosition,
     setSelectedPosition,
     handleSlotClick,
-    endSecondInteraction
+    endSecondInteraction,
+    placeholderPositions,
+    setPlaceholderPositions
   };
 };
 

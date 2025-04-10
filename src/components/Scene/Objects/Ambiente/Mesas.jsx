@@ -7,17 +7,17 @@ const MESAS_CONFIG = [
   {
     position: [1.1, 0, 0],
     rotation: [0, 0, 0],
-    scale: 0.2
+    scale: [0.2, 0.2, 0.2],
   },
   {
     position: [0, 0, 1.1],
     rotation: [0, Math.PI / 2, 0],
-    scale: 0.2
+    scale: [0.2, 0.2, 0.2],
   },
   {
     position: [0, 0, -1.1],
     rotation: [0, Math.PI / 2, 0],
-    scale: 0.2
+    scale: [0.2, 0.2, 0.2],
   }
 ];
 

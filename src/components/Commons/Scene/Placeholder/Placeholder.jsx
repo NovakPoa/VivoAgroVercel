@@ -14,7 +14,7 @@ const Placeholder = ({ position, color = "#660099", opacity = 0.5 }) => {
       ref={meshRef} 
       position={adjustedPosition} 
     >
-      <cylinderGeometry args={[2.5, 0, 30, 32]} />
+      <cylinderGeometry args={[2.5, 0, cylinderHeight, 32]} />
       <meshStandardMaterial 
         color={color}
         transparent={true} 

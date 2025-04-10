@@ -1,22 +1,27 @@
-import React, { useEffect, useState } from 'react';
-import Instruction from '../../../../Commons/UI/Instruction/Instruction';
-import useInteractionStore from '../../../../../stores/InteractionStore';
-import './AgroCoberturaInstructionWithTimer.css';
+import React, { useEffect } from 'react';
+import Instruction from '../Instruction/Instruction';
+import useInteractionStore from '../../../../stores/InteractionStore';
+import './InstructionWithTimer.css';
 
-const AgroCoberturaInstructionWithTimer = ({ isVisible }) => {
+const InstructionWithTimer = ({ 
+  isVisible,
+  title, 
+  description,
+  duration = 20,
+  timerTitle = "Aguarde" 
+}) => {
   const { 
     timerRemaining, 
     timerDuration, 
     timerActive,
-    startTimer, 
-    setTimerCompleteCallback 
+    startTimer
   } = useInteractionStore();
 
   useEffect(() => {
     if (isVisible && !timerActive) {
-      startTimer(4);
+      startTimer(duration);
     }
-  }, [isVisible, timerActive, startTimer]);
+  }, [isVisible, timerActive, startTimer, duration]);
   
   if (!isVisible) return null;
 
@@ -27,11 +32,11 @@ const AgroCoberturaInstructionWithTimer = ({ isVisible }) => {
   return (
     <div className="instruction-container">
       <Instruction 
-        title="Ative o sinal da antena" 
-        description="Pressione o botão para ativar o sinal de sua antena."
+        title={title} 
+        description={description}
       >
         <div className="timer-section">
-          <h3 className="timer-title">Aguarde {timerRemaining} segundos</h3>
+          <h3 className="timer-title">{timerTitle} {timerRemaining} segundos</h3>
           <div className="timer-container">
             <div className="timer-progress" style={{ width: `${progressPercentage}%` }} />
             <span className="timer-text">{timerRemaining}s</span>
@@ -42,4 +47,4 @@ const AgroCoberturaInstructionWithTimer = ({ isVisible }) => {
   );
 };
 
-export default AgroCoberturaInstructionWithTimer;
+export default InstructionWithTimer;
