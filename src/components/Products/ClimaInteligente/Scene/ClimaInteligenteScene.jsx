@@ -1,40 +1,40 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ProductFirstInteraction from '../../../Commons/Scene/ProductFirstInteraction';
 import useProductScene from '../../../../hooks/useProductScene';
+import Estacao from '../../../Scene/Objects/Experiencia/Products/ClimaInteligente/Estacao';
+
+const INITIAL_PLACEHOLDER_POSITIONS = [
+  [10, 0, 10],
+  [0, 0, 10],
+  [-10, 0, 10],
+];
+
+const INTERACTION_OBJECT_POSITION = [0, 1.2, 0.5];
 
 const ClimaInteligenteScene = () => {
   const {
     enableObject,
     showFirstInteraction,
-    showSecondInteraction,
     isCurrentProduct,
     selectedPosition,
-    handleSlotClick,
-    handleButtonClick,
-  } = useProductScene('clima-inteligente');
+    placeholderPositions
+  } = useProductScene('clima-inteligente', INITIAL_PLACEHOLDER_POSITIONS);
   
-  const placeholderPositions = [
-    [-10, 0, 10],
-    [0, 0, 10],
-    [10, 0, 10],
-  ];
-  
-  const buttonPosition = [0, 1.2, 0.5];
-
   return (
     <group>
-{/*       {enableObject && selectedPosition && (
-        <Dispositivo position={selectedPosition} />
-      )} */}
+      {enableObject && selectedPosition && (
+        <Estacao position={selectedPosition} />
+      )}    
       {showFirstInteraction && isCurrentProduct && (
-        <ProductFirstInteraction 
-          placeholderPositions={placeholderPositions}
-          onSlotClick={handleSlotClick}
-        />
+        <>
+          <ProductFirstInteraction 
+            placeholderPositions={placeholderPositions}
+          />
+          <Estacao position={INTERACTION_OBJECT_POSITION} scale={0.1} />
+        </>
       )}
     </group>
   );
 };
 
 export default ClimaInteligenteScene;
-  
