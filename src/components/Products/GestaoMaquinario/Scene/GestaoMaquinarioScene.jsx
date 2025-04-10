@@ -22,7 +22,7 @@ const GestaoMaquinarioScene = () => {
     setPlaceholderPositions
   } = useProductScene('gestao-maquinario', INITIAL_PLACEHOLDER_POSITIONS);
   
-  const handleObjectPositionUpdat = (position, tratorIndex) => {
+  const handleObjectPositionUpdate = (position, tratorIndex) => {
     if (position) {
       setPlaceholderPositions(prevPositions => {
         const newPositions = [...prevPositions];
@@ -36,7 +36,7 @@ const GestaoMaquinarioScene = () => {
 
   return (
     <group>
-      <Tratores onObjectPositionUpdate={handleObjectPositionUpdat} />
+      <Tratores onObjectPositionUpdate={handleObjectPositionUpdate} />
 
       {showFirstInteraction && isCurrentProduct && (
         <>

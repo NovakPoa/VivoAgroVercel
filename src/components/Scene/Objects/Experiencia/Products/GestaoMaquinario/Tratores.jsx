@@ -48,10 +48,9 @@ const Trator = forwardRef(({ path, position, rotation, scale, onMeshFound, index
       const objectMesh = findObjectMesh(scene);
       if (objectMesh) {
         meshRef.current = objectMesh;
-        controlAnimation.play();
       }
     }
-  }, [scene, controlAnimation]);
+  }, [scene]);
   
   useFrame(() => {
     if (meshRef.current && currentProduct === 'gestao-maquinario') {
