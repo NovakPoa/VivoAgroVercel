@@ -38,6 +38,10 @@ const GestaoMaquinarioScene = () => {
     <group>
       <Tratores onObjectPositionUpdate={handleObjectPositionUpdate} />
 
+      {enableObject && selectedPosition && (
+        <DispositivoMaquinario position={selectedPosition} />
+      )} 
+
       {showFirstInteraction && isCurrentProduct && (
         <>
           <ProductFirstInteraction 
