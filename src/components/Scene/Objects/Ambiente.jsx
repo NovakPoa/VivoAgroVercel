@@ -1,14 +1,14 @@
 import React from 'react';
 import Fazenda from './Ambiente/Fazenda';
 import Vegetaçao from './Ambiente/Vegetaçao';
-import Mesa from './Ambiente/Mesa';
+import Mesas from './Ambiente/Mesas';
 
 const Ambiente = () => {
   return (
     <group>
       <Fazenda />  
       <Vegetaçao /> 
-      {/* <Mesa />  */}
+      <Mesas /> 
     </group>
   );
 };
