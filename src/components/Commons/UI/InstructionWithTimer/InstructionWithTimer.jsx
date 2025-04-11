@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Instruction from '../Instruction/Instruction';
 import useInteractionStore from '../../../../stores/InteractionStore';
 import './InstructionWithTimer.css';
@@ -17,13 +17,25 @@ const InstructionWithTimer = ({
     startTimer
   } = useInteractionStore();
 
+  const [shouldRender, setShouldRender] = useState(isVisible);
+
   useEffect(() => {
     if (isVisible && !timerActive) {
       startTimer(duration);
     }
+    
+    if (isVisible) {
+      setShouldRender(true);
+    } else {
+      const timer = setTimeout(() => {
+        setShouldRender(false);
+      }, 1000);
+      
+      return () => clearTimeout(timer);
+    }
   }, [isVisible, timerActive, startTimer, duration]);
   
-  if (!isVisible) return null;
+  if (!shouldRender) return null;
 
   const progressPercentage = timerDuration > 0 
     ? Math.max(0, Math.min(100, (timerRemaining / timerDuration) * 100))
