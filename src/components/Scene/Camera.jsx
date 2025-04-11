@@ -8,7 +8,7 @@ const INITIAL_CAMERA_POSITION = [0, 1.7, 0];
 const INITIAL_ROTATION = [0, -90, 0];
 
 /////////////
-const ENABLE_DEBUG_CONTROLS = true;
+const ENABLE_DEBUG_CONTROLS = false;
 /////////////
 
 const Camera = () => {

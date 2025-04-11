@@ -15,6 +15,7 @@ const Slots = () => {
   const slots = Array.from({ length: slotsLength }).map((_, index) => (
     <Slot 
       key={index}
+      index={index}
       isActive={selectedIndex === index}
       onSelected={() => handleSlotClick(index)}
     />
