@@ -81,3 +81,15 @@
   padding: 8px;
   border-radius: 20px;  
 }
+
+@media screen and (max-height: 430px) {
+  .image-button {
+    height: 180px;
+  }
+}
+
+@media screen and (max-height: 410px) {
+  .image-button {
+    height: 170px;
+  }
+}

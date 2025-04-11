@@ -56,15 +56,34 @@
 
 @media (max-width: 768px) {
   .dashboard-card {
-    height: 100vh; 
-    top: 0;
-    left: 0;
-    transform: none;
+    height: 95vh; 
+    max-width: 400px;
   }
-
+  .sidebar-buttons {
+    padding: 20px 0px 20px 14px;
+  }
   .main-buttons {
     grid-template-columns: 1fr;
     justify-items: center;
     overflow-y: auto; 
+    padding: 20px 20px 20px 14px;
   }
+}
+
+@media screen and (max-height: 430px) {
+  .dashboard-card {
+    height: 95vh; 
+  } 
+  .main-buttons {
+    padding: 18px;
+  }  
+}
+
+@media screen and (max-height: 410px) {
+  .dashboard-card {
+    height: 97vh; 
+  } 
+  .main-buttons {
+    padding: 10px;
+  }  
 }
