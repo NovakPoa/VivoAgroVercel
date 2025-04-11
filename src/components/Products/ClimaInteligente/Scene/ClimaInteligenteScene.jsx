@@ -1,5 +1,5 @@
 import React from 'react';
-import ProductFirstInteraction from '../../../Commons/Scene/ProductFirstInteraction';
+import Placeholders from '../../../Commons/Scene/Placeholders/Placeholders';
 import useProductScene from '../../../../hooks/useProductScene';
 import Estacao from '../../../Scene/Objects/Experiencia/Products/ClimaInteligente/Estacao';
 import Tablet from '../../../Scene/Objects/Experiencia/Products/Tablet';
@@ -35,7 +35,7 @@ const ClimaInteligenteScene = () => {
 
       {showFirstInteraction && isCurrentProduct && (
         <>
-          <ProductFirstInteraction 
+          <Placeholders 
             placeholderPositions={placeholderPositions}
           />
           <Estacao position={INTERACTION_OBJECT_POSITION} scale={0.1} />

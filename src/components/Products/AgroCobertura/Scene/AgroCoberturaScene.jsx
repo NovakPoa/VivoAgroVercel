@@ -1,5 +1,5 @@
 import React from 'react';
-import ProductFirstInteraction from '../../../Commons/Scene/ProductFirstInteraction';
+import Placeholders from '../../../Commons/Scene/Placeholders/Placeholders';
 import useProductScene from '../../../../hooks/useProductScene';
 import Antena from '../../../Scene/Objects/Experiencia/Products/AgroCobertura/Antena';
 import Tablet from '../../../Scene/Objects/Experiencia/Products/Tablet';
@@ -36,7 +36,7 @@ const AgroCoberturaScene = () => {
 
       {showFirstInteraction && isCurrentProduct && (
         <>
-          <ProductFirstInteraction 
+          <Placeholders 
             placeholderPositions={placeholderPositions}
           />
           <Antena position={INTERACTION_OBJECT_POSITION} scale={0.015} />

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import ProductFirstInteraction from '../../../Commons/Scene/ProductFirstInteraction';
+import Placeholders from '../../../Commons/Scene/Placeholders/Placeholders';
 import useProductScene from '../../../../hooks/useProductScene';
 import Tratores from '../../../Scene/Objects/Experiencia/Products/GestaoMaquinario/Tratores';
 import DispositivoMaquinario from '../../../Scene/Objects/Experiencia/Products/GestaoMaquinario/DispositivoMaquinario';
@@ -51,7 +51,7 @@ const GestaoMaquinarioScene = () => {
 
       {showFirstInteraction && isCurrentProduct && (
         <>
-          <ProductFirstInteraction 
+          <Placeholders 
             placeholderPositions={placeholderPositions}
           />
           <DispositivoMaquinario position={INTERACTION_OBJECT_POSITION} scale={0.08} />
