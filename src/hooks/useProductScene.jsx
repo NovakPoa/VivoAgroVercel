@@ -7,11 +7,7 @@ import useProductNavigation from './useProductNavigation';
 
 const useProductScene = (productId, initialPlaceholderPositions, cameraRotation) => {
   const { currentProduct}  = useProductsStore();  
-  const {
-    showInteraction,
-    setShowFirstInstruction, 
-    setShowSecondInstruction
-  } = useInteractionStore(); 
+  const { showInteraction, setShowFirstInstruction, setShowSecondInstruction } = useInteractionStore(); 
   const { endProduct } = useProductNavigation();
   const { setTimerCompleteCallback } = useInteractionStore();
   const { setSlotsLength, setShowSlots, setSelectedIndex, selectedIndex } = useSlotsStore();
@@ -22,7 +18,8 @@ const useProductScene = (productId, initialPlaceholderPositions, cameraRotation)
   const [showSecondInteraction, setShowSecondInteraction] = useState(false);
   const [isCurrentProduct, setIsCurrentProduct] = useState(false);
   const [selectedPosition, setSelectedPosition] = useState(null);
-  const [placeholderPositions, setPlaceholderPositions] = useState(initialPlaceholderPositions || []);
+  const [placeholderPositions, setPlaceholderPositions] = useState (initialPlaceholderPositions || []);
+  const [animateTablet, setAnimateTablet] = useState(false);
 
   useEffect(() => {
     if (cameraRotation) {
@@ -85,8 +82,11 @@ const useProductScene = (productId, initialPlaceholderPositions, cameraRotation)
     setShowSecondInteraction(false);
     setTimeout(() => {
       // mostrar tablet
+      setAnimateTablet(true);
+    }, 2000);
+    setTimeout(() => {
       endProduct();
-    }, 1000);
+    }, 10000);    
   }; 
 
   return {
@@ -96,6 +96,7 @@ const useProductScene = (productId, initialPlaceholderPositions, cameraRotation)
     isCurrentProduct,
     selectedPosition,
     setSelectedPosition,
+    animateTablet,
     handleSlotClick,
     endSecondInteraction,
     placeholderPositions,

@@ -19,6 +19,7 @@ const assets = {
     
     // Geral
     '/models/geral/Mesa.glb',
+    '/models/geral/Tablet.glb',
     
     // Intro
     '/models/intro/LogoVivoAgro.glb',

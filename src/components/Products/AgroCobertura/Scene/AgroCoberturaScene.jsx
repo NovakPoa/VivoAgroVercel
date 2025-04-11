@@ -2,6 +2,8 @@ import React from 'react';
 import ProductFirstInteraction from '../../../Commons/Scene/ProductFirstInteraction';
 import useProductScene from '../../../../hooks/useProductScene';
 import Antena from '../../../Scene/Objects/Experiencia/Products/AgroCobertura/Antena';
+import Tablet from '../../../Scene/Objects/Experiencia/Products/Tablet';
+import AgroCoberturaTabletContent from '../UI/AgroCoberturaTabletContent';
 
 const INITIAL_PLACEHOLDER_POSITIONS = [
   [50, 0, -20],
@@ -10,6 +12,11 @@ const INITIAL_PLACEHOLDER_POSITIONS = [
 ];
 const INTERACTION_OBJECT_POSITION = [0.5, 1.2, 0];
 const CAMERA_ROTATION = [0, -90, 0];
+const TABLET = {
+  position: [1.1, 1.2, 0.4],
+  rotation: [0, -1.9, 0],
+  scale: 0.015,
+};
 
 const AgroCoberturaScene = () => {
   const {
@@ -17,14 +24,16 @@ const AgroCoberturaScene = () => {
     showFirstInteraction,
     isCurrentProduct,
     selectedPosition,
-    placeholderPositions
+    placeholderPositions,
+    animateTablet
   } = useProductScene('agro-cobertura', INITIAL_PLACEHOLDER_POSITIONS, CAMERA_ROTATION);
 
   return (
     <group>
       {enableObject && selectedPosition && (
         <Antena position={selectedPosition} />
-      )}    
+      )}   
+
       {showFirstInteraction && isCurrentProduct && (
         <>
           <ProductFirstInteraction 
@@ -33,6 +42,10 @@ const AgroCoberturaScene = () => {
           <Antena position={INTERACTION_OBJECT_POSITION} scale={0.015} />
         </>
       )}
+      
+      <Tablet position={TABLET.position} rotation={TABLET.rotation} scale={TABLET.scale} animateTablet={animateTablet}>
+        <AgroCoberturaTabletContent />
+      </Tablet>
     </group>
   );
 };

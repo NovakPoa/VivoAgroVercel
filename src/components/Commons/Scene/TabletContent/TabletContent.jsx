@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import Button from '../Button/Button';
-import './tablet.css';
+import Button from '../../UI/Button/Button';
+import './TabletContent.css';
 
-const Tablet = ({ images, onFinish }) => {
+const TabletContent = ({ images, onFinish }) => {
   const [currentScreen, setCurrentScreen] = useState(0);
 
   const handleNextScreen = () => {
@@ -31,4 +31,4 @@ const Tablet = ({ images, onFinish }) => {
   );
 };
 
-export default Tablet;
+export default TabletContent;
