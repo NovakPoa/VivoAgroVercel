@@ -54,7 +54,7 @@ const useProductScene = (productId, initialPlaceholderPositions, cameraRotation)
       setSlotsLength(placeholderPositions.length);
       setShowSlots(true);
     } else {
-      setShowSlots(false);
+      //setShowSlots(false);
       setSelectedIndex(-1);
     }
   }, [showFirstInteraction, isCurrentProduct, setSlotsLength, setShowSlots, placeholderPositions.length]);
