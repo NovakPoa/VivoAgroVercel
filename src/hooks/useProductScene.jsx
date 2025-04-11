@@ -73,7 +73,7 @@ const useProductScene = (productId, initialPlaceholderPositions, cameraRotation)
       setTimeout(() => {
         setShowSecondInstruction(true);
         setShowSecondInteraction(true);
-      }, 1000);
+      }, 4000);
     }
   };
 
@@ -81,12 +81,12 @@ const useProductScene = (productId, initialPlaceholderPositions, cameraRotation)
     setShowSecondInstruction(false);
     setShowSecondInteraction(false);
     setTimeout(() => {
-      // mostrar tablet
+      // mostra tablet
       setAnimateTablet(true);
-    }, 2000);
+    }, 4000);
     setTimeout(() => {
       endProduct();
-    }, 10000);    
+    }, 8000);    
   }; 
 
   return {
