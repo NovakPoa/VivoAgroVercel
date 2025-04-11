@@ -1,9 +1,9 @@
 import React from 'react';
 import Card from '../../../Commons/UI/Card/Card';
-import useCardVisibility from '../../../../hooks/useCardVisibility';
+import useComponentVisibility from '../../../../hooks/useComponentVisibility';
 
 const ClimaInteligenteCard = ({ isVisible, onContinueClick, onSkipClick }) => {
-  const shouldRender = useCardVisibility(isVisible);
+  const shouldRender = useComponentVisibility(isVisible);
 
   if (!shouldRender) return null;
 

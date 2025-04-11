@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const useCardVisibility = (isVisible, exitDuration = 400) => { // Tempo igual à duração da animação cardScaleOut (ver Card.css) 
+const useComponentVisibility = (isVisible, exitDuration = 400) => { // Tempo igual à duração da animação cardScaleOut (ver Card.css) 
   const [shouldRender, setShouldRender] = useState(isVisible);
 
   useEffect(() => {
@@ -19,4 +19,4 @@ const useCardVisibility = (isVisible, exitDuration = 400) => { // Tempo igual à
   return shouldRender;
 };
 
-export default useCardVisibility;
+export default useComponentVisibility;

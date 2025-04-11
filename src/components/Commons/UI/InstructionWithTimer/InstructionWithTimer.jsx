@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Instruction from '../Instruction/Instruction';
 import useInteractionStore from '../../../../stores/InteractionStore';
+import useComponentVisibility from '../../../../hooks/useComponentVisibility';
 import './InstructionWithTimer.css';
 
 const InstructionWithTimer = ({ 
@@ -17,21 +18,11 @@ const InstructionWithTimer = ({
     startTimer
   } = useInteractionStore();
 
-  const [shouldRender, setShouldRender] = useState(isVisible);
+  const shouldRender = useComponentVisibility(isVisible);
 
   useEffect(() => {
     if (isVisible && !timerActive) {
       startTimer(duration);
-    }
-    
-    if (isVisible) {
-      setShouldRender(true);
-    } else {
-      const timer = setTimeout(() => {
-        setShouldRender(false);
-      }, 1000);
-      
-      return () => clearTimeout(timer);
     }
   }, [isVisible, timerActive, startTimer, duration]);
   
@@ -46,6 +37,7 @@ const InstructionWithTimer = ({
       <Instruction 
         title={title} 
         description={description}
+        isVisible={isVisible}
       >
         <div className="timer-section">
           <h3 className="timer-title">{timerTitle} {timerRemaining} segundos</h3>

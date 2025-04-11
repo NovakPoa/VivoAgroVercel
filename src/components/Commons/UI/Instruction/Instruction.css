@@ -16,7 +16,6 @@
   z-index: 10; 
 }
 
-/* Aumentar um pouco o tamanho quando há extras */
 .instruction.with-extras {
   max-width: 320px;
 }
@@ -52,7 +51,7 @@
 }
 
 /* Animação */
-@keyframes cardScaleIn {
+@keyframes instructionScaleIn {
   0% {
     transform: translate(-50%, -50%) scale(0.8);
     opacity: 0;
@@ -67,11 +66,30 @@
   }
 }
 
+@keyframes instructionScaleOut {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  30% {
+    transform: translate(-50%, -50%) scale(1.05);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0;
+  }
+}
+
 .instruction.visible {
-  animation: cardScaleIn 0.5s ease-out forwards;
+  animation: instructionScaleIn 0.5s ease-out forwards;
 }
 
 .instruction.hidden {
-  opacity: 0;
   transform: translate(-50%, -50%) scale(0.8);
+  opacity: 0;
+}
+
+.instruction.hiding {
+  animation: instructionScaleOut 0.5s ease-in forwards;
 }
