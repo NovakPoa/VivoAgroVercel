@@ -23,9 +23,12 @@ export default function useProductNavigation() {
   const endProduct = () => {
     setProductStatus(currentProduct, 'completed');
     setShowCard(false);
-    setShowDashboard(true);
     setLastProductName(currentProduct);
     setShowInteraction(false);
+
+    const timer = setTimeout(() => {
+      setShowDashboard(true);
+    }, 400); // Tempo igual à duração da animação cardScaleOut (ver Card.css)   
 
     // Desbloquear próximo produto
     const currentIndex = productsOrder.indexOf(currentProduct);

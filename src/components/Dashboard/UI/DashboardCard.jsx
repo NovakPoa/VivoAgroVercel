@@ -1,22 +1,39 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './DashboardCard.css';
 import ImageButton from '../../Commons/UI/ImageButton/ImageButton';
 import { RiResetRightFill } from "react-icons/ri";
 import useProductsStore from '../../../stores/ProductsStore';
 import useDashboardStore from '../../../stores/DashboardStore';
 
-const DashboardCard = () => {
+const DashboardCard = ({ isVisible = true }) => {
   const { productsStatus, setCurrentProduct, setStartProduct } = useProductsStore();
   const { setShowDashboard } = useDashboardStore();
+  const [animState, setAnimState] = useState('initial'); // 'initial', 'visible', 'hiding'
+
+  useEffect(() => {
+    if (isVisible) {
+      const showTimer = setTimeout(() => setAnimState('visible'), 30);
+      return () => clearTimeout(showTimer);
+    } else if (animState === 'visible') {
+      setAnimState('hiding');
+    }
+  }, [isVisible, animState]);
+
+  const animClass = 
+    animState === 'initial' ? 'hidden' :
+    animState === 'visible' ? 'visible' : 
+    'hiding';
 
   const handleProductClick = (productName) => {
     setShowDashboard(false);
-    setCurrentProduct(productName);
-    setStartProduct(true);
+    const timer = setTimeout(() => {
+      setCurrentProduct(productName);
+      setStartProduct(true);
+    }, 400); // Tempo igual à duração da animação cardScaleOut (ver Card.css)       
   };
 
   return (
-    <div className="dashboard-card">
+    <div className={`dashboard-card ${animClass}`}>
       <div className="sidebar-buttons">
         <button className="sidebar-button active">
           <img src="./icons/vivo-icon-dark.png" alt="Vivo Icon" />
