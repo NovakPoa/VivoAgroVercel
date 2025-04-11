@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Placeholders from '../../../Commons/Scene/Placeholders/Placeholders';
 import useProductScene from '../../../../hooks/useProductScene';
+import useComponentVisibility from '../../../../hooks/useComponentVisibility';
 import Vacas from '../../../Scene/Objects/Experiencia/Products/GestaoPecuaria/Vacas';
 import DispositivosPecuaria from '../../../Scene/Objects/Experiencia/Products/GestaoPecuaria/DispositivosPecuaria';
 import Brinco from '../../../Scene/Objects/Experiencia/Products/GestaoPecuaria/Brinco';
@@ -29,6 +30,13 @@ const GestaoPecuariaScene = () => {
     animateTablet
   } = useProductScene('gestao-pecuaria', INITIAL_PLACEHOLDER_POSITIONS, CAMERA_ROTATION);
   
+  const [placeholdersVisible, setPlaceholdersVisible] = useState(false);
+  const shouldRenderPlaceholders = useComponentVisibility(placeholdersVisible);
+
+  useEffect(() => {
+    setPlaceholdersVisible(showFirstInteraction && isCurrentProduct);
+  }, [showFirstInteraction, isCurrentProduct]);
+
   const handleObjectPositionUpdate = (position, vacaIndex) => {
     if (position) {
       setPlaceholderPositions(prevPositions => {
@@ -50,10 +58,11 @@ const GestaoPecuariaScene = () => {
         <Brinco position={selectedPosition} />
       )} 
 
-      {showFirstInteraction && isCurrentProduct && (
+      {shouldRenderPlaceholders && (
         <>
           <Placeholders 
             placeholderPositions={placeholderPositions}
+            isVisible={placeholdersVisible}
           />
           <Brinco position={INTERACTION_OBJECT_POSITION} scale={0.5} />
         </>

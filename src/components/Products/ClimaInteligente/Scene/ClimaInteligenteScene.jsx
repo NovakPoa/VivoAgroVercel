@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Placeholders from '../../../Commons/Scene/Placeholders/Placeholders';
 import useProductScene from '../../../../hooks/useProductScene';
+import useComponentVisibility from '../../../../hooks/useComponentVisibility';
 import Estacao from '../../../Scene/Objects/Experiencia/Products/ClimaInteligente/Estacao';
 import Tablet from '../../../Scene/Objects/Experiencia/Products/Tablet';
 
@@ -27,16 +28,24 @@ const ClimaInteligenteScene = () => {
     animateTablet
   } = useProductScene('clima-inteligente', INITIAL_PLACEHOLDER_POSITIONS, CAMERA_ROTATION);
   
+  const [placeholdersVisible, setPlaceholdersVisible] = useState(false);
+  const shouldRenderPlaceholders = useComponentVisibility(placeholdersVisible);
+
+  useEffect(() => {
+    setPlaceholdersVisible(showFirstInteraction && isCurrentProduct);
+  }, [showFirstInteraction, isCurrentProduct]);
+
   return (
     <group>
       {enableObject && selectedPosition && (
         <Estacao position={selectedPosition} />
       )}    
 
-      {showFirstInteraction && isCurrentProduct && (
+      {shouldRenderPlaceholders && (
         <>
           <Placeholders 
             placeholderPositions={placeholderPositions}
+            isVisible={placeholdersVisible}
           />
           <Estacao position={INTERACTION_OBJECT_POSITION} scale={0.1} />
         </>

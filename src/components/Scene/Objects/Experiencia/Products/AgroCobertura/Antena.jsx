@@ -11,7 +11,7 @@ const Antena = ({position, rotation = [0, 0, 0], scale = 1}) => {
 
   return (
     <primitive 
-      object={scene} 
+      object={scene.clone()} 
       ref={meshRef}
       position={position}
       rotation={rotation}

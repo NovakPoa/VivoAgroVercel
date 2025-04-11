@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Placeholders from '../../../Commons/Scene/Placeholders/Placeholders';
 import useProductScene from '../../../../hooks/useProductScene';
+import useComponentVisibility from '../../../../hooks/useComponentVisibility';
 import Tratores from '../../../Scene/Objects/Experiencia/Products/GestaoMaquinario/Tratores';
 import DispositivoMaquinario from '../../../Scene/Objects/Experiencia/Products/GestaoMaquinario/DispositivoMaquinario';
 import Tablet from '../../../Scene/Objects/Experiencia/Products/Tablet';
@@ -29,6 +30,13 @@ const GestaoMaquinarioScene = () => {
     animateTablet
   } = useProductScene('gestao-maquinario', INITIAL_PLACEHOLDER_POSITIONS, CAMERA_ROTATION);
   
+  const [placeholdersVisible, setPlaceholdersVisible] = useState(false);
+  const shouldRenderPlaceholders = useComponentVisibility(placeholdersVisible);
+
+  useEffect(() => {
+    setPlaceholdersVisible(showFirstInteraction && isCurrentProduct);
+  }, [showFirstInteraction, isCurrentProduct]);
+
   const handleObjectPositionUpdate = (position, tratorIndex) => {
     if (position) {
       setPlaceholderPositions(prevPositions => {
@@ -49,10 +57,11 @@ const GestaoMaquinarioScene = () => {
         <DispositivoMaquinario position={selectedPosition} />
       )} 
 
-      {showFirstInteraction && isCurrentProduct && (
+      {shouldRenderPlaceholders && (
         <>
           <Placeholders 
             placeholderPositions={placeholderPositions}
+            isVisible={placeholdersVisible}
           />
           <DispositivoMaquinario position={INTERACTION_OBJECT_POSITION} scale={0.08} />
         </>
