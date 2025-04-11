@@ -1,11 +1,13 @@
 import React from 'react';
 import Card from '../../../Commons/UI/Card/Card';
+import useCardVisibility from '../../../../hooks/useCardVisibility';
 
 const GestaoPecuariaCard = ({ isVisible, onContinueClick, onSkipClick }) => {
+  const shouldRender = useCardVisibility(isVisible);
+
+  if (!shouldRender) return null;
 
   const imageUrl = "/ui/gestaoPecuaria.png";
-
-  if (!isVisible) return null;
 
   return (
     <div className="card-container">
@@ -19,7 +21,8 @@ const GestaoPecuariaCard = ({ isVisible, onContinueClick, onSkipClick }) => {
         firstButtonOnClick={onContinueClick}
         secondButton={true}
         secondButtonText="Não possuo gado"
-        secondButtonOnClick={onSkipClick}        
+        secondButtonOnClick={onSkipClick}  
+        isVisible={isVisible}        
       />
     </div>
   );

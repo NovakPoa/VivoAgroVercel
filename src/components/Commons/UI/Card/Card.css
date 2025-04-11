@@ -89,11 +89,30 @@
   }
 }
 
+@keyframes cardScaleOut {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  30% {
+    transform: translate(-50%, -50%) scale(1.05);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0;
+  }
+}
+
 .card.visible {
   animation: cardScaleIn 0.5s ease-out forwards;
 }
 
 .card.hidden {
-  opacity: 0;
   transform: translate(-50%, -50%) scale(0.8);
+  opacity: 0;
+}
+
+.card.hiding {
+  animation: cardScaleOut 0.35s ease-in forwards;
 }

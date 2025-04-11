@@ -1,11 +1,13 @@
 import React from 'react';
 import Card from '../../../Commons/UI/Card/Card';
+import useCardVisibility from '../../../../hooks/useCardVisibility';
 
 const ClimaInteligenteCard = ({ isVisible, onContinueClick, onSkipClick }) => {
+  const shouldRender = useCardVisibility(isVisible);
+
+  if (!shouldRender) return null;
 
   const imageUrl = "/ui/climaInteligente.jpg";
-
-  if (!isVisible) return null;
 
   return (
     <div className="card-container">
@@ -19,7 +21,8 @@ const ClimaInteligenteCard = ({ isVisible, onContinueClick, onSkipClick }) => {
         firstButtonOnClick={onContinueClick}
         secondButton={true}
         secondButtonText="Já possuo análise de microclima"
-        secondButtonOnClick={onSkipClick}        
+        secondButtonOnClick={onSkipClick}
+        isVisible={isVisible}     
       />
     </div>
   );

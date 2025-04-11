@@ -63,7 +63,9 @@ export default function useProductNavigation() {
 
   const onContinueClick = () => {
     setShowCard(false);
-    setShowInteraction(true);
+    const timer = setTimeout(() => {
+      setShowInteraction(true);
+    }, 400); // Tempo igual à duração da animação cardScaleOut (ver Card.css)   
   };
 
   const onSkipClick = () => {
