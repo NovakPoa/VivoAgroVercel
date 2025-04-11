@@ -1,11 +1,21 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from '../Button/Button';
 import PreloadedImage from '../PreloadedImage/PreloadedImage';
 import './Card.css';
 
 const Card = ({ title, description, showImage = true, imageUrl, firstButton = true, secondButton = true, firstButtonText, secondButtonText, firstButtonOnClick, secondButtonOnClick }) => {
+  const [visible, setVisible] = useState(false);
+  
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setVisible(true);
+    }, 30);
+    
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <div className="card">
+    <div className={`card ${visible ? 'visible' : 'hidden'}`} >
       {showImage && (
         <div className="card-image-wrapper">
           <PreloadedImage src={imageUrl} alt={title} />
