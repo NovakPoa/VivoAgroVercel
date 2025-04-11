@@ -10,13 +10,15 @@ const assets = {
     '/models/fazenda/Cercas/Cercas.glb',
     '/models/fazenda/Galpao/Galpao.glb',
     '/models/fazenda/Ornamentos/Ornamentos-2.glb',
-    '/models/fazenda/Mesa.glb',
 
     // Vegetação
     '/models/vegetaçao/Grama.glb',
     '/models/vegetaçao/PlantaçaoDeSoja.glb',
     '/models/vegetaçao/ArvoresDistantes.glb',
     '/models/vegetaçao/VegetaçaoPerto.glb',
+    
+    // Geral
+    '/models/geral/Mesa.glb',
     
     // Intro
     '/models/intro/LogoVivoAgro.glb',

@@ -1,7 +1,7 @@
 import React, { useRef, forwardRef } from 'react';
 import { useGLTF } from '@react-three/drei';
 
-const MODEL_PATH = '/models/fazenda/Mesa.glb';
+const MODEL_PATH = '/models/geral/Mesa.glb';
 
 const MESAS_CONFIG = [
   {
