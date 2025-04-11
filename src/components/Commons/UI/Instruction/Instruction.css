@@ -50,3 +50,28 @@
   margin-top: 8px;
   padding: 0 8px 8px;
 }
+
+/* Animação */
+@keyframes cardScaleIn {
+  0% {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0;
+  }
+  70% {
+    transform: translate(-50%, -50%) scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+.instruction.visible {
+  animation: cardScaleIn 0.5s ease-out forwards;
+}
+
+.instruction.hidden {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.8);
+}
