@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { ANIMATION_DURATIONS } from '../../../../../config/animationConfig';
 import './Slot.css';
 
@@ -22,11 +22,11 @@ const Slot = ({ onSelected, onAnimationOutEnded, index = 0, isVisible = true }) 
       return () => { clearTimeout(endTimer); };
     }
   }, [animState]);
-  
-  const handleClick = () => {
+
+  const handleClick = useCallback(() => {
     onSelected(index);
     isActiveRef.current = true;
-  };
+  }, []);
 
   const style = {
     '--slot-scale-in-duration': `${ANIMATION_DURATIONS.SLOT.SCALE_IN}ms`,

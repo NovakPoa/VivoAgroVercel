@@ -24,7 +24,7 @@ const InstructionWithTimer = ({
     if (isVisible && !timerActive) {
       startTimer(duration);
     }
-  }, [isVisible, timerActive, startTimer, duration]);
+  }, [isVisible]);
   
   if (!shouldRender) return null;
 

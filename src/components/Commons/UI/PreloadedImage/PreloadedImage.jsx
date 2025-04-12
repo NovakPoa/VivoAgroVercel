@@ -27,7 +27,7 @@ const PreloadedImage = ({ src, alt, className = '' }) => {
       };
       img.src = src;
     }
-  }, [src, getUIImage]);
+  }, [src]);
 
   return (
     <div className={`preloaded-image-container ${className} ${isLoaded ? 'loaded' : 'loading'}`}>
