@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import Button from '../../UI/Button/Button';
 import './TabletContent.css';
 
 const TabletContent = ({ images, onFinish }) => {
   const [currentScreen, setCurrentScreen] = useState(0);
 
-  const handleNextScreen = () => {
+  const handleNextScreen = useCallback(() => {
     if (currentScreen < images.length - 1) {
       setCurrentScreen(currentScreen + 1);
     } else {
       onFinish();
     }
-  };
+  }, [currentScreen, images]);
 
   return (
     <div className="tablet">

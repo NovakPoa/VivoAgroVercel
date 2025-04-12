@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import './Button.css';
 
 const Button = ({ text, onClick, showIcon = true, iconUrl = "./icons/vivo-icon.png", type = 'primary' }) => {
@@ -12,4 +12,4 @@ const Button = ({ text, onClick, showIcon = true, iconUrl = "./icons/vivo-icon.p
   );
 };
 
-export default Button;
+export default memo(Button);
