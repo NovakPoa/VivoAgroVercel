@@ -23,6 +23,7 @@ export const Placeholder = ({
   const materialRef = useRef();
   const [animState, setAnimState] = useState('initial');
   const [currentOpacity, setCurrentOpacity] = useState(0);
+  const [animating, setAnimating] = useState(false);
   
   const animStartTimeRef = useRef(0);
   const { clock } = useThree();
@@ -41,6 +42,9 @@ export const Placeholder = ({
   }, [isVisible]);
   
   useEffect(() => {
+    if (animState === 'visible' || animState === 'hiding') {
+      setAnimating(true);
+    }    
     if (animState === 'hiding') {
       const endTimer = setTimeout(() => { if (onAnimationOutEnded) onAnimationOutEnded(); }, ANIMATION_DURATIONS.PLACEHOLDER.SCALE_OUT);
       return () => { clearTimeout(endTimer); };
@@ -48,7 +52,7 @@ export const Placeholder = ({
   }, [animState]);
 
   useFrame(() => {
-    if (!materialRef.current) return;
+    if (!animating || !materialRef.current) return;
     
     const now = clock.elapsedTime * 1000; 
     const elapsed = now - animStartTimeRef.current;
@@ -70,6 +74,9 @@ export const Placeholder = ({
           groupRef.current.scale.set(1, newScale, 1);
         }
       }
+      if (progress >= 1) {
+        setAnimating(false);
+      }      
     }
     else if (animState === 'hiding') {
       const progress = Math.min(elapsed / ANIMATION_DURATIONS.PLACEHOLDER.SCALE_OUT, 1);
@@ -88,6 +95,9 @@ export const Placeholder = ({
           groupRef.current.scale.set(1, newScale, 1);
         }
       }
+      if (progress >= 1) {
+        setAnimating(false);
+      }      
     }
   });
 
