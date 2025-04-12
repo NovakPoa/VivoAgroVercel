@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './DashboardCard.css';
 import ImageButton from '../../Commons/UI/ImageButton/ImageButton';
 import { RiResetRightFill } from "react-icons/ri";
@@ -36,13 +36,13 @@ const DashboardCard = ({ isVisible = true, onAnimationOutEnded }) => {
     animState === 'visible' ? 'visible' : 
     'hiding';
 
-  const handleProductClick = (productName) => {
+  const handleProductClick = useCallback((productName) => {
     setShowDashboard(false);
     const timer = setTimeout(() => {
       setCurrentProduct(productName);
       setStartProduct(true);
-    }, ANIMATION_DURATIONS.DASHBOARD.SCALE_OUT);        
-  };
+    }, ANIMATION_DURATIONS.DASHBOARD.SCALE_OUT);   
+  }, []);
 
   return (
     <div className={`dashboard-card ${animClass}`} style={style} >

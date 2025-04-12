@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useCallback } from 'react';
 import useSlotsStore from '../../../../stores/SlotsStore';
 import useComponentVisibility from '../../../../hooks/useComponentVisibility';
 import Slot from './Slot/Slot';
@@ -8,10 +8,10 @@ const Slots = () => {
   const { setSelectedIndex, showSlots, slotsLength, setShowSlots } = useSlotsStore();
   const [shouldRender, handleAnimationOutEnded] = useComponentVisibility(showSlots);
 
-  const handleSlotClick = (index) => {
+  const handleSlotClick = useCallback((index) => {
     setSelectedIndex(index);
     setShowSlots(false);
-  };
+  }, []);
 
   if (!shouldRender) return null;
 
