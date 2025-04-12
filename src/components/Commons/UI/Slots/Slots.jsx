@@ -1,17 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import useSlotsStore from '../../../../stores/SlotsStore';
 import Slot from './Slot/Slot';
-import useComponentVisibility from '../../../../hooks/useComponentVisibility';
 import './Slots.css';
 
 const Slots = () => {
   const { selectedIndex, setSelectedIndex, showSlots, slotsLength, setShowSlots } = useSlotsStore();
-  
-  const shouldRender = useComponentVisibility(showSlots);
+  const [shouldRender, setShouldRender] = useState(showSlots);
+  const [animationEnded, setAnimationEnded] = useState(false);
+
+  useEffect(() => {
+    if (showSlots) {
+      setShouldRender(true);
+      setAnimationEnded(false);
+    }
+  }, [showSlots]);
 
   const handleSlotClick = (index) => {
     setSelectedIndex(index);
     setShowSlots(false);
+  };
+
+  const handleAnimationOutEnded = () => {
+    if (!animationEnded) {
+      setAnimationEnded(true);
+      setShouldRender(false);
+    }
   };
 
   if (!shouldRender) return null;
@@ -20,8 +33,8 @@ const Slots = () => {
     <Slot 
       key={index}
       index={index}
-      isActive={selectedIndex === index}
       onSelected={() => handleSlotClick(index)}
+      onAnimationOutEnded={handleAnimationOutEnded}
       isVisible={showSlots}
     />
   ));

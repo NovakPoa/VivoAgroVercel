@@ -73,7 +73,7 @@ const useProductScene = (productId, initialPlaceholderPositions, cameraRotation)
       setTimeout(() => {
         setShowSecondInstruction(true);
         setShowSecondInteraction(true);
-      }, 4000);
+      }, 4000); // mostrar timer
     }
   };
 
@@ -81,9 +81,8 @@ const useProductScene = (productId, initialPlaceholderPositions, cameraRotation)
     setShowSecondInstruction(false);
     setShowSecondInteraction(false);
     setTimeout(() => {
-      // mostra tablet
       setAnimateTablet(true);
-    }, 4000);
+    }, 4000); // mostrar tablet
     setTimeout(() => {
       endProduct();
     }, 8000);    
