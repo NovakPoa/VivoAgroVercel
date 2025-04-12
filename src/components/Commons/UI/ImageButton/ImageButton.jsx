@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import './ImageButton.css';
 import { RiLock2Fill } from "react-icons/ri";
 import { FaCheck } from "react-icons/fa6";
 import PreloadedImage from '../PreloadedImage/PreloadedImage';
 
 const ImageButton = ({ imageUrl, title, status, onClick }) => {
-  const handleClick = () => {
+
+  const handleClick = useCallback(() => {
     if (status !== 'locked') {
       onClick();
     }
-  };
+  }, [status]);
 
   return (
     <div
