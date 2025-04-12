@@ -1,35 +1,35 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import IntroCard from './UI/IntroCard';
 import useIntroStore from '../../stores/IntroStore';
 import useProductsStore from '../../stores/ProductsStore';
 
-const Intro = () => {
-  const startProductsDelay = 2000;
-  const showIntroCardDelay = 0;
+const START_PRODUCTS_DELAY = 2000;
+const SHOW_INTRO_CARD_DELAY = 0;
 
+const Intro = () => {
   const [showCard, setShowCard] = useState(false);
   const { setStartIntro, setIntroVisibility } = useIntroStore();
   const { setCurrentProduct, setStartProduct } = useProductsStore();
 
-  const onButtonClick = () => {
-    setIntroVisibility(true);
-    setStartIntro(true);
-    setShowCard(false);
-    startProductsTimer();
-  }
-
-  const startProductsTimer = () => {
+  const timerToStartProduct = () => {
     setTimeout(() => {
       setCurrentProduct('agro-cobertura');
       setStartProduct(true);
-    }, startProductsDelay);
+    }, START_PRODUCTS_DELAY);
   }
 
   useEffect(() => {
     setTimeout(() => {
       setShowCard(true);
-    }, showIntroCardDelay);  
+    }, SHOW_INTRO_CARD_DELAY);  
   } , []);
+
+  const onButtonClick = useCallback(() => {
+    setIntroVisibility(true);
+    setStartIntro(true);
+    setShowCard(false);
+    timerToStartProduct();   
+  }, []);
 
   return (
     <div className="intro-container">
