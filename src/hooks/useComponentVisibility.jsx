@@ -13,10 +13,8 @@ const useComponentVisibility = (isVisible) => {
 
   const handleAnimationOutEnded = useCallback(() => {
     if (!animationEndedRef.current && !isVisible) {
-      console.log('animationEndedRef.current', animationEndedRef.current);
       animationEndedRef.current = true;
       setShouldRender(false);
-      console.log('animationEndedRef.current', animationEndedRef.current);
     }
   }, [isVisible]);
   
