@@ -10,26 +10,19 @@ const Slot = ({ onSelected, onAnimationOutEnded, index = 0, isVisible = true }) 
   useEffect(() => {
     if (isVisible) {
       isActiveRef.current = false;
-      const showTimer = setTimeout(() => {
-        setAnimState('visible');
-      }, index * 100);
+      const showTimer = setTimeout(() => { setAnimState('visible'); }, index * 100);
       return () => clearTimeout(showTimer);
     } else if (animState === 'visible') {
       setAnimState('hiding');
     }
-  }, [isVisible, animState]);
+  }, [isVisible]);
   
   useEffect(() => {
     if (animState === 'hiding') {
-      console.log(`index: ${index}, animState: ${animState}`);
-      const endTimer = setTimeout(() => {
-        if (onAnimationOutEnded) onAnimationOutEnded();
-        console.log(`onAnimationOutEnded`);
-      }, SLOT_SCALE_DURATION);
-      
+      const endTimer = setTimeout(() => { if (onAnimationOutEnded) onAnimationOutEnded(); }, SLOT_SCALE_DURATION);
       return () => { clearTimeout(endTimer); };
     }
-  }, [animState, onAnimationOutEnded]);
+  }, [animState]);
   
   const handleClick = () => {
     onSelected(index);
