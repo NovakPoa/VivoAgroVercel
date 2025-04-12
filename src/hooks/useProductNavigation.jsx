@@ -77,7 +77,6 @@ export default function useProductNavigation() {
 
   return {
     showCard,
-    setShowCard,
     endProduct,
     onContinueClick,
     onSkipClick

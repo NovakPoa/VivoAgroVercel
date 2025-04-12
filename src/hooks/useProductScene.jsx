@@ -94,7 +94,6 @@ const useProductScene = (productId, initialPlaceholderPositions, cameraRotation)
     showSecondInteraction,
     isCurrentProduct,
     selectedPosition,
-    setSelectedPosition,
     animateTablet,
     handleSlotClick,
     endSecondInteraction,
