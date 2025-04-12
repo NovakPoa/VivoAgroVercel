@@ -5,6 +5,9 @@ import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
 const MODEL_PATH = '/models/geral/Tablet.glb';
+const SCREEN_POSITION = [0, 0, -1.02];
+const SCREEN_ROTATION = [0, 0, 0];
+const SCREEN_SCALE = [9, 8, 5];
 
 const Tablet = ({position, rotation = [0, 0, 0], scale = 1, animateTablet = false, children}) => {
   const groupRef = useRef();
@@ -41,9 +44,7 @@ const Tablet = ({position, rotation = [0, 0, 0], scale = 1, animateTablet = fals
     }
   });
 
-  const screenPosition = [0, 0, -1.02]; 
-  const screenRotation = [0, 0, 0]; 
-  const screenScale = [9, 8, 5];
+
 
   return (
     <group ref={groupRef} position={position} rotation={rotation} scale={scale}>
@@ -53,9 +54,9 @@ const Tablet = ({position, rotation = [0, 0, 0], scale = 1, animateTablet = fals
         <group ref={htmlGroupRef}>
           <Html
             transform
-            position={screenPosition}
-            rotation={screenRotation}
-            scale={screenScale}
+            position={SCREEN_POSITION}
+            rotation={SCREEN_ROTATION}
+            scale={SCREEN_SCALE}
             occlude={false}
             distanceFactor={1}
             className="tablet-screen-content"

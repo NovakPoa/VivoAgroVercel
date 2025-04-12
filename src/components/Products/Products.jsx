@@ -6,7 +6,7 @@ import ProductInstructions from './ProductInstructions';
 import Slots from '../Commons/UI/Slots/Slots';
 
 const Products = () => {
-  const { currentProduct } = useProductsStore();
+  const currentProduct = useProductsStore(state => state.currentProduct);
   const { showCard, onContinueClick, onSkipClick } = useProductNavigation();
 
   const ProductCard = productRegistry[currentProduct]?.card;

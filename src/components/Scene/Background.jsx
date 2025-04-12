@@ -32,7 +32,7 @@ const Background = () => {
       
       }
     }
-  }, [scene, isLoading]);
+  }, [isLoading]);
 
   return null;
 };
