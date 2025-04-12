@@ -1,13 +1,12 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
+import { ANIMATION_DURATIONS } from '../../../../config/animationConfig';
 
 const CYLINDER_HEIGHT = 20;
 
-const ANIM_IN_DURATION = 500;
 const SCALE_IN_ANIMATION = false;
 const OPACITY_IN_ANIMATION = true;
 
-const ANIM_OUT_DURATION = 500;
 const SCALE_OUT_ANIMATION = false;
 const OPACITY_OUT_ANIMATION = true; 
 
@@ -43,7 +42,7 @@ export const Placeholder = ({
   
   useEffect(() => {
     if (animState === 'hiding') {
-      const endTimer = setTimeout(() => { if (onAnimationOutEnded) onAnimationOutEnded(); }, ANIM_OUT_DURATION);
+      const endTimer = setTimeout(() => { if (onAnimationOutEnded) onAnimationOutEnded(); }, ANIMATION_DURATIONS.PLACEHOLDER.SCALE_OUT);
       return () => { clearTimeout(endTimer); };
     }
   }, [animState]);
@@ -55,7 +54,7 @@ export const Placeholder = ({
     const elapsed = now - animStartTimeRef.current;
     
     if (animState === 'visible') {
-      const progress = Math.min(elapsed / ANIM_IN_DURATION, 1);
+      const progress = Math.min(elapsed / ANIMATION_DURATIONS.PLACEHOLDER.SCALE_IN, 1);
       
       // Animação de opacidade na entrada
       if (OPACITY_IN_ANIMATION) {
@@ -73,7 +72,7 @@ export const Placeholder = ({
       }
     }
     else if (animState === 'hiding') {
-      const progress = Math.min(elapsed / ANIM_OUT_DURATION, 1);
+      const progress = Math.min(elapsed / ANIMATION_DURATIONS.PLACEHOLDER.SCALE_OUT, 1);
       
       // Animação de opacidade na saída
       if (OPACITY_OUT_ANIMATION) {

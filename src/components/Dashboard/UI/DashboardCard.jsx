@@ -4,9 +4,7 @@ import ImageButton from '../../Commons/UI/ImageButton/ImageButton';
 import { RiResetRightFill } from "react-icons/ri";
 import useProductsStore from '../../../stores/ProductsStore';
 import useDashboardStore from '../../../stores/DashboardStore';
-
-const DASH_SCALE_IN_DURATION = 500;
-const DASH_SCALE_OUT_DURATION = 350;
+import { ANIMATION_DURATIONS } from '../../../config/animationConfig';
 
 const DashboardCard = ({ isVisible = true, onAnimationOutEnded }) => {
   const { productsStatus, setCurrentProduct, setStartProduct } = useProductsStore();
@@ -23,14 +21,14 @@ const DashboardCard = ({ isVisible = true, onAnimationOutEnded }) => {
 
   useEffect(() => {
     if (animState === 'hiding') {
-      const endTimer = setTimeout(() => { if (onAnimationOutEnded) onAnimationOutEnded(); }, DASH_SCALE_OUT_DURATION);
+      const endTimer = setTimeout(() => { if (onAnimationOutEnded) onAnimationOutEnded(); }, ANIMATION_DURATIONS.DASHBOARD.SCALE_OUT);
       return () => { clearTimeout(endTimer); };
     }
   }, [animState]);
 
   const style = {
-    '--dash-scale-in-duration': `${DASH_SCALE_IN_DURATION}ms`,
-    '--dash-scale-out-duration': `${DASH_SCALE_OUT_DURATION}ms`
+    '--dash-scale-in-duration': `${ANIMATION_DURATIONS.DASHBOARD.SCALE_IN}ms`,
+    '--dash-scale-out-duration': `${ANIMATION_DURATIONS.DASHBOARD.SCALE_OUT}ms`
   };
 
   const animClass = 
@@ -43,7 +41,7 @@ const DashboardCard = ({ isVisible = true, onAnimationOutEnded }) => {
     const timer = setTimeout(() => {
       setCurrentProduct(productName);
       setStartProduct(true);
-    }, DASH_SCALE_OUT_DURATION);        
+    }, ANIMATION_DURATIONS.DASHBOARD.SCALE_OUT);        
   };
 
   return (

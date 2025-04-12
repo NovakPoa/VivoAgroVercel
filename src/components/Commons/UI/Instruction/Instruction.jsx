@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { ANIMATION_DURATIONS } from '../../../../config/animationConfig';
 import './Instruction.css';
-
-const INSTRUCTION_SCALE_IN_DURATION = 500;
-const INSTRUCTION_SCALE_OUT_DURATION = 500;
 
 const Instruction = ({ title, description, children, isVisible = true, onAnimationOutEnded }) => {
   const [animState, setAnimState] = useState('initial'); // 'initial', 'visible', 'hiding'
@@ -17,14 +15,14 @@ const Instruction = ({ title, description, children, isVisible = true, onAnimati
 
   useEffect(() => {
     if (animState === 'hiding') {
-      const endTimer = setTimeout(() => { if (onAnimationOutEnded) onAnimationOutEnded(); }, INSTRUCTION_SCALE_OUT_DURATION);
+      const endTimer = setTimeout(() => { if (onAnimationOutEnded) onAnimationOutEnded(); }, ANIMATION_DURATIONS.INSTRUCTION.SCALE_OUT);
       return () => { clearTimeout(endTimer); };
     }
   }, [animState]);
 
   const style = {
-    '--instruction-scale-in-duration': `${INSTRUCTION_SCALE_IN_DURATION}ms`,
-    '--instruction-scale-out-duration': `${INSTRUCTION_SCALE_OUT_DURATION}ms`
+    '--instruction-scale-in-duration': `${ANIMATION_DURATIONS.INSTRUCTION.SCALE_IN}ms`,
+    '--instruction-scale-out-duration': `${ANIMATION_DURATIONS.INSTRUCTION.SCALE_OUT}ms`
   };
 
   const animClass = 

@@ -3,6 +3,7 @@ import useProductsStore from '../stores/ProductsStore';
 import useInteractionStore from '../stores/InteractionStore';
 import useCameraStore from '../stores/CameraStore';
 import useDashboardStore from '../stores/DashboardStore';
+import { ANIMATION_DURATIONS } from '../config/animationConfig';
 
 export default function useProductNavigation() {
   const [showCard, setShowCard] = useState(false);
@@ -28,7 +29,7 @@ export default function useProductNavigation() {
 
     const timer = setTimeout(() => {
       setShowDashboard(true);
-    }, 400); // Tempo igual à duração da animação cardScaleOut (ver Card.css)   
+    }, ANIMATION_DURATIONS.CARD.SCALE_OUT); 
 
     // Desbloquear próximo produto
     const currentIndex = productsOrder.indexOf(currentProduct);
@@ -68,11 +69,11 @@ export default function useProductNavigation() {
     setShowCard(false);
     const timer = setTimeout(() => {
       setShowInteraction(true);
-    }, 400); // Tempo igual à duração da animação cardScaleOut (ver Card.css)   
+    }, ANIMATION_DURATIONS.CARD.SCALE_OUT);
   };
 
   const onSkipClick = () => {
-    endProduct();
+    endProduct();   
   };
 
   return {

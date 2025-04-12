@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { ANIMATION_DURATIONS } from '../../../../../config/animationConfig';
 import './Slot.css';
-
-const SLOT_SCALE_IN_DURATION = 500;
-const SLOT_SCALE_OUT_DURATION = 500;
 
 const Slot = ({ onSelected, onAnimationOutEnded, index = 0, isVisible = true }) => {
   const [animState, setAnimState] = useState('initial'); // 'initial', 'visible', 'hiding'
@@ -20,7 +18,7 @@ const Slot = ({ onSelected, onAnimationOutEnded, index = 0, isVisible = true }) 
   
   useEffect(() => {
     if (animState === 'hiding') {
-      const endTimer = setTimeout(() => { if (onAnimationOutEnded) onAnimationOutEnded(); }, SLOT_SCALE_OUT_DURATION);
+      const endTimer = setTimeout(() => { if (onAnimationOutEnded) onAnimationOutEnded(); }, ANIMATION_DURATIONS.SLOT.SCALE_OUT);
       return () => { clearTimeout(endTimer); };
     }
   }, [animState]);
@@ -31,8 +29,8 @@ const Slot = ({ onSelected, onAnimationOutEnded, index = 0, isVisible = true }) 
   };
 
   const style = {
-    '--slot-scale-in-duration': `${SLOT_SCALE_IN_DURATION}ms`,
-    '--slot-scale-out-duration': `${SLOT_SCALE_OUT_DURATION}ms`
+    '--slot-scale-in-duration': `${ANIMATION_DURATIONS.SLOT.SCALE_IN}ms`,
+    '--slot-scale-out-duration': `${ANIMATION_DURATIONS.SLOT.SCALE_OUT}ms`
   };
 
   const animClass = 
