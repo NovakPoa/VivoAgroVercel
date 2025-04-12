@@ -4,7 +4,6 @@ import PreloadedImage from '../PreloadedImage/PreloadedImage';
 import { ANIMATION_DURATIONS } from '../../../../config/animationConfig';
 import './Card.css';
 
-
 const Card = ({ 
   title, 
   description, 
