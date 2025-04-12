@@ -1,8 +1,11 @@
 import React from 'react';
 import Card from '../../Commons/UI/Card/Card';
+import useComponentVisibility from '../../../hooks/useComponentVisibility';
 
 const IntroCard = ({ isVisible, onButtonClick }) => {
-  if (!isVisible) return null;
+  const shouldRender = useComponentVisibility(isVisible);
+
+  if (!shouldRender) return null;
 
   return (
     <div className="card-container">
@@ -14,6 +17,7 @@ const IntroCard = ({ isVisible, onButtonClick }) => {
         firstButtonText="Começar"
         firstButtonOnClick={onButtonClick}
         secondButton={false}
+        isVisible={isVisible}  
       />
     </div>
   );
