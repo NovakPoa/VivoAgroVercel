@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import useProductsStore from '../stores/ProductsStore';
 import useInteractionStore from '../stores/InteractionStore';
 import useCameraStore from '../stores/CameraStore';
@@ -21,14 +21,18 @@ export default function useProductNavigation() {
   const { setShowDashboard } = useDashboardStore();
   const { animateToProduct } = useCameraStore();
 
-  const endProduct = () => {
+  const timerRef = useRef(null);
+
+  const endProduct = useCallback(() => {
     setProductStatus(currentProduct, 'completed');
     setShowCard(false);
     setLastProductName(currentProduct);
     setShowInteraction(false);
 
-    const timer = setTimeout(() => {
+    if (timerRef.current) clearTimeout(timerRef.current);
+    timerRef.current = setTimeout(() => {
       setShowDashboard(true);
+      timerRef.current = null;
     }, ANIMATION_DURATIONS.CARD.SCALE_OUT); 
 
     // Desbloquear próximo produto
@@ -39,9 +43,13 @@ export default function useProductNavigation() {
         setProductStatus(nextProduct, 'unlocked');
       }
     }
-  };
+  }, [
+    currentProduct, 
+    productsOrder,
+    productsStatus
+  ]);
 
-  const startProductHandler = () => {
+  const startProductHandler = useCallback(() => {
     if (currentProduct === lastProductName) {
       setShowCard(true);
       return;
@@ -53,10 +61,12 @@ export default function useProductNavigation() {
     
     animateToProduct(currentProduct, duration);
 
-    setTimeout(() => {
+    if (timerRef.current) clearTimeout(timerRef.current);
+    timerRef.current = setTimeout(() => {
       setShowCard(true);
+      timerRef.current = null;
     }, delay);
-  }
+  }, [currentProduct, lastProductName]);
 
   useEffect(() => {
     if (startProduct) {
@@ -65,16 +75,19 @@ export default function useProductNavigation() {
     }
   }, [startProduct]);
 
-  const onContinueClick = () => {
+  const onContinueClick = useCallback(() => {
     setShowCard(false);
-    const timer = setTimeout(() => {
+    
+    if (timerRef.current) clearTimeout(timerRef.current);
+    timerRef.current = setTimeout(() => {
       setShowInteraction(true);
+      timerRef.current = null;
     }, ANIMATION_DURATIONS.CARD.SCALE_OUT);
-  };
+  }, [setShowInteraction]);
 
-  const onSkipClick = () => {
+  const onSkipClick = useCallback(() => {
     endProduct();   
-  };
+  }, [endProduct]);
 
   return {
     showCard,

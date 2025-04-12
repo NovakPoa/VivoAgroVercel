@@ -3,7 +3,7 @@ import { create } from 'zustand';
 const productsStore = (set) => ({
   startProduct: false,
   currentProduct: 'agro-cobertura',
-  lastProductName: '',
+  lastProductName: 'agro-cobertura',
   productsOrder: ['agro-cobertura', 'gestao-maquinario', 'gestao-pecuaria', 'clima-inteligente'],
   productsStatus: {
     'agro-cobertura': 'completed',
