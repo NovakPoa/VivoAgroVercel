@@ -5,11 +5,11 @@ import useComponentVisibility from '../../hooks/useComponentVisibility';
 
 const Dashboard = () => {
   const { showDashboard } = useDashboardStore();
-  const shouldRender = useComponentVisibility(showDashboard);
+  const [shouldRender, handleAnimationOutEnded] = useComponentVisibility(showDashboard);
 
   if (!shouldRender) return null;
 
-  return <DashboardCard isVisible={showDashboard} />;
+  return <DashboardCard isVisible={showDashboard} onAnimationOutEnded={handleAnimationOutEnded} />;
 };
 
 export default Dashboard;

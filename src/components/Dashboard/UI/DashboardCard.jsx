@@ -5,19 +5,33 @@ import { RiResetRightFill } from "react-icons/ri";
 import useProductsStore from '../../../stores/ProductsStore';
 import useDashboardStore from '../../../stores/DashboardStore';
 
-const DashboardCard = ({ isVisible = true }) => {
+const DASH_SCALE_IN_DURATION = 500;
+const DASH_SCALE_OUT_DURATION = 350;
+
+const DashboardCard = ({ isVisible = true, onAnimationOutEnded }) => {
   const { productsStatus, setCurrentProduct, setStartProduct } = useProductsStore();
   const { setShowDashboard } = useDashboardStore();
   const [animState, setAnimState] = useState('initial'); // 'initial', 'visible', 'hiding'
 
   useEffect(() => {
     if (isVisible) {
-      const showTimer = setTimeout(() => setAnimState('visible'), 30);
-      return () => clearTimeout(showTimer);
+      setAnimState('visible')
     } else if (animState === 'visible') {
       setAnimState('hiding');
     }
-  }, [isVisible, animState]);
+  }, [isVisible]);
+
+  useEffect(() => {
+    if (animState === 'hiding') {
+      const endTimer = setTimeout(() => { if (onAnimationOutEnded) onAnimationOutEnded(); }, DASH_SCALE_OUT_DURATION);
+      return () => { clearTimeout(endTimer); };
+    }
+  }, [animState]);
+
+  const style = {
+    '--dash-scale-in-duration': `${DASH_SCALE_IN_DURATION}ms`,
+    '--dash-scale-out-duration': `${DASH_SCALE_OUT_DURATION}ms`
+  };
 
   const animClass = 
     animState === 'initial' ? 'hidden' :
@@ -29,11 +43,11 @@ const DashboardCard = ({ isVisible = true }) => {
     const timer = setTimeout(() => {
       setCurrentProduct(productName);
       setStartProduct(true);
-    }, 400); // Tempo igual à duração da animação cardScaleOut (ver Card.css)       
+    }, DASH_SCALE_OUT_DURATION);        
   };
 
   return (
-    <div className={`dashboard-card ${animClass}`}>
+    <div className={`dashboard-card ${animClass}`} style={style} >
       <div className="sidebar-buttons">
         <button className="sidebar-button active">
           <img src="./icons/vivo-icon-dark.png" alt="Vivo Icon" />

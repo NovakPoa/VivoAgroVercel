@@ -3,7 +3,7 @@ import Card from '../../../Commons/UI/Card/Card';
 import useComponentVisibility from '../../../../hooks/useComponentVisibility';
 
 const GestaoPecuariaCard = ({ isVisible, onContinueClick, onSkipClick }) => {
-  const shouldRender = useComponentVisibility(isVisible);
+  const [shouldRender, handleAnimationOutEnded] = useComponentVisibility(isVisible);
 
   if (!shouldRender) return null;
 
@@ -22,7 +22,8 @@ const GestaoPecuariaCard = ({ isVisible, onContinueClick, onSkipClick }) => {
         secondButton={true}
         secondButtonText="Não possuo gado"
         secondButtonOnClick={onSkipClick}  
-        isVisible={isVisible}        
+        isVisible={isVisible} 
+        onAnimationOutEnded={handleAnimationOutEnded}       
       />
     </div>
   );

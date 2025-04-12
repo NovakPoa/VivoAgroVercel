@@ -3,7 +3,7 @@ import Instruction from '../../../Commons/UI/Instruction/Instruction';
 import useComponentVisibility from '../../../../hooks/useComponentVisibility';
 
 const AgroCoberturaInstruction1 = ({ isVisible }) => {
-  const shouldRender = useComponentVisibility(isVisible);
+  const [shouldRender, handleAnimationOutEnded] = useComponentVisibility(isVisible);
 
   if (!shouldRender) return null;
 
@@ -13,6 +13,7 @@ const AgroCoberturaInstruction1 = ({ isVisible }) => {
         title="Leve cobertura aonde você mais precisa" 
         description="Arraste a torre abaixo para escolher onde instalar sua primeira antena do Agro Cobertura Móvel." 
         isVisible={isVisible}
+        onAnimationOutEnded={handleAnimationOutEnded}
       />
     </div>
   );

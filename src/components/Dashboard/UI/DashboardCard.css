@@ -119,7 +119,7 @@
 }
 
 .dashboard-card.visible {
-  animation: dashboardScaleIn 0.5s ease-out forwards;
+  animation: dashboardScaleIn var(--dash-scale-in-duration, 500ms) ease-out forwards;
 }
 
 .dashboard-card.hidden {
@@ -128,5 +128,5 @@
 }
 
 .dashboard-card.hiding {
-  animation: dashboardScaleOut 0.35s ease-in forwards;
+  animation: dashboardScaleOut var(--dash-scale-out-duration, 500ms) ease-in forwards;
 }

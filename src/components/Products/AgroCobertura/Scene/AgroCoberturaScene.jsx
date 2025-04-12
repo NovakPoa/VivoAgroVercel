@@ -30,7 +30,7 @@ const AgroCoberturaScene = () => {
   } = useProductScene('agro-cobertura', INITIAL_PLACEHOLDER_POSITIONS, CAMERA_ROTATION);
 
   const [placeholdersVisible, setPlaceholdersVisible] = useState(false);
-  const shouldRenderPlaceholders = useComponentVisibility(placeholdersVisible);
+  const [shouldRenderPlaceholders, handleAnimationOutEnded] = useComponentVisibility(placeholdersVisible);
 
   useEffect(() => {
     setPlaceholdersVisible(showFirstInteraction && isCurrentProduct);
@@ -47,6 +47,7 @@ const AgroCoberturaScene = () => {
           <Placeholders 
             placeholderPositions={placeholderPositions}
             isVisible={placeholdersVisible} 
+            onAnimationOutEnded={handleAnimationOutEnded}
           />
           <Antena position={INTERACTION_OBJECT_POSITION} scale={0.015} />
         </>

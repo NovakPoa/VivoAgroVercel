@@ -3,7 +3,7 @@ import Card from '../../Commons/UI/Card/Card';
 import useComponentVisibility from '../../../hooks/useComponentVisibility';
 
 const IntroCard = ({ isVisible, onButtonClick }) => {
-  const shouldRender = useComponentVisibility(isVisible);
+  const [shouldRender, handleAnimationOutEnded] = useComponentVisibility(isVisible);
 
   if (!shouldRender) return null;
 
@@ -17,7 +17,8 @@ const IntroCard = ({ isVisible, onButtonClick }) => {
         firstButtonText="Começar"
         firstButtonOnClick={onButtonClick}
         secondButton={false}
-        isVisible={isVisible}  
+        isVisible={isVisible} 
+        onAnimationOutEnded={handleAnimationOutEnded}  
       />
     </div>
   );

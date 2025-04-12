@@ -1,11 +1,13 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { useFrame } from '@react-three/fiber';
+import { useFrame, useThree } from '@react-three/fiber';
 
 const CYLINDER_HEIGHT = 20;
 
+const ANIM_IN_DURATION = 500;
 const SCALE_IN_ANIMATION = false;
 const OPACITY_IN_ANIMATION = true;
 
+const ANIM_OUT_DURATION = 500;
 const SCALE_OUT_ANIMATION = false;
 const OPACITY_OUT_ANIMATION = true; 
 
@@ -15,58 +17,74 @@ export const Placeholder = ({
   opacity = 0.5, 
   index = 0, 
   isVisible = true,
+  onAnimationOutEnded
 }) => {
   const groupRef = useRef();
   const meshRef = useRef();
   const materialRef = useRef();
   const [animState, setAnimState] = useState('initial');
-  const [scale, setScale] = useState(0.01);
   const [currentOpacity, setCurrentOpacity] = useState(0);
   
+  const animStartTimeRef = useRef(0);
+  const { clock } = useThree();
+
   useEffect(() => {
     if (isVisible) {
-      const showTimer = setTimeout(() => {
+      const showTimer = setTimeout(() => { 
         setAnimState('visible');
+        animStartTimeRef.current = clock.elapsedTime * 1000;
       }, index * 100);
       return () => clearTimeout(showTimer);
     } else if (animState === 'visible') {
       setAnimState('hiding');
+      animStartTimeRef.current = clock.elapsedTime * 1000;
     }
-  }, [isVisible, animState, index]);
+  }, [isVisible]);
   
+  useEffect(() => {
+    if (animState === 'hiding') {
+      const endTimer = setTimeout(() => { if (onAnimationOutEnded) onAnimationOutEnded(); }, ANIM_OUT_DURATION);
+      return () => { clearTimeout(endTimer); };
+    }
+  }, [animState]);
+
   useFrame(() => {
     if (!materialRef.current) return;
     
+    const now = clock.elapsedTime * 1000; 
+    const elapsed = now - animStartTimeRef.current;
+    
     if (animState === 'visible') {
+      const progress = Math.min(elapsed / ANIM_IN_DURATION, 1);
+      
       // Animação de opacidade na entrada
-      if (OPACITY_IN_ANIMATION && currentOpacity < opacity) {
-        const newOpacity = Math.min(currentOpacity + 0.03, opacity);
+      if (OPACITY_IN_ANIMATION) {
+        const newOpacity = progress * opacity;
         setCurrentOpacity(newOpacity);
         materialRef.current.opacity = newOpacity;
       }
       
       // Animação de escala na entrada
-      if (SCALE_IN_ANIMATION && scale < 1) {
-        const newScale = Math.min(scale + 0.05, 1);
-        setScale(newScale);
+      if (SCALE_IN_ANIMATION) {
+        const newScale = 0.01 + progress * 0.99;
         if (groupRef.current) {
           groupRef.current.scale.set(1, newScale, 1);
         }
       }
     }
-
     else if (animState === 'hiding') {
+      const progress = Math.min(elapsed / ANIM_OUT_DURATION, 1);
+      
       // Animação de opacidade na saída
-      if (OPACITY_OUT_ANIMATION && currentOpacity > 0) {
-        const newOpacity = Math.max(currentOpacity - 0.03, 0);
+      if (OPACITY_OUT_ANIMATION) {
+        const newOpacity = opacity * (1 - progress);
         setCurrentOpacity(newOpacity);
         materialRef.current.opacity = newOpacity;
       }
       
       // Animação de escala na saída
-      if (SCALE_OUT_ANIMATION && scale > 0.01) {
-        const newScale = Math.max(scale - 0.05, 0.01);
-        setScale(newScale);
+      if (SCALE_OUT_ANIMATION) {
+        const newScale = 1 - (progress * 0.99);
         if (groupRef.current) {
           groupRef.current.scale.set(1, newScale, 1);
         }
@@ -99,7 +117,7 @@ export const Placeholder = ({
   );
 };
 
-export const Placeholders = ({ placeholderPositions, isVisible = true }) => {
+export const Placeholders = ({ placeholderPositions, isVisible = true, onAnimationOutEnded }) => {
   return (
     <>
       {placeholderPositions.map((position, index) => (
@@ -108,6 +126,7 @@ export const Placeholders = ({ placeholderPositions, isVisible = true }) => {
           position={position}
           index={index}
           isVisible={isVisible}
+          onAnimationOutEnded={onAnimationOutEnded}
         />
       ))}
     </>    

@@ -18,7 +18,7 @@ const InstructionWithTimer = ({
     startTimer
   } = useInteractionStore();
 
-  const shouldRender = useComponentVisibility(isVisible);
+  const [shouldRender, handleAnimationOutEnded] = useComponentVisibility(isVisible);
 
   useEffect(() => {
     if (isVisible && !timerActive) {
@@ -38,6 +38,7 @@ const InstructionWithTimer = ({
         title={title} 
         description={description}
         isVisible={isVisible}
+        onAnimationOutEnded={handleAnimationOutEnded} 
       >
         <div className="timer-section">
           <h3 className="timer-title">{timerTitle} {timerRemaining} segundos</h3>

@@ -3,7 +3,7 @@ import Instruction from '../../../Commons/UI/Instruction/Instruction';
 import useComponentVisibility from '../../../../hooks/useComponentVisibility';
 
 const ClimaInteligenteInstruction1 = ({ isVisible }) => {
-  const shouldRender = useComponentVisibility(isVisible);
+  const [shouldRender, handleAnimationOutEnded] = useComponentVisibility(isVisible);
 
   if (!shouldRender) return null;
 
@@ -13,6 +13,7 @@ const ClimaInteligenteInstruction1 = ({ isVisible }) => {
         title="Instale a estação meteorológica" 
         description="Arraste a estação abaixo para escolher onde instalar sua estação do Clima Inteligente." 
         isVisible={isVisible}
+        onAnimationOutEnded={handleAnimationOutEnded}
       />
     </div>
   );

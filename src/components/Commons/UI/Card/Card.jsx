@@ -3,6 +3,9 @@ import Button from '../Button/Button';
 import PreloadedImage from '../PreloadedImage/PreloadedImage';
 import './Card.css';
 
+const CARD_SCALE_IN_DURATION = 500;
+const CARD_SCALE_OUT_DURATION = 300;
+
 const Card = ({ 
   title, 
   description, 
@@ -14,26 +17,38 @@ const Card = ({
   secondButtonText, 
   firstButtonOnClick, 
   secondButtonOnClick,
-  isVisible = true
+  isVisible = true,
+  onAnimationOutEnded
 }) => {
   const [animState, setAnimState] = useState('initial'); // 'initial', 'visible', 'hiding'
   
   useEffect(() => {
     if (isVisible) {
-      const showTimer = setTimeout(() => setAnimState('visible'), 30);
-      return () => clearTimeout(showTimer);
+      setAnimState('visible')
     } else if (animState === 'visible') {
       setAnimState('hiding');
     }
-  }, [isVisible, animState]);
+  }, [isVisible]);
   
+  useEffect(() => {
+    if (animState === 'hiding') {
+      const endTimer = setTimeout(() => { if (onAnimationOutEnded) onAnimationOutEnded(); }, CARD_SCALE_OUT_DURATION);
+      return () => { clearTimeout(endTimer); };
+    }
+  }, [animState]);
+
+  const style = {
+    '--card-scale-in-duration': `${CARD_SCALE_IN_DURATION}ms`,
+    '--card-scale-out-duration': `${CARD_SCALE_OUT_DURATION}ms`
+  };
+
   const animClass = 
     animState === 'initial' ? 'hidden' :
     animState === 'visible' ? 'visible' : 
     'hiding';
 
   return (
-    <div className={`card ${animClass}`}>
+    <div className={`card ${animClass}`} style={style} >
       {showImage && (
         <div className="card-image-wrapper">
           <PreloadedImage src={imageUrl} alt={title} />

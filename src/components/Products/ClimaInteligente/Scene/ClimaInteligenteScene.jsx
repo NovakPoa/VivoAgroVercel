@@ -29,7 +29,7 @@ const ClimaInteligenteScene = () => {
   } = useProductScene('clima-inteligente', INITIAL_PLACEHOLDER_POSITIONS, CAMERA_ROTATION);
   
   const [placeholdersVisible, setPlaceholdersVisible] = useState(false);
-  const shouldRenderPlaceholders = useComponentVisibility(placeholdersVisible);
+  const [shouldRenderPlaceholders, handleAnimationOutEnded] = useComponentVisibility(placeholdersVisible);
 
   useEffect(() => {
     setPlaceholdersVisible(showFirstInteraction && isCurrentProduct);
@@ -46,6 +46,7 @@ const ClimaInteligenteScene = () => {
           <Placeholders 
             placeholderPositions={placeholderPositions}
             isVisible={placeholdersVisible}
+            onAnimationOutEnded={handleAnimationOutEnded}
           />
           <Estacao position={INTERACTION_OBJECT_POSITION} scale={0.1} />
         </>

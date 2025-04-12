@@ -3,7 +3,7 @@ import Instruction from '../../../Commons/UI/Instruction/Instruction';
 import useComponentVisibility from '../../../../hooks/useComponentVisibility';
 
 const GestaoMaquinarioInstruction1 = ({ isVisible }) => {
-  const shouldRender = useComponentVisibility(isVisible);
+  const [shouldRender, handleAnimationOutEnded] = useComponentVisibility(isVisible);
 
   if (!shouldRender) return null;
 
@@ -12,7 +12,8 @@ const GestaoMaquinarioInstruction1 = ({ isVisible }) => {
       <Instruction 
         title="Acople o sensor inteligente" 
         description="Arraste o sensor abaixo para escolher onde integrar o sensor para Gestão de Maquinário." 
-        isVisible={isVisible}        
+        isVisible={isVisible}  
+        onAnimationOutEnded={handleAnimationOutEnded}      
       />
     </div>
   );

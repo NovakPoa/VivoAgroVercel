@@ -105,7 +105,7 @@
 }
 
 .card.visible {
-  animation: cardScaleIn 0.5s ease-out forwards;
+  animation: cardScaleIn var(--card-scale-in-duration, 500ms) ease-out forwards;
 }
 
 .card.hidden {
@@ -114,5 +114,5 @@
 }
 
 .card.hiding {
-  animation: cardScaleOut 0.35s ease-in forwards;
+  animation: cardScaleOut var(--card-scale-out-duration, 300ms) ease-in forwards;
 }

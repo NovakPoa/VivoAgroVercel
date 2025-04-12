@@ -1,8 +1,11 @@
 import React from 'react';
 import Card from '../../Commons/UI/Card/Card';
+import useComponentVisibility from '../../../hooks/useComponentVisibility';
 
 const EndCard = ({ isVisible, onContinueClick, onSkipClick }) => {
-  if (!isVisible) return null;
+  const [shouldRender, handleAnimationOutEnded] = useComponentVisibility(isVisible);
+
+  if (!shouldRender) return null;
 
   return (
     <div className="card-container">
@@ -16,7 +19,9 @@ const EndCard = ({ isVisible, onContinueClick, onSkipClick }) => {
         firstButtonOnClick={onContinueClick}
         secondButton={true}
         secondButtonText="Recomeçar experiência"
-        secondButtonOnClick={onSkipClick}        
+        secondButtonOnClick={onSkipClick}    
+        isVisible={isVisible} 
+        onAnimationOutEnded={handleAnimationOutEnded}              
       />
     </div>
   );

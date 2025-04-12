@@ -82,7 +82,7 @@
 }
 
 .instruction.visible {
-  animation: instructionScaleIn 0.5s ease-out forwards;
+  animation: instructionScaleIn var(--instruction-scale-in-duration, 500ms) ease-out forwards;
 }
 
 .instruction.hidden {
@@ -91,5 +91,5 @@
 }
 
 .instruction.hiding {
-  animation: instructionScaleOut 0.5s ease-in forwards;
+  animation: instructionScaleOut var(--instruction-scale-out-duration, 500ms) ease-in forwards;
 }

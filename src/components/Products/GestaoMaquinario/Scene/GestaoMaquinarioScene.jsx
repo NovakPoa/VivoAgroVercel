@@ -31,7 +31,7 @@ const GestaoMaquinarioScene = () => {
   } = useProductScene('gestao-maquinario', INITIAL_PLACEHOLDER_POSITIONS, CAMERA_ROTATION);
   
   const [placeholdersVisible, setPlaceholdersVisible] = useState(false);
-  const shouldRenderPlaceholders = useComponentVisibility(placeholdersVisible);
+  const [shouldRenderPlaceholders, handleAnimationOutEnded] = useComponentVisibility(placeholdersVisible);
 
   useEffect(() => {
     setPlaceholdersVisible(showFirstInteraction && isCurrentProduct);
@@ -62,6 +62,7 @@ const GestaoMaquinarioScene = () => {
           <Placeholders 
             placeholderPositions={placeholderPositions}
             isVisible={placeholdersVisible}
+            onAnimationOutEnded={handleAnimationOutEnded}
           />
           <DispositivoMaquinario position={INTERACTION_OBJECT_POSITION} scale={0.08} />
         </>

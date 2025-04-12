@@ -1,22 +1,26 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 
-const useComponentVisibility = (isVisible, exitDuration = 400) => { // Tempo igual à duração da animação cardScaleOut (ver Card.css) 
+const useComponentVisibility = (isVisible) => {
   const [shouldRender, setShouldRender] = useState(isVisible);
-
+  const animationEndedRef = useRef(false);
+  
   useEffect(() => {
     if (isVisible) {
       setShouldRender(true);
-    } 
-    else {
-      const timer = setTimeout(() => {
-        setShouldRender(false);
-      }, exitDuration);
-      
-      return () => clearTimeout(timer);
+      animationEndedRef.current = false;
     }
-  }, [isVisible, exitDuration]);
+  }, [isVisible]);
 
-  return shouldRender;
+  const handleAnimationOutEnded = useCallback(() => {
+    if (!animationEndedRef.current && !isVisible) {
+      animationEndedRef.current = true;
+      setShouldRender(false);
+    }
+  }, [isVisible]);
+  
+  //const isAnimationOutEnded = useCallback(() => animationEndedRef.current, []);
+
+  return [shouldRender, handleAnimationOutEnded];
 };
 
 export default useComponentVisibility;
