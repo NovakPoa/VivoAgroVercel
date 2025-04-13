@@ -25,7 +25,6 @@ export default function useProductNavigation() {
 
   const endProduct = useCallback(() => {
     setProductStatus(currentProduct, 'completed');
-    setShowCard(false);
     setLastProductName(currentProduct);
     setShowInteraction(false);
 
@@ -43,11 +42,7 @@ export default function useProductNavigation() {
         setProductStatus(nextProduct, 'unlocked');
       }
     }
-  }, [
-    currentProduct, 
-    productsOrder,
-    productsStatus
-  ]);
+  }, [ currentProduct, productsOrder, productsStatus ]);
 
   const startProductHandler = useCallback(() => {
     if (currentProduct === lastProductName) {
@@ -86,6 +81,7 @@ export default function useProductNavigation() {
   }, [setShowInteraction]);
 
   const onSkipClick = useCallback(() => {
+    setShowCard(false);
     endProduct();   
   }, [endProduct]);
 

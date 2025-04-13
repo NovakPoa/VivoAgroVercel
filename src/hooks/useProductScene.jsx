@@ -3,13 +3,13 @@ import useProductsStore from '../stores/ProductsStore';
 import useInteractionStore from '../stores/InteractionStore';
 import useSlotsStore from '../stores/SlotsStore';
 import useCameraStore from '../stores/CameraStore';
-import useProductNavigation from './useProductNavigation';
+import useDashboardStore from '../stores/DashboardStore';
 
 const useProductScene = (productId, initialPlaceholderPositions, cameraRotation) => {
-  const { currentProduct}  = useProductsStore();  
+  const { currentProduct, setProductStatus, setLastProductName, productsOrder, productsStatus }  = useProductsStore();  
   const { showInteraction, setShowFirstInstruction, setShowSecondInstruction } = useInteractionStore(); 
-  const { endProduct } = useProductNavigation();
-  const { setTimerCompleteCallback } = useInteractionStore();
+  const { setTimerCompleteCallback, setShowInteraction } = useInteractionStore();
+  const { setShowDashboard } = useDashboardStore();
   const { setSlotsLength, setShowSlots, setSelectedIndex, selectedIndex } = useSlotsStore();
   const { registerProductRotation } = useCameraStore();
 
@@ -86,6 +86,23 @@ const useProductScene = (productId, initialPlaceholderPositions, cameraRotation)
     }
   }, [showSecondInteraction, isCurrentProduct]);
 
+  // Termina Produto pela cena
+  const endProduct = () => {
+    setProductStatus(currentProduct, 'completed');
+    setLastProductName(currentProduct);
+    setShowInteraction(false);
+    setShowDashboard(true);
+
+    // Desbloquear próximo produto
+    const currentIndex = productsOrder.indexOf(currentProduct);
+    if (currentIndex !== -1 && currentIndex < productsOrder.length - 1) {
+      const nextProduct = productsOrder[currentIndex + 1];
+      if (productsStatus[nextProduct] === 'locked') {
+        setProductStatus(nextProduct, 'unlocked');
+      }
+    }
+  };
+
   // Limpar timers quando o componente é desmontado
   useEffect(() => {
     return clearAllTimers;
@@ -116,7 +133,7 @@ const useProductScene = (productId, initialPlaceholderPositions, cameraRotation)
     createTimer(() => {
       endProduct();
     }, 8000);
-  }, []);
+  }, [setShowSecondInstruction, createTimer, endProduct]);
 
   return {
     enableObject,
