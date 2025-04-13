@@ -87,21 +87,12 @@ const useProductScene = (productId, initialPlaceholderPositions, cameraRotation)
   }, [showSecondInteraction, isCurrentProduct]);
 
   // Termina Produto pela cena
-  const endProduct = () => {
-    setProductStatus(currentProduct, 'completed');
+  const endProduct = useCallback(() => {
+    useProductsStore.getState().completeProduct(currentProduct);
     setLastProductName(currentProduct);
     setShowInteraction(false);
     setShowDashboard(true);
-
-    // Desbloquear próximo produto
-    const currentIndex = productsOrder.indexOf(currentProduct);
-    if (currentIndex !== -1 && currentIndex < productsOrder.length - 1) {
-      const nextProduct = productsOrder[currentIndex + 1];
-      if (productsStatus[nextProduct] === 'locked') {
-        setProductStatus(nextProduct, 'unlocked');
-      }
-    }
-  };
+  }, [ currentProduct ]);
 
   // Limpar timers quando o componente é desmontado
   useEffect(() => {

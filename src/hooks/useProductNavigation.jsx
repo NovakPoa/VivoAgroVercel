@@ -11,10 +11,7 @@ export default function useProductNavigation() {
     startProduct, 
     currentProduct, 
     setStartProduct, 
-    setProductStatus,
     setLastProductName,
-    productsOrder,
-    productsStatus,
     lastProductName
   } = useProductsStore();
   const { setShowInteraction } = useInteractionStore();
@@ -24,7 +21,7 @@ export default function useProductNavigation() {
   const timerRef = useRef(null);
 
   const endProduct = useCallback(() => {
-    setProductStatus(currentProduct, 'completed');
+    useProductsStore.getState().completeProduct(currentProduct);
     setLastProductName(currentProduct);
     setShowInteraction(false);
 
@@ -33,16 +30,7 @@ export default function useProductNavigation() {
       setShowDashboard(true);
       timerRef.current = null;
     }, ANIMATION_DURATIONS.CARD.SCALE_OUT); 
-
-    // Desbloquear próximo produto
-    const currentIndex = productsOrder.indexOf(currentProduct);
-    if (currentIndex !== -1 && currentIndex < productsOrder.length - 1) {
-      const nextProduct = productsOrder[currentIndex + 1];
-      if (productsStatus[nextProduct] === 'locked') {
-        setProductStatus(nextProduct, 'unlocked');
-      }
-    }
-  }, [ currentProduct, productsOrder, productsStatus ]);
+  }, [ currentProduct ]);
 
   const startProductHandler = useCallback(() => {
     if (currentProduct === lastProductName) {
