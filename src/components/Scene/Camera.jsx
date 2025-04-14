@@ -21,8 +21,16 @@ const Camera = () => {
   const animationDuration = useCameraStore(state => state.animationDuration);
   const fov = useCameraStore(state => state.fov);
   const finishAnimation = useCameraStore(state => state.finishAnimation);  
+  const resetCamera = useCameraStore(state => state.resetCamera);
 
   useEffect(() => {
+    // Se estiver animando cancela a animação
+    if (isAnimating.current) {
+      gsap.killTweensOf(camera.rotation);
+      isAnimating.current = false;
+    }
+    
+    // Configura a câmera para sua posição inicial
     camera.fov = fov;
     camera.position.set(
       INITIAL_CAMERA_POSITION[0],
@@ -35,8 +43,8 @@ const Camera = () => {
       INITIAL_ROTATION[2] * Math.PI / 180
     );
     camera.updateProjectionMatrix();
-
-  }, []);
+    
+  }, [camera, fov, resetCamera]);;
 
   const animateCamera = useCallback((targetPoint) => {
     if (isAnimating.current) return;

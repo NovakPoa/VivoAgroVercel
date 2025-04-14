@@ -6,6 +6,7 @@ const cameraStore = (set, get) => ({
   animationDuration: 2,
   fov: 80,
   productRotations: {},
+  resetCamera: false,
   
   registerProductRotation: (productId, rotation) => set(state => ({
     productRotations: {
@@ -31,7 +32,16 @@ const cameraStore = (set, get) => ({
   
   setFov: (newFov) => set({
     fov: newFov,
-  }),  
+  }), 
+  
+  resetCameraPosition: () => {
+    set({ resetCamera: true });
+    
+    setTimeout(() => {
+      set({ resetCamera: false });
+    }, 100);
+  },
+
 });
 
 const useCameraStore = create(cameraStore);

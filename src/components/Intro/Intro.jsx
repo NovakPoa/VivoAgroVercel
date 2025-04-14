@@ -4,25 +4,24 @@ import useIntroStore from '../../stores/IntroStore';
 import useProductsStore from '../../stores/ProductsStore';
 
 const START_PRODUCTS_DELAY = 2000;
-const SHOW_INTRO_CARD_DELAY = 0;
 
 const Intro = () => {
   const [showCard, setShowCard] = useState(false);
-  const { setStartIntro, setIntroVisibility } = useIntroStore();
+  const { introVisibility, setStartIntro, setIntroVisibility } = useIntroStore();
   const { setCurrentProduct, setStartProduct } = useProductsStore();
 
-  const timerToStartProduct = () => {
+  useEffect(() => {
+    if (!introVisibility) {
+      setShowCard(true); 
+    }
+  } , [introVisibility]);
+
+  const timerToStartProduct = useCallback(() => {
     setTimeout(() => {
       setCurrentProduct('agro-cobertura');
       setStartProduct(true);
     }, START_PRODUCTS_DELAY);
-  }
-
-  useEffect(() => {
-    setTimeout(() => {
-      setShowCard(true);
-    }, SHOW_INTRO_CARD_DELAY);  
-  } , []);
+  }, []);
 
   const onButtonClick = useCallback(() => {
     setIntroVisibility(true);

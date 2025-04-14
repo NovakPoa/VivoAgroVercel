@@ -6,7 +6,7 @@ import useProductsStore from '../../../stores/ProductsStore';
 import useDashboardStore from '../../../stores/DashboardStore';
 import { ANIMATION_DURATIONS } from '../../../config/animationConfig';
 
-const DashboardCard = ({ isVisible = true, onAnimationOutEnded }) => {
+const DashboardCard = ({ isVisible = true, onAnimationOutEnded, onResetClick }) => {
   const { productsStatus, setCurrentProduct, setStartProduct } = useProductsStore();
   const { setShowDashboard } = useDashboardStore();
   const [animState, setAnimState] = useState('initial'); // 'initial', 'visible', 'hiding'
@@ -44,13 +44,23 @@ const DashboardCard = ({ isVisible = true, onAnimationOutEnded }) => {
     }, ANIMATION_DURATIONS.DASHBOARD.SCALE_OUT);   
   }, []);
 
+  const handleResetClick = useCallback(() => {
+    if (onResetClick) {
+      onResetClick();
+    }
+  }, [onResetClick])
+
   return (
     <div className={`dashboard-card ${animClass}`} style={style} >
       <div className="sidebar-buttons">
         <button className="sidebar-button active">
           <img src="./icons/vivo-icon-dark.png" alt="Vivo Icon" />
         </button>
-        <button className="sidebar-button">
+        <button 
+          className="sidebar-button"
+          onClick={handleResetClick}
+          title="Reiniciar experiência"
+        >
           <RiResetRightFill color="#283943" size={28} />
         </button>
       </div>
