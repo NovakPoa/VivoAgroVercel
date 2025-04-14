@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Placeholders from '../../../Commons/Scene/Placeholders/Placeholders';
 import useProductScene from '../../../../hooks/useProductScene';
 import useComponentVisibility from '../../../../hooks/useComponentVisibility';
@@ -25,20 +25,36 @@ const GestaoMaquinarioScene = () => {
     showFirstInteraction,
     isCurrentProduct,
     selectedPosition,
-    placeholderPositions,
-    setPlaceholderPositions,
-    animateTablet
+    animateTablet,
+    selectedIndex
   } = useProductScene('gestao-maquinario', INITIAL_PLACEHOLDER_POSITIONS, CAMERA_ROTATION);
   
   const [placeholdersVisible, setPlaceholdersVisible] = useState(false);
   const [shouldRenderPlaceholders, handleAnimationOutEnded] = useComponentVisibility(placeholdersVisible);
+  
+  const tratorPositionsRef = useRef(INITIAL_PLACEHOLDER_POSITIONS);
+  const trackedTratorIndexRef = useRef(-1);
+
+  const [dispositivoPosition, setDispositivoPosition] = useState(selectedPosition);
+  const [placeholderPositions, setPlaceholderPositions] = useState(INITIAL_PLACEHOLDER_POSITIONS);
 
   useEffect(() => {
     setPlaceholdersVisible(showFirstInteraction && isCurrentProduct);
   }, [showFirstInteraction, isCurrentProduct]);
 
+  useEffect(() => {
+    if (selectedIndex >= 0 && isCurrentProduct) {
+      trackedTratorIndexRef.current = selectedIndex;
+      if (tratorPositionsRef.current[selectedIndex]) {
+        setDispositivoPosition(tratorPositionsRef.current[selectedIndex]);
+      }
+    }
+  }, [selectedIndex, isCurrentProduct]);
+
   const handleObjectPositionUpdate = (position, tratorIndex) => {
     if (position) {
+      tratorPositionsRef.current[tratorIndex] = [position.x, position.y, position.z]; 
+      // Atualizar os placeholders
       setPlaceholderPositions(prevPositions => {
         const newPositions = [...prevPositions];
         if (tratorIndex >= 0 && tratorIndex < newPositions.length) {
@@ -46,6 +62,10 @@ const GestaoMaquinarioScene = () => {
         }
         return newPositions;
       });
+      // Atualizar a posição do dispositivo
+      if (enableObject && trackedTratorIndexRef.current === tratorIndex) {
+        setDispositivoPosition([position.x, position.y, position.z]);
+      }
     }
   };
 
@@ -53,9 +73,12 @@ const GestaoMaquinarioScene = () => {
     <group>
       <Tratores onObjectPositionUpdate={handleObjectPositionUpdate} />
 
-      {enableObject && selectedPosition && (
-        <DispositivoMaquinario position={selectedPosition} />
-      )} 
+      {enableObject && dispositivoPosition && trackedTratorIndexRef.current >= 0 && (
+        <DispositivoMaquinario 
+          position={dispositivoPosition} 
+          scale={1.5}
+        />
+      )}
 
       {shouldRenderPlaceholders && (
         <>

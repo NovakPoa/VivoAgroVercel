@@ -84,7 +84,7 @@ const useProductScene = (productId, initialPlaceholderPositions, cameraRotation)
     if (selectedIndex > -1 && isCurrentProduct && placeholderPositions[selectedIndex]) {
       handleSlotClick(placeholderPositions[selectedIndex]);
     }
-  }, [selectedIndex, isCurrentProduct, placeholderPositions]);
+  }, [selectedIndex, isCurrentProduct]);
 
   // Configurar callback para o timer da segunda interação
   useEffect(() => {
@@ -143,7 +143,7 @@ const useProductScene = (productId, initialPlaceholderPositions, cameraRotation)
     handleSlotClick,
     endSecondInteraction,
     placeholderPositions,
-    setPlaceholderPositions
+    selectedIndex
   };
 };
 
