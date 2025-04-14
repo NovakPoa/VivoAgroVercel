@@ -40,6 +40,11 @@
   white-space: nowrap;
 }
 
+.button-disabled {
+  pointer-events: none;
+  cursor: default;
+}
+
 @media (max-width: 400px) {
   .primary-button, .secondary-button {
     width: 60%; 

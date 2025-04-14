@@ -82,6 +82,12 @@
   border-radius: 20px;  
 }
 
+.image-button.button-disabled {
+  pointer-events: none;
+  cursor: default;
+  transform: scale(1) !important;
+}
+
 @media screen and (max-height: 430px) {
   .image-button {
     height: 180px;

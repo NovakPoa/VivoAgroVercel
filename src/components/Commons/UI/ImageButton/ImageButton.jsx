@@ -4,17 +4,22 @@ import { RiLock2Fill } from "react-icons/ri";
 import { FaCheck } from "react-icons/fa6";
 import PreloadedImage from '../PreloadedImage/PreloadedImage';
 
+let isAnyImageButtonClicked = false;
+
 const ImageButton = ({ imageUrl, title, status, onClick }) => {
 
   const handleClick = useCallback(() => {
-    if (status !== 'locked') {
-      onClick();
-    }
-  }, [status]);
+    if (status === 'locked' || isAnyImageButtonClicked) return;
+    isAnyImageButtonClicked = true;
+    onClick();
+    setTimeout(() => {
+      isAnyImageButtonClicked = false;
+    }, 800);
+  }, [status, onClick]);
 
   return (
     <div
-      className={`image-button ${status}`}
+      className={`image-button ${status} ${isAnyImageButtonClicked ? 'button-disabled' : ''}`}
       onClick={handleClick}
     >
       <div className="image-container">
