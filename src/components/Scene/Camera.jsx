@@ -134,6 +134,11 @@ const Camera = () => {
           ref={controlsRef}
           makeDefault
           enabled={ENABLE_DEBUG_CONTROLS}
+          mouseButtons={{
+            left: 1,
+            right: 2 | 64,
+            wheel: 8
+          }}
         />
       )}
     </>
