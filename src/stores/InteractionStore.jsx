@@ -8,9 +8,18 @@ const interactionStore = (set, get) => ({
   timerRemaining: 0,
   
   showInteraction: false,
+  setShowInteraction: (value) => set({ showInteraction: value }),
+
+  showFirstInteraction: false,
+  showSecondInteraction: false,
+  setShowFirstInteraction: (value) => set({ showFirstInteraction: value }),
+  setShowSecondInteraction: (value) => set({ showSecondInteraction: value }),  
+  
   showFirstInstruction: false,
   showSecondInstruction: false,
-  
+  setShowFirstInstruction: (show) => set({ showFirstInstruction: show }),
+  setShowSecondInstruction: (show) => set({ showSecondInstruction: show }), 
+
   startTimer: (duration = 10) => {
     // Limpar timer anterior se existir
     if (timerInterval) {
@@ -76,11 +85,7 @@ const interactionStore = (set, get) => ({
       timerActive: false,
       timerRemaining: 0
     });
-  },
-
-  setShowInteraction: (value) => set({ showInteraction: value }),
-  setShowFirstInstruction: (show) => set({ showFirstInstruction: show }),
-  setShowSecondInstruction: (show) => set({ showSecondInstruction: show }),  
+  }, 
 });
 
 const useInteractionStore = create(interactionStore);

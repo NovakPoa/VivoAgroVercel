@@ -6,36 +6,43 @@ import useCameraStore from '../stores/CameraStore';
 import useDashboardStore from '../stores/DashboardStore';
 
 const useProductScene = (productId, initialPlaceholderPositions, cameraRotation) => {
-  const { currentProduct, setProductStatus, setLastProductName, productsOrder, productsStatus }  = useProductsStore();  
-  const { showInteraction, setShowFirstInstruction, setShowSecondInstruction } = useInteractionStore(); 
-  const { setTimerCompleteCallback, setShowInteraction } = useInteractionStore();
+  const { currentProduct, setLastProductName }  = useProductsStore();  
+  const { 
+    showInteraction, 
+    setShowFirstInstruction, 
+    setShowSecondInstruction,
+    setTimerCompleteCallback, 
+    setShowInteraction,
+    showFirstInteraction,
+    setShowFirstInteraction,
+    showSecondInteraction,
+    setShowSecondInteraction
+  } = useInteractionStore(); 
   const { setShowDashboard } = useDashboardStore();
   const { setSlotsLength, setShowSlots, setSelectedIndex, selectedIndex } = useSlotsStore();
   const { registerProductRotation } = useCameraStore();
 
   const [enableObject, setEnableObject] = useState(false);
-  const [showFirstInteraction, setShowFirstInteraction] = useState(false);
-  const [showSecondInteraction, setShowSecondInteraction] = useState(false);
   const [isCurrentProduct, setIsCurrentProduct] = useState(false);
   const [selectedPosition, setSelectedPosition] = useState(null);
   const [placeholderPositions, setPlaceholderPositions] = useState (initialPlaceholderPositions || []);
   const [animateTablet, setAnimateTablet] = useState(false);
 
-    // Referência para os timers
-    const timersRef = useRef([]);
+  // Referência para os timers
+  const timersRef = useRef([]);
+
+  // Função para limpar todos os timers pendentes
+  const clearAllTimers = useCallback(() => {
+    timersRef.current.forEach(clearTimeout);
+    timersRef.current = [];
+  }, []);
   
-    // Função para limpar todos os timers pendentes
-    const clearAllTimers = useCallback(() => {
-      timersRef.current.forEach(clearTimeout);
-      timersRef.current = [];
-    }, []);
-    
-    // Função para criar um timer e armazená-lo para limpeza posterior
-    const createTimer = useCallback((callback, delay) => {
-      const timerId = setTimeout(callback, delay);
-      timersRef.current.push(timerId);
-      return timerId;
-    }, []);
+  // Função para criar um timer e armazená-lo para limpeza posterior
+  const createTimer = useCallback((callback, delay) => {
+    const timerId = setTimeout(callback, delay);
+    timersRef.current.push(timerId);
+    return timerId;
+  }, []);
 
   // Registrar a rotação da câmera para este produto
   useEffect(() => {

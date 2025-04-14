@@ -2,6 +2,7 @@ import React, { useRef, forwardRef, useEffect } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { useGLTFAnimations } from '../../../../../../hooks/useGLTFAnimations';
 import useProductsStore from '../../../../../../stores/ProductsStore';
+import useInteractionStore from '../../../../../../stores/InteractionStore';
 import * as THREE from 'three';
 
 const MODELS = [
@@ -36,6 +37,7 @@ const Vaca = forwardRef(({ path, position, rotation, scale, onMeshFound, index }
   const meshRef = useRef(null);
   const frameCounter = useRef(0);
   const { currentProduct } = useProductsStore();
+  const showFirstInteraction = useInteractionStore(state => state.showFirstInteraction);
 
   useEffect(() => {
     if (scene) {
@@ -47,7 +49,7 @@ const Vaca = forwardRef(({ path, position, rotation, scale, onMeshFound, index }
   }, [scene]);
   
   useFrame(() => {
-    if (meshRef.current && currentProduct === 'gestao-pecuaria') {
+    if (meshRef.current && currentProduct === 'gestao-pecuaria' && showFirstInteraction) {
       frameCounter.current += 1;
       
       const worldPos = new THREE.Vector3();

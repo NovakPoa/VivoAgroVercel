@@ -22,17 +22,7 @@ const Products = () => {
   const { showCard, onContinueClick, onSkipClick } = useProductNavigation();
 
   const ProductCard = productRegistry[currentProduct]?.card;
-
-  React.useEffect(() => {
-    console.log('currentProduct: ', currentProduct);
-  }, [currentProduct]);
-  React.useEffect(() => {
-    console.log('lastProductName: ', lastProductName);
-  }, [lastProductName]);
-  React.useEffect(() => {
-    console.log('productsStatus: ', productsStatus);
-  }, [productsStatus]);
-
+  
   return (
     <div className="products-container">
       {ProductCard && (
