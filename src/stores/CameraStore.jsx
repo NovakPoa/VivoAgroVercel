@@ -4,7 +4,6 @@ const cameraStore = (set, get) => ({
   cameraTargetPoint: [0, 0, 0],
   cameraAnimate: false,
   animationDuration: 2,
-  fov: 80,
   productRotations: {},
   resetCamera: false,
   
@@ -29,10 +28,6 @@ const cameraStore = (set, get) => ({
   finishAnimation: () => set({
     cameraAnimate: false
   }),
-  
-  setFov: (newFov) => set({
-    fov: newFov,
-  }), 
   
   resetCameraPosition: () => {
     set({ resetCamera: true });

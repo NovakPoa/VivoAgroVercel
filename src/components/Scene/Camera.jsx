@@ -1,53 +1,74 @@
-import { useEffect, useRef, useCallback } from 'react';
-import { useThree } from '@react-three/fiber';
+import { useEffect, useRef, useCallback, useMemo } from 'react';
 import { gsap } from 'gsap';
-import { OrbitControls } from '@react-three/drei';
+import { PerspectiveCamera, CameraControls } from '@react-three/drei';
+import { useThree } from '@react-three/fiber';
 import useCameraStore from '../../stores/CameraStore';
 
 const INITIAL_CAMERA_POSITION = [0, 1.7, 0];
 const INITIAL_ROTATION = [0, -90, 0];
-
-/////////////
 const ENABLE_DEBUG_CONTROLS = false;
-/////////////
+
+const BASE_FOV = 65;
+const REFERENCE_ASPECT = 16/9;
+const FOV_ADJUSTMENT_FACTOR = 0.5; 
+const MIN_FOV = 45;
+const MAX_FOV = 80;
 
 const Camera = () => {
-  const { camera, gl } = useThree();
   const isAnimating = useRef(false);
+  const cameraRef = useRef();
   const controlsRef = useRef();
+  
+  const { size} = useThree();
   
   const cameraAnimate = useCameraStore(state => state.cameraAnimate);
   const cameraTargetPoint = useCameraStore(state => state.cameraTargetPoint);
   const animationDuration = useCameraStore(state => state.animationDuration);
-  const fov = useCameraStore(state => state.fov);
   const finishAnimation = useCameraStore(state => state.finishAnimation);  
   const resetCamera = useCameraStore(state => state.resetCamera);
+  
+  const aspectRatio = size.width / size.height;
+  //const isPortrait = aspectRatio < 1;
+  
+  const adjustedFOV = useMemo(() => {
+    const aspectDifference = REFERENCE_ASPECT / aspectRatio;
+    const calculatedFOV = BASE_FOV * (1 + (aspectDifference - 1) * FOV_ADJUSTMENT_FACTOR);
 
+    return Math.min(Math.max(calculatedFOV, MIN_FOV), MAX_FOV);
+  }, [aspectRatio, BASE_FOV]);
+  
+  // Debug: mostrar valores atualizados
+/*   useEffect(() => {
+    console.log(`Aspect ratio: ${aspectRatio}, FOV: ${adjustedFOV}`);
+  }, [aspectRatio, adjustedFOV]); */
+
+
+  const rotationInRadians = [
+    INITIAL_ROTATION[0] * Math.PI / 180,
+    INITIAL_ROTATION[1] * Math.PI / 180,
+    INITIAL_ROTATION[2] * Math.PI / 180
+  ];
+
+  // Reset da câmera
   useEffect(() => {
-    // Se estiver animando cancela a animação
+    if (!cameraRef.current || !resetCamera) return;
+    
+    const camera = cameraRef.current;
+    
     if (isAnimating.current) {
       gsap.killTweensOf(camera.rotation);
       isAnimating.current = false;
     }
     
-    // Configura a câmera para sua posição inicial
-    camera.fov = fov;
-    camera.position.set(
-      INITIAL_CAMERA_POSITION[0],
-      INITIAL_CAMERA_POSITION[1],
-      INITIAL_CAMERA_POSITION[2]
-    );
-    camera.rotation.set(
-      INITIAL_ROTATION[0] * Math.PI / 180,
-      INITIAL_ROTATION[1] * Math.PI / 180,
-      INITIAL_ROTATION[2] * Math.PI / 180
-    );
+    camera.rotation.set(...rotationInRadians);
     camera.updateProjectionMatrix();
     
-  }, [camera, fov, resetCamera]);;
+  }, [resetCamera, rotationInRadians]);
 
   const animateCamera = useCallback((targetPoint) => {
-    if (isAnimating.current) return;
+    if (!cameraRef.current || isAnimating.current) return;
+    
+    const camera = cameraRef.current;
     isAnimating.current = true;
     
     const targetRotation = {
@@ -85,27 +106,38 @@ const Camera = () => {
         
         isAnimating.current = false;
         finishAnimation();
-        
-      }
+      },
+      ease: "power2.inOut"
     });
-  }, [camera]);
+  }, [animationDuration, finishAnimation]);
 
   useEffect(() => {
-    if (cameraAnimate) {
+    if (cameraAnimate && cameraRef.current) {
       animateCamera(cameraTargetPoint);
     }
-  }, [cameraAnimate]);
+  }, [cameraAnimate, cameraTargetPoint, animateCamera]);
 
-  return ENABLE_DEBUG_CONTROLS ? (
-    <OrbitControls 
-      ref={controlsRef}
-      args={[camera, gl.domElement]}
-      enableDamping={true}
-      enablePan={ENABLE_DEBUG_CONTROLS}
-      enableRotate={ENABLE_DEBUG_CONTROLS}
-      enableZoom={ENABLE_DEBUG_CONTROLS}
-    />
-  ) : null;
+  return (
+    <>
+      <PerspectiveCamera
+        ref={cameraRef}
+        makeDefault
+        fov={adjustedFOV}
+        position={INITIAL_CAMERA_POSITION}
+        rotation={rotationInRadians}
+        near={0.1}
+        far={1000}
+      />
+
+      {ENABLE_DEBUG_CONTROLS && (
+        <CameraControls 
+          ref={controlsRef}
+          makeDefault
+          enabled={ENABLE_DEBUG_CONTROLS}
+        />
+      )}
+    </>
+  );
 };
 
 export default Camera;
