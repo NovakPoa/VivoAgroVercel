@@ -13,8 +13,20 @@ const Tablet = ({position, rotation = [0, 0, 0], scale = 1, animateTablet = fals
   const groupRef = useRef();
   const screenRef = useRef();
   const htmlGroupRef = useRef();
-  const { scene, animations } = useGLTFAnimations(MODEL_PATH, animateTablet);
-  
+  const { scene, playAll, stopAll } = useGLTFAnimations(MODEL_PATH, {
+    cloneScene: true,
+  });
+
+  useEffect(() => {
+    if (animateTablet) {
+      playAll({ 
+        loop: false, 
+      });
+    }
+    // Limpar na desmontagem
+    return () => stopAll();
+  }, [animateTablet]);
+    
   useEffect(() => {
     if (scene) {
       const screenNode = scene.getObjectByName("Screen") || scene.getObjectByName("Tela") || scene.children[0];
@@ -43,8 +55,6 @@ const Tablet = ({position, rotation = [0, 0, 0], scale = 1, animateTablet = fals
 
     }
   });
-
-
 
   return (
     <group ref={groupRef} position={position} rotation={rotation} scale={scale}>

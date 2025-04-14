@@ -1,96 +1,229 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
 
-export function useGLTFAnimations(modelPath, triggerAnimation = false, options = {}) {
+export function useGLTFAnimations(modelPath, options = {}) {
   const {
-    loop = false,
-    clampWhenFinished = true,
-    repetitions = Infinity,
-    onFinish = null
+    cloneScene = true
   } = options;
 
+  // Carrega o modelo 
   const { scene: originalScene, animations } = useGLTF(modelPath);
-  const [clonedScene] = useState(() => originalScene ? originalScene.clone() : null);
+  
+  // Clona a cena se necessário
+  const scene = useMemo(() => {
+    if (!originalScene) return null;
+    return cloneScene ? originalScene.clone() : originalScene;
+  }, [originalScene, cloneScene]);
+  
+  // Referências
   const mixerRef = useRef(null);
-  const [animationActions, setAnimationActions] = useState([]);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const actionsRef = useRef({});
+  const callbacksRef = useRef({});
+  const batchRef = useRef(new Map());
+  
+  // Estados minimizados para evitar re-renders
+  const [activeAnimations, setActiveAnimations] = useState(new Set());
 
+  // Setup inicial do mixer e ações
   useEffect(() => {
-    if (!clonedScene || !animations || animations.length === 0) return;
+    if (!scene || !animations || animations.length === 0) return;
     
-    const mixer = new THREE.AnimationMixer(clonedScene);
+    const mixer = new THREE.AnimationMixer(scene);
     mixerRef.current = mixer;
     
-    const actions = animations.map(clip => {
+    const actionMap = {};
+    animations.forEach(clip => {
       const action = mixer.clipAction(clip);
-      
-      if (!loop) {
-        action.setLoop(THREE.LoopOnce);
-        action.clampWhenFinished = clampWhenFinished;
-      } else {
-        action.setLoop(THREE.LoopRepeat, repetitions);
-      }
-      
-      return { name: clip.name, action, clip };
+      actionMap[clip.name] = action;
     });
     
-    if (!loop && onFinish) {
-      mixer.addEventListener('finished', (e) => {
-        onFinish({
-          ...e,
-          clipName: e.action._clip.name
-        });
-      });
-    }
+    actionsRef.current = actionMap;
     
-    setAnimationActions(actions);
-    
-    return () => {
-      if (mixer) {
-        mixer.stopAllAction();
-      }
-    };
-  }, [clonedScene, animations, loop, clampWhenFinished, repetitions, onFinish, modelPath]);
-
-  useEffect(() => {
-    if (triggerAnimation && animationActions.length > 0 && !isPlaying) {      
-      animationActions.forEach(({ action }) => {
-        action.reset();
-        action.play();
+    // Handler para eventos finished
+    const handleFinish = (e) => {
+      const clipName = e.action._clip.name;
+      
+      // Remover do set de animações ativas
+      setActiveAnimations(prev => {
+        const newSet = new Set(prev);
+        newSet.delete(clipName);
+        return newSet;
       });
       
-      setIsPlaying(true);
-    }
-  }, [triggerAnimation, animationActions, isPlaying, modelPath]);
+      // Verificar se é parte de um lote de playAll
+      if (batchRef.current.size > 0) {
+        // Só executa este código se houver lotes registrados
+        for (const [batchId, data] of batchRef.current.entries()) {
+          if (data.animations.has(clipName)) {
+            data.animations.delete(clipName);
+            
+            // Se foi a última animação do lote, chamar o callback
+            if (data.animations.size === 0 && data.onFinish) {
+              data.onFinish({ type: 'batchComplete', batchId });
+              batchRef.current.delete(batchId);
+            }
+            break;
+          }
+        }
+      }
+      
+      // Executar callback específico para esta animação (se existir)
+      const callback = callbacksRef.current[clipName];
+      if (callback) {
+        callback({ ...e, clipName });
+        delete callbacksRef.current[clipName];
+      }
+    };
+    
+    mixer.addEventListener('finished', handleFinish);
+    
+    return () => {
+      mixer.removeEventListener('finished', handleFinish);
+      mixer.stopAllAction();
+      mixer.uncacheRoot(scene);
+      batchRef.current.clear();
+    };
+  }, [scene, animations]);
 
-  useFrame((state, delta) => {
-    if (mixerRef.current) {
+  useFrame((_, delta) => {
+    if (mixerRef.current && activeAnimations.size > 0) {
       mixerRef.current.update(delta);
     }
   });
 
-  return {
-    scene: clonedScene,
-    animations: animationActions,
-    isPlaying,
-    controlAnimation: {
-      play: () => {
-        animationActions.forEach(({ action }) => action.play());
-        setIsPlaying(true);
-      },
-      stop: () => {
-        animationActions.forEach(({ action }) => action.stop());
-        setIsPlaying(false);
-      },
-      reset: () => {
-        animationActions.forEach(({ action }) => {
-          action.stop();
-          action.reset();
-        });
-        setIsPlaying(false);
-      }
+  const configAndPlayAction = useCallback((animName, action, options = {}) => {
+    const {
+      loop = false,
+      clampWhenFinished = true,
+      repetitions = Infinity,
+      onFinish = null,
+      batchId = null
+    } = options;
+    
+    if (loop) {
+      action.setLoop(THREE.LoopRepeat, repetitions);
+    } else {
+      action.setLoop(THREE.LoopOnce);
+      action.clampWhenFinished = clampWhenFinished;
     }
+    
+    if (onFinish && !batchId) {
+      callbacksRef.current[animName] = onFinish;
+    }
+
+    action.reset().play();
+    setActiveAnimations(prev => new Set([...prev, animName]));
+  }, []);
+  
+  // play - tocar animação específica
+  const play = useCallback((name, options = {}) => {
+    if (!mixerRef.current || !name) {
+      console.warn('É necessário fornecer um nome de animação para play()');
+      return;
+    }
+    
+    const action = actionsRef.current[name];
+    if (action) {
+      configAndPlayAction(name, action, options);
+    } else {
+      console.warn(`Animação "${name}" não encontrada no modelo.`);
+    }
+  }, [configAndPlayAction]);
+
+  // playAll - tocar todas as animações
+  const playAll = useCallback((options = {}) => {
+    if (!mixerRef.current) return;
+    
+    const { onFinish, ...restOptions } = options;
+    
+    // Criar um ID de lote único se tiver callback
+    const batchId = onFinish ? Date.now() + Math.random() : null;
+    const animationNames = Object.keys(actionsRef.current);
+    
+    if (batchId) {
+      // Registrar animações iniciadas neste lote
+      batchRef.current.set(batchId, { 
+        animations: new Set(animationNames),
+        onFinish 
+      });
+    }
+    
+    // Iniciar todas as animações com o mesmo ID de lote
+    Object.entries(actionsRef.current).forEach(([animName, action]) => {
+      configAndPlayAction(animName, action, { 
+        ...restOptions,
+        batchId
+      });
+    });
+  }, [configAndPlayAction]);
+
+  // stop - parar apenas uma animação específica
+  const stop = useCallback((name) => {
+    if (!mixerRef.current) {
+      return;
+    }
+    
+    if (!name) {
+      console.warn('É necessário fornecer um nome de animação para stop()');
+      return;
+    }
+    
+    const action = actionsRef.current[name];
+    if (action) {
+      action.stop();
+      
+      // Remover callbacks associados
+      if (callbacksRef.current[name]) {
+        delete callbacksRef.current[name];
+      }
+      
+      // Remover das animações ativas
+      setActiveAnimations(prev => {
+        const newSet = new Set(prev);
+        newSet.delete(name);
+        return newSet;
+      });
+      
+      // Remover de qualquer lote de playAll
+      for (const [batchId, data] of batchRef.current.entries()) {
+        if (data.animations.has(name)) {
+          data.animations.delete(name);
+        }
+      }
+    } else {
+      console.warn(`Tentativa de parar animação "${name}" que não existe.`);
+    }
+  }, []);
+
+  // stopAll - parar todas as animações
+  const stopAll = useCallback(() => {
+    if (!mixerRef.current) return;
+    
+    // Parar todas as animações
+    Object.values(actionsRef.current).forEach(action => {
+      action.stop();
+    });
+    
+    // Limpar todos os callbacks
+    callbacksRef.current = {};
+    
+    // Limpar todos os lotes
+    batchRef.current.clear();
+    
+    // Limpar animações ativas
+    setActiveAnimations(new Set());
+  }, []);
+
+  return {
+    scene,
+    isPlaying: activeAnimations.size > 0,
+    activeAnimations: [...activeAnimations],
+    availableAnimations: Object.keys(actionsRef.current),
+    play,   
+    playAll, 
+    stop,  
+    stopAll 
   };
 }

@@ -39,7 +39,9 @@ const findObjectMesh = (object) => {
 };
 
 const Trator = forwardRef(({ path, position, rotation, scale, onMeshFound, index }, ref) => {
-  const { scene, controlAnimation } = useGLTFAnimations(path, true, { loop: true });
+  const { scene, playAll, stopAll } = useGLTFAnimations(path, {
+    cloneScene: false,
+  });
   const meshRef = useRef(null);
   const frameCounter = useRef(0);
   const { currentProduct } = useProductsStore();
@@ -51,7 +53,14 @@ const Trator = forwardRef(({ path, position, rotation, scale, onMeshFound, index
       if (objectMesh) {
         meshRef.current = objectMesh;
       }
+
+      playAll({ 
+        loop: true, 
+      });      
     }
+
+    // Limpar na desmontagem
+    return () => stopAll(); 
   }, [scene]);
   
   useFrame(() => {
