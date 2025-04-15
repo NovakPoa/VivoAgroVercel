@@ -23,8 +23,6 @@ const IntroLogo = () => {
         onFinish: handleAnimationFinish
       });
     }
-    // Limpar na desmontagem
-    return () => stopAll();
   }, [startIntro]);
 
   // Se não tiver cena, não renderiza nada

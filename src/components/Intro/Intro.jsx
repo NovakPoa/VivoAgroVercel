@@ -3,11 +3,11 @@ import IntroCard from './UI/IntroCard';
 import useIntroStore from '../../stores/IntroStore';
 import useProductsStore from '../../stores/ProductsStore';
 
-const START_PRODUCTS_DELAY = 2000;
+const START_PRODUCTS_DELAY = 6000;
 
 const Intro = () => {
   const [showCard, setShowCard] = useState(false);
-  const { introVisibility, setStartIntro, setIntroVisibility } = useIntroStore();
+  const { introVisibility, setStartIntro, setIntroVisibility, setIntroNeonVisibility } = useIntroStore();
   const { setCurrentProduct, setStartProduct } = useProductsStore();
 
   useEffect(() => {
@@ -25,6 +25,7 @@ const Intro = () => {
 
   const onButtonClick = useCallback(() => {
     setIntroVisibility(true);
+    setIntroNeonVisibility(true);
     setStartIntro(true);
     setShowCard(false);
     timerToStartProduct();   
