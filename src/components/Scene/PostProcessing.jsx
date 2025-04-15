@@ -5,7 +5,7 @@ import { EffectComposer, SelectiveBloom } from '@react-three/postprocessing';
 
 const PostProcessing = () => {
   const { scene: threeScene } = useThree();
-  const [lights, setLights] = useState([]);
+/*   const [lights, setLights] = useState([]);
   const lightRef = useRef();
   
   // Criar uma luz dedicada para o bloom
@@ -32,18 +32,18 @@ const PostProcessing = () => {
   }, [threeScene]);
 
   // Não renderizar até termos luz
-  if (!lightRef.current) return null;
+  if (!lightRef.current) return null; */
 
   return (
     <EffectComposer multisampling={8}>
-      <SelectiveBloom 
+{/*       <SelectiveBloom 
         lights={[lightRef.current]}
         selectionLayer={1}
         intensity={2.5}
         luminanceThreshold={0.0}
         luminanceSmoothing={0.0}
         height={256}
-      />
+      /> */}
     </EffectComposer>
   );
 };
