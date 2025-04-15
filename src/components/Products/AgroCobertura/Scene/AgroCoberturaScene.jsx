@@ -22,19 +22,13 @@ const TABLET = {
 const AgroCoberturaScene = () => {
   const {
     enableObject,
-    showFirstInteraction,
-    isCurrentProduct,
     selectedPosition,
     placeholderPositions,
-    animateTablet
+    animateTablet,
+    shouldRenderPlaceholders,
+    placeholdersVisible,
+    handleAnimationOutEnded    
   } = useProductScene('agro-cobertura', INITIAL_PLACEHOLDER_POSITIONS, CAMERA_ROTATION);
-
-  const [placeholdersVisible, setPlaceholdersVisible] = useState(false);
-  const [shouldRenderPlaceholders, handleAnimationOutEnded] = useComponentVisibility(placeholdersVisible);
-
-  useEffect(() => {
-    setPlaceholdersVisible(showFirstInteraction && isCurrentProduct);
-  }, [showFirstInteraction, isCurrentProduct]);
 
   return (
     <group>

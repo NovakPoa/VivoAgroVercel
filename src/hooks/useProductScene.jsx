@@ -4,6 +4,7 @@ import useInteractionStore from '../stores/InteractionStore';
 import useSlotsStore from '../stores/SlotsStore';
 import useCameraStore from '../stores/CameraStore';
 import useDashboardStore from '../stores/DashboardStore';
+import useComponentVisibility from './useComponentVisibility';
 
 const useProductScene = (productId, initialPlaceholderPositions, cameraRotation) => {
   const { currentProduct, setLastProductName }  = useProductsStore();  
@@ -27,6 +28,14 @@ const useProductScene = (productId, initialPlaceholderPositions, cameraRotation)
   const [selectedPosition, setSelectedPosition] = useState(null);
   const [placeholderPositions, setPlaceholderPositions] = useState (initialPlaceholderPositions || []);
   const [animateTablet, setAnimateTablet] = useState(false);
+
+  // Placeholders Visibility
+  const [placeholdersVisible, setPlaceholdersVisible] = useState(false);
+  const [shouldRenderPlaceholders, handleAnimationOutEnded] = useComponentVisibility(placeholdersVisible);
+
+  useEffect(() => {
+    setPlaceholdersVisible(showFirstInteraction && isCurrentProduct);
+  }, [showFirstInteraction, isCurrentProduct]);
 
   // Referência para os timers
   const timersRef = useRef([]);
@@ -143,7 +152,10 @@ const useProductScene = (productId, initialPlaceholderPositions, cameraRotation)
     handleSlotClick,
     endSecondInteraction,
     placeholderPositions,
-    selectedIndex
+    selectedIndex,
+    placeholdersVisible,
+    shouldRenderPlaceholders,
+    handleAnimationOutEnded    
   };
 };
 

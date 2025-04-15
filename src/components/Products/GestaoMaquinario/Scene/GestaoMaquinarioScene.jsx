@@ -22,25 +22,20 @@ const TABLET = {
 const GestaoMaquinarioScene = () => {
   const {
     enableObject,
-    showFirstInteraction,
     isCurrentProduct,
     selectedPosition,
     animateTablet,
-    selectedIndex
+    selectedIndex,
+    shouldRenderPlaceholders,
+    placeholdersVisible,
+    handleAnimationOutEnded    
   } = useProductScene('gestao-maquinario', INITIAL_PLACEHOLDER_POSITIONS, CAMERA_ROTATION);
-  
-  const [placeholdersVisible, setPlaceholdersVisible] = useState(false);
-  const [shouldRenderPlaceholders, handleAnimationOutEnded] = useComponentVisibility(placeholdersVisible);
   
   const tratorPositionsRef = useRef(INITIAL_PLACEHOLDER_POSITIONS);
   const trackedTratorIndexRef = useRef(-1);
 
   const [dispositivoPosition, setDispositivoPosition] = useState(selectedPosition);
   const [placeholderPositions, setPlaceholderPositions] = useState(INITIAL_PLACEHOLDER_POSITIONS);
-
-  useEffect(() => {
-    setPlaceholdersVisible(showFirstInteraction && isCurrentProduct);
-  }, [showFirstInteraction, isCurrentProduct]);
 
   useEffect(() => {
     if (selectedIndex >= 0 && isCurrentProduct) {
