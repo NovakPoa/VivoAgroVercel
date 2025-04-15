@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Placeholders from '../../../Commons/Scene/Placeholders/Placeholders';
 import useProductScene from '../../../../hooks/useProductScene';
 import useComponentVisibility from '../../../../hooks/useComponentVisibility';
@@ -8,10 +8,10 @@ import Brinco from '../../../Scene/Objects/Experiencia/Products/GestaoPecuaria/B
 import Tablet from '../../../Scene/Objects/Experiencia/Products/Tablet';
 
 const INITIAL_PLACEHOLDER_POSITIONS = [
-  [-20, 0, 10],
   [5, 0, 10],
+  [-20, 0, 10],
 ];
-const INTERACTION_OBJECT_POSITION = [0, 1.2, -0.5];
+const INTERACTION_OBJECT_POSITION = [0, 1.2, -0.7];
 const CAMERA_ROTATION = [0, 0, 0];
 const TABLET = {
   position: [-0.1, 1.2, -0.8],
@@ -25,20 +25,36 @@ const GestaoPecuariaScene = () => {
     showFirstInteraction,
     isCurrentProduct,
     selectedPosition,
-    placeholderPositions,
-    setPlaceholderPositions,
-    animateTablet
+    animateTablet,
+    selectedIndex
   } = useProductScene('gestao-pecuaria', INITIAL_PLACEHOLDER_POSITIONS, CAMERA_ROTATION);
   
   const [placeholdersVisible, setPlaceholdersVisible] = useState(false);
   const [shouldRenderPlaceholders, handleAnimationOutEnded] = useComponentVisibility(placeholdersVisible);
 
+  const vacaPositionsRef = useRef(INITIAL_PLACEHOLDER_POSITIONS);
+  const trackedVacaIndexRef = useRef(-1);
+
+  const [dispositivoPosition, setDispositivoPosition] = useState(selectedPosition);
+  const [placeholderPositions, setPlaceholderPositions] = useState(INITIAL_PLACEHOLDER_POSITIONS);
+
   useEffect(() => {
     setPlaceholdersVisible(showFirstInteraction && isCurrentProduct);
   }, [showFirstInteraction, isCurrentProduct]);
 
+  useEffect(() => {
+    if (selectedIndex >= 0 && isCurrentProduct) {
+      trackedVacaIndexRef.current = selectedIndex;
+      if (vacaPositionsRef.current[selectedIndex]) {
+        setDispositivoPosition(vacaPositionsRef.current[selectedIndex]);
+      }
+    }
+  }, [selectedIndex, isCurrentProduct]);
+
   const handleObjectPositionUpdate = (position, vacaIndex) => {
     if (position) {
+      vacaPositionsRef.current[vacaIndex] = [position.x, position.y, position.z]; 
+      // Atualizar os placeholders
       setPlaceholderPositions(prevPositions => {
         const newPositions = [...prevPositions];
         if (vacaIndex >= 0 && vacaIndex < newPositions.length) {
@@ -46,6 +62,10 @@ const GestaoPecuariaScene = () => {
         }
         return newPositions;
       });
+      // Atualizar a posição do dispositivo
+      if (enableObject && trackedVacaIndexRef.current === vacaIndex) {
+        setDispositivoPosition([position.x, position.y, position.z]);
+      }
     }
   };
 
@@ -54,9 +74,12 @@ const GestaoPecuariaScene = () => {
       <DispositivosPecuaria />
       <Vacas onObjectPositionUpdate={handleObjectPositionUpdate} />
 
-      {enableObject && selectedPosition && (
-        <Brinco position={selectedPosition} />
-      )} 
+      {enableObject && dispositivoPosition && trackedVacaIndexRef.current >= 0 && (
+        <Brinco 
+          position={dispositivoPosition} 
+          scale={0.5}
+        />
+      )}
 
       {shouldRenderPlaceholders && (
         <>
@@ -65,7 +88,7 @@ const GestaoPecuariaScene = () => {
             isVisible={placeholdersVisible}
             onAnimationOutEnded={handleAnimationOutEnded}
           />
-          <Brinco position={INTERACTION_OBJECT_POSITION} scale={0.5} />
+          <Brinco position={INTERACTION_OBJECT_POSITION} scale={0.2} />
         </>
       )}
       

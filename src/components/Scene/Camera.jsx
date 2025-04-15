@@ -8,10 +8,10 @@ const INITIAL_CAMERA_POSITION = [0, 1.7, 0];
 const INITIAL_ROTATION = [0, -90, 0];
 const ENABLE_DEBUG_CONTROLS = false;
 
-const BASE_FOV = 80;
+const BASE_FOV = 700;
 const REFERENCE_ASPECT = 16/9;
-const FOV_ADJUSTMENT_FACTOR = 0.5; 
-const MIN_FOV = 45;
+const FOV_ADJUSTMENT_FACTOR = 0.4; 
+const MIN_FOV = 50;
 const MAX_FOV = 80;
 
 const Camera = () => {
