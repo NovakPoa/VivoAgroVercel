@@ -8,6 +8,7 @@ import Products from '../Products/Products';
 import Dashboard from '../Dashboard/Dashboard';
 import Experiencia from './Objects/Experiencia';
 import Ambiente from './Objects/Ambiente';
+import PostProcessing from './PostProcessing';
 
 const SceneContent = () => {
  
@@ -19,6 +20,7 @@ const SceneContent = () => {
         <Background />
         <Ambiente />
         <Experiencia />
+        <PostProcessing /> 
       </Canvas>
       <Intro />
       <Products />  

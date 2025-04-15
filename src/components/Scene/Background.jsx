@@ -1,12 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useThree } from '@react-three/fiber';
 import * as THREE from 'three';
-import useAssetsStore from '../../stores/AssetsStore';;
+import useAssetsStore from '../../stores/AssetsStore';
 
 const Background = () => {
-  const { scene } = useThree();
-  const { getTexture, isLoading } = useAssetsStore();  
-
+  const { scene, camera } = useThree();
+  const { getTexture, isLoading } = useAssetsStore();
+  const skyboxRef = useRef();
+  
   useEffect(() => {
     if (!isLoading) {
       const px = getTexture('/skybox/px.png');
@@ -17,22 +18,36 @@ const Background = () => {
       const nz = getTexture('/skybox/nz.png');
       
       if (px && nx && py && ny && pz && nz) {
-        const cubeTexture = new THREE.CubeTexture();
+        scene.background = null;
         
-        cubeTexture.images = [
-          px.image, nx.image, py.image, 
-          ny.image, pz.image, nz.image
+        const materials = [
+          new THREE.MeshBasicMaterial({ map: px, side: THREE.BackSide }),
+          new THREE.MeshBasicMaterial({ map: nx, side: THREE.BackSide }),
+          new THREE.MeshBasicMaterial({ map: py, side: THREE.BackSide }),
+          new THREE.MeshBasicMaterial({ map: ny, side: THREE.BackSide }),
+          new THREE.MeshBasicMaterial({ map: pz, side: THREE.BackSide }),
+          new THREE.MeshBasicMaterial({ map: nz, side: THREE.BackSide })
         ];
         
-        cubeTexture.needsUpdate = true;
+        const skyboxGeo = new THREE.BoxGeometry(1000, 1000, 1000);
+        const skybox = new THREE.Mesh(skyboxGeo, materials);
         
-        scene.background = cubeTexture;
-        scene.backgroundIntensity = 1.05;
-        scene.backgroundBlurriness = 0;
-      
+        skybox.layers.set(0);
+        
+        scene.add(skybox);
+        
+        skyboxRef.current = skybox;
       }
     }
-  }, [isLoading]);
+    
+    return () => {
+      if (skyboxRef.current) {
+        scene.remove(skyboxRef.current);
+        skyboxRef.current.geometry.dispose();
+        skyboxRef.current.material.forEach(material => material.dispose());
+      }
+    };
+  }, [isLoading, scene]);
 
   return null;
 };

@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import useAssetsStore from '../../stores/AssetsStore';
 import './LoadingScreen.css';
+import { EffectComposer, Bloom } from '@react-three/postprocessing';
+import { Canvas } from '@react-three/fiber';
 
 const LoadingScreen = () => {
   const { isLoading, loadingProgress, loadAllAssets } = useAssetsStore();
@@ -57,6 +59,13 @@ const LoadingScreen = () => {
           ></div>
         </div>
         <p className="loading-percentage">{Math.round(displayProgress)}%</p>
+      </div>
+      <div style={{ position: 'absolute', width: 1, height: 1, overflow: 'hidden', opacity: 0 }}>
+        <Canvas>
+          <EffectComposer>
+            <Bloom intensity={0.001} luminanceThreshold={1} height={64} />
+          </EffectComposer>
+        </Canvas>
       </div>
     </div>
   );

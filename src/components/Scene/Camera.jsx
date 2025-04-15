@@ -117,6 +117,12 @@ const Camera = () => {
     }
   }, [cameraAnimate, cameraTargetPoint, animateCamera]);
 
+  useEffect(() => {
+    if (cameraRef.current) {
+      cameraRef.current.layers.enable(1);
+    }
+  }, []);
+
   return (
     <>
       <PerspectiveCamera
