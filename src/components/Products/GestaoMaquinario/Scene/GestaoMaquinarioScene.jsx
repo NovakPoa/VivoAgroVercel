@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Placeholders from '../../../Commons/Scene/Placeholders/Placeholders';
 import useProductScene from '../../../../hooks/useProductScene';
-import useComponentVisibility from '../../../../hooks/useComponentVisibility';
 import Tratores from '../../../Scene/Objects/Experiencia/Products/GestaoMaquinario/Tratores';
 import DispositivoMaquinario from '../../../Scene/Objects/Experiencia/Products/GestaoMaquinario/DispositivoMaquinario';
 import Tablet from '../../../Scene/Objects/Experiencia/Products/Tablet';

@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Placeholders from '../../../Commons/Scene/Placeholders/Placeholders';
 import useProductScene from '../../../../hooks/useProductScene';
-import useComponentVisibility from '../../../../hooks/useComponentVisibility';
 import Estacao from '../../../Scene/Objects/Experiencia/Products/ClimaInteligente/Estacao';
 import Tablet from '../../../Scene/Objects/Experiencia/Products/Tablet';
 

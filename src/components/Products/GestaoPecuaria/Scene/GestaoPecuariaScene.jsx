@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Placeholders from '../../../Commons/Scene/Placeholders/Placeholders';
 import useProductScene from '../../../../hooks/useProductScene';
-import useComponentVisibility from '../../../../hooks/useComponentVisibility';
 import Vacas from '../../../Scene/Objects/Experiencia/Products/GestaoPecuaria/Vacas';
 import DispositivosPecuaria from '../../../Scene/Objects/Experiencia/Products/GestaoPecuaria/DispositivosPecuaria';
 import Brinco from '../../../Scene/Objects/Experiencia/Products/GestaoPecuaria/Brinco';
