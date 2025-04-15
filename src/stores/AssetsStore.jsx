@@ -23,6 +23,7 @@ const assets = {
     
     // Intro
     '/models/intro/LogoVivoAgro.glb',
+    '/models/Intro/IntroNeon.glb',
 
     // Products
     //  AgroCobertura
@@ -39,6 +40,7 @@ const assets = {
     '/models/products/GestaoPecuaria/VacaNelore.glb',
     //  ClimaInteligente
     '/models/products/ClimaInteligente/Estacao.glb',
+
   ],
   textures: [
     // Skybox
