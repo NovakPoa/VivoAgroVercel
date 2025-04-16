@@ -54,9 +54,6 @@ const Trator = forwardRef(({ path, position, rotation, scale, onMeshFound, index
         loop: true, 
       });      
     }
-
-    // Limpar na desmontagem
-    return () => stopAll(); 
   }, [scene]);
   
   useFrame(() => {

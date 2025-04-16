@@ -23,8 +23,6 @@ const Tablet = ({position, rotation = [0, 0, 0], scale = 1, animateTablet = fals
         loop: false, 
       });
     }
-    // Limpar na desmontagem
-    return () => stopAll();
   }, [animateTablet]);
     
   useEffect(() => {
