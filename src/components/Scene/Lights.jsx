@@ -4,14 +4,14 @@ import { useHelper } from '@react-three/drei';
 import * as THREE from 'three';
 
 const defaultLightSettings = {
-  ambientIntensity: 1.0,
+  ambientIntensity: 0.3, 
   ambientColor: '#ffffff',
-  dirIntensity: 1.0,
-  dirColor: '#ffffff',
-  dirX: 0,
-  dirY: 0,
-  dirZ: 5,
-  dirCastShadow: false,
+  dirIntensity: 3.0, 
+  dirColor: '#FEBF71', 
+  dirX: 20,
+  dirY: 20,
+  dirZ: 20,
+  dirCastShadow: true, 
   showHelper: false
 };
 

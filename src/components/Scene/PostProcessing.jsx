@@ -11,18 +11,18 @@ import * as THREE from 'three';
 import { useControls, folder } from 'leva';
 
 const defaultSettings = {
-  exposure: 1.0,
-  toneMapping: THREE.CineonToneMapping,
-  middleGrey: 0.2,
+  exposure: 1.1,
+  toneMapping: THREE.CineonToneMapping, 
+  middleGrey: 0.6,
   maxLuminance: 16.0,
-  bloomEnabled: false,
-  bloomIntensity: 1.5,
+  bloomEnabled: false, 
+  bloomIntensity: 0.5,
   bloomThreshold: 0.85,
   bloomSmoothing: 0.4,
   brightness: 0.05,
   contrast: 0.1,
   hue: 0,
-  saturation: 0
+  saturation: 0.1 
 };
 
 const PostProcessing = () => {

@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { TextureLoader } from 'three';
 import { useGLTF } from '@react-three/drei';
+import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader';
 
 const assets = {
   models: [
@@ -44,12 +45,15 @@ const assets = {
   ],
   textures: [
     // Skybox
-    '/skybox/px.png',
-    '/skybox/nx.png',
-    '/skybox/py.png',
-    '/skybox/ny.png',
-    '/skybox/pz.png',
-    '/skybox/nz.png',
+    '/textures/skybox/px.png',
+    '/textures/skybox/nx.png',
+    '/textures/skybox/py.png',
+    '/textures/skybox/ny.png',
+    '/textures/skybox/pz.png',
+    '/textures/skybox/nz.png',
+
+    // HDR
+    '/textures/environment.hdr',
   ],   
   images: [
     // Product images
@@ -73,6 +77,7 @@ const useAssetsStore = create((set, get) => ({
   loadAllAssets: () => {
     const { incrementLoadedAssets } = get();
     const textureLoader = new TextureLoader();
+    const rgbeLoader = new RGBELoader();
 
     // Carregar modelos
     assets.models.forEach(modelPath => {
@@ -82,20 +87,38 @@ const useAssetsStore = create((set, get) => ({
 
     // Carregar texturas
     assets.textures.forEach(texturePath => {
-      textureLoader.load(
-        texturePath,
-        (loadedTexture) => {
-          get().textureCache[texturePath] = loadedTexture;
-          incrementLoadedAssets();
-        },
-        (progress) => {
-          // 
-        },
-        (error) => {
-          console.error(`Erro carregando 3D textura ${texturePath}:`, error);
-          incrementLoadedAssets();
-        }
-      );
+      // Verificar se é um arquivo HDR
+      if (texturePath.endsWith('.hdr')) {
+        rgbeLoader.load(
+          texturePath,
+          (loadedTexture) => {
+            get().textureCache[texturePath] = loadedTexture;
+            incrementLoadedAssets();
+          },
+          (progress) => {
+            // 
+          },
+          (error) => {
+            console.error(`Erro carregando HDR ${texturePath}:`, error);
+            incrementLoadedAssets();
+          }
+        );
+      } else {
+        textureLoader.load(
+          texturePath,
+          (loadedTexture) => {
+            get().textureCache[texturePath] = loadedTexture;
+            incrementLoadedAssets();
+          },
+          (progress) => {
+            // 
+          },
+          (error) => {
+            console.error(`Erro carregando textura ${texturePath}:`, error);
+            incrementLoadedAssets();
+          }
+        );
+      }
     });
 
     // Carregar images 

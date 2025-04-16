@@ -10,12 +10,12 @@ const Background = () => {
   
   useEffect(() => {
     if (!isLoading) {
-      const px = getTexture('/skybox/px.png');
-      const nx = getTexture('/skybox/nx.png');
-      const py = getTexture('/skybox/py.png');
-      const ny = getTexture('/skybox/ny.png');
-      const pz = getTexture('/skybox/pz.png');
-      const nz = getTexture('/skybox/nz.png');
+      const px = getTexture('/textures/skybox/px.png');
+      const nx = getTexture('/textures/skybox/nx.png');
+      const py = getTexture('/textures/skybox/py.png');
+      const ny = getTexture('/textures/skybox/ny.png');
+      const pz = getTexture('/textures/skybox/pz.png');
+      const nz = getTexture('/textures/skybox/nz.png');
       
       if (px && nx && py && ny && pz && nz) {
         scene.background = null;

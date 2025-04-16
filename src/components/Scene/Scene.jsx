@@ -9,6 +9,7 @@ import Dashboard from '../Dashboard/Dashboard';
 import Experiencia from './Objects/Experiencia';
 import Ambiente from './Objects/Ambiente';
 import PostProcessing from './PostProcessing';
+import Visuals from './Visuals';
 
 const SceneContent = () => {
  
@@ -21,6 +22,7 @@ const SceneContent = () => {
         <Ambiente />
         <Experiencia />
         <PostProcessing /> 
+        <Visuals />
       </Canvas>
       <Intro />
       <Products />  
