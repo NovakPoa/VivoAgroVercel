@@ -1,7 +1,5 @@
 import React, { useCallback } from 'react';
 import './ImageButton.css';
-import { RiLock2Fill } from "react-icons/ri";
-import { FaCheck } from "react-icons/fa6";
 import PreloadedImage from '../PreloadedImage/PreloadedImage';
 
 let isAnyImageButtonClicked = false;
@@ -30,13 +28,12 @@ const ImageButton = ({ imageUrl, title, status, onClick }) => {
         />
       </div>
       
-      {status === 'locked' && (
-        <div className="overlay locked-overlay">
-          <RiLock2Fill color="#fff" className="icon center-icon" />
-        </div>
+      {status === 'unlocked' && (
+        <div className="overlay unlocked-overlay"></div>
       )}
+
       {status === 'completed' && (
-        <FaCheck color="#007D1E" className="icon check-icon" />
+        <img src="./ui/icons/check-icon.png" alt="Check Icon" className="icon check-icon" />
       )}
       <div className="title">{title}</div>
     </div>

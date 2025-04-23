@@ -3,7 +3,7 @@ import './Button.css';
 
 let isAnyButtonClicked = false;
 
-const Button = ({ text, onClick, showIcon = true, iconUrl = "./icons/vivo-icon.png", type = 'primary' }) => {
+const Button = ({ text, onClick, showIcon = true, iconUrl = "./ui/icons/vivo-icon.png", type = 'primary' }) => {
   const buttonClass = type === 'primary' ? 'primary-button' : 'secondary-button';
 
   const handleClick = useCallback((e) => {
