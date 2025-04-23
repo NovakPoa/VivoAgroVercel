@@ -12,12 +12,12 @@ const AgroCoberturaCard = ({ isVisible, onContinueClick, onSkipClick }) => {
   return (
     <div className="card-container">
       <Card 
-        title="Contratando Agro Cobertura Móvel" 
-        description="Conectividade é o primeiro passo para sua fazenda tecnológica, saiba mais sobre nossa solução:" 
+        title="Agro Cobertura" 
+        description="Conectividade é o primeiro passo para tornar sua fazenda tecnológica." 
         showImage={true}
         imageUrl={imageUrl}
         firstButton={true}
-        firstButtonText="Contratar"
+        firstButtonText="Saiba mais"
         firstButtonOnClick={onContinueClick}
         secondButton={true}
         secondButtonText="Já possuo conectividade"

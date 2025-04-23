@@ -12,12 +12,12 @@ const GestaoPecuariaCard = ({ isVisible, onContinueClick, onSkipClick }) => {
   return (
     <div className="card-container">
       <Card 
-        title="Contratando Gestão Pecuária" 
-        description="Analise a performance individual dos animais e maximize a produtividade do seu rebanho." 
+        title="Gestão Pecuária" 
+        description="Monitore seu rebanho remotamente e digitalize as principais atividades do manejo." 
         showImage={true}
         imageUrl={imageUrl}
         firstButton={true}
-        firstButtonText="Contratar"
+        firstButtonText="Saiba mais"
         firstButtonOnClick={onContinueClick}
         secondButton={true}
         secondButtonText="Não possuo gado"

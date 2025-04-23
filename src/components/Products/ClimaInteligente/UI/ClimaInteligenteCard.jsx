@@ -12,12 +12,12 @@ const ClimaInteligenteCard = ({ isVisible, onContinueClick, onSkipClick }) => {
   return (
     <div className="card-container">
       <Card 
-        title="Contratando Clima Inteligente" 
-        description="Previsões precisas sobre seu microclima, ajudando você a otimizar seu manejo, irrigação e produção." 
+        title="Clima Inteligente" 
+        description="Receba previsões climáticas precisas e otimize seu manejo, irrigação e produção." 
         showImage={true}
         imageUrl={imageUrl}
         firstButton={true}
-        firstButtonText="Contratar"
+        firstButtonText="Saiba mais"
         firstButtonOnClick={onContinueClick}
         secondButton={true}
         secondButtonText="Já possuo análise de microclima"

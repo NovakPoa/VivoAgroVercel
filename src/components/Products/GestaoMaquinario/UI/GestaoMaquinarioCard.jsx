@@ -12,12 +12,12 @@ const GestaoMaquinarioCard = ({ isVisible, onContinueClick, onSkipClick }) => {
   return (
     <div className="card-container">
       <Card 
-        title="Contratando Gestão de Maquinário" 
-        description="Monitore e controle toda sua frota em tempo real, aumentando a produtividade e reduzindo custos." 
+        title="Gestão de Maquinário" 
+        description="Acompanhe a performance da sua frota em tempo real em uma única plataforma." 
         showImage={true}
         imageUrl={imageUrl}
         firstButton={true}
-        firstButtonText="Contratar"
+        firstButtonText="Saiba mais"
         firstButtonOnClick={onContinueClick}
         secondButton={true}
         secondButtonText="Não possuo maquinário"

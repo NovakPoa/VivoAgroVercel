@@ -10,8 +10,8 @@ const IntroCard = ({ isVisible, onButtonClick }) => {
   return (
     <div className="card-container">
       <Card 
-        title="Bem-vindo à Imersão Vivo Agro" 
-        description="Embarque nessa experiência para descobrir o que a tecnologia pode fazer pela sua fazenda." 
+        title="Bem-vindo à experiência Vivo Agro" 
+        description="Descubra como as nossas soluções de tecnologia podem ajudar na sua fazenda." 
         showImage={false}
         firstButton={true}
         firstButtonText="Começar"
