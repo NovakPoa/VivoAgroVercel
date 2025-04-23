@@ -1,5 +1,6 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import DashboardCard from './UI/DashboardCard';
+import ResetConfirmation from './UI/ResetConfirmation';
 import useDashboardStore from '../../stores/DashboardStore';
 import useProductsStore from '../../stores/ProductsStore';
 import useInteractionStore from '../../stores/InteractionStore';
@@ -12,10 +13,26 @@ import { ANIMATION_DURATIONS } from '../../config/animationConfig';
 const Dashboard = () => {
   const { showDashboard, setShowDashboard } = useDashboardStore();
   const [shouldRender, handleAnimationOutEnded] = useComponentVisibility(showDashboard);
-  
-  const handleResetExperience = useCallback(() => {
- 
+  const [showResetConfirmation, setShowResetConfirmation] = useState(false);
+
+  const showConfirmationCard = useCallback(() => {
     setShowDashboard(false);
+    setShowResetConfirmation(true);
+
+  }, []);
+
+  const cancelResetButtonClicked = useCallback(() => {
+    setShowResetConfirmation(false);
+    setShowDashboard(true); 
+  }, []);
+
+  const confirmResetButtonClicked = useCallback(() => {
+ 
+    setTimeout(() => {
+      window.location.reload();
+    }, 50);
+
+/*     setShowDashboard(false);
     
     useProductsStore.setState({
       startProduct: false,
@@ -58,18 +75,27 @@ const Dashboard = () => {
         startIntro: false
       });
       useCameraStore.getState().resetCameraPosition();
-    }, ANIMATION_DURATIONS.DASHBOARD.SCALE_OUT);
+    }, ANIMATION_DURATIONS.DASHBOARD.SCALE_OUT); */
 
-  }, [setShowDashboard]);
+  }, []);
 
-  if (!shouldRender) return null;
+  //if (!shouldRender) return null;
 
   return (
-    <DashboardCard 
-      isVisible={showDashboard} 
-      onAnimationOutEnded={handleAnimationOutEnded}
-      onResetClick={handleResetExperience}
-    />
+    <>
+      {shouldRender && 
+        <DashboardCard 
+          isVisible={showDashboard} 
+          onAnimationOutEnded={handleAnimationOutEnded}
+          onResetClick={showConfirmationCard}
+        />
+      }
+      <ResetConfirmation
+        isVisible={showResetConfirmation}
+        onConfirmButtonClick={confirmResetButtonClicked}
+        onCancelButtonClick={cancelResetButtonClicked}
+      />
+    </>
   );
 };
 

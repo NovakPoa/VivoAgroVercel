@@ -10,6 +10,7 @@ const Card = ({
   showImage = true, 
   imageUrl, 
   firstButton = true, 
+  firstButtonShowIcon = true,
   secondButton = true, 
   firstButtonText, 
   secondButtonText, 
@@ -58,7 +59,7 @@ const Card = ({
         {(firstButton || secondButton) && (
           <div className="card-buttons">
             {firstButton && (
-              <Button text={firstButtonText} onClick={firstButtonOnClick} type="primary" />
+              <Button text={firstButtonText} onClick={firstButtonOnClick} showIcon={firstButtonShowIcon} type="primary" />
             )}
             {secondButton && (
               <Button text={secondButtonText} onClick={secondButtonOnClick} showIcon={false} type="secondary" />
