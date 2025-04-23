@@ -1,20 +1,16 @@
-import React, { memo, useState, useCallback } from 'react';
+import React, { memo, useCallback } from 'react';
+import useButtonStore from '../../../../stores/ButtonStore';
 import './Button.css';
-
-let isAnyButtonClicked = false;
 
 const Button = ({ text, onClick, showIcon = true, iconUrl = "./ui/icons/vivo-icon.png", type = 'primary' }) => {
   const buttonClass = type === 'primary' ? 'primary-button' : 'secondary-button';
+  const { isAnyButtonClicked, clickButton } = useButtonStore();
 
   const handleClick = useCallback((e) => {
     if (isAnyButtonClicked) return;
-    isAnyButtonClicked = true;
+    clickButton();
     onClick && onClick(e);
-    // Reativa o botão após um período
-    setTimeout(() => {
-      isAnyButtonClicked = false;
-    }, 600);
-  }, [onClick]);
+  }, [onClick, isAnyButtonClicked, clickButton]);
 
   return (
     <button 

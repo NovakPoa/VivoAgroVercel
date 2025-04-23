@@ -3,6 +3,7 @@ import useProductsStore from '../stores/ProductsStore';
 import useInteractionStore from '../stores/InteractionStore';
 import useCameraStore from '../stores/CameraStore';
 import useDashboardStore from '../stores/DashboardStore';
+import useEndStore from '../stores/EndStore';
 import { ANIMATION_DURATIONS } from '../config/animationConfig';
 
 export default function useProductNavigation() {
@@ -17,6 +18,7 @@ export default function useProductNavigation() {
   const { setShowInteraction } = useInteractionStore();
   const { setShowDashboard } = useDashboardStore();
   const { animateToProduct } = useCameraStore();
+  const { setShowEndCard } = useEndStore();
 
   const timerRef = useRef(null);
 
@@ -27,9 +29,15 @@ export default function useProductNavigation() {
 
     if (timerRef.current) clearTimeout(timerRef.current);
     timerRef.current = setTimeout(() => {
-      setShowDashboard(true);
-      timerRef.current = null;
-    }, ANIMATION_DURATIONS.CARD.SCALE_OUT); 
+      if (currentProduct === 'clima-inteligente') {
+        setShowEndCard(true);
+      } else 
+      {
+        setShowDashboard(true);
+        timerRef.current = null;
+      }
+    }, ANIMATION_DURATIONS.CARD.SCALE_OUT);
+     
   }, [ currentProduct ]);
 
   const startProductHandler = useCallback(() => {

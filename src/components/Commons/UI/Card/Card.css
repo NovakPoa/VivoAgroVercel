@@ -39,6 +39,7 @@
   margin: 12px 0;
   color: #660099; 
   font-family: 'Roboto', sans-serif;
+  white-space: pre-line;
 }
 
 .card-description {

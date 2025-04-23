@@ -4,6 +4,7 @@ import useInteractionStore from '../stores/InteractionStore';
 import useSlotsStore from '../stores/SlotsStore';
 import useCameraStore from '../stores/CameraStore';
 import useDashboardStore from '../stores/DashboardStore';
+import useEndStore from '../stores/EndStore';
 import useComponentVisibility from './useComponentVisibility';
 
 const useProductScene = (productId, initialPlaceholderPositions, cameraRotation) => {
@@ -22,6 +23,7 @@ const useProductScene = (productId, initialPlaceholderPositions, cameraRotation)
   const { setShowDashboard } = useDashboardStore();
   const { setSlotsLength, setShowSlots, setSelectedIndex, selectedIndex } = useSlotsStore();
   const { registerProductRotation } = useCameraStore();
+  const { setShowEndCard } = useEndStore();
 
   const [enableObject, setEnableObject] = useState(false);
   const [isCurrentProduct, setIsCurrentProduct] = useState(false);
@@ -107,7 +109,12 @@ const useProductScene = (productId, initialPlaceholderPositions, cameraRotation)
     useProductsStore.getState().completeProduct(currentProduct);
     setLastProductName(currentProduct);
     setShowInteraction(false);
-    setShowDashboard(true);
+
+    if (currentProduct === 'clima-inteligente') {
+      setShowEndCard(true);
+    } else {
+      setShowDashboard(true);
+    }    
   }, [ currentProduct ]);
 
   // Limpar timers quando o componente é desmontado

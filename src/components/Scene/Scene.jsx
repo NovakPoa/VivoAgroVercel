@@ -4,6 +4,7 @@ import Background from './Background';
 import Camera from './Camera';
 import Lights from './Lights';
 import Intro from '../Intro/Intro';
+import End from '../End/End';
 import Products from '../Products/Products';
 import Dashboard from '../Dashboard/Dashboard';
 import Experiencia from './Objects/Experiencia';
@@ -27,6 +28,7 @@ const SceneContent = () => {
       <Intro />
       <Products />  
       <Dashboard />
+      <End />
     </div>
   );
 };
