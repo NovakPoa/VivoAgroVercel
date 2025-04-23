@@ -5,8 +5,8 @@ const GestaoMaquinarioInstruction2 = ({ isVisible }) => {
   return (
     <InstructionWithTimer 
       isVisible={isVisible}
-      title="Ligue o sensor inteligente"
-      description="Pressione o botão para conectar o sensor do seu maquinário e desbloquear os dados de uso."
+      title="Estamos conectando seus sensores"
+      description="Você logo poderá acessar os dados da sua frota"
       duration={4}
     />
   );

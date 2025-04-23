@@ -5,8 +5,8 @@ const GestaoPecuariaInstruction2 = ({ isVisible }) => {
   return (
     <InstructionWithTimer 
       isVisible={isVisible}
-      title="Ative o dispositivo" 
-      description="Pressione o botão para conectar o sensor do seu gado e desbloquear os dados de uso." 
+      title="Estamos ativando o monitoramento" 
+      description="Você logo poderá acompanhar os dados de saúde de seus animais" 
       duration={4}
     />
   );

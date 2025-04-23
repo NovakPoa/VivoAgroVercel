@@ -5,8 +5,8 @@ const AgroCoberturaInstruction2 = ({ isVisible }) => {
   return (
     <InstructionWithTimer 
       isVisible={isVisible}
-      title="Ative o sinal da antena" 
-      description="Pressione o botão para ativar o sinal de sua antena."
+      title="Estamos ativando sua antena" 
+      description="Você logo poderá acessar novas tecnologias para sua fazenda"
       duration={4}
     />
   );

@@ -10,8 +10,8 @@ const GestaoPecuariaInstruction1 = ({ isVisible }) => {
   return (
     <div className="instruction-container">
       <Instruction 
-        title="Aplique o dispositivo no gado" 
-        description="Arraste o dispositivo abaixo para começar a receber os dados da Gestão Pecuária." 
+        title="Aplique o brinco no gado" 
+        description="Escolha onde aplicar" 
         isVisible={isVisible}   
         onAnimationOutEnded={handleAnimationOutEnded}     
       />

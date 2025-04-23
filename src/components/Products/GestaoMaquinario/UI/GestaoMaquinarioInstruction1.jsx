@@ -10,8 +10,8 @@ const GestaoMaquinarioInstruction1 = ({ isVisible }) => {
   return (
     <div className="instruction-container">
       <Instruction 
-        title="Acople o sensor inteligente" 
-        description="Arraste o sensor abaixo para escolher onde integrar o sensor para Gestão de Maquinário." 
+        title="Instale o dispositivo para conectar sua frota" 
+        description="Escolha onde instalar" 
         isVisible={isVisible}  
         onAnimationOutEnded={handleAnimationOutEnded}      
       />

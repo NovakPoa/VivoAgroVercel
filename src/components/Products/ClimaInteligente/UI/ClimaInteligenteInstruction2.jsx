@@ -5,8 +5,8 @@ const ClimaInteligenteInstruction2 = ({ isVisible }) => {
   return (
     <InstructionWithTimer 
       isVisible={isVisible}
-      title="Ative sua estação meteorológica" 
-      description="Pressione o botão para ativar sua estação e começar a receber dados do seu microclima." 
+      title="Estamos iniciando sua estação meteorológica" 
+      description="Você logo terá acesso aos dados climáticos" 
       duration={4}
     />
   );
