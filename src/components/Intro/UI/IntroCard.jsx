@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import Card from '../../Commons/UI/Card/Card';
 import useComponentVisibility from '../../../hooks/useComponentVisibility';
 
@@ -19,6 +19,7 @@ const IntroCard = ({ isVisible, onButtonClick }) => {
         secondButton={false}
         isVisible={isVisible} 
         onAnimationOutEnded={handleAnimationOutEnded}  
+        position="center"
       />
     </div>
   );

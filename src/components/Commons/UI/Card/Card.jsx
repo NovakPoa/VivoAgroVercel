@@ -17,7 +17,8 @@ const Card = ({
   firstButtonOnClick, 
   secondButtonOnClick,
   isVisible = true,
-  onAnimationOutEnded
+  onAnimationOutEnded,
+  position = 'center'
 }) => {
   const [animState, setAnimState] = useState('initial'); // 'initial', 'visible', 'hiding'
   
@@ -46,8 +47,10 @@ const Card = ({
     animState === 'visible' ? 'visible' : 
     'hiding';
 
+  const positionClass = `card-position-${position}`;
+
   return (
-    <div className={`card ${animClass}`} style={style} >
+    <div className={`card ${animClass} ${positionClass}`} style={style}>
       {showImage && (
         <div className="card-image-wrapper">
           <PreloadedImage src={imageUrl} alt={title} />

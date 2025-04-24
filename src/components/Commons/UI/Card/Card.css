@@ -1,22 +1,34 @@
-  
-  .card {
+.card {
   display: flex;
   flex-direction: column;
   align-items: center;
   max-width: 368px;
   width: 96%;
   height: auto;
-  max-height: 96vh;    
+  max-height: 96vh;
   border-radius: 20px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   background-color: #fff;
   margin: 0 auto;
   position: absolute;
-  top: 50%;
   left: 50%;
+  z-index: 10;
+}
+
+.card.card-position-center {
+  top: 50%;
   transform: translate(-50%, -50%);
-  z-index: 10; 
+}
+
+.card.card-position-top {
+  top: 20px;
+  transform: translateX(-50%);
+}
+
+.card.card-position-bottom {
+  bottom: 20px;
+  transform: translateX(-50%);
 }
 
 .card-image-wrapper {
@@ -91,45 +103,77 @@
 }
 
 /* Animação */
-@keyframes cardScaleIn {
-  0% {
-    transform: translate(-50%, -50%) scale(0.8);
-    opacity: 0;
-  }
-  70% {
-    transform: translate(-50%, -50%) scale(1.05);
-    opacity: 1;
-  }
-  100% {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 1;
-  }
+@keyframes cardScaleInCenter {
+  0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+  70% { transform: translate(-50%, -50%) scale(1.05); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
 }
 
-@keyframes cardScaleOut {
-  0% {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 1;
-  }
-  30% {
-    transform: translate(-50%, -50%) scale(1.05);
-    opacity: 0.8;
-  }
-  100% {
-    transform: translate(-50%, -50%) scale(0.8);
-    opacity: 0;
-  }
+@keyframes cardScaleOutCenter {
+  0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  30% { transform: translate(-50%, -50%) scale(1.05); opacity: 0.8; }
+  100% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
 }
 
-.card.visible {
-  animation: cardScaleIn var(--card-scale-in-duration, 500ms) ease-out forwards;
+@keyframes cardScaleInTop {
+  0% { transform: translateX(-50%) scale(0.8); opacity: 0; }
+  70% { transform: translateX(-50%) scale(1.05); opacity: 1; }
+  100% { transform: translateX(-50%) scale(1); opacity: 1; }
 }
 
-.card.hidden {
+@keyframes cardScaleOutTop {
+  0% { transform: translateX(-50%) scale(1); opacity: 1; }
+  30% { transform: translateX(-50%) scale(1.05); opacity: 0.8; }
+  100% { transform: translateX(-50%) scale(0.8); opacity: 0; }
+}
+
+@keyframes cardScaleInBottom {
+  0% { transform: translateX(-50%) scale(0.8); opacity: 0; }
+  70% { transform: translateX(-50%) scale(1.05); opacity: 1; }
+  100% { transform: translateX(-50%) scale(1); opacity: 1; }
+}
+
+@keyframes cardScaleOutBottom {
+  0% { transform: translateX(-50%) scale(1); opacity: 1; }
+  30% { transform: translateX(-50%) scale(1.05); opacity: 0.8; }
+  100% { transform: translateX(-50%) scale(0.8); opacity: 0; }
+}
+
+.card.card-position-center.visible {
+  animation: cardScaleInCenter var(--card-scale-in-duration, 500ms) ease-out forwards;
+}
+
+.card.card-position-center.hiding {
+  animation: cardScaleOutCenter var(--card-scale-out-duration, 300ms) ease-in forwards;
+}
+
+.card.card-position-center.hidden {
   transform: translate(-50%, -50%) scale(0.8);
   opacity: 0;
 }
 
-.card.hiding {
-  animation: cardScaleOut var(--card-scale-out-duration, 300ms) ease-in forwards;
+.card.card-position-top.visible {
+  animation: cardScaleInTop var(--card-scale-in-duration, 500ms) ease-out forwards;
+}
+
+.card.card-position-top.hiding {
+  animation: cardScaleOutTop var(--card-scale-out-duration, 300ms) ease-in forwards;
+}
+
+.card.card-position-top.hidden {
+  transform: translateX(-50%) scale(0.8);
+  opacity: 0;
+}
+
+.card.card-position-bottom.visible {
+  animation: cardScaleInBottom var(--card-scale-in-duration, 500ms) ease-out forwards;
+}
+
+.card.card-position-bottom.hiding {
+  animation: cardScaleOutBottom var(--card-scale-out-duration, 300ms) ease-in forwards;
+}
+
+.card.card-position-bottom.hidden {
+  transform: translateX(-50%) scale(0.8);
+  opacity: 0;
 }
