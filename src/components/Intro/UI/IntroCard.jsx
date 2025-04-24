@@ -19,7 +19,7 @@ const IntroCard = ({ isVisible, onButtonClick }) => {
         secondButton={false}
         isVisible={isVisible} 
         onAnimationOutEnded={handleAnimationOutEnded}  
-        position="center"
+        position="bottom"
       />
     </div>
   );
