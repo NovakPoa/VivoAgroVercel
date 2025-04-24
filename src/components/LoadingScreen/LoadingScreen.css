@@ -1,5 +1,6 @@
 .loading-screen {
   position: fixed;
+  font-family: 'Roboto', sans-serif;
   top: 0;
   left: 0;
   width: 100%;
