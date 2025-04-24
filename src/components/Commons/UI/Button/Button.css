@@ -46,10 +46,11 @@
   cursor: default;
 }
 
-@media (max-width: 400px) {
+
+
+@media screen and (max-height: 380px) {
   .primary-button, .secondary-button {
-    width: 60%; 
-    padding: 6px 12px;
-    font-size: 0.8rem;
-  }
+    font-size: clamp(12px, 3vh, 14px);
+    padding: clamp(8px, 2.5vh, 10px) 20px;
+  } 
 }
