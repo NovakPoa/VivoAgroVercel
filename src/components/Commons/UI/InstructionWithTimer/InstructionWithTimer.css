@@ -17,6 +17,8 @@
   border-radius: 4px;
   position: relative;
   overflow: hidden;
+  margin-top: 15px;
+  margin-bottom: 4px;
 }
 
 .timer-progress {
@@ -35,4 +37,17 @@
   font-size: 12px;
   font-weight: bold;
   color: #660099;
+}
+
+@media screen and (max-width: 768px) { 
+  .timer-container {
+    margin-bottom: 4px;
+  }
+}
+
+@media screen and (max-width: 480px) { 
+  .timer-container {
+    height: 8px;
+    margin-bottom: 4px;
+  }
 }

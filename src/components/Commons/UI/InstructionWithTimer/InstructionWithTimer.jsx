@@ -63,7 +63,7 @@ const InstructionWithTimer = ({
     
     // Verificar se a animação terminou
     if (remainingPercent <= 0) {
-      completeTimer();
+      completeTimer(); // comentar para debug
       timerStartedRef.current = false;
     } else {
       animationRef.current = requestAnimationFrame(animateProgress);
