@@ -71,6 +71,7 @@
   gap: 8px;
 }
 
+/* height breakpoints */
 @media screen and (max-height: 460px) {
   .card-image-wrapper {
     height: 180px;
@@ -92,13 +93,27 @@
 
 @media screen and (max-height: 380px) {
   .card-title {
-    font-size: clamp(14px, 5vh, 20px); 
+    font-size: clamp(16px, 5vh, 20px); 
     margin: clamp(6px, 3vh, 12px) 0;
   }
   .card-description {
-    font-size: clamp(12px, 4vh, 15px);
+    font-size: clamp(13px, 4vh, 15px);
     line-height: clamp(16px, 5vh, 20px);
     margin-bottom: clamp(10px, 6vh, 24px);
+  }  
+}
+
+/* width breakpoints */
+@media screen and (max-width: 320px) {
+  .card-title {
+    font-size: clamp(16px, 6vw, 20px); 
+    margin-top: 0px;
+    margin-bottom: 6px;
+  }
+  .card-description {
+    font-size: clamp(13px, 4vw, 15px);
+    line-height: clamp(16px, 7vw, 20px);
+    margin-bottom: clamp(10px, 6vw, 24px);
   }  
 }
 

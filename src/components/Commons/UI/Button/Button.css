@@ -46,11 +46,18 @@
   cursor: default;
 }
 
-
-
+/* height breakpoints */
 @media screen and (max-height: 380px) {
   .primary-button, .secondary-button {
     font-size: clamp(12px, 3vh, 14px);
     padding: clamp(8px, 2.5vh, 10px) 20px;
+  } 
+}
+
+/* width breakpoints */
+@media screen and (max-width: 320px) {
+  .primary-button, .secondary-button {
+    font-size: clamp(12px, 5vw, 14px);
+    padding: clamp(8px, 4vw, 10px) 20px;
   } 
 }
