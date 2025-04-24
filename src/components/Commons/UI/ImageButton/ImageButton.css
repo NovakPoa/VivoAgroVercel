@@ -93,20 +93,15 @@
   transform: scale(1) !important;
 }
 
-@media screen and (max-height: 430px) {
-  .image-button {
-    height: 180px;
-  }
-}
-
-@media screen and (max-height: 410px) {
-  .image-button {
-    height: 170px;
-  }
-}
-
 @keyframes pulseOverlay {
   0% { opacity: 0; }
   50% { opacity: 0.2; }
   100% { opacity: 0; }
+}
+
+/* height breakpoints */
+@media screen and (max-height: 440px) {
+  .image-button {
+    height: 42vh;
+  }
 }
