@@ -1,21 +1,21 @@
 .slots-container {
   position: fixed;
-  top: 0;
+  top: 100px;
   left: 0;
   right: 0;
-  bottom: 0; 
+  bottom: 60px; 
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: end;
   z-index: 100;
   pointer-events: none;
 }
 
 .slots-wrapper {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
-  max-width: 800px;
-  width: 80%;
+  max-width: 500px;
+  width: 90%;
   pointer-events: auto; 
 }

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { ANIMATION_DURATIONS } from '../../../../../config/animationConfig';
 import './Slot.css';
 
-const Slot = ({ onSelected, onAnimationOutEnded, index = 0, isVisible = true }) => {
+const Slot = ({ onSelected, onAnimationOutEnded, index = 0, isVisible = true, className = '' }) => {
   const [animState, setAnimState] = useState('initial'); // 'initial', 'visible', 'hiding'
   const isActiveRef = useRef(false);
   
@@ -40,12 +40,11 @@ const Slot = ({ onSelected, onAnimationOutEnded, index = 0, isVisible = true }) 
 
   return (
     <div 
-      className={`slot-ui-container ${isActiveRef.current ? 'active' : ''} ${animClass}`} 
+      className={`slot-ui-container ${isActiveRef.current ? 'active' : ''} ${animClass} ${className}`} 
       onClick={animState !== 'hiding' ? handleClick : undefined}
       style={style}
     >
-      <div className="slot-outer-circle"></div>
-      <div className="slot-inner-circle"></div>
+      <div className="slot-circle"></div>
     </div>
   );
 };

@@ -15,15 +15,20 @@ const Slots = () => {
 
   if (!shouldRender) return null;
 
-  const slots = Array.from({ length: slotsLength }).map((_, index) => (
-    <Slot 
-      key={index}
-      index={index}
-      onSelected={() => handleSlotClick(index)}
-      onAnimationOutEnded={handleAnimationOutEnded}
-      isVisible={showSlots}
-    />
-  ));
+  const slots = Array.from({ length: slotsLength }).map((_, index) => {
+    const isMiddleSlot = slotsLength === 3 && index === 1;
+    
+    return (
+      <Slot 
+        key={index}
+        index={index}
+        onSelected={() => handleSlotClick(index)}
+        onAnimationOutEnded={handleAnimationOutEnded}
+        isVisible={showSlots}
+        className={isMiddleSlot ? 'middle-slot' : ''}
+      />
+    );
+  });
 
   return (
     <div className="slots-container">

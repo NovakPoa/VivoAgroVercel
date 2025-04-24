@@ -18,21 +18,30 @@
   transform: scale(1.15);
 }
 
-.slot-ui-container .slot-outer-circle {
+.slot-ui-container .slot-circle {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  border: 3px solid #660099;
+  border: 1px solid white;
+  background-color: rgba(150, 0, 255, 0.1);
   position: absolute;
-  box-shadow: 0 0 10px rgba(102, 0, 153, 0.7);
+  animation: slotPulse 2s infinite ease-in-out;
 }
 
-.slot-ui-container .slot-inner-circle {
-  width: 90%;
-  height: 90%;
-  border-radius: 50%;
-  background-color: #660099;
-  position: absolute;
+.slot-ui-container:hover .slot-circle {
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+  animation: none;
+}
+
+.slot-ui-container.active .slot-circle {
+  border-width: 3px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+  background-color: rgba(150, 0, 255, 0.2);
+  animation: none;
+}
+
+.slot-ui-container.middle-slot {
+  margin-top: 40px;
 }
 
 /* Animação */
@@ -78,6 +87,21 @@
   100% {
     transform: scale(1.6);
     opacity: 0;
+  }
+}
+
+@keyframes slotPulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
   }
 }
 
