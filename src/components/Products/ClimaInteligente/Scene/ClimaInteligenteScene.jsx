@@ -2,6 +2,7 @@ import React from 'react';
 import Placeholders from '../../../Commons/Scene/Placeholders/Placeholders';
 import useProductScene from '../../../../hooks/useProductScene';
 import Estacao from '../../../Scene/Objects/Experiencia/Products/ClimaInteligente/Estacao';
+import EstacaoSmall from '../../../Scene/Objects/Experiencia/Products/ClimaInteligente/EstacaoSmall';
 import Tablet from '../../../Scene/Objects/Experiencia/Products/Tablet';
 
 const INITIAL_PLACEHOLDER_POSITIONS = [
@@ -41,7 +42,7 @@ const ClimaInteligenteScene = () => {
             isVisible={placeholdersVisible}
             onAnimationOutEnded={handleAnimationOutEnded}
           />
-          <Estacao position={INTERACTION_OBJECT_POSITION} scale={0.1} />
+          <EstacaoSmall position={INTERACTION_OBJECT_POSITION} scale={0.1} />
         </>
       )}
 

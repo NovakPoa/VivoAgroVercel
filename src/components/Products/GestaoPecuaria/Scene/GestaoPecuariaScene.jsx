@@ -4,6 +4,7 @@ import useProductScene from '../../../../hooks/useProductScene';
 import Vacas from '../../../Scene/Objects/Experiencia/Products/GestaoPecuaria/Vacas';
 import DispositivosPecuaria from '../../../Scene/Objects/Experiencia/Products/GestaoPecuaria/DispositivosPecuaria';
 import Brinco from '../../../Scene/Objects/Experiencia/Products/GestaoPecuaria/Brinco';
+import BrincoSmall from '../../../Scene/Objects/Experiencia/Products/GestaoPecuaria/BrincoSmall';
 import Tablet from '../../../Scene/Objects/Experiencia/Products/Tablet';
 
 const INITIAL_PLACEHOLDER_POSITIONS = [
@@ -83,7 +84,7 @@ const GestaoPecuariaScene = () => {
             isVisible={placeholdersVisible}
             onAnimationOutEnded={handleAnimationOutEnded}
           />
-          <Brinco position={INTERACTION_OBJECT_POSITION} scale={0.2} />
+          <BrincoSmall position={INTERACTION_OBJECT_POSITION} scale={0.2} />
         </>
       )}
       

@@ -3,6 +3,7 @@ import Placeholders from '../../../Commons/Scene/Placeholders/Placeholders';
 import useProductScene from '../../../../hooks/useProductScene';
 import Tratores from '../../../Scene/Objects/Experiencia/Products/GestaoMaquinario/Tratores';
 import DispositivoMaquinario from '../../../Scene/Objects/Experiencia/Products/GestaoMaquinario/DispositivoMaquinario';
+import DispositivoMaquinarioSmall from '../../../Scene/Objects/Experiencia/Products/GestaoMaquinario/DispositivoMaquinarioSmall';
 import Tablet from '../../../Scene/Objects/Experiencia/Products/Tablet';
 
 const INITIAL_PLACEHOLDER_POSITIONS = [
@@ -81,7 +82,7 @@ const GestaoMaquinarioScene = () => {
             isVisible={placeholdersVisible}
             onAnimationOutEnded={handleAnimationOutEnded}
           />
-          <DispositivoMaquinario position={INTERACTION_OBJECT_POSITION} scale={0.08} />
+          <DispositivoMaquinarioSmall position={INTERACTION_OBJECT_POSITION} scale={0.08} />
         </>
       )}
       

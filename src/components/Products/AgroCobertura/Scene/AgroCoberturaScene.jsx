@@ -2,6 +2,7 @@ import React from 'react';
 import Placeholders from '../../../Commons/Scene/Placeholders/Placeholders';
 import useProductScene from '../../../../hooks/useProductScene';
 import Antena from '../../../Scene/Objects/Experiencia/Products/AgroCobertura/Antena';
+import AntenaSmall from '../../../Scene/Objects/Experiencia/Products/AgroCobertura/AntenaSmall';
 import Tablet from '../../../Scene/Objects/Experiencia/Products/Tablet';
 import AgroCoberturaTabletContent from '../UI/AgroCoberturaTabletContent';
 
@@ -42,7 +43,7 @@ const AgroCoberturaScene = () => {
             isVisible={placeholdersVisible} 
             onAnimationOutEnded={handleAnimationOutEnded}
           />
-          <Antena position={INTERACTION_OBJECT_POSITION} scale={0.015} />
+          <AntenaSmall position={INTERACTION_OBJECT_POSITION} scale={0.015} />
         </>
       )}
       

@@ -29,18 +29,22 @@ const assets = {
     // Products
     //  AgroCobertura
     '/models/products/AgroCobertura/Antena.glb',
+    '/models/products/AgroCobertura/AntenaSmall.glb',
     //  GestaoMaquinario
     '/models/products/GestaoMaquinario/DispositivoMaquinario.glb',
+    '/models/products/GestaoMaquinario/DispositivoMaquinarioSmall.glb',
     '/models/products/GestaoMaquinario/TratorA3.glb',
     '/models/products/GestaoMaquinario/TratorB3.glb',
     '/models/products/GestaoMaquinario/TratorC3.glb',
     //  GestaoPecuaria
     '/models/products/GestaoPecuaria/DispositivosPecuaria.glb',
     '/models/products/GestaoPecuaria/Brinco.glb',
+    '/models/products/GestaoPecuaria/BrincoSmall.glb',
     '/models/products/GestaoPecuaria/VacaHolandesa.glb',
     '/models/products/GestaoPecuaria/VacaNelore.glb',
     //  ClimaInteligente
     '/models/products/ClimaInteligente/Estacao.glb',
+    '/models/products/ClimaInteligente/EstacaoSmall.glb',
 
   ],
   textures: [
