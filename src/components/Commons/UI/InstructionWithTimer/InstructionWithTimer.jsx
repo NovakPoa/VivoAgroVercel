@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Instruction from '../Instruction/Instruction';
 import useInteractionStore from '../../../../stores/InteractionStore';
 import useComponentVisibility from '../../../../hooks/useComponentVisibility';
@@ -8,29 +8,69 @@ const InstructionWithTimer = ({
   isVisible,
   title, 
   description,
-  duration = 20,
-  timerTitle = "Aguarde" 
+  duration = 20
 }) => {
   const { 
     timerRemaining, 
     timerDuration, 
     timerActive,
-    startTimer
+    startTimer,
+    completeTimer,
+    stopTimer
   } = useInteractionStore();
+
+  const [smoothProgress, setSmoothProgress] = useState(100);
+  const animationRef = useRef(null);
+  const timerStartedRef = useRef(false);
+  const startTimeRef = useRef(0);
+  const durationRef = useRef(duration);
 
   const [shouldRender, handleAnimationOutEnded] = useComponentVisibility(isVisible);
 
   useEffect(() => {
-    if (isVisible && !timerActive) {
+    if (isVisible && !timerStartedRef.current) {
       startTimer(duration);
+      
+      timerStartedRef.current = true;
+      startTimeRef.current = Date.now();
+      durationRef.current = duration;
+      
+      // Iniciar a animação frame a frame
+      requestAnimationFrame(animateProgress);
     }
-  }, [isVisible]);
+    
+    if (!isVisible && timerStartedRef.current) {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+      timerStartedRef.current = false;
+      stopTimer();
+    }
+
+    return () => {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+    };
+  }, [isVisible, duration]);
+
+  const animateProgress = () => {
+    const elapsedTime = (Date.now() - startTimeRef.current) / 1000;
+    const remainingPercent = Math.max(0, 100 - (elapsedTime / durationRef.current) * 100);
+    
+    // Atualizar a largura da barra de progresso
+    setSmoothProgress(remainingPercent);
+    
+    // Verificar se a animação terminou
+    if (remainingPercent <= 0) {
+      completeTimer();
+      timerStartedRef.current = false;
+    } else {
+      animationRef.current = requestAnimationFrame(animateProgress);
+    }
+  };
   
   if (!shouldRender) return null;
-
-  const progressPercentage = timerDuration > 0 
-    ? Math.max(0, Math.min(100, (timerRemaining / timerDuration) * 100))
-    : 0;
 
   return (
     <div className="instruction-container">
@@ -41,10 +81,14 @@ const InstructionWithTimer = ({
         onAnimationOutEnded={handleAnimationOutEnded} 
       >
         <div className="timer-section">
-          <h3 className="timer-title">{timerTitle} {timerRemaining} segundos</h3>
           <div className="timer-container">
-            <div className="timer-progress" style={{ width: `${progressPercentage}%` }} />
-            <span className="timer-text">{timerRemaining}s</span>
+            <div 
+              className="timer-progress" 
+              style={{ 
+                width: `${smoothProgress}%`,
+                transition: 'none'
+              }} 
+            />
           </div>
         </div>
       </Instruction>

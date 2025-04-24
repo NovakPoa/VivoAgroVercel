@@ -21,10 +21,13 @@ const interactionStore = (set, get) => ({
   setShowSecondInstruction: (show) => set({ showSecondInstruction: show }), 
 
   startTimer: (duration = 10) => {
-    // Limpar timer anterior se existir
     if (timerInterval) {
       clearInterval(timerInterval);
     }
+    
+    const startTime = Date.now();
+    const durationMs = duration * 1000;
+    
     set({ 
       timerActive: true, 
       timerDuration: duration, 
@@ -32,20 +35,19 @@ const interactionStore = (set, get) => ({
     });
     
     timerInterval = setInterval(() => {
-      const state = get();
+      const elapsed = Date.now() - startTime;
+      const remaining = Math.max(0, durationMs - elapsed) / 1000;
       
-      if (state.timerRemaining <= 1) {
-        // Timer acabou, limpar intervalo e disparar evento de finalização
+      if (remaining <= 0) {
+
         clearInterval(timerInterval);
         timerInterval = null;
         set({ timerRemaining: 0 });
-        
-        const { completeTimer } = get();
-        completeTimer();
+  
       } else {
-        set({ timerRemaining: state.timerRemaining - 1 });
+        set({ timerRemaining: remaining });
       }
-    }, 1000);
+    }, 100);
   },
   
   updateTimerRemaining: (remaining) => {
