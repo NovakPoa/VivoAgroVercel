@@ -4,12 +4,12 @@ import IntroNeon from '../../Scene/Objects/Experiencia/Intro/IntroNeon';
 import useIntroStore from '../../../stores/IntroStore';
 
 const IntroScene = () => {
-  const { introVisibility, introNeonVisibility } = useIntroStore();
+  const { introLogoVisibility, introNeonVisibility } = useIntroStore();
   
   return (
     <group>
-      {introVisibility && <IntroLogo />}
-      {introVisibility && introNeonVisibility && <IntroNeon />}
+      {introLogoVisibility && <IntroLogo />}
+      {introNeonVisibility && <IntroNeon />}
     </group>
   );
 };

@@ -1,12 +1,10 @@
 import React, { useRef, useCallback, useEffect } from 'react';
-import useIntroStore from '../../../../../stores/IntroStore';
 import { useGLTFAnimations } from '../../../../../hooks/useGLTFAnimations';
 
 const MODEL_PATH = '/models/intro/LogoVivoAgro.glb';
 
 const IntroLogo = () => {
   const groupRef = useRef();
-  const { startIntro } = useIntroStore();
   
   const { scene, play, playAll, stopAll } = useGLTFAnimations(MODEL_PATH, {
     cloneScene: false,
@@ -17,13 +15,11 @@ const IntroLogo = () => {
   }, []);
 
   useEffect(() => {
-    if (startIntro) {
-      playAll({ 
-        loop: false, 
-        onFinish: handleAnimationFinish
-      });
-    }
-  }, [startIntro]);
+    playAll({ 
+      loop: false, 
+      onFinish: handleAnimationFinish
+    });
+  }, []);
 
   // Se não tiver cena, não renderiza nada
   if (!scene) return null;

@@ -71,8 +71,7 @@ const Dashboard = () => {
     
     setTimeout(() => {
       useIntroStore.setState({
-        introVisibility: false,
-        startIntro: false
+        introLogoVisibility: false,
       });
       useCameraStore.getState().resetCameraPosition();
     }, ANIMATION_DURATIONS.DASHBOARD.SCALE_OUT); */

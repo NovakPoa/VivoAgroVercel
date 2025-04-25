@@ -4,17 +4,17 @@ import useIntroStore from '../../stores/IntroStore';
 import useProductsStore from '../../stores/ProductsStore';
 
 const START_PRODUCTS_DELAY = 6000;
+const START_NEON_DELAY = 0;
+const START_LOGO_DELAY = 4000;
 
 const Intro = () => {
   const [showCard, setShowCard] = useState(false);
-  const { introVisibility, setStartIntro, setIntroVisibility, setIntroNeonVisibility } = useIntroStore();
+  const { setIntroLogoVisibility, setIntroNeonVisibility } = useIntroStore();
   const { setCurrentProduct, setStartProduct } = useProductsStore();
 
   useEffect(() => {
-    if (!introVisibility) {
-      setShowCard(true); 
-    }
-  } , [introVisibility]);
+    setShowCard(true); 
+  } , []);
 
   const timerToStartProduct = useCallback(() => {
     setTimeout(() => {
@@ -23,11 +23,22 @@ const Intro = () => {
     }, START_PRODUCTS_DELAY);
   }, []);
 
+  const timerToStartNeonAnimation = useCallback(() => {
+    setTimeout(() => {
+      setIntroNeonVisibility(true);
+    }, START_NEON_DELAY);
+  }, []);
+
+  const timerToStartLogoAnimation = useCallback(() => {
+    setTimeout(() => {
+      setIntroLogoVisibility(true);
+    }, START_LOGO_DELAY);
+  }, []);
+
   const onButtonClick = useCallback(() => {
-    setIntroVisibility(true);
-    setIntroNeonVisibility(true);
-    setStartIntro(true);
     setShowCard(false);
+    timerToStartLogoAnimation();
+    timerToStartNeonAnimation();
     timerToStartProduct();   
   }, []);
 

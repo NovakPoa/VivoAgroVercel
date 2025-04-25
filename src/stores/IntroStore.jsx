@@ -1,12 +1,10 @@
 import { create } from 'zustand';
 
 const introStore = (set) => ({
-  introVisibility: false,
+  introLogoVisibility: false,
   introNeonVisibility: false,
-  startIntro: false,
-  setStartIntro: (animate) => set({ startIntro: animate }),
-  setIntroVisibility: (visible) => set({ introVisibility: visible }),
-  setIntroNeonVisibility: (value) => set({ introNeonVisibility: value }),
+  setIntroLogoVisibility: (visible) => set({ introLogoVisibility: visible }),
+  setIntroNeonVisibility: (visible) => set({ introNeonVisibility: visible }),
 });
 
 const useIntroStore = create(introStore);
