@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
-import { ANIMATION_DURATIONS } from '../../../../config/animationConfig';
+import { ANIMATION_DURATIONS } from '../../../../config/animationUIConfig';
 
 const CYLINDER_HEIGHT = 20;
 
