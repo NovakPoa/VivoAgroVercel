@@ -15,7 +15,7 @@ export const Placeholder = ({
   color = "#660099", 
   opacity = 0.5, 
   index = 0, 
-  isVisible = true,
+  isVisible = false,
   onAnimationOutEnded
 }) => {
   const groupRef = useRef();

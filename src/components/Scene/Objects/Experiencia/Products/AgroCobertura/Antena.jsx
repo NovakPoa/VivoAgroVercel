@@ -1,17 +1,27 @@
-import React, { useRef } from 'react';
-import { useGLTF } from '@react-three/drei';
+import React, { useRef, useEffect } from 'react';
+import { useGLTFAnimations } from '../../../../../../hooks/useGLTFAnimations';
 
 const MODEL_PATH = '/models/products/AgroCobertura/Antena.glb';
 
 const Antena = ({position, rotation = [0, 0, 0], scale = 1}) => {
   const meshRef = useRef();
-  const { scene } = useGLTF(MODEL_PATH);
-  
+  const { scene, play } = useGLTFAnimations(MODEL_PATH, {
+    cloneScene: true,
+  });
+
+  useEffect(() => {
+    if (scene) {
+      play('scale-in', { 
+        loop: false, 
+      });
+    }
+  }, []);
+
   if (!scene) return null;
 
   return (
     <primitive 
-      object={scene.clone()} 
+      object={scene} 
       ref={meshRef}
       position={position}
       rotation={rotation}

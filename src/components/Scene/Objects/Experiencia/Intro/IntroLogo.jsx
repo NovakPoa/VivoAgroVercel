@@ -8,7 +8,7 @@ const IntroLogo = () => {
   const groupRef = useRef();
   const { startIntro } = useIntroStore();
   
-  const { scene, playAll, stopAll } = useGLTFAnimations(MODEL_PATH, {
+  const { scene, play, playAll, stopAll } = useGLTFAnimations(MODEL_PATH, {
     cloneScene: false,
   });
 

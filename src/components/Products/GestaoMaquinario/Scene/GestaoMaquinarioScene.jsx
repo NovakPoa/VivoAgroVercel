@@ -28,7 +28,7 @@ const GestaoMaquinarioScene = () => {
     selectedIndex,
     shouldRenderPlaceholders,
     placeholdersVisible,
-    handleAnimationOutEnded    
+    handlePlaceholderAnimationOutEnded    
   } = useProductScene('gestao-maquinario', INITIAL_PLACEHOLDER_POSITIONS, CAMERA_ROTATION);
   
   const tratorPositionsRef = useRef(INITIAL_PLACEHOLDER_POSITIONS);
@@ -80,7 +80,7 @@ const GestaoMaquinarioScene = () => {
           <Placeholders 
             placeholderPositions={placeholderPositions}
             isVisible={placeholdersVisible}
-            onAnimationOutEnded={handleAnimationOutEnded}
+            onAnimationOutEnded={handlePlaceholderAnimationOutEnded}
           />
           <DispositivoMaquinarioSmall position={INTERACTION_OBJECT_POSITION} scale={0.08} />
         </>

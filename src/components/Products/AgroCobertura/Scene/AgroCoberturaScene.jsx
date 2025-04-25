@@ -27,7 +27,10 @@ const AgroCoberturaScene = () => {
     animateTablet,
     shouldRenderPlaceholders,
     placeholdersVisible,
-    handleAnimationOutEnded    
+    shouldRenderSmallObject,
+    smallObjectVisible,    
+    handlePlaceholderAnimationOutEnded,
+    handleSmallObjAnimationOutEnded 
   } = useProductScene('agro-cobertura', INITIAL_PLACEHOLDER_POSITIONS, CAMERA_ROTATION);
 
   return (
@@ -37,16 +40,22 @@ const AgroCoberturaScene = () => {
       )}   
 
       {shouldRenderPlaceholders && (
-        <>
-          <Placeholders 
-            placeholderPositions={placeholderPositions}
-            isVisible={placeholdersVisible} 
-            onAnimationOutEnded={handleAnimationOutEnded}
-          />
-          <AntenaSmall position={INTERACTION_OBJECT_POSITION} scale={0.015} />
-        </>
+        <Placeholders 
+          placeholderPositions={placeholderPositions}
+          isVisible={placeholdersVisible} 
+          onAnimationOutEnded={handlePlaceholderAnimationOutEnded}
+        />
       )}
       
+      {shouldRenderSmallObject && (
+        <AntenaSmall 
+          position={INTERACTION_OBJECT_POSITION}
+          scale={0.015}
+          isVisible={smallObjectVisible} 
+          onAnimationOutEnded={handleSmallObjAnimationOutEnded}            
+        />
+      )}
+        
       <Tablet position={TABLET.position} rotation={TABLET.rotation} scale={TABLET.scale} animateTablet={animateTablet}>
         <AgroCoberturaTabletContent />
       </Tablet>

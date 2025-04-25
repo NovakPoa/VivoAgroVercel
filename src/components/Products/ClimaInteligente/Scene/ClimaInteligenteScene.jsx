@@ -26,7 +26,7 @@ const ClimaInteligenteScene = () => {
     animateTablet,
     shouldRenderPlaceholders,
     placeholdersVisible,
-    handleAnimationOutEnded        
+    handlePlaceholderAnimationOutEnded        
   } = useProductScene('clima-inteligente', INITIAL_PLACEHOLDER_POSITIONS, CAMERA_ROTATION);
   
   return (
@@ -40,7 +40,7 @@ const ClimaInteligenteScene = () => {
           <Placeholders 
             placeholderPositions={placeholderPositions}
             isVisible={placeholdersVisible}
-            onAnimationOutEnded={handleAnimationOutEnded}
+            onAnimationOutEnded={handlePlaceholderAnimationOutEnded}
           />
           <EstacaoSmall position={INTERACTION_OBJECT_POSITION} scale={0.1} />
         </>

@@ -29,7 +29,7 @@ const GestaoPecuariaScene = () => {
     selectedIndex,
     shouldRenderPlaceholders,
     placeholdersVisible,
-    handleAnimationOutEnded        
+    handlePlaceholderAnimationOutEnded        
   } = useProductScene('gestao-pecuaria', INITIAL_PLACEHOLDER_POSITIONS, CAMERA_ROTATION);
 
   const vacaPositionsRef = useRef(INITIAL_PLACEHOLDER_POSITIONS);
@@ -82,7 +82,7 @@ const GestaoPecuariaScene = () => {
           <Placeholders 
             placeholderPositions={placeholderPositions}
             isVisible={placeholdersVisible}
-            onAnimationOutEnded={handleAnimationOutEnded}
+            onAnimationOutEnded={handlePlaceholderAnimationOutEnded}
           />
           <BrincoSmall position={INTERACTION_OBJECT_POSITION} scale={0.2} />
         </>

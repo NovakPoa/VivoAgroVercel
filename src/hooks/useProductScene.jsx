@@ -33,10 +33,14 @@ const useProductScene = (productId, initialPlaceholderPositions, cameraRotation)
 
   // Placeholders Visibility
   const [placeholdersVisible, setPlaceholdersVisible] = useState(false);
-  const [shouldRenderPlaceholders, handleAnimationOutEnded] = useComponentVisibility(placeholdersVisible);
+  const [shouldRenderPlaceholders, handlePlaceholderAnimationOutEnded] = useComponentVisibility(placeholdersVisible);
+  // SmallObject Visibility
+  const [smallObjectVisible, setSmallObjectVisible] = useState(false);
+  const [shouldRenderSmallObject, handleSmallObjAnimationOutEnded] = useComponentVisibility(smallObjectVisible);
 
   useEffect(() => {
     setPlaceholdersVisible(showFirstInteraction && isCurrentProduct);
+    setSmallObjectVisible(showFirstInteraction && isCurrentProduct);
   }, [showFirstInteraction, isCurrentProduct]);
 
   // Referência para os timers
@@ -162,7 +166,10 @@ const useProductScene = (productId, initialPlaceholderPositions, cameraRotation)
     selectedIndex,
     placeholdersVisible,
     shouldRenderPlaceholders,
-    handleAnimationOutEnded    
+    handlePlaceholderAnimationOutEnded,
+    smallObjectVisible,
+    shouldRenderSmallObject,
+    handleSmallObjAnimationOutEnded,
   };
 };
 
