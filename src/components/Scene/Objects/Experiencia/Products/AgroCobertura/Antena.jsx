@@ -13,7 +13,7 @@ const Antena = ({position, rotation = [0, 0, 0], scale = 1}) => {
     if (scene) {
       play('scale-in', { //conferir nome da animaçao
         loop: false, 
-        timeScale: 3.0
+        timeScale: 2.4
       });
     }
   }, []);

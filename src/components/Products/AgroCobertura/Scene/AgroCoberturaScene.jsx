@@ -6,13 +6,20 @@ import AntenaSmall from '../../../Scene/Objects/Experiencia/Products/AgroCobertu
 import Tablet from '../../../Scene/Objects/Experiencia/Products/Tablet';
 import AgroCoberturaTabletContent from '../UI/AgroCoberturaTabletContent';
 
+const PRODUCT_ID = 'agro-cobertura';
+const START_NEON_DELAY = 4000;                 // inicia quando slot é selecionado
+const START_FIRST_ANIMATION_DELAY = 0;      // inicia quando slot é selecionado
+const SHOW_TIMER_CARD_DELAY = 5000;            // inicia quando slot é selecionado
+const START_TABLET_ANIMATION_DELAY = 4000;     // inicia quando card com timer termina
+const START_END_PRODUCT_DELAY = 8000;          // inicia quando card com timer termina  
+
+const SMALL_OBJECT_POSITION = [0.5, 1.2, 0];
+const CAMERA_ROTATION = [0, -90, 0];
 const INITIAL_PLACEHOLDER_POSITIONS = [
   [35, 0, -10],
   [40, 0, 0],
   [40, 0, 12],
 ];
-const SMALL_OBJECT_POSITION = [0.5, 1.2, 0];
-const CAMERA_ROTATION = [0, -90, 0];
 const TABLET = {
   position: [1.1, 1.2, 0.4],
   rotation: [0, -1.9, 0],
@@ -21,7 +28,7 @@ const TABLET = {
 
 const AgroCoberturaScene = () => {
   const {
-    enableObject,
+    shouldRenderMainObject,
     selectedPosition,
     placeholderPositions,
     animateTablet,
@@ -31,11 +38,20 @@ const AgroCoberturaScene = () => {
     smallObjectVisible,    
     handlePlaceholderAnimationOutEnded,
     handleSmallObjAnimationOutEnded 
-  } = useProductScene('agro-cobertura', INITIAL_PLACEHOLDER_POSITIONS, CAMERA_ROTATION);
+  } = useProductScene(
+    PRODUCT_ID,
+    INITIAL_PLACEHOLDER_POSITIONS, 
+    CAMERA_ROTATION,
+    START_NEON_DELAY,
+    START_FIRST_ANIMATION_DELAY,
+    SHOW_TIMER_CARD_DELAY,
+    START_TABLET_ANIMATION_DELAY,
+    START_END_PRODUCT_DELAY,   
+  );
 
   return (
     <group>
-      {enableObject && selectedPosition && (
+      {shouldRenderMainObject && selectedPosition && (
         <Antena position={selectedPosition} />
       )}   
 

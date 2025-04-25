@@ -7,12 +7,19 @@ import Brinco from '../../../Scene/Objects/Experiencia/Products/GestaoPecuaria/B
 import BrincoSmall from '../../../Scene/Objects/Experiencia/Products/GestaoPecuaria/BrincoSmall';
 import Tablet from '../../../Scene/Objects/Experiencia/Products/Tablet';
 
+const PRODUCT_ID = 'gestao-pecuaria';
+const START_NEON_DELAY = 0;                 // inicia quando slot é selecionado
+const START_FIRST_ANIMATION_DELAY = 3000;      // inicia quando slot é selecionado
+const SHOW_TIMER_CARD_DELAY = 5000;            // inicia quando slot é selecionado
+const START_TABLET_ANIMATION_DELAY = 4000;     // inicia quando card com timer termina
+const START_END_PRODUCT_DELAY = 8000;          // inicia quando card com timer termina  
+
+const SMALL_OBJECT_POSITION = [0, 1.2, -0.7];
+const CAMERA_ROTATION = [0, 0, 0];
 const INITIAL_PLACEHOLDER_POSITIONS = [
   [0, 0, 0],
   [0, 0, 0],
 ];
-const SMALL_OBJECT_POSITION = [0, 1.2, -0.7];
-const CAMERA_ROTATION = [0, 0, 0];
 const TABLET = {
   position: [-0.1, 1.2, -0.8],
   rotation: [0, 0.9, 0],
@@ -21,7 +28,7 @@ const TABLET = {
 
 const GestaoPecuariaScene = () => {
   const {
-    enableObject,
+    shouldRenderMainObject,
     showFirstInteraction,
     isCurrentProduct,
     selectedPosition,
@@ -29,8 +36,20 @@ const GestaoPecuariaScene = () => {
     selectedIndex,
     shouldRenderPlaceholders,
     placeholdersVisible,
-    handlePlaceholderAnimationOutEnded        
-  } = useProductScene('gestao-pecuaria', INITIAL_PLACEHOLDER_POSITIONS, CAMERA_ROTATION);
+    shouldRenderSmallObject,
+    smallObjectVisible,    
+    handlePlaceholderAnimationOutEnded,
+    handleSmallObjAnimationOutEnded         
+  } = useProductScene(
+    PRODUCT_ID,
+    INITIAL_PLACEHOLDER_POSITIONS, 
+    CAMERA_ROTATION,
+    START_NEON_DELAY,
+    START_FIRST_ANIMATION_DELAY,
+    SHOW_TIMER_CARD_DELAY,
+    START_TABLET_ANIMATION_DELAY,
+    START_END_PRODUCT_DELAY,   
+  );
 
   const vacaPositionsRef = useRef(INITIAL_PLACEHOLDER_POSITIONS);
   const trackedVacaIndexRef = useRef(-1);
@@ -59,7 +78,7 @@ const GestaoPecuariaScene = () => {
         return newPositions;
       });
       // Atualizar a posição do dispositivo
-      if (enableObject && trackedVacaIndexRef.current === vacaIndex) {
+      if (shouldRenderMainObject && trackedVacaIndexRef.current === vacaIndex) {
         setDispositivoPosition([position.x, position.y, position.z]);
       }
     }
@@ -70,7 +89,7 @@ const GestaoPecuariaScene = () => {
       <DispositivosPecuaria />
       <Vacas onObjectPositionUpdate={handleObjectPositionUpdate} />
 
-      {enableObject && dispositivoPosition && trackedVacaIndexRef.current >= 0 && (
+      {shouldRenderMainObject && dispositivoPosition && trackedVacaIndexRef.current >= 0 && (
         <Brinco 
           position={dispositivoPosition} 
           scale={0.5}
@@ -78,16 +97,22 @@ const GestaoPecuariaScene = () => {
       )}
 
       {shouldRenderPlaceholders && (
-        <>
-          <Placeholders 
-            placeholderPositions={placeholderPositions}
-            isVisible={placeholdersVisible}
-            onAnimationOutEnded={handlePlaceholderAnimationOutEnded}
-          />
-          <BrincoSmall position={SMALL_OBJECT_POSITION} scale={0.2} />
-        </>
+        <Placeholders 
+          placeholderPositions={placeholderPositions}
+          isVisible={placeholdersVisible}
+          onAnimationOutEnded={handlePlaceholderAnimationOutEnded}
+        />
       )}
       
+      {shouldRenderSmallObject && (
+        <BrincoSmall 
+          position={SMALL_OBJECT_POSITION}
+          scale={0.2}
+          isVisible={smallObjectVisible} 
+          onAnimationOutEnded={handleSmallObjAnimationOutEnded}            
+        />
+      )}
+
       <Tablet position={TABLET.position} rotation={TABLET.rotation} scale={TABLET.scale} animateTablet={animateTablet} />
     </group>
   );

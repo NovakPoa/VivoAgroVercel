@@ -7,7 +7,16 @@ import useDashboardStore from '../stores/DashboardStore';
 import useEndStore from '../stores/EndStore';
 import useComponentVisibility from './useComponentVisibility';
 
-const useProductScene = (productId, initialPlaceholderPositions, cameraRotation) => {
+const useProductScene = (
+  productId, 
+  initialPlaceholderPositions, 
+  cameraRotation,
+  startNeonDelay = 0, // inicia quando slot é selecionado
+  startFirstAnimationDelay = 0, // inicia quando slot é selecionado
+  showTimerCardDelay = 0, // inicia quando slot é selecionado
+  startTabletAnimationDelay = 0, // inicia quando card com timer termina
+  startEndProductDelay = 0 // inicia quando card com timer termina
+) => {
   const { currentProduct, setLastProductName }  = useProductsStore();  
   const { 
     showInteraction, 
@@ -25,7 +34,7 @@ const useProductScene = (productId, initialPlaceholderPositions, cameraRotation)
   const { registerProductRotation } = useCameraStore();
   const { setShowEndCard } = useEndStore();
 
-  const [enableObject, setEnableObject] = useState(false);
+  const [shouldRenderMainObject, setShouldRenderMainObject] = useState(false);
   const [isCurrentProduct, setIsCurrentProduct] = useState(false);
   const [selectedPosition, setSelectedPosition] = useState(null);
   const [placeholderPositions, setPlaceholderPositions] = useState (initialPlaceholderPositions || []);
@@ -43,22 +52,6 @@ const useProductScene = (productId, initialPlaceholderPositions, cameraRotation)
     setSmallObjectVisible(showFirstInteraction && isCurrentProduct);
   }, [showFirstInteraction, isCurrentProduct]);
 
-  // Referência para os timers
-  const timersRef = useRef([]);
-
-  // Função para limpar todos os timers pendentes
-  const clearAllTimers = useCallback(() => {
-    timersRef.current.forEach(clearTimeout);
-    timersRef.current = [];
-  }, []);
-  
-  // Função para criar um timer e armazená-lo para limpeza posterior
-  const createTimer = useCallback((callback, delay) => {
-    const timerId = setTimeout(callback, delay);
-    timersRef.current.push(timerId);
-    return timerId;
-  }, []);
-
   // Registrar a rotação da câmera para este produto
   useEffect(() => {
     if (cameraRotation) {
@@ -70,10 +63,6 @@ const useProductScene = (productId, initialPlaceholderPositions, cameraRotation)
   useEffect(() => {
     const isThisProductCurrent = currentProduct === productId;
     setIsCurrentProduct(isThisProductCurrent);
-    
-    if (isThisProductCurrent) {
-      setEnableObject(true);
-    }
   }, [currentProduct, productId]);
   
   // Iniciar primeira interação
@@ -121,22 +110,15 @@ const useProductScene = (productId, initialPlaceholderPositions, cameraRotation)
     }    
   }, [ currentProduct ]);
 
-  // Limpar timers quando o componente é desmontado
-  useEffect(() => {
-    return clearAllTimers;
-  }, [clearAllTimers]);
-
   // Callbacks
   const handleSlotClick = useCallback((position) => {
     if (isCurrentProduct) {
-      setSelectedPosition(position);
       setShowFirstInstruction(false);
       setShowFirstInteraction(false);
       
-      createTimer(() => {
-        setShowSecondInstruction(true);
-        setShowSecondInteraction(true);
-      }, 4000);
+      timerToStartFirstAnimation(position);
+      timerToStartNeonAnimation();
+      timerToStartTimerCard();
     }
   }, [isCurrentProduct]);
 
@@ -144,17 +126,46 @@ const useProductScene = (productId, initialPlaceholderPositions, cameraRotation)
     setShowSecondInstruction(false);
     setShowSecondInteraction(false);
     
-    createTimer(() => {
+    timerToStartTabletAnimation();
+    timerToEndProduct();
+  }, [setShowSecondInstruction, endProduct]);
+
+  const timerToStartNeonAnimation = useCallback(() => {
+    setTimeout(() => {
+      // set neon true
+    }, startNeonDelay);
+  }, []);
+
+  const timerToStartFirstAnimation = useCallback((position) => {
+    setTimeout(() => {
+      setSelectedPosition(position);
+      if (isCurrentProduct) {
+        setShouldRenderMainObject(true);
+      }      
+    }, startFirstAnimationDelay);
+  }, [isCurrentProduct]);
+
+  const timerToStartTimerCard = useCallback(() => {
+    setTimeout(() => {
+      setShowSecondInstruction(true);
+      setShowSecondInteraction(true);
+    }, showTimerCardDelay);
+  }, []);
+
+  const timerToStartTabletAnimation = useCallback(() => { // inicia quando timer do card termina
+    setTimeout(() => {
       setAnimateTablet(true);
-    }, 4000);
-    
-    createTimer(() => {
+    }, startTabletAnimationDelay);
+  }, []);
+
+  const timerToEndProduct = useCallback(() => { // inicia quando timer do card termina
+    setTimeout(() => {
       endProduct();
-    }, 8000);
-  }, [setShowSecondInstruction, createTimer, endProduct]);
+    }, startEndProductDelay);
+  }, [endProduct]);
 
   return {
-    enableObject,
+    shouldRenderMainObject,
     showFirstInteraction,
     showSecondInteraction,
     isCurrentProduct,
