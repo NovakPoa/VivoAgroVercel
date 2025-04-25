@@ -4,7 +4,7 @@ import useProductScene from '../../../../hooks/useProductScene';
 import Tratores from '../../../Scene/Objects/Experiencia/Products/GestaoMaquinario/Tratores';
 import DispositivoMaquinario from '../../../Scene/Objects/Experiencia/Products/GestaoMaquinario/DispositivoMaquinario';
 import DispositivoMaquinarioSmall from '../../../Scene/Objects/Experiencia/Products/GestaoMaquinario/DispositivoMaquinarioSmall';
-import Tablet from '../../../Scene/Objects/Experiencia/Products/Tablet';
+import TabletMaquinario from '../../../Scene/Objects/Experiencia/Products/GestaoMaquinario/TabletMaquinario';
 
 const PRODUCT_ID = 'gestao-maquinario';
 const START_NEON_DELAY = 0;                 // inicia quando slot é selecionado
@@ -111,7 +111,12 @@ const GestaoMaquinarioScene = () => {
         />
       )}
 
-      <Tablet position={TABLET.position} rotation={TABLET.rotation} scale={TABLET.scale} animateTablet={animateTablet}/>
+      <TabletMaquinario
+        position={TABLET.position}
+        rotation={TABLET.rotation}
+        scale={TABLET.scale}
+        animateTablet={animateTablet}
+      />
     </group>
   );
 };

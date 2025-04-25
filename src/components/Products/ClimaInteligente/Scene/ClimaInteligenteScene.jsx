@@ -3,7 +3,7 @@ import Placeholders from '../../../Commons/Scene/Placeholders/Placeholders';
 import useProductScene from '../../../../hooks/useProductScene';
 import Estacao from '../../../Scene/Objects/Experiencia/Products/ClimaInteligente/Estacao';
 import EstacaoSmall from '../../../Scene/Objects/Experiencia/Products/ClimaInteligente/EstacaoSmall';
-import Tablet from '../../../Scene/Objects/Experiencia/Products/Tablet';
+import TabletClima from '../../../Scene/Objects/Experiencia/Products/ClimaInteligente/TabletClima';
 
 const PRODUCT_ID = 'clima-inteligente';
 const START_NEON_DELAY = 0;                     // inicia quando slot é selecionado
@@ -71,7 +71,12 @@ const ClimaInteligenteScene = () => {
         />
       )}
 
-      <Tablet position={TABLET.position} rotation={TABLET.rotation} scale={TABLET.scale} animateTablet={animateTablet} />
+      <TabletClima
+        position={TABLET.position}
+        rotation={TABLET.rotation}
+        scale={TABLET.scale}
+        animateTablet={animateTablet}
+      />
     </group>
   );
 };

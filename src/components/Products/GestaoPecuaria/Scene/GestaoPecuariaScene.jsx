@@ -5,7 +5,7 @@ import Vacas from '../../../Scene/Objects/Experiencia/Products/GestaoPecuaria/Va
 import DispositivosPecuaria from '../../../Scene/Objects/Experiencia/Products/GestaoPecuaria/DispositivosPecuaria';
 import Brinco from '../../../Scene/Objects/Experiencia/Products/GestaoPecuaria/Brinco';
 import BrincoSmall from '../../../Scene/Objects/Experiencia/Products/GestaoPecuaria/BrincoSmall';
-import Tablet from '../../../Scene/Objects/Experiencia/Products/Tablet';
+import TabletPecuaria from '../../../Scene/Objects/Experiencia/Products/GestaoPecuaria/TabletPecuaria';
 
 const PRODUCT_ID = 'gestao-pecuaria';
 const START_NEON_DELAY = 0;                 // inicia quando slot é selecionado
@@ -113,7 +113,12 @@ const GestaoPecuariaScene = () => {
         />
       )}
 
-      <Tablet position={TABLET.position} rotation={TABLET.rotation} scale={TABLET.scale} animateTablet={animateTablet} />
+      <TabletPecuaria
+        position={TABLET.position}
+        rotation={TABLET.rotation}
+        scale={TABLET.scale}
+        animateTablet={animateTablet}
+      />
     </group>
   );
 };

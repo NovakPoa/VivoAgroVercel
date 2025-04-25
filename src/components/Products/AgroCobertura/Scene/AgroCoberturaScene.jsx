@@ -3,8 +3,7 @@ import Placeholders from '../../../Commons/Scene/Placeholders/Placeholders';
 import useProductScene from '../../../../hooks/useProductScene';
 import Antena from '../../../Scene/Objects/Experiencia/Products/AgroCobertura/Antena';
 import AntenaSmall from '../../../Scene/Objects/Experiencia/Products/AgroCobertura/AntenaSmall';
-import Tablet from '../../../Scene/Objects/Experiencia/Products/Tablet';
-import AgroCoberturaTabletContent from '../UI/AgroCoberturaTabletContent';
+import TabletAgro from '../../../Scene/Objects/Experiencia/Products/AgroCobertura/TabletAgro';
 
 const PRODUCT_ID = 'agro-cobertura';
 const START_NEON_DELAY = 4000;                 // inicia quando slot é selecionado
@@ -72,9 +71,12 @@ const AgroCoberturaScene = () => {
         />
       )}
         
-      <Tablet position={TABLET.position} rotation={TABLET.rotation} scale={TABLET.scale} animateTablet={animateTablet}>
-        <AgroCoberturaTabletContent />
-      </Tablet>
+      <TabletAgro
+        position={TABLET.position}
+        rotation={TABLET.rotation}
+        scale={TABLET.scale}
+        animateTablet={animateTablet}
+      />
     </group>
   );
 };
