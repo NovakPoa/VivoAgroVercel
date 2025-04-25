@@ -1,17 +1,28 @@
-import React, { useRef } from 'react';
-import { useGLTF } from '@react-three/drei';
+import React, { useRef, useEffect } from 'react';
+import { useGLTFAnimations } from '../../../../../../hooks/useGLTFAnimations';
 
 const MODEL_PATH = '/models/products/ClimaInteligente/Estacao.glb';
 
 const Estacao = ({position, rotation = [0, 0, 0], scale = 1}) => {
   const meshRef = useRef();
-  const { scene } = useGLTF(MODEL_PATH);
+  const { scene, play } = useGLTFAnimations(MODEL_PATH, {
+    cloneScene: false,
+  });
+
+  useEffect(() => {
+    if (scene) {
+      play('scale-in', { //conferir nome da animaçao
+        loop: false, 
+        timeScale: 3.0
+      });
+    }
+  }, []);
 
   if (!scene) return null;
 
   return (
     <primitive 
-      object={scene.clone()} 
+      object={scene} 
       ref={meshRef}
       position={position}
       rotation={rotation}

@@ -12,7 +12,7 @@ const AntenaSmall = ({
 }) => {
   const meshRef = useRef();
   const { scene, play } = useGLTFAnimations(MODEL_PATH, {
-    cloneScene: true,
+    cloneScene: false,
   });
   
   useEffect(() => {
@@ -20,11 +20,13 @@ const AntenaSmall = ({
       if (scene) {
         play('scale-in', { 
           loop: false, 
+          timeScale: 3.0
         });
       }
     } else {
       play('scale-out', { 
         loop: false, 
+        timeScale: 3.0,
         onFinish: onAnimationOutEnded
       });
     }

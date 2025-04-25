@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Button from '../Button/Button';
 import PreloadedImage from '../PreloadedImage/PreloadedImage';
-import { ANIMATION_DURATIONS } from '../../../../config/animationConfig';
+import { ANIMATION_DURATIONS } from '../../../../config/animationUIConfig';
 import './Card.css';
 
 const Card = ({ 

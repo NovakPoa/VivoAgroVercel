@@ -4,7 +4,7 @@ import ImageButton from '../../Commons/UI/ImageButton/ImageButton';
 import { RiResetRightFill } from "react-icons/ri";
 import useProductsStore from '../../../stores/ProductsStore';
 import useDashboardStore from '../../../stores/DashboardStore';
-import { ANIMATION_DURATIONS } from '../../../config/animationConfig';
+import { ANIMATION_DURATIONS } from '../../../config/animationUIConfig';
 
 const DashboardCard = ({ isVisible = true, onAnimationOutEnded, onResetClick }) => {
   const { productsStatus, setCurrentProduct, setStartProduct } = useProductsStore();

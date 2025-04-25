@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ANIMATION_DURATIONS } from '../../../../config/animationConfig';
+import { ANIMATION_DURATIONS } from '../../../../config/animationUIConfig';
 import './Instruction.css';
 
 const Instruction = ({ title, description, children, isVisible = true, onAnimationOutEnded }) => {

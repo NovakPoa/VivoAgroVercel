@@ -4,7 +4,7 @@ import useInteractionStore from '../stores/InteractionStore';
 import useCameraStore from '../stores/CameraStore';
 import useDashboardStore from '../stores/DashboardStore';
 import useEndStore from '../stores/EndStore';
-import { ANIMATION_DURATIONS } from '../config/animationConfig';
+import { ANIMATION_DURATIONS } from '../config/animationUIConfig';
 
 export default function useProductNavigation() {
   const [showCard, setShowCard] = useState(false);

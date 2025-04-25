@@ -8,7 +8,7 @@ import useSlotsStore from '../../stores/SlotsStore';
 import useCameraStore from '../../stores/CameraStore';
 import useIntroStore from '../../stores/IntroStore';
 import useComponentVisibility from '../../hooks/useComponentVisibility';
-import { ANIMATION_DURATIONS } from '../../config/animationConfig';
+import { ANIMATION_DURATIONS } from '../../config/animationUIConfig';
 
 const Dashboard = () => {
   const { showDashboard, setShowDashboard } = useDashboardStore();

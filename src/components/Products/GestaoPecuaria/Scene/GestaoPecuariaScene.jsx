@@ -11,7 +11,7 @@ const INITIAL_PLACEHOLDER_POSITIONS = [
   [5, 0, 10],
   [-20, 0, 10],
 ];
-const INTERACTION_OBJECT_POSITION = [0, 1.2, -0.7];
+const SMALL_OBJECT_POSITION = [0, 1.2, -0.7];
 const CAMERA_ROTATION = [0, 0, 0];
 const TABLET = {
   position: [-0.1, 1.2, -0.8],
@@ -84,7 +84,7 @@ const GestaoPecuariaScene = () => {
             isVisible={placeholdersVisible}
             onAnimationOutEnded={handlePlaceholderAnimationOutEnded}
           />
-          <BrincoSmall position={INTERACTION_OBJECT_POSITION} scale={0.2} />
+          <BrincoSmall position={SMALL_OBJECT_POSITION} scale={0.2} />
         </>
       )}
       

@@ -6,13 +6,14 @@ const MODEL_PATH = '/models/products/AgroCobertura/Antena.glb';
 const Antena = ({position, rotation = [0, 0, 0], scale = 1}) => {
   const meshRef = useRef();
   const { scene, play } = useGLTFAnimations(MODEL_PATH, {
-    cloneScene: true,
+    cloneScene: false,
   });
 
   useEffect(() => {
     if (scene) {
-      play('scale-in', { 
+      play('scale-in', { //conferir nome da animaçao
         loop: false, 
+        timeScale: 3.0
       });
     }
   }, []);

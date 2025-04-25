@@ -98,6 +98,7 @@ export function useGLTFAnimations(modelPath, options = {}) {
       loop = false,
       clampWhenFinished = true,
       repetitions = Infinity,
+      timeScale = 1.0,
       onFinish = null,
       batchId = null
     } = options;
@@ -108,6 +109,8 @@ export function useGLTFAnimations(modelPath, options = {}) {
       action.setLoop(THREE.LoopOnce);
       action.clampWhenFinished = clampWhenFinished;
     }
+    
+    action.timeScale = timeScale;
     
     if (onFinish && !batchId) {
       callbacksRef.current[animName] = onFinish;

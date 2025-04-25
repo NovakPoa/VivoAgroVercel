@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { ANIMATION_DURATIONS } from '../../../../../config/animationConfig';
+import { ANIMATION_DURATIONS } from '../../../../../config/animationUIConfig';
 import './Slot.css';
 
 const Slot = ({ onSelected, onAnimationOutEnded, index = 0, isVisible = true, className = '' }) => {
