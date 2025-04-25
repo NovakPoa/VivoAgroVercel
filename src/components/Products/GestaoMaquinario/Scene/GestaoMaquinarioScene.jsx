@@ -7,9 +7,9 @@ import DispositivoMaquinarioSmall from '../../../Scene/Objects/Experiencia/Produ
 import Tablet from '../../../Scene/Objects/Experiencia/Products/Tablet';
 
 const INITIAL_PLACEHOLDER_POSITIONS = [
-  [50, 0, -20],
-  [50, 0, 5],
-  [50, 0, 35],
+  [0, 0, 0],
+  [0, 0, 0],
+  [0, 0, 0],
 ];
 const SMALL_OBJECT_POSITION = [0, 1.2, 0.5];
 const CAMERA_ROTATION = [0, -180, 0];

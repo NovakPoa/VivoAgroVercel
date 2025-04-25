@@ -6,9 +6,9 @@ import EstacaoSmall from '../../../Scene/Objects/Experiencia/Products/ClimaIntel
 import Tablet from '../../../Scene/Objects/Experiencia/Products/Tablet';
 
 const INITIAL_PLACEHOLDER_POSITIONS = [
-  [10, 0, 10],
+  [8, 0, 25],
   [0, 0, 10],
-  [-10, 0, 10],
+  [-3, 0, 12],
 ];
 const SMALL_OBJECT_POSITION = [0, 1.2, 0.5];
 const CAMERA_ROTATION = [0, -180, 0];

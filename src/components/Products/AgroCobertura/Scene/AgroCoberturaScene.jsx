@@ -7,9 +7,9 @@ import Tablet from '../../../Scene/Objects/Experiencia/Products/Tablet';
 import AgroCoberturaTabletContent from '../UI/AgroCoberturaTabletContent';
 
 const INITIAL_PLACEHOLDER_POSITIONS = [
-  [50, 0, -20],
-  [50, 0, 5],
-  [50, 0, 35],
+  [35, 0, -10],
+  [40, 0, 0],
+  [40, 0, 12],
 ];
 const SMALL_OBJECT_POSITION = [0.5, 1.2, 0];
 const CAMERA_ROTATION = [0, -90, 0];
