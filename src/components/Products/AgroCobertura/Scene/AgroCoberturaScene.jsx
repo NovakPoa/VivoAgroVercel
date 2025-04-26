@@ -6,11 +6,12 @@ import AntenaSmall from '../../../Scene/Objects/Experiencia/Products/AgroCobertu
 import TabletAgro from '../../../Scene/Objects/Experiencia/Products/AgroCobertura/TabletAgro';
 
 const PRODUCT_ID = 'agro-cobertura';
-const START_NEON_DELAY = 4000;                 // inicia quando slot é selecionado
-const START_FIRST_ANIMATION_DELAY = 0;      // inicia quando slot é selecionado
+const START_NEON_DELAY = 4000;                  // inicia quando slot é selecionado
+const START_FIRST_ANIMATION_DELAY = 0;          // inicia quando slot é selecionado
 const SHOW_TIMER_CARD_DELAY = 5000;            // inicia quando slot é selecionado
-const START_TABLET_ANIMATION_DELAY = 4000;     // inicia quando card com timer termina
-const START_END_PRODUCT_DELAY = 8000;          // inicia quando card com timer termina  
+const SHOW_TABLET_DELAY = 4000;                 // inicia quando card com timer termina
+const HIDE_TABLET_DELAY = 12000;                  // inicia quando card com timer termina
+const START_END_PRODUCT_DELAY = 13000;          // inicia quando card com timer termina  
 
 const SMALL_OBJECT_POSITION = [0.5, 1.2, 0];
 const CAMERA_ROTATION = [0, -90, 0];
@@ -21,7 +22,7 @@ const INITIAL_PLACEHOLDER_POSITIONS = [
 ];
 const TABLET = {
   position: [1.1, 1.2, 0.4],
-  rotation: [0, -1.9, 0],
+  rotation: [0, -3.5, 0],
   scale: 0.015,
 };
 
@@ -44,7 +45,8 @@ const AgroCoberturaScene = () => {
     START_NEON_DELAY,
     START_FIRST_ANIMATION_DELAY,
     SHOW_TIMER_CARD_DELAY,
-    START_TABLET_ANIMATION_DELAY,
+    SHOW_TABLET_DELAY,
+    HIDE_TABLET_DELAY,
     START_END_PRODUCT_DELAY,   
   );
 

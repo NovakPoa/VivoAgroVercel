@@ -116,7 +116,13 @@ export function useGLTFAnimations(modelPath, options = {}) {
       callbacksRef.current[animName] = onFinish;
     }
 
-    action.reset().play();
+    if (timeScale < 0) {
+      action.reset(); 
+      action.time = action._clip.duration;
+      action.play();
+    } else {
+      action.reset().play();
+    }
     setActiveAnimations(prev => new Set([...prev, animName]));
   }, []);
   

@@ -14,8 +14,9 @@ const useProductScene = (
   startNeonDelay = 0, // inicia quando slot é selecionado
   startFirstAnimationDelay = 0, // inicia quando slot é selecionado
   showTimerCardDelay = 0, // inicia quando slot é selecionado
-  startTabletAnimationDelay = 0, // inicia quando card com timer termina
-  startEndProductDelay = 0 // inicia quando card com timer termina
+  showTabletDelay = 0, // inicia quando card com timer termina
+  hideTabletDelay = 0, // inicia quando card com timer termina  
+  endProductDelay = 0 // inicia quando card com timer termina
 ) => {
   const { currentProduct, setLastProductName }  = useProductsStore();  
   const { 
@@ -102,7 +103,7 @@ const useProductScene = (
     useProductsStore.getState().completeProduct(currentProduct);
     setLastProductName(currentProduct);
     setShowInteraction(false);
-
+    
     if (currentProduct === 'clima-inteligente') {
       setShowEndCard(true);
     } else {
@@ -126,7 +127,8 @@ const useProductScene = (
     setShowSecondInstruction(false);
     setShowSecondInteraction(false);
     
-    timerToStartTabletAnimation();
+    timerToShowTablet();
+    timerToHideTablet();
     timerToEndProduct();
   }, [setShowSecondInstruction, endProduct]);
 
@@ -152,16 +154,22 @@ const useProductScene = (
     }, showTimerCardDelay);
   }, []);
 
-  const timerToStartTabletAnimation = useCallback(() => { // inicia quando timer do card termina
+  const timerToShowTablet = useCallback(() => { // inicia quando timer do card termina
     setTimeout(() => {
       setAnimateTablet(true);
-    }, startTabletAnimationDelay);
+    }, showTabletDelay);
+  }, []);
+
+  const timerToHideTablet = useCallback(() => { // inicia quando timer do card termina
+    setTimeout(() => {
+      setAnimateTablet(false);
+    }, hideTabletDelay);
   }, []);
 
   const timerToEndProduct = useCallback(() => { // inicia quando timer do card termina
     setTimeout(() => {
       endProduct();
-    }, startEndProductDelay);
+    }, endProductDelay);
   }, [endProduct]);
 
   return {

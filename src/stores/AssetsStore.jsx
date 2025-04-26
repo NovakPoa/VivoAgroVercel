@@ -69,6 +69,12 @@ const assets = {
     '/ui/gestaoMaquinario.jpg',
     '/ui/gestaoPecuaria.png'
   ], 
+  videos: [
+    '/videos/TabletAgroCobertura.mp4',
+    '/videos/TabletGestaoMaquinario.mp4',
+    '/videos/TabletGestaoPecuaria.mp4',
+    '/videos/TabletClimaInteligente.mp4'
+  ],  
 };
 
 const useAssetsStore = create((set, get) => ({
@@ -80,6 +86,7 @@ const useAssetsStore = create((set, get) => ({
   //modelCache: {},
   textureCache: {},
   imageCache: {},
+  videoCache: {},
 
   loadAllAssets: () => {
     const { incrementLoadedAssets } = get();
@@ -145,6 +152,33 @@ const useAssetsStore = create((set, get) => ({
       
       img.src = imagePath;
     });
+
+    // Carregar vídeos
+    assets.videos.forEach(videoPath => {
+      const video = document.createElement('video');
+      video.crossOrigin = 'anonymous';
+      video.loop = true;
+      video.muted = true; // Necessario para autoplay sem interação
+      video.playsInline = true;
+      
+      // Para alguns navegadores é necessario definir o tamanho
+      video.width = 1920;
+      video.height = 1080;
+      
+      // Indica que o vídeo está pronto para ser usado
+      video.oncanplaythrough = () => {
+        get().videoCache[videoPath] = video;
+        incrementLoadedAssets();
+      };
+      
+      video.onerror = () => {
+        console.error(`Erro ao carregar vídeo: ${videoPath}`);
+        incrementLoadedAssets();
+      };
+      
+      video.src = videoPath;
+      video.load();
+    });    
   },
 
   // Atualizar o progresso
@@ -171,11 +205,14 @@ const useAssetsStore = create((set, get) => ({
   getTexture: (path) => {
     return get().textureCache[path];
   },
-
   // Obter imagem
   getUIImage: (path) => {
     return get().imageCache[path];
-  }
+  },
+  // Obter video
+  getVideo: (path) => {
+    return get().videoCache[path];
+  }  
 }));
 
 export default useAssetsStore;
