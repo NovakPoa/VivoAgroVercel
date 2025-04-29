@@ -37,7 +37,8 @@ const AgroCoberturaScene = () => {
     shouldRenderSmallObject,
     smallObjectVisible,    
     handlePlaceholderAnimationOutEnded,
-    handleSmallObjAnimationOutEnded 
+    handleSmallObjAnimationOutEnded,
+    shouldPlaySecondAnimation
   } = useProductScene(
     PRODUCT_ID,
     INITIAL_PLACEHOLDER_POSITIONS, 
@@ -53,7 +54,7 @@ const AgroCoberturaScene = () => {
   return (
     <group>
       {shouldRenderMainObject && selectedPosition && (
-        <Antena position={selectedPosition} />
+        <Antena position={selectedPosition} playSecondAnimation={shouldPlaySecondAnimation} />
       )}   
 
       {shouldRenderPlaceholders && (

@@ -37,6 +37,7 @@ const useProductScene = (
 
   const [shouldRenderMainObject, setShouldRenderMainObject] = useState(false);
   const [isCurrentProduct, setIsCurrentProduct] = useState(false);
+  const [shouldPlaySecondAnimation, setShouldPlaySecondAnimation] = useState(false);
   const [selectedPosition, setSelectedPosition] = useState(null);
   const [placeholderPositions, setPlaceholderPositions] = useState (initialPlaceholderPositions || []);
   const [animateTablet, setAnimateTablet] = useState(false);
@@ -127,6 +128,8 @@ const useProductScene = (
     setShowSecondInstruction(false);
     setShowSecondInteraction(false);
     
+    setShouldPlaySecondAnimation(true);
+    
     timerToShowTablet();
     timerToHideTablet();
     timerToEndProduct();
@@ -189,6 +192,7 @@ const useProductScene = (
     smallObjectVisible,
     shouldRenderSmallObject,
     handleSmallObjAnimationOutEnded,
+    shouldPlaySecondAnimation
   };
 };
 

@@ -39,7 +39,8 @@ const GestaoMaquinarioScene = () => {
     shouldRenderSmallObject,
     smallObjectVisible,    
     handlePlaceholderAnimationOutEnded,
-    handleSmallObjAnimationOutEnded     
+    handleSmallObjAnimationOutEnded,
+    shouldPlaySecondAnimation    
   } = useProductScene(
     PRODUCT_ID,
     INITIAL_PLACEHOLDER_POSITIONS, 
@@ -93,6 +94,7 @@ const GestaoMaquinarioScene = () => {
         <DispositivoMaquinario 
           position={dispositivoPosition} 
           scale={1.5}
+          playSecondAnimation={shouldPlaySecondAnimation}
         />
       )}
 

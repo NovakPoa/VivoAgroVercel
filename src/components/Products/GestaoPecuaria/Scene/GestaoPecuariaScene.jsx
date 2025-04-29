@@ -40,7 +40,8 @@ const GestaoPecuariaScene = () => {
     shouldRenderSmallObject,
     smallObjectVisible,    
     handlePlaceholderAnimationOutEnded,
-    handleSmallObjAnimationOutEnded         
+    handleSmallObjAnimationOutEnded,
+    shouldPlaySecondAnimation       
   } = useProductScene(
     PRODUCT_ID,
     INITIAL_PLACEHOLDER_POSITIONS, 
@@ -95,6 +96,7 @@ const GestaoPecuariaScene = () => {
         <Brinco 
           position={dispositivoPosition} 
           scale={0.5}
+          playSecondAnimation={shouldPlaySecondAnimation}
         />
       )}
 
