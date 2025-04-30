@@ -179,6 +179,7 @@ const useProductScene = (
 
   const timerToShowTablet = useCallback(() => { // inicia quando timer do card termina
     setTimeout(() => {
+      animateToTarget(cameraTarget, 1);
       setAnimateTablet(true);
     }, showTabletDelay);
   }, []);
