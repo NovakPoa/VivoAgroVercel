@@ -19,15 +19,18 @@ export const useTablet = (modelPath, videoPath, animateTablet) => {
   // Encontra e armazena referência ao mesh da tela
   useEffect(() => {
     if (scene) {
-      scene.traverse((child) => {
-        if (child.isMesh && child.name.includes('Screen')) {
-          screenMeshRef.current = child;
-          // Guarda uma cópia do material original
-          if (child.material) {
-            originalMaterialRef.current = child.material.clone();
-          }
+
+      const screenMesh = scene.getObjectByName('Screen');
+
+      if (screenMesh) {
+        screenMeshRef.current = screenMesh;
+        // Guarda uma cópia do material original
+        if (screenMesh.material) {
+          originalMaterialRef.current = screenMesh.material.clone();
         }
-      });
+      } else {
+        console.warn(`Mesh "${screenMeshName}" não encontrado no modelo ${modelPath}`);
+      }
       
       // Cria a textura de vídeo
       const video = getVideo(videoPath);

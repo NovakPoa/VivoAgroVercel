@@ -18,16 +18,14 @@ const MODELS = [
   },
 ];
 
-const findObjectMesh = (object) => {
-  let targetMesh = null;
+const findObjectMesh = (object, meshName = 'Olho') => {
+  const targetObject = object.getObjectByName(meshName);
+
+  if (targetObject && targetObject.isMesh) {
+    return targetObject;
+  }
   
-  object.traverse((child) => {   
-    if (child.isMesh && child.name === 'Olho') {
-      targetMesh = child;
-    }
-  });
-  
-  return targetMesh;
+  return null;
 };
 
 const Vaca = forwardRef(({ path, position, rotation, scale, onMeshFound, index }, ref) => {

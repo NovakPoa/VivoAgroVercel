@@ -24,16 +24,14 @@ const MODELS = [
   },
 ];
 
-const findObjectMesh = (object) => {
-  let targetMesh = null;
+const findObjectMesh = (object, meshName = 'Roçadeira_-_ok_Procedural') => {
+  const targetObject = object.getObjectByName(meshName);
+
+  if (targetObject && targetObject.isMesh) {
+    return targetObject;
+  }
   
-  object.traverse((child) => {
-    if (child.isMesh && child.name === 'Roçadeira_-_ok_Procedural') {
-      targetMesh = child;
-    }
-  });
-  
-  return targetMesh;
+  return null;  
 };
 
 const Trator = forwardRef(({ path, position, rotation, scale, onMeshFound, index }, ref) => {
