@@ -118,7 +118,9 @@ const useProductScene = (
     setShowInteraction(false);
     
     if (currentProduct === 'clima-inteligente') {
-      setShowEndCard(true);
+      setTimeout(() => {
+        setShowEndCard(true);
+      }, 1000);      
     } else {
       setShowDashboard(true);
     }    
