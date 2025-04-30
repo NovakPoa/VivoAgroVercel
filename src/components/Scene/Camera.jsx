@@ -42,51 +42,55 @@ const Camera = () => {
 
   useEffect(() => {
     if (controlsRef.current && cameraAnimate) {
-
+      // Interromper animação anterior se existir
       if (gsapAnimationRef.current) {
         gsapAnimationRef.current.kill();
       }
       
+      // Obter posição atual do target
       const currentX = controlsRef.current.target.x;
+      const currentY = controlsRef.current.target.y;
       const currentZ = controlsRef.current.target.z;
-      const targetY = currentTarget[1]; // Manter Y constante
+      const targetY = currentTarget[1];
       
-      // Calcular ângulos (em radianos) para a animação circular
+      // Calcular ângulos para animação circular horizontal
       const startAngle = Math.atan2(currentZ, currentX);
       const endAngle = Math.atan2(currentTarget[2], currentTarget[0]);
       
-      // Calcular a distância do centro (raio)
+      // Calcular o raio (distância do centro) para manter consistente
       const radius = Math.sqrt(
         currentTarget[0] * currentTarget[0] + 
         currentTarget[2] * currentTarget[2]
       );
       
-      // Objeto para animar o ângulo
-      const angleObj = { angle: startAngle };
+      // Objeto para animar o ângulo e a altura Y
+      const animObj = { 
+        angle: startAngle,
+        y: currentY 
+      };
       
-      // Criar animação com GSAP para girar horizontalmente
-      gsapAnimationRef.current = gsap.to(angleObj, {
+      // Criar animação com GSAP para girar horizontalmente e ajustar Y
+      gsapAnimationRef.current = gsap.to(animObj, {
         angle: endAngle,
+        y: targetY,
         duration: animationDuration,
-        ease: "power2.inOut", 
+        ease: "power1.inOut", 
         onUpdate: () => {
           // Calcular novas coordenadas X e Z baseadas no ângulo
-          const newX = Math.cos(angleObj.angle) * radius;
-          const newZ = Math.sin(angleObj.angle) * radius;
+          const newX = Math.cos(animObj.angle) * radius;
+          const newZ = Math.sin(animObj.angle) * radius;
           
           // Atualizar a posição do target
-          controlsRef.current.target.set(newX, targetY, newZ);
+          controlsRef.current.target.set(newX, animObj.y, newZ);
           controlsRef.current.update();
         },
         onComplete: () => {
-          // Garantir que chegamos exatamente ao destino desejado
           controlsRef.current.target.set(
             currentTarget[0],
             currentTarget[1],
             currentTarget[2]
           );
           controlsRef.current.update();
-          
           finishAnimation();
         }
       });
