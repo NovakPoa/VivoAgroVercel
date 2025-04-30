@@ -15,7 +15,7 @@ const HIDE_TABLET_DELAY = 12000;                  // inicia quando card com time
 const START_END_PRODUCT_DELAY = 13000;          // inicia quando card com timer termina  
 
 const SMALL_OBJECT_POSITION = [0, 1.2, 0.5];
-const CAMERA_ROTATION = [0, -180, 0];
+const CAMERA_TARGET = [0, 1.7, 10];
 const INITIAL_PLACEHOLDER_POSITIONS = [
   [0, 0, 0],
   [0, 0, 0],
@@ -45,7 +45,7 @@ const GestaoMaquinarioScene = () => {
   } = useProductScene(
     PRODUCT_ID,
     INITIAL_PLACEHOLDER_POSITIONS, 
-    CAMERA_ROTATION,
+    CAMERA_TARGET,
     START_NEON_DELAY,
     START_FIRST_ANIMATION_DELAY,
     SHOW_TIMER_CARD_DELAY,

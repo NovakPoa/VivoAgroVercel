@@ -1,153 +1,90 @@
-import { useEffect, useRef, useCallback, useMemo } from 'react';
-import { gsap } from 'gsap';
-import { PerspectiveCamera, CameraControls } from '@react-three/drei';
-import { useThree } from '@react-three/fiber';
+import { useEffect, useRef } from 'react';
+import { CameraControls } from '@react-three/drei';
+import { useThree, useFrame } from '@react-three/fiber'; 
 import useCameraStore from '../../stores/CameraStore';
 
-const INITIAL_CAMERA_POSITION = [0, 1.7, 0];
-const INITIAL_ROTATION = [0, -90, 0];
-const ENABLE_DEBUG_CONTROLS = false;
-
-const BASE_FOV = 700;
-const REFERENCE_ASPECT = 16/9;
-const FOV_ADJUSTMENT_FACTOR = 0.4; 
-const MIN_FOV = 50;
-const MAX_FOV = 80;
+const CAMERA_POSITION = [0, 1.7, 0];
+const INITIAL_TARGET = [10, 1.7, 0];
 
 const Camera = () => {
-  const isAnimating = useRef(false);
-  const cameraRef = useRef();
   const controlsRef = useRef();
-  
-  const { size} = useThree();
-  
+  const isAnimating = useRef(false);
+  const { camera } = useThree();
+
+  // Obtendo estados do CameraStore para animação
   const cameraAnimate = useCameraStore(state => state.cameraAnimate);
-  const cameraTargetPoint = useCameraStore(state => state.cameraTargetPoint);
+  const currentTarget = useCameraStore(state => state.currentTarget);
   const animationDuration = useCameraStore(state => state.animationDuration);
-  const finishAnimation = useCameraStore(state => state.finishAnimation);  
+  const finishAnimation = useCameraStore(state => state.finishAnimation);
   const resetCamera = useCameraStore(state => state.resetCamera);
-  
-  const aspectRatio = size.width / size.height;
-  //const isPortrait = aspectRatio < 1;
-  
-  const adjustedFOV = useMemo(() => {
-    const aspectDifference = REFERENCE_ASPECT / aspectRatio;
-    const calculatedFOV = BASE_FOV * (1 + (aspectDifference - 1) * FOV_ADJUSTMENT_FACTOR);
 
-    return Math.min(Math.max(calculatedFOV, MIN_FOV), MAX_FOV);
-  }, [aspectRatio, BASE_FOV]);
-  
-  // Debug: mostrar valores atualizados
-/*   useEffect(() => {
-    console.log(`Aspect ratio: ${aspectRatio}, FOV: ${adjustedFOV}`);
-  }, [aspectRatio, adjustedFOV]); */
-
-
-  const rotationInRadians = [
-    INITIAL_ROTATION[0] * Math.PI / 180,
-    INITIAL_ROTATION[1] * Math.PI / 180,
-    INITIAL_ROTATION[2] * Math.PI / 180
-  ];
-
-  // Reset da câmera
+  // Define posiçoes iniciais
   useEffect(() => {
-    if (!cameraRef.current || !resetCamera) return;
-    
-    const camera = cameraRef.current;
-    
-    if (isAnimating.current) {
-      gsap.killTweensOf(camera.rotation);
-      isAnimating.current = false;
+    if (controlsRef.current) {
+      controlsRef.current.setLookAt(
+        CAMERA_POSITION[0], 
+        CAMERA_POSITION[1], 
+        CAMERA_POSITION[2],
+        INITIAL_TARGET[0], 
+        INITIAL_TARGET[1], 
+        INITIAL_TARGET[2], 
+        false 
+      );
+
+      controlsRef.current.mouseButtons.wheel = 0;
+      controlsRef.current.mouseButtons.middle = 0;
+      controlsRef.current.mouseButtons.left = 0;
+      controlsRef.current.mouseButtons.right = 0;
+      controlsRef.current.touches.one = 0;
+      controlsRef.current.touches.two = 0;
+      controlsRef.current.touches.three = 0;
+
+      controlsRef.current.update(0);
     }
-    
-    camera.rotation.set(...rotationInRadians);
-    camera.updateProjectionMatrix();
-    
-  }, [resetCamera, rotationInRadians]);
-
-  const animateCamera = useCallback((targetPoint) => {
-    if (!cameraRef.current || isAnimating.current) return;
-    
-    const camera = cameraRef.current;
-    isAnimating.current = true;
-    
-    const targetRotation = {
-      x: targetPoint[0],
-      y: targetPoint[1],
-      z: targetPoint[2]
-    };
-    
-    const currentRotation = {
-      x: camera.rotation.x * 180 / Math.PI,
-      y: camera.rotation.y * 180 / Math.PI,
-      z: camera.rotation.z * 180 / Math.PI
-    };
-
-    gsap.to(currentRotation, {
-      duration: animationDuration,
-      x: targetRotation.x,
-      y: targetRotation.y,
-      z: targetRotation.z,
-      onUpdate: () => {
-        camera.rotation.set(
-          currentRotation.x * Math.PI / 180,
-          currentRotation.y * Math.PI / 180,
-          currentRotation.z * Math.PI / 180
-        );
-        camera.updateProjectionMatrix();
-      },
-      onComplete: () => {
-        camera.rotation.set(
-          targetRotation.x * Math.PI / 180,
-          targetRotation.y * Math.PI / 180,
-          targetRotation.z * Math.PI / 180
-        );
-        camera.updateProjectionMatrix();
-        
-        isAnimating.current = false;
-        finishAnimation();
-      },
-      ease: "power2.inOut"
-    });
-  }, [animationDuration, finishAnimation]);
+  }, [camera]);
 
   useEffect(() => {
-    if (cameraAnimate && cameraRef.current) {
-      animateCamera(cameraTargetPoint);
-    }
-  }, [cameraAnimate, cameraTargetPoint, animateCamera]);
+    if (controlsRef.current && cameraAnimate) {
+      
+      isAnimating.current = true;
 
-  useEffect(() => {
-    if (cameraRef.current) {
-      cameraRef.current.layers.enable(1);
+      controlsRef.current.setLookAt(
+        CAMERA_POSITION[0], 
+        CAMERA_POSITION[1], 
+        CAMERA_POSITION[2],
+        currentTarget[0], 
+        currentTarget[1], 
+        currentTarget[2], 
+        true, 
+        {
+          duration: animationDuration,
+          onComplete: () => {
+            console.log("Animação de câmera concluída");
+            finishAnimation();
+          }
+        }
+      );
     }
-  }, []);
+  }, [cameraAnimate, currentTarget, animationDuration, finishAnimation]);
+    
+  useFrame((state, delta) => {
+    if (controlsRef.current) {
+      controlsRef.current.update(delta);
+      
+      // Opcional: logging para debug
+      if (isAnimating.current && delta > 0) {
+        console.log("Atualizando animação, delta:", delta);
+      }
+    }
+  });
 
   return (
-    <>
-      <PerspectiveCamera
-        ref={cameraRef}
-        makeDefault
-        fov={adjustedFOV}
-        position={INITIAL_CAMERA_POSITION}
-        rotation={rotationInRadians}
-        near={0.1}
-        far={1000}
-      />
-
-      {ENABLE_DEBUG_CONTROLS && (
-        <CameraControls 
-          ref={controlsRef}
-          makeDefault
-          enabled={ENABLE_DEBUG_CONTROLS}
-          mouseButtons={{
-            left: 1,
-            right: 2 | 64,
-            wheel: 8
-          }}
-        />
-      )}
-    </>
+    <CameraControls 
+      ref={controlsRef}
+      makeDefault
+      camera={camera}
+      enabled={false}
+    />
   );
 };
 

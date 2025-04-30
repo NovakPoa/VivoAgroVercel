@@ -10,7 +10,7 @@ import useComponentVisibility from './useComponentVisibility';
 const useProductScene = (
   productId, 
   initialPlaceholderPositions, 
-  cameraRotation,
+  cameraTarget,
   startNeonDelay = 0, // inicia quando slot é selecionado
   startFirstAnimationDelay = 0, // inicia quando slot é selecionado
   showTimerCardDelay = 0, // inicia quando slot é selecionado
@@ -32,7 +32,7 @@ const useProductScene = (
   } = useInteractionStore(); 
   const { setShowDashboard } = useDashboardStore();
   const { setSlotsLength, setShowSlots, setSelectedIndex, selectedIndex } = useSlotsStore();
-  const { registerProductRotation } = useCameraStore();
+  const { registerProductTarget } = useCameraStore();
   const { setShowEndCard } = useEndStore();
 
   const [shouldRenderMainObject, setShouldRenderMainObject] = useState(false);
@@ -57,8 +57,8 @@ const useProductScene = (
 
   // Registrar a rotação da câmera para este produto
   useEffect(() => {
-    if (cameraRotation) {
-      registerProductRotation(productId, cameraRotation);
+    if (cameraTarget) {
+      registerProductTarget(productId, cameraTarget);
     }
   }, []);
   

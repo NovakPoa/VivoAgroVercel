@@ -1,28 +1,43 @@
 import { create } from 'zustand';
 
 const cameraStore = (set, get) => ({
-  cameraTargetPoint: [0, 0, 0],
+  currentTarget: [0, 0, 0], 
+  
+  // Controle de animação
   cameraAnimate: false,
   animationDuration: 2,
-  productRotations: {},
+  
+  // Armazenar targets por produto
+  productTargets: {},
   resetCamera: false,
   
-  registerProductRotation: (productId, rotation) => set(state => ({
-    productRotations: {
-      ...state.productRotations,
-      [productId]: rotation
+  // Registrar target para um produto
+  registerProductTarget: (productId, target) => set(state => ({
+    productTargets: {
+      ...state.productTargets,
+      [productId]: target
     }
   })),
   
+  // Animar câmera para olhar para o target do produto
   animateToProduct: (productId, duration = 2) => {
-    const rotation = get().productRotations[productId];
-    if (rotation) {
+    const target = get().productTargets[productId];
+    if (target) {
       set({
         cameraAnimate: true,
-        cameraTargetPoint: rotation,
+        currentTarget: target,
         animationDuration: duration
       });
     }
+  },
+  
+  // Animar câmera para um target específico
+  animateToTarget: (target, duration = 2) => {
+    set({
+      cameraAnimate: true,
+      currentTarget: target,
+      animationDuration: duration
+    });
   },
   
   finishAnimation: () => set({
@@ -36,7 +51,6 @@ const cameraStore = (set, get) => ({
       set({ resetCamera: false });
     }, 100);
   },
-
 });
 
 const useCameraStore = create(cameraStore);
