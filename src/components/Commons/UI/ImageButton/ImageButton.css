@@ -105,3 +105,10 @@
     height: 42vh;
   }
 }
+/* width breakpoints */
+@media (max-width: 576px) {
+  .image-button {
+    height: 18vh;
+    max-width: 100%;;
+  }
+}
