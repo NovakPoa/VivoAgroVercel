@@ -57,8 +57,11 @@ const Camera = () => {
       const startAngle = Math.atan2(currentZ, currentX);
       const endAngle = Math.atan2(currentTarget[2], currentTarget[0]);
       
-      // Calcular o raio (distância do centro) para manter consistente
-      const radius = Math.sqrt(
+      // Calcular o raio atual
+      const currentRadius = Math.sqrt(currentX * currentX + currentZ * currentZ);
+
+      // Calcular o raio do target
+      const targetRadius = Math.sqrt(
         currentTarget[0] * currentTarget[0] + 
         currentTarget[2] * currentTarget[2]
       );
@@ -66,19 +69,21 @@ const Camera = () => {
       // Objeto para animar o ângulo e a altura Y
       const animObj = { 
         angle: startAngle,
-        y: currentY 
+        y: currentY,
+        radius: currentRadius
       };
       
-      // Criar animação com GSAP para girar horizontalmente e ajustar Y
+      // Criar animação com GSAP
       gsapAnimationRef.current = gsap.to(animObj, {
         angle: endAngle,
         y: targetY,
+        radius: targetRadius,
         duration: animationDuration,
-        ease: "power1.inOut", 
+        ease: "power2.inOut", 
         onUpdate: () => {
           // Calcular novas coordenadas X e Z baseadas no ângulo
-          const newX = Math.cos(animObj.angle) * radius;
-          const newZ = Math.sin(animObj.angle) * radius;
+          const newX = Math.cos(animObj.angle) * animObj.radius;
+          const newZ = Math.sin(animObj.angle) * animObj.radius;
           
           // Atualizar a posição do target
           controlsRef.current.target.set(newX, animObj.y, newZ);

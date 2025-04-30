@@ -16,7 +16,9 @@ const useProductScene = (
   showTimerCardDelay = 0, // inicia quando slot é selecionado
   showTabletDelay = 0, // inicia quando card com timer termina
   hideTabletDelay = 0, // inicia quando card com timer termina  
-  endProductDelay = 0 // inicia quando card com timer termina
+  endProductDelay = 0, // inicia quando card com timer termina
+  smallObjectLookAt,
+  placeholderLookAtOffset = [0, 1.5, 0],
 ) => {
   const { currentProduct, setLastProductName, skipProduct }  = useProductsStore();  
   const { 
@@ -32,7 +34,7 @@ const useProductScene = (
   } = useInteractionStore(); 
   const { setShowDashboard } = useDashboardStore();
   const { setSlotsLength, setShowSlots, setSelectedIndex, selectedIndex } = useSlotsStore();
-  const { registerProductTarget } = useCameraStore();
+  const { registerProductTarget, animateToTarget } = useCameraStore();
   const { setShowEndCard } = useEndStore();
 
   const [shouldRenderMainObject, setShouldRenderMainObject] = useState(false);
@@ -71,6 +73,9 @@ const useProductScene = (
   // Iniciar primeira interação
   useEffect(() => {
     if (showInteraction && isCurrentProduct) {
+
+      animateToTarget(smallObjectLookAt, 1);
+
       setShouldRenderMainObject(false);
       setShouldPlaySecondAnimation(false);
       setShouldSkipProduct(false);
@@ -131,7 +136,8 @@ const useProductScene = (
     if (isCurrentProduct) {
       setShowFirstInstruction(false);
       setShowFirstInteraction(false);
-      
+      animateToTarget(position.map((value, index) => value + placeholderLookAtOffset[index]), 1);
+
       timerToStartFirstAnimation(position);
       timerToStartNeonAnimation();
       timerToStartTimerCard();

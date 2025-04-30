@@ -15,12 +15,14 @@ const HIDE_TABLET_DELAY = 12000;                  // inicia quando card com time
 const START_END_PRODUCT_DELAY = 13000;          // inicia quando card com timer termina  
 
 const SMALL_OBJECT_POSITION = [0, 1.2, 0.5];
+const SMALL_OBJECT_LOOKAT = [0, 0.8, 10];
 const CAMERA_TARGET = [0, 1.7, 10];
 const INITIAL_PLACEHOLDER_POSITIONS = [
   [0, 0, 0],
   [0, 0, 0],
   [0, 0, 0],
 ];
+const PLACEHOLDER_LOOKAT_OFFSET = [0, 0, 0];
 const TABLET = {
   position: [-0.4, 1.2, 0.8],
   rotation: [0, 0.2, 0],
@@ -51,7 +53,9 @@ const GestaoMaquinarioScene = () => {
     SHOW_TIMER_CARD_DELAY,
     SHOW_TABLET_DELAY,
     HIDE_TABLET_DELAY,
-    START_END_PRODUCT_DELAY,     
+    START_END_PRODUCT_DELAY,  
+    SMALL_OBJECT_LOOKAT,  
+    PLACEHOLDER_LOOKAT_OFFSET 
   );
   
   const tratorPositionsRef = useRef(INITIAL_PLACEHOLDER_POSITIONS);
