@@ -13,7 +13,8 @@ export default function useProductNavigation() {
     currentProduct, 
     setStartProduct, 
     setLastProductName,
-    lastProductName
+    lastProductName,
+    setSkipProduct
   } = useProductsStore();
   const { setShowInteraction } = useInteractionStore();
   const { setShowDashboard } = useDashboardStore();
@@ -23,6 +24,7 @@ export default function useProductNavigation() {
   const timerRef = useRef(null);
 
   const endProduct = useCallback(() => {
+    setSkipProduct(true);
     useProductsStore.getState().completeProduct(currentProduct);
     setLastProductName(currentProduct);
     setShowInteraction(false);
@@ -68,7 +70,7 @@ export default function useProductNavigation() {
 
   const onContinueClick = useCallback(() => {
     setShowCard(false);
-    
+    setSkipProduct(false);
     if (timerRef.current) clearTimeout(timerRef.current);
     timerRef.current = setTimeout(() => {
       setShowInteraction(true);

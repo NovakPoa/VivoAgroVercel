@@ -11,7 +11,8 @@ const productsStore = (set, get) => ({
     'gestao-pecuaria': 'locked',
     'clima-inteligente': 'locked',
   },
-  
+  skipProduct: false,
+  setSkipProduct: (value) => set({ skipProduct: value }),
   setStartProduct: (start) => set({ startProduct: start }),
   setCurrentProduct: (name) => set({ currentProduct: name }),
   setLastProductName: (name) => set({ lastProductName: name }),

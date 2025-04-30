@@ -40,7 +40,8 @@ const GestaoMaquinarioScene = () => {
     smallObjectVisible,    
     handlePlaceholderAnimationOutEnded,
     handleSmallObjAnimationOutEnded,
-    shouldPlaySecondAnimation    
+    shouldPlaySecondAnimation,
+    shouldSkipProduct    
   } = useProductScene(
     PRODUCT_ID,
     INITIAL_PLACEHOLDER_POSITIONS, 
@@ -95,6 +96,7 @@ const GestaoMaquinarioScene = () => {
           position={dispositivoPosition} 
           scale={1.5}
           playSecondAnimation={shouldPlaySecondAnimation}
+          skipProduct={shouldSkipProduct}
         />
       )}
 

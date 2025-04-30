@@ -38,7 +38,8 @@ const ClimaInteligenteScene = () => {
     smallObjectVisible,    
     handlePlaceholderAnimationOutEnded,
     handleSmallObjAnimationOutEnded,
-    shouldPlaySecondAnimation      
+    shouldPlaySecondAnimation,
+    shouldSkipProduct      
   } = useProductScene(
     PRODUCT_ID,
     INITIAL_PLACEHOLDER_POSITIONS, 
@@ -54,7 +55,7 @@ const ClimaInteligenteScene = () => {
   return (
     <group>
       {shouldRenderMainObject && selectedPosition && (
-        <Estacao position={selectedPosition} playSecondAnimation={shouldPlaySecondAnimation} />
+        <Estacao position={selectedPosition} playSecondAnimation={shouldPlaySecondAnimation} skipProduct={shouldSkipProduct} />
       )}    
 
       {shouldRenderPlaceholders && (

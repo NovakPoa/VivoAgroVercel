@@ -41,7 +41,8 @@ const GestaoPecuariaScene = () => {
     smallObjectVisible,    
     handlePlaceholderAnimationOutEnded,
     handleSmallObjAnimationOutEnded,
-    shouldPlaySecondAnimation       
+    shouldPlaySecondAnimation,
+    shouldSkipProduct       
   } = useProductScene(
     PRODUCT_ID,
     INITIAL_PLACEHOLDER_POSITIONS, 
@@ -97,6 +98,7 @@ const GestaoPecuariaScene = () => {
           position={dispositivoPosition} 
           scale={0.5}
           playSecondAnimation={shouldPlaySecondAnimation}
+          skipProduct={shouldSkipProduct}
         />
       )}
 

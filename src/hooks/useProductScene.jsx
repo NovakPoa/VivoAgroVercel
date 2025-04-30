@@ -18,7 +18,7 @@ const useProductScene = (
   hideTabletDelay = 0, // inicia quando card com timer termina  
   endProductDelay = 0 // inicia quando card com timer termina
 ) => {
-  const { currentProduct, setLastProductName }  = useProductsStore();  
+  const { currentProduct, setLastProductName, skipProduct }  = useProductsStore();  
   const { 
     showInteraction, 
     setShowFirstInstruction, 
@@ -41,6 +41,7 @@ const useProductScene = (
   const [selectedPosition, setSelectedPosition] = useState(null);
   const [placeholderPositions, setPlaceholderPositions] = useState (initialPlaceholderPositions || []);
   const [animateTablet, setAnimateTablet] = useState(false);
+  const [shouldSkipProduct, setShouldSkipProduct] = useState (skipProduct);
 
   // Placeholders Visibility
   const [placeholdersVisible, setPlaceholdersVisible] = useState(false);
@@ -70,10 +71,21 @@ const useProductScene = (
   // Iniciar primeira interação
   useEffect(() => {
     if (showInteraction && isCurrentProduct) {
+      setShouldRenderMainObject(false);
+      setShouldPlaySecondAnimation(false);
+      setShouldSkipProduct(false);
       setShowFirstInstruction(true);
       setShowFirstInteraction(true);
     }
   }, [showInteraction, isCurrentProduct]);
+
+  useEffect(() => {
+    if (skipProduct && isCurrentProduct) {
+      setSelectedPosition(placeholderPositions[1]);
+      setShouldSkipProduct(true);
+      setShouldRenderMainObject(true);
+    }
+  }, [skipProduct, isCurrentProduct]);
 
   // Configurar slots quando a primeira interação é mostrada
   useEffect(() => {
@@ -192,7 +204,8 @@ const useProductScene = (
     smallObjectVisible,
     shouldRenderSmallObject,
     handleSmallObjAnimationOutEnded,
-    shouldPlaySecondAnimation
+    shouldPlaySecondAnimation,
+    shouldSkipProduct
   };
 };
 

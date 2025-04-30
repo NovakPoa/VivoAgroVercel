@@ -1,22 +1,31 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useCallback } from 'react';
 import { useGLTFAnimations } from '../../../../../../hooks/useGLTFAnimations';
 
 const MODEL_PATH = '/models/products/AgroCobertura/Antena.glb';
 
-const Antena = ({position, rotation = [0, 0, 0], scale = 1, playSecondAnimation = false}) => {
+const Antena = ({position, rotation = [0, 0, 0], scale = 1, playSecondAnimation = false, skipProduct = false}) => {
   const meshRef = useRef();
-  const { scene, play } = useGLTFAnimations(MODEL_PATH, {
+  const { scene, play, jumpToEnd } = useGLTFAnimations(MODEL_PATH, {
     cloneScene: false,
   });
 
   useEffect(() => {
-    if (scene) {
+    if (!scene) return;
+
+    if (!skipProduct) {
       play('scale-in', { //conferir nome da animaçao
         loop: false, 
         timeScale: 2.4
       });
+    } else {
+      jumpToEnd('scale-in');//conferir nome da animaçao
+      jumpToEnd('scaleInRings');//conferir nome da animaçao
+      play('animateRings', { //conferir nome da animaçao
+        loop: true, 
+        timeScale: 2.4,
+      });       
     }
-  }, []);
+  }, [scene, skipProduct, play, jumpToEnd]);
 
   useEffect(() => {
     if (playSecondAnimation) {
@@ -26,14 +35,14 @@ const Antena = ({position, rotation = [0, 0, 0], scale = 1, playSecondAnimation 
         onFinish: onAnimationEnded
       });
     }
-  }, [playSecondAnimation]);
+  }, [play, playSecondAnimation]);
 
   const onAnimationEnded = useCallback(() => {
     play('animateRings', { //conferir nome da animaçao
       loop: true, 
       timeScale: 2.4,
     }); 
-  }, []);  
+  }, [play]);  
 
   if (!scene) return null;
 

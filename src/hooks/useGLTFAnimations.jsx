@@ -225,6 +225,30 @@ export function useGLTFAnimations(modelPath, options = {}) {
     setActiveAnimations(new Set());
   }, []);
 
+  const jumpToEnd = useCallback((name) => {
+    if (!mixerRef.current || !name) {
+      console.warn('É necessário fornecer um nome de animação para jumpToEnd()');
+      return;
+    }
+        
+    const action = actionsRef.current[name];
+    if (!action) {
+      console.warn(`Animação "${name}" não encontrada no modelo.`);
+      return;
+    }
+    
+    // Parar a animação atual se estiver rodando
+    stop(name);
+    
+    // Definir para o último frame e aplicar uma única atualização
+    action.time = action._clip.duration;
+    action.play();
+    action.paused = true;
+    mixerRef.current.update(0.01);
+    action.stop();
+    
+  }, [stop]);
+
   return {
     scene,
     isPlaying: activeAnimations.size > 0,
@@ -233,6 +257,7 @@ export function useGLTFAnimations(modelPath, options = {}) {
     play,   
     playAll, 
     stop,  
-    stopAll 
+    stopAll,
+    jumpToEnd
   };
 }
