@@ -30,9 +30,9 @@ const Camera = () => {
         INITIAL_TARGET[2]
       );
       
-      controlsRef.current.enableZoom = false;
-      controlsRef.current.enablePan = false;
-      controlsRef.current.enableRotate = false;
+      controlsRef.current.enableZoom = true;
+      controlsRef.current.enablePan = true;
+      controlsRef.current.enableRotate = true;
       controlsRef.current.enableDamping = true;
       controlsRef.current.dampingFactor = 0.1;
       

@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
 import useNeonEffect from '../../../../../hooks/useNeonEffect';
-import useIntroStore from '../../../../../stores/IntroStore';
 
-const MODEL_PATH = '/models/intro/IntroNeon.glb';
+const MODEL_PATH = '/models/products/GestaoMaquinario/MaquinarioNeon.glb';
 
-const IntroNeon = ({ 
-  position = [8, 6, -5], 
+const MaquinarioNeon = ({ 
+  position = [8, 6, 5], 
   rotation = [0, 3.14, 0], 
   scale = [3, 1, 1], 
   animationDuration = 6,
@@ -14,7 +13,6 @@ const IntroNeon = ({
   invertDirection = false,
   bloomStrength = 2.0
 }) => {
-  const { setIntroNeonVisibility } = useIntroStore();
   
   const { modelRef, startAnimation } = useNeonEffect({
     modelPath: MODEL_PATH,
@@ -25,10 +23,9 @@ const IntroNeon = ({
     bloomStrength,
     animationDuration,
     fadeOutDuration,
-    onFadeOutComplete: () => setIntroNeonVisibility(false)
+    //onFadeOutComplete: () => setIntroNeonVisibility(false)
   });
 
-  // Iniciar animação automaticamente como no código original
   useEffect(() => {
     startAnimation();
   }, []);
@@ -43,4 +40,4 @@ const IntroNeon = ({
   );
 };
 
-export default IntroNeon;
+export default MaquinarioNeon;

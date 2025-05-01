@@ -23,13 +23,14 @@ const assets = {
     
     // Intro
     '/models/intro/LogoVivoAgro.glb',
-    '/models/Intro/IntroNeon.glb',
+    '/models/intro/IntroNeon.glb',
 
     // Products
     //  AgroCobertura
     '/models/products/AgroCobertura/Antena.glb',
     '/models/products/AgroCobertura/AntenaSmall.glb',
     '/models/products/AgroCobertura/TabletAgro.glb',
+    '/models/products/AgroCobertura/AgroNeon.glb',
     //  GestaoMaquinario
     '/models/products/GestaoMaquinario/DispositivoMaquinario.glb',
     '/models/products/GestaoMaquinario/DispositivoMaquinarioSmall.glb',
@@ -37,6 +38,7 @@ const assets = {
     '/models/products/GestaoMaquinario/TratorB3.glb',
     '/models/products/GestaoMaquinario/TratorC3.glb',
     '/models/products/GestaoMaquinario/TabletMaquinario.glb',
+    '/models/products/GestaoMaquinario/MaquinarioNeon.glb',
     //  GestaoPecuaria
     '/models/products/GestaoPecuaria/DispositivosPecuaria.glb',
     '/models/products/GestaoPecuaria/Brinco.glb',
@@ -44,10 +46,12 @@ const assets = {
     '/models/products/GestaoPecuaria/VacaHolandesa.glb',
     '/models/products/GestaoPecuaria/VacaNelore.glb',
     '/models/products/GestaoPecuaria/TabletPecuaria.glb',
+    '/models/products/GestaoPecuaria/PecuariaNeon.glb',
     //  ClimaInteligente
     '/models/products/ClimaInteligente/Estacao.glb',
     '/models/products/ClimaInteligente/EstacaoSmall.glb',
     '/models/products/ClimaInteligente/TabletClima.glb',
+    '/models/products/ClimaInteligente/ClimaNeon.glb',
 
   ],
   textures: [

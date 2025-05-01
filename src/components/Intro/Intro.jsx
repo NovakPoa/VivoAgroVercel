@@ -27,11 +27,12 @@ const Intro = () => {
 
   const timerToStartNeonAnimation = useCallback(() => {
     setTimeout(() => {
+      setIntroNeonVisibility(true);
       animateToTarget([7, 2.2, -3], 1.5);
       setTimeout(() => {
         animateToTarget([10, 2.3, 0], 1.5);
       }, 2000);      
-      setIntroNeonVisibility(true);
+
     }, START_NEON_DELAY);
   }, []);
 
