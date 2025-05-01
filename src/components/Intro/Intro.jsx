@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import IntroCard from './UI/IntroCard';
 import useIntroStore from '../../stores/IntroStore';
+import useCameraStore from '../../stores/CameraStore';
 import useProductsStore from '../../stores/ProductsStore';
 
 const START_PRODUCTS_DELAY = 6000;
@@ -11,6 +12,7 @@ const Intro = () => {
   const [showCard, setShowCard] = useState(false);
   const { setIntroLogoVisibility, setIntroNeonVisibility } = useIntroStore();
   const { setCurrentProduct, setStartProduct } = useProductsStore();
+  const { animateToTarget } = useCameraStore();
 
   useEffect(() => {
     setShowCard(true); 
@@ -25,6 +27,10 @@ const Intro = () => {
 
   const timerToStartNeonAnimation = useCallback(() => {
     setTimeout(() => {
+      animateToTarget([7, 2.2, -3], 1.5);
+      setTimeout(() => {
+        animateToTarget([10, 2.3, 0], 1.5);
+      }, 2000);      
       setIntroNeonVisibility(true);
     }, START_NEON_DELAY);
   }, []);

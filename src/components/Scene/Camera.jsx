@@ -46,13 +46,13 @@ const Camera = () => {
       if (gsapAnimationRef.current) {
         gsapAnimationRef.current.kill();
       }
-      
+
       // Obter posição atual do target
       const currentX = controlsRef.current.target.x;
       const currentY = controlsRef.current.target.y;
       const currentZ = controlsRef.current.target.z;
       const targetY = currentTarget[1];
-      
+
       // Calcular ângulos para animação circular horizontal
       const startAngle = Math.atan2(currentZ, currentX);
       const endAngle = Math.atan2(currentTarget[2], currentTarget[0]);
@@ -100,7 +100,7 @@ const Camera = () => {
         }
       });
     }
-  }, [cameraAnimate, currentTarget, animationDuration, finishAnimation]);
+  }, [cameraAnimate]);
 
   return (
     <OrbitControls
