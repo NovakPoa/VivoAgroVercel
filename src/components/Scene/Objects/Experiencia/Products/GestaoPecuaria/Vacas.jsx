@@ -2,6 +2,7 @@ import React, { useRef, forwardRef, useEffect } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { useGLTFAnimations } from '../../../../../../hooks/useGLTFAnimations';
 import * as THREE from 'three';
+import useSoundStore from '../../../../../../stores/SoundStore';
 
 const MODELS = [
   {
@@ -76,7 +77,79 @@ const Vaca = forwardRef(({ path, position, rotation, scale, onMeshFound, index }
 
 const Vacas = ({ onObjectPositionUpdate }) => {
   const vacaRefs = useRef([]);
+  const { playSound, stopSound } = useSoundStore();
+  const soundIdRef = useRef(null);
+  const isPlayingRef = useRef(false);
+  const timerRef = useRef(null);
   
+  const SOUND_POSITION = [0, 1.6, -3];
+
+  const soundConfig = {
+    minTimeBetweenSounds: 5,
+    maxTimeBetweenSounds: 15,
+    minVolume: 0.6,
+    maxVolume: 1.0,
+    minPitch: 0.8,
+    maxPitch: 1.2
+  };
+  
+  // Função para reproduzir um som aleatório
+  const playRandomSound = () => {
+    if (isPlayingRef.current) return;
+    
+    const soundId = Math.random() > 0.5 ? 'VACA_A' : 'VACA_B';
+    const volume = Math.random() * 
+      (soundConfig.maxVolume - soundConfig.minVolume) + soundConfig.minVolume;
+    const rate = Math.random() * 
+      (soundConfig.maxPitch - soundConfig.minPitch) + soundConfig.minPitch;
+    
+    // Reproduzir o som em posição fixa
+    const id = playSound(soundId, {
+      volume,
+      rate,
+      spatial: true,
+      position: SOUND_POSITION,
+      onEnd: () => {
+        isPlayingRef.current = false;
+        soundIdRef.current = null;
+        scheduleNextSound();
+      }
+    });
+    
+    isPlayingRef.current = true;
+    soundIdRef.current = { id, soundId };
+  };
+  
+  // Agendar o próximo som
+  const scheduleNextSound = () => {
+    const delay = (Math.random() * 
+      (soundConfig.maxTimeBetweenSounds - soundConfig.minTimeBetweenSounds) + 
+      soundConfig.minTimeBetweenSounds) * 1000;
+    
+    timerRef.current = setTimeout(() => {
+      playRandomSound();
+    }, delay);
+  };
+  
+  useEffect(() => {
+    // Iniciar os sons com um pequeno atraso inicial
+    timerRef.current = setTimeout(() => {
+      playRandomSound();
+    }, 500);
+    
+    // Cleanup
+    return () => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
+      
+      if (soundIdRef.current) {
+        stopSound(soundIdRef.current.soundId, soundIdRef.current.id);
+        soundIdRef.current = null;
+      }
+    };
+  }, []);
+
   return (
     <group name="vacas">
       {MODELS.map((model, index) => (

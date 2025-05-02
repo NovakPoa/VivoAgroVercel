@@ -89,9 +89,11 @@ const assets = {
     NEON_APPEAR: '/audio/Produtos/Geral/Swoosh.wav',
     ACTIVATION: '/audio/Produtos/Geral/Activation.wav',
     ENDING: '/audio/Produtos/Geral/Ending.wav',
+
     // Sons de produtos
-/*     ANTENA_MOVE: '/sounds/products/antena_move.mp3',
-    TABLET_APPEAR: '/sounds/products/tablet_appear.mp3', */
+    TRATOR: '/audio/Produtos/GestaoMaquinario/tractor.wav',
+    VACA_A: '/audio/Produtos/GestaoPecuaria/Vaca-A.wav',
+    VACA_B: '/audio/Produtos/GestaoPecuaria/Vaca-B.wav',
     
     // Ambiente
     AMBIENT: '/audio/Fazenda/Ambiance.wav',
