@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useGLTF } from '@react-three/drei';
+import useSoundStore from '../../../../stores/SoundStore';
 
 const MODELS = [
   {
@@ -35,6 +36,26 @@ const MODELS = [
 ];
 
 const Fazenda = () => {
+  const ambientSoundRef = useRef(null);
+  const { playSound, stopSound } = useSoundStore();
+
+  useEffect(() => {
+    // Tocar som ambiente em loop
+    ambientSoundRef.current = playSound('AMBIENT', {
+      volume: 0.4,   
+      loop: true,  
+      spatial: false  
+    });
+    
+    // Limpar som ao desmontar o componente
+    return () => {
+      if (ambientSoundRef.current) {
+        stopSound('AMBIENT', ambientSoundRef.current);
+        ambientSoundRef.current = null;
+      }
+    };
+  }, [playSound, stopSound]);
+
   return (
     <group name="fazenda">
       {MODELS.map((model, index) => (

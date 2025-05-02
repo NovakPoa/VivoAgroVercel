@@ -93,7 +93,7 @@ const assets = {
     TABLET_APPEAR: '/sounds/products/tablet_appear.mp3', */
     
     // Ambiente
-  /*   AMBIENT_FARM: '/sounds/ambient/farm.mp3' */
+    AMBIENT: '/audio/Fazenda/Ambiance.wav',
   }    
 };
 
