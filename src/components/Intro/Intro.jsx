@@ -12,7 +12,7 @@ const Intro = () => {
   const [showCard, setShowCard] = useState(false);
   const { setIntroLogoVisibility, setIntroNeonVisibility } = useIntroStore();
   const { setCurrentProduct, setStartProduct } = useProductsStore();
-  const { animateToTarget } = useCameraStore();
+  const { animateToTarget, setFreeLookMode } = useCameraStore();
 
   useEffect(() => {
     setShowCard(true); 
@@ -44,6 +44,7 @@ const Intro = () => {
 
   const onButtonClick = useCallback(() => {
     setShowCard(false);
+    setFreeLookMode(false);
     timerToStartLogoAnimation();
     timerToStartNeonAnimation();
     timerToStartProduct();   

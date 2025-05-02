@@ -1,11 +1,11 @@
 import { useEffect, useRef } from 'react';
 import { OrbitControls } from '@react-three/drei';
-import { useThree } from '@react-three/fiber';;
+import { useThree } from '@react-three/fiber';
+import * as THREE from 'three';
 import gsap from 'gsap';
 import useCameraStore from '../../stores/CameraStore';
 
 const CAMERA_POSITION = [0, 1.7, 0];
-const INITIAL_TARGET = [10, 1.7, 0];
 
 const Camera = () => {
   const controlsRef = useRef();
@@ -18,6 +18,7 @@ const Camera = () => {
   const animationDuration = useCameraStore(state => state.animationDuration);
   const finishAnimation = useCameraStore(state => state.finishAnimation);
   const resetCamera = useCameraStore(state => state.resetCamera);
+  const isFreeLookMode = useCameraStore(state => state.isFreeLookMode);
 
   // Configurar posição inicial da câmera
   useEffect(() => {
@@ -25,20 +26,42 @@ const Camera = () => {
       camera.position.set(CAMERA_POSITION[0], CAMERA_POSITION[1], CAMERA_POSITION[2]);
       
       controlsRef.current.target.set(
-        INITIAL_TARGET[0],
-        INITIAL_TARGET[1], 
-        INITIAL_TARGET[2]
+        CAMERA_POSITION[0] + 0.1,
+        CAMERA_POSITION[1] + 0.006, 
+        CAMERA_POSITION[2]
       );
       
-      controlsRef.current.enableZoom = true;
-      controlsRef.current.enablePan = true;
-      controlsRef.current.enableRotate = true;
+      controlsRef.current.enableZoom = false;
+      controlsRef.current.enablePan = false;
       controlsRef.current.enableDamping = true;
       controlsRef.current.dampingFactor = 0.1;
+      controlsRef.current.rotateSpeed = 0.25;
       
       controlsRef.current.update();
     }
   }, [camera]);
+
+  useEffect(() => {
+    if (controlsRef.current) { 
+      if (isFreeLookMode) {
+        controlsRef.current.minDistance = 0.1;
+        controlsRef.current.maxDistance = 0.1;
+        controlsRef.current.enableRotate = true;
+      } else {
+        controlsRef.current.minDistance = 0;
+        controlsRef.current.maxDistance = 100;
+        controlsRef.current.enableRotate = false;
+
+        const direction = new THREE.Vector3();
+        camera.getWorldDirection(direction);
+        const lookDistance = 10;
+        direction.multiplyScalar(lookDistance);  
+        const targetPosition = camera.position.clone().add(direction);      
+        controlsRef.current.target.copy(targetPosition);
+      }
+      controlsRef.current.update();
+    }
+  }, [isFreeLookMode, camera]);
 
   useEffect(() => {
     if (controlsRef.current && cameraAnimate) {

@@ -11,6 +11,9 @@ const cameraStore = (set, get) => ({
   productTargets: {},
   resetCamera: false,
   
+  isFreeLookMode: true, 
+  setFreeLookMode: (isEnabled) => set({ isFreeLookMode: isEnabled }),
+
   // Registrar target para um produto
   registerProductTarget: (productId, target) => set(state => ({
     productTargets: {
