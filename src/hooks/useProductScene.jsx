@@ -6,6 +6,7 @@ import useCameraStore from '../stores/CameraStore';
 import useDashboardStore from '../stores/DashboardStore';
 import useEndStore from '../stores/EndStore';
 import useComponentVisibility from './useComponentVisibility';
+import useSoundStore from '../stores/SoundStore';
 
 const useProductScene = (
   productId, 
@@ -36,6 +37,7 @@ const useProductScene = (
   const { setSlotsLength, setShowSlots, setSelectedIndex, selectedIndex } = useSlotsStore();
   const { registerProductTarget, animateToTarget } = useCameraStore();
   const { setShowEndCard } = useEndStore();
+  const { playSound } = useSoundStore();
 
   const [shouldRenderMainObject, setShouldRenderMainObject] = useState(false);
   const [shouldRenderNeon, setShouldRenderNeon] = useState(false);
@@ -148,13 +150,15 @@ const useProductScene = (
   const endSecondInteraction = useCallback(() => {
     setShowSecondInstruction(false);
     setShowSecondInteraction(false);
+
+    playSound('ACTIVATION', { volume: 0.7 });
     
     setShouldPlaySecondAnimation(true);
     
     timerToShowTablet();
     timerToHideTablet();
     timerToEndProduct();
-  }, [setShowSecondInstruction, endProduct]);
+  }, [setShowSecondInstruction, endProduct, playSound]);
 
   const timerToStartNeonAnimation = useCallback(() => {
     setTimeout(() => {
