@@ -1,19 +1,24 @@
 import React, { useCallback } from 'react';
 import './ImageButton.css';
 import PreloadedImage from '../PreloadedImage/PreloadedImage';
+import useSoundStore from '../../../../stores/SoundStore';
 
 let isAnyImageButtonClicked = false;
 
 const ImageButton = ({ imageUrl, title, status, onClick }) => {
+  const { playSound } = useSoundStore();
 
   const handleClick = useCallback(() => {
     if (status === 'locked' || isAnyImageButtonClicked) return;
+
+    playSound('BUTTON_CLICK', { volume: 0.5 });
+
     isAnyImageButtonClicked = true;
     onClick();
     setTimeout(() => {
       isAnyImageButtonClicked = false;
     }, 800);
-  }, [status, onClick]);
+  }, [status, onClick, playSound]);
 
   return (
     <div

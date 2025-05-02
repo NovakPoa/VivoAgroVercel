@@ -82,8 +82,8 @@ const assets = {
   ],  
   sounds: {
     // Interface
-/*     UI_CLICK: '/sounds/ui/click.mp3',
-    UI_HOVER: '/sounds/ui/hover.mp3', */
+    BUTTON_CLICK: '/audio/Geral/Click.wav',
+    SLOT_CLICK: '/audio/Geral/Grab.wav',
     
     // Efeitos de neon
     NEON_APPEAR: '/audio/Produtos/Geral/Swoosh.wav',

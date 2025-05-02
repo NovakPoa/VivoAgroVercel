@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { ANIMATION_DURATIONS } from '../../../../../config/animationUIConfig';
+import useSoundStore from '../../../../../stores/SoundStore';
 import './Slot.css';
 
 const Slot = ({ onSelected, onAnimationOutEnded, index = 0, isVisible = true, className = '' }) => {
   const [animState, setAnimState] = useState('initial'); // 'initial', 'visible', 'hiding'
   const isActiveRef = useRef(false);
+  const { playSound } = useSoundStore();  
   
   useEffect(() => {
     if (isVisible) {
@@ -24,9 +26,12 @@ const Slot = ({ onSelected, onAnimationOutEnded, index = 0, isVisible = true, cl
   }, [animState]);
 
   const handleClick = useCallback(() => {
+
+    playSound('SLOT_CLICK', { volume: 0.5 });
+
     onSelected(index);
     isActiveRef.current = true;
-  }, []);
+  }, [playSound]);
 
   const style = {
     '--slot-scale-in-duration': `${ANIMATION_DURATIONS.SLOT.SCALE_IN}ms`,
