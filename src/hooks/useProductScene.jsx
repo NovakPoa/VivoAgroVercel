@@ -38,6 +38,7 @@ const useProductScene = (
   const { setShowEndCard } = useEndStore();
 
   const [shouldRenderMainObject, setShouldRenderMainObject] = useState(false);
+  const [shouldRenderNeon, setShouldRenderNeon] = useState(false);
   const [isCurrentProduct, setIsCurrentProduct] = useState(false);
   const [shouldPlaySecondAnimation, setShouldPlaySecondAnimation] = useState(false);
   const [selectedPosition, setSelectedPosition] = useState(null);
@@ -157,9 +158,11 @@ const useProductScene = (
 
   const timerToStartNeonAnimation = useCallback(() => {
     setTimeout(() => {
-      // set neon true
+      if (isCurrentProduct) {
+        setShouldRenderNeon(true);
+      }  
     }, startNeonDelay);
-  }, []);
+  }, [isCurrentProduct]);
 
   const timerToStartFirstAnimation = useCallback((position) => {
     setTimeout(() => {
@@ -214,7 +217,9 @@ const useProductScene = (
     shouldRenderSmallObject,
     handleSmallObjAnimationOutEnded,
     shouldPlaySecondAnimation,
-    shouldSkipProduct
+    shouldSkipProduct,
+    setShouldRenderNeon,
+    shouldRenderNeon
   };
 };
 

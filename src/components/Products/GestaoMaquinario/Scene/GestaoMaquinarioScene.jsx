@@ -5,6 +5,7 @@ import Tratores from '../../../Scene/Objects/Experiencia/Products/GestaoMaquinar
 import DispositivoMaquinario from '../../../Scene/Objects/Experiencia/Products/GestaoMaquinario/DispositivoMaquinario';
 import DispositivoMaquinarioSmall from '../../../Scene/Objects/Experiencia/Products/GestaoMaquinario/DispositivoMaquinarioSmall';
 import TabletMaquinario from '../../../Scene/Objects/Experiencia/Products/GestaoMaquinario/TabletMaquinario';
+import MaquinarioNeon from '../../../Scene/Objects/Experiencia/Products/GestaoMaquinario/MaquinarioNeon';
 
 const PRODUCT_ID = 'gestao-maquinario';
 const START_NEON_DELAY = 0;                 // inicia quando slot é selecionado
@@ -43,7 +44,9 @@ const GestaoMaquinarioScene = () => {
     handlePlaceholderAnimationOutEnded,
     handleSmallObjAnimationOutEnded,
     shouldPlaySecondAnimation,
-    shouldSkipProduct    
+    shouldSkipProduct,
+    shouldRenderNeon,
+    setShouldRenderNeon    
   } = useProductScene(
     PRODUCT_ID,
     INITIAL_PLACEHOLDER_POSITIONS, 
@@ -94,6 +97,10 @@ const GestaoMaquinarioScene = () => {
   return (
     <group>
       <Tratores onObjectPositionUpdate={handleObjectPositionUpdate} />
+
+      {shouldRenderNeon && (
+        <MaquinarioNeon onAnimationEnd={() => setShouldRenderNeon(false)} />
+      )} 
 
       {shouldRenderMainObject && dispositivoPosition && trackedTratorIndexRef.current >= 0 && (
         <DispositivoMaquinario 

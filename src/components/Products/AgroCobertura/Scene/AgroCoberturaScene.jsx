@@ -3,6 +3,7 @@ import Placeholders from '../../../Commons/Scene/Placeholders/Placeholders';
 import useProductScene from '../../../../hooks/useProductScene';
 import Antena from '../../../Scene/Objects/Experiencia/Products/AgroCobertura/Antena';
 import AntenaSmall from '../../../Scene/Objects/Experiencia/Products/AgroCobertura/AntenaSmall';
+import AgroNeon from '../../../Scene/Objects/Experiencia/Products/AgroCobertura/AgroNeon';
 import TabletAgro from '../../../Scene/Objects/Experiencia/Products/AgroCobertura/TabletAgro';
 
 const PRODUCT_ID = 'agro-cobertura';
@@ -41,7 +42,9 @@ const AgroCoberturaScene = () => {
     handlePlaceholderAnimationOutEnded,
     handleSmallObjAnimationOutEnded,
     shouldPlaySecondAnimation,
-    shouldSkipProduct
+    shouldSkipProduct,
+    shouldRenderNeon,
+    setShouldRenderNeon
   } = useProductScene(
     PRODUCT_ID,
     INITIAL_PLACEHOLDER_POSITIONS, 
@@ -61,6 +64,10 @@ const AgroCoberturaScene = () => {
       {shouldRenderMainObject && selectedPosition && (
         <Antena position={selectedPosition} playSecondAnimation={shouldPlaySecondAnimation} skipProduct={shouldSkipProduct}/>
       )}   
+
+      {shouldRenderNeon && (
+        <AgroNeon onAnimationEnd={() => setShouldRenderNeon(false)} />
+      )}  
 
       {shouldRenderPlaceholders && (
         <Placeholders 

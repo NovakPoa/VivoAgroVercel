@@ -4,6 +4,7 @@ import useProductScene from '../../../../hooks/useProductScene';
 import Estacao from '../../../Scene/Objects/Experiencia/Products/ClimaInteligente/Estacao';
 import EstacaoSmall from '../../../Scene/Objects/Experiencia/Products/ClimaInteligente/EstacaoSmall';
 import TabletClima from '../../../Scene/Objects/Experiencia/Products/ClimaInteligente/TabletClima';
+import ClimaNeon from '../../../Scene/Objects/Experiencia/Products/ClimaInteligente/ClimaNeon'; 
 
 const PRODUCT_ID = 'clima-inteligente';
 const START_NEON_DELAY = 0;                     // inicia quando slot é selecionado
@@ -41,7 +42,9 @@ const ClimaInteligenteScene = () => {
     handlePlaceholderAnimationOutEnded,
     handleSmallObjAnimationOutEnded,
     shouldPlaySecondAnimation,
-    shouldSkipProduct      
+    shouldSkipProduct,
+    shouldRenderNeon,
+    setShouldRenderNeon  
   } = useProductScene(
     PRODUCT_ID,
     INITIAL_PLACEHOLDER_POSITIONS, 
@@ -61,6 +64,10 @@ const ClimaInteligenteScene = () => {
       {shouldRenderMainObject && selectedPosition && (
         <Estacao position={selectedPosition} playSecondAnimation={shouldPlaySecondAnimation} skipProduct={shouldSkipProduct} />
       )}    
+
+      {shouldRenderNeon && (
+        <ClimaNeon onAnimationEnd={() => setShouldRenderNeon(false)} />
+      )} 
 
       {shouldRenderPlaceholders && (
         <Placeholders 

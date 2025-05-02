@@ -1,17 +1,18 @@
 import React, { useEffect } from 'react';
-import useNeonEffect from '../../../../../hooks/useNeonEffect';
+import useNeonEffect from '../../../../../../hooks/useNeonEffect';
 
 const MODEL_PATH = '/models/products/GestaoPecuaria/PecuariaNeon.glb';
 
 const PecuariaNeon = ({ 
-  position = [8, 6, 5], 
-  rotation = [0, 3.14, 0], 
+  position = [0, 6, -13], 
+  rotation = [0, -1.14, 0], 
   scale = [3, 1, 1], 
   animationDuration = 6,
   fadeOutDuration = 1, 
   useXCoord = true,
   invertDirection = false,
-  bloomStrength = 2.0
+  bloomStrength = 2.0,
+  onAnimationEnd = () => {}
 }) => {
   
   const { modelRef, startAnimation } = useNeonEffect({
@@ -23,7 +24,7 @@ const PecuariaNeon = ({
     bloomStrength,
     animationDuration,
     fadeOutDuration,
-    //onFadeOutComplete: () => setIntroNeonVisibility(false)
+    onFadeOutComplete: onAnimationEnd
   });
 
   useEffect(() => {

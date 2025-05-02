@@ -6,6 +6,7 @@ import DispositivosPecuaria from '../../../Scene/Objects/Experiencia/Products/Ge
 import Brinco from '../../../Scene/Objects/Experiencia/Products/GestaoPecuaria/Brinco';
 import BrincoSmall from '../../../Scene/Objects/Experiencia/Products/GestaoPecuaria/BrincoSmall';
 import TabletPecuaria from '../../../Scene/Objects/Experiencia/Products/GestaoPecuaria/TabletPecuaria';
+import PecuariaNeon from '../../../Scene/Objects/Experiencia/Products/GestaoPecuaria/PecuariaNeon';
 
 const PRODUCT_ID = 'gestao-pecuaria';
 const START_NEON_DELAY = 0;                 // inicia quando slot é selecionado
@@ -44,7 +45,9 @@ const GestaoPecuariaScene = () => {
     handlePlaceholderAnimationOutEnded,
     handleSmallObjAnimationOutEnded,
     shouldPlaySecondAnimation,
-    shouldSkipProduct       
+    shouldSkipProduct,
+    shouldRenderNeon,
+    setShouldRenderNeon      
   } = useProductScene(
     PRODUCT_ID,
     INITIAL_PLACEHOLDER_POSITIONS, 
@@ -96,6 +99,10 @@ const GestaoPecuariaScene = () => {
     <group>
       <DispositivosPecuaria />
       <Vacas onObjectPositionUpdate={handleObjectPositionUpdate} />
+
+      {shouldRenderNeon && (
+        <PecuariaNeon onAnimationEnd={() => setShouldRenderNeon(false)} />
+      )} 
 
       {shouldRenderMainObject && dispositivoPosition && trackedVacaIndexRef.current >= 0 && (
         <Brinco 
