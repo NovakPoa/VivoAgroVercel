@@ -9,7 +9,8 @@ export const useTablet = (modelPath, videoPath, animateTablet) => {
   const videoRef = useRef(null);  
   const screenMeshRef = useRef(null);
   const originalMaterialRef = useRef(null);
-  
+  const hasAnimatedBeforeRef = useRef(false);
+
   const { scene, play } = useGLTFAnimations(modelPath, {
     cloneScene: false,
   });
@@ -62,6 +63,8 @@ export const useTablet = (modelPath, videoPath, animateTablet) => {
         timeScale: 2.4
       });
 
+      hasAnimatedBeforeRef.current = true;
+
       // Inicia o vídeo com delay
       setTimeout(() => {
         if (screenMeshRef.current?.material && videoTextureRef.current) {
@@ -77,7 +80,7 @@ export const useTablet = (modelPath, videoPath, animateTablet) => {
           console.warn('Erro ao reproduzir vídeo automaticamente:', err);
         });        
       }, 1200);   
-    } else {
+    } else if (hasAnimatedBeforeRef.current) {
       // Pausa o vídeo
       videoRef.current.pause();
 
