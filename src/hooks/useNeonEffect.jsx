@@ -3,6 +3,7 @@ import { useGLTF } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import gsap from 'gsap';
 import { createTubeRevealMaterial } from '../shaders/TubeRevealShader';
+import useSoundStore from '../stores/SoundStore';
 
 const useNeonEffect = ({
   modelPath,
@@ -15,15 +16,22 @@ const useNeonEffect = ({
   // Animation props
   animationDuration = 6,
   fadeOutDuration = 1,
+  // Audio Props
+  enableSound = true,
+  appearSoundId = 'NEON_APPEAR',
+  soundVolume = 0.7,  
   // Callback
   onFadeOutComplete = null
 }) => {
   const { scene } = useGLTF(modelPath);
   const modelRef = useRef();
+  const appearSoundIdRef = useRef(null);
   const shaderMaterials = useRef([]);
   const progressRef = useRef(1.0);
   const opacityRef = useRef(1.0);  
   const animationStage = useRef('intro');
+
+  const { playSound, stopSound } = useSoundStore();
 
   useEffect(() => {
     if (!scene) return;
@@ -69,6 +77,13 @@ const useNeonEffect = ({
   // Função para iniciar a animação
   const startAnimation = () => {
     animationStage.current = 'intro';
+
+    if (enableSound && appearSoundId) {
+      appearSoundIdRef.current = playSound(appearSoundId, {
+        volume: soundVolume
+      });
+    }
+        
     gsap.fromTo(progressRef, 
       { current: 1.0 },
       { 

@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { TextureLoader } from 'three';
 import { useGLTF } from '@react-three/drei';
 import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader';
+import { Howl } from 'howler';
 
 const assets = {
   models: [
@@ -79,18 +80,36 @@ const assets = {
     '/videos/TabletGestaoPecuaria.mp4',
     '/videos/TabletClimaInteligente.mp4'
   ],  
+  sounds: {
+    // Interface
+/*     UI_CLICK: '/sounds/ui/click.mp3',
+    UI_HOVER: '/sounds/ui/hover.mp3', */
+    
+    // Efeitos de neon
+    NEON_APPEAR: '/audio/Produtos/Geral/Swoosh.wav',
+    
+    // Sons de produtos
+/*     ANTENA_MOVE: '/sounds/products/antena_move.mp3',
+    TABLET_APPEAR: '/sounds/products/tablet_appear.mp3', */
+    
+    // Ambiente
+  /*   AMBIENT_FARM: '/sounds/ambient/farm.mp3' */
+  }    
 };
 
 const useAssetsStore = create((set, get) => ({
   isLoading: true,
   loadingProgress: 0,
-  totalAssets: assets.models.length + assets.textures.length + assets.images.length,
+  totalAssets: assets.models.length + assets.textures.length + 
+               assets.images.length + assets.videos.length + 
+               Object.keys(assets.sounds).length,
   loadedAssets: 0,
   
   //modelCache: {},
   textureCache: {},
   imageCache: {},
   videoCache: {},
+  soundCache: {},
 
   loadAllAssets: () => {
     const { incrementLoadedAssets } = get();
@@ -183,6 +202,22 @@ const useAssetsStore = create((set, get) => ({
       video.src = videoPath;
       video.load();
     });    
+
+    Object.entries(assets.sounds).forEach(([soundId, soundPath]) => {
+      const sound = new Howl({
+        src: [soundPath],
+        preload: true,
+        onload: () => {
+          get().soundCache[soundId] = sound;
+          incrementLoadedAssets();
+        },
+        onloaderror: (id, error) => {
+          console.error(`Erro ao carregar som ${soundId}:`, error);
+          incrementLoadedAssets();
+        }
+      });
+    });
+
   },
 
   // Atualizar o progresso
@@ -216,7 +251,12 @@ const useAssetsStore = create((set, get) => ({
   // Obter video
   getVideo: (path) => {
     return get().videoCache[path];
-  }  
+  },
+  // Obter sounds
+  getSound: (soundId) => {
+    return get().soundCache[soundId];
+  },
+
 }));
 
 export default useAssetsStore;
