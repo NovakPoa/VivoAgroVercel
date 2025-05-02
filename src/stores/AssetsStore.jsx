@@ -88,6 +88,7 @@ const assets = {
     // Efeitos
     NEON_APPEAR: '/audio/Produtos/Geral/Swoosh.wav',
     ACTIVATION: '/audio/Produtos/Geral/Activation.wav',
+    ENDING: '/audio/Produtos/Geral/Ending.wav',
     // Sons de produtos
 /*     ANTENA_MOVE: '/sounds/products/antena_move.mp3',
     TABLET_APPEAR: '/sounds/products/tablet_appear.mp3', */
