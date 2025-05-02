@@ -91,7 +91,9 @@ const assets = {
     ENDING: '/audio/Produtos/Geral/Ending.wav',
 
     // Sons de produtos
-    TRATOR: '/audio/Produtos/GestaoMaquinario/tractor.wav',
+    TRATOR_A: '/audio/Produtos/GestaoMaquinario/tractor.wav',
+    TRATOR_B: '/audio/Produtos/GestaoMaquinario/tractor.wav',
+    TRATOR_C: '/audio/Produtos/GestaoMaquinario/tractor.wav',
     VACA_A: '/audio/Produtos/GestaoPecuaria/Vaca-A.wav',
     VACA_B: '/audio/Produtos/GestaoPecuaria/Vaca-B.wav',
     
