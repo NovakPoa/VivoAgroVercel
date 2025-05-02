@@ -1,5 +1,5 @@
-import { useEffect, useRef } from 'react';
-import { OrbitControls } from '@react-three/drei';
+import { useEffect, useRef, useMemo } from 'react';
+import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import { useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 import gsap from 'gsap';
@@ -7,10 +7,18 @@ import useCameraStore from '../../stores/CameraStore';
 
 const CAMERA_POSITION = [0, 1.7, 0];
 
+const BASE_FOV = 60;
+const REFERENCE_ASPECT = 16/9;
+const FOV_ADJUSTMENT_FACTOR = 0.4; 
+const MIN_FOV = 50;
+const MAX_FOV = 70;
+
 const Camera = () => {
   const controlsRef = useRef();
+  const cameraRef = useRef();
   const gsapAnimationRef = useRef(null);
   const { camera } = useThree();
+  const { size} = useThree();
 
   // Obtendo estados do CameraStore para animação
   const cameraAnimate = useCameraStore(state => state.cameraAnimate);
@@ -19,6 +27,25 @@ const Camera = () => {
   const finishAnimation = useCameraStore(state => state.finishAnimation);
   const resetCamera = useCameraStore(state => state.resetCamera);
   const isFreeLookMode = useCameraStore(state => state.isFreeLookMode);
+  
+  const aspectRatio = size.width / size.height;
+
+  const adjustedFOV = useMemo(() => {
+  
+    const aspectDifference = aspectRatio / REFERENCE_ASPECT;
+    let calculatedFOV;
+  
+    if (aspectDifference < 1) {
+      // Tela mais estreita/alta (mobile) - aumentar FOV
+      calculatedFOV = BASE_FOV + (10 * (1 - aspectDifference));
+    } else {
+      // Tela mais larga - reduzir FOV levemente
+      calculatedFOV = BASE_FOV - (5 * (aspectDifference - 1));
+    }
+    console.log(Math.min(Math.max(calculatedFOV, MIN_FOV), MAX_FOV))
+    // Limitar entre MIN_FOV e MAX_FOV
+    return Math.min(Math.max(calculatedFOV, MIN_FOV), MAX_FOV);
+  }, [aspectRatio, BASE_FOV]);
 
   // Configurar posição inicial da câmera
   useEffect(() => {
@@ -126,11 +153,18 @@ const Camera = () => {
   }, [cameraAnimate]);
 
   return (
-    <OrbitControls
-      ref={controlsRef}
-      makeDefault
-      camera={camera}
-    />
+    <>
+      <PerspectiveCamera
+        ref={cameraRef}
+        makeDefault
+        fov={adjustedFOV}
+      />    
+      <OrbitControls
+        ref={controlsRef}
+        makeDefault
+        camera={camera}
+      />
+    </>
   );
 };
 
