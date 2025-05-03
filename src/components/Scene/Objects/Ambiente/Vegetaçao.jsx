@@ -4,15 +4,15 @@ import { useGLTF } from '@react-three/drei';
 const MODELS = [
   {
     path: '/models/vegetaçao/Grama.glb',
-    position: [4, 0, -10],
+    position: [0, 0, 0],
     rotation: [0, 0, 0],
     scale: 1
   },
   {
-    path: '/models/vegetaçao/PlantaçaoDeSoja.glb',
-    position: [15, 0, 5],
+    path: '/models/vegetaçao/Soja.glb',
+    position: [0, 0, 0],
     rotation: [0, 0, 0],
-    scale: 0.8
+    scale: 1
   },
   {
     path: '/models/vegetaçao/ArvoresDistantes.glb',
@@ -22,6 +22,12 @@ const MODELS = [
   },
   {
     path: '/models/vegetaçao/VegetaçaoPerto.glb',
+    position: [0, 0, 0],
+    rotation: [0, 0, 0],
+    scale: 1
+  },
+  {
+    path: '/models/vegetaçao/SojaFundo.glb',
     position: [0, 0, 0],
     rotation: [0, 0, 0],
     scale: 1
