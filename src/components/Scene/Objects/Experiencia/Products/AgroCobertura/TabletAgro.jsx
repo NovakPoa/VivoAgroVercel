@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTablet } from '../../../../../../hooks/useTablet';
 
-const MODEL_PATH = '/models/products/AgroCobertura/TabletAgro.glb';
+const MODEL_PATH = '/models/geral/TabletAgro.glb';
 const VIDEO_PATH = '/videos/TabletAgroCobertura.mp4';
 
 const TabletAgro = ({position, rotation = [0, 0, 0], scale = 1, animateTablet = false}) => {
