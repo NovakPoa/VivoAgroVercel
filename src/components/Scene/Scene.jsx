@@ -13,7 +13,7 @@ import PostProcessing from './PostProcessing';
 import Visuals from './Visuals';
 
 const SceneContent = () => {
- 
+
   return (
     <div className='scene-container'>
       <Canvas className="canvas">
@@ -22,11 +22,11 @@ const SceneContent = () => {
         <Background />
         <Ambiente />
         <Experiencia />
-        <PostProcessing /> 
+        <PostProcessing />
         <Visuals />
       </Canvas>
       <Intro />
-      <Products />  
+      <Products />
       <Dashboard />
       <End />
     </div>
