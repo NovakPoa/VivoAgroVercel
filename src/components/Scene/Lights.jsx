@@ -4,26 +4,26 @@ import { useHelper } from '@react-three/drei';
 import * as THREE from 'three';
 
 const defaultLightSettings = {
-  ambientIntensity: 0.3, 
+  ambientIntensity: 0.0,
   ambientColor: '#ffffff',
-  dirIntensity: 3.0, 
-  dirColor: '#FEBF71', 
+  dirIntensity: 0.0,
+  dirColor: '#FEBF71',
   dirX: 20,
   dirY: 20,
   dirZ: 20,
-  dirCastShadow: true, 
+  dirCastShadow: false,
   showHelper: false
 };
 
 const Lights = () => {
   const directionalLightRef = useRef();
-  
+
   useHelper(
     directionalLightRef,
     defaultLightSettings.showHelper ? THREE.DirectionalLightHelper : null,
     1
   );
-  
+
   const lightSettings = useControls('Lights', {
     Ambient: folder({
       ambientIntensity: { value: defaultLightSettings.ambientIntensity, min: 0, max: 2, step: 0.01 },
@@ -49,12 +49,12 @@ const Lights = () => {
 
   return (
     <>
-      <ambientLight 
-        intensity={lightSettings.ambientIntensity} 
-        color={lightSettings.ambientColor} 
+      <ambientLight
+        intensity={lightSettings.ambientIntensity}
+        color={lightSettings.ambientColor}
       />
-      
-      <directionalLight 
+
+      <directionalLight
         ref={directionalLightRef}
         position={[lightSettings.dirX, lightSettings.dirY, lightSettings.dirZ]}
         intensity={lightSettings.dirIntensity}
