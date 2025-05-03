@@ -1,11 +1,11 @@
 import React from 'react';
 import { useTablet } from '../../../../../../hooks/useTablet';
 
-const MODEL_PATH = '/models/products/GestaoMaquinario/TabletMaquinario.glb';
+const MODEL_PATH = '/models/geral/TabletMaquinario.glb';
 const VIDEO_PATH = '/videos/TabletGestaoMaquinario.mp4';
 
 const TabletMaquinario = ({position, rotation = [0, 0, 0], scale = 1, animateTablet = false}) => {
-  const { scene, meshRef } = useTablet(MODEL_PATH, VIDEO_PATH, animateTablet, '02');
+  const { scene, meshRef } = useTablet(MODEL_PATH, VIDEO_PATH, animateTablet, '04');
     
   if (!scene) return null;
 

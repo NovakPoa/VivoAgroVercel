@@ -22,6 +22,10 @@ const assets = {
 
     // Geral
     '/models/geral/Mesa.glb',
+    '/models/geral/TabletAgro.glb',
+    '/models/geral/TabletMaquinario.glb',
+    '/models/geral/TabletPecuaria.glb',
+    '/models/geral/TabletClima.glb',
 
     // Intro
     '/models/intro/LogoVivoAgro.glb',
@@ -31,7 +35,6 @@ const assets = {
     //  AgroCobertura
     '/models/products/AgroCobertura/Antena.glb',
     '/models/products/AgroCobertura/AntenaSmall.glb',
-    '/models/products/AgroCobertura/TabletAgro.glb',
     '/models/products/AgroCobertura/AgroNeon.glb',
     //  GestaoMaquinario
     '/models/products/GestaoMaquinario/DispositivoMaquinario.glb',
@@ -39,7 +42,6 @@ const assets = {
     '/models/products/GestaoMaquinario/TratorA3.glb',
     '/models/products/GestaoMaquinario/TratorB3.glb',
     '/models/products/GestaoMaquinario/TratorC3.glb',
-    '/models/products/GestaoMaquinario/TabletMaquinario.glb',
     '/models/products/GestaoMaquinario/MaquinarioNeon.glb',
     //  GestaoPecuaria
     '/models/products/GestaoPecuaria/DispositivosPecuaria.glb',
@@ -47,12 +49,10 @@ const assets = {
     '/models/products/GestaoPecuaria/BrincoSmall.glb',
     '/models/products/GestaoPecuaria/VacaHolandesa.glb',
     '/models/products/GestaoPecuaria/VacaNelore.glb',
-    '/models/products/GestaoPecuaria/TabletPecuaria.glb',
     '/models/products/GestaoPecuaria/PecuariaNeon.glb',
     //  ClimaInteligente
     '/models/products/ClimaInteligente/Estacao.glb',
     '/models/products/ClimaInteligente/EstacaoSmall.glb',
-    '/models/products/ClimaInteligente/TabletClima.glb',
     '/models/products/ClimaInteligente/ClimaNeon.glb',
 
   ],
