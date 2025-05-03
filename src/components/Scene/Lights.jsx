@@ -6,11 +6,11 @@ import * as THREE from 'three';
 const defaultLightSettings = {
   ambientIntensity: 0.0,
   ambientColor: '#ffffff',
-  dirIntensity: 0.0,
-  dirColor: '#FEBF71',
-  dirX: 20,
-  dirY: 20,
-  dirZ: 20,
+  dirIntensity: 5.0,
+  dirColor: '#fff6e7',
+  dirX: -12,
+  dirY: 120,
+  dirZ: 90,
   dirCastShadow: false,
   showHelper: false
 };
@@ -26,16 +26,16 @@ const Lights = () => {
 
   const lightSettings = useControls('Lights', {
     Ambient: folder({
-      ambientIntensity: { value: defaultLightSettings.ambientIntensity, min: 0, max: 2, step: 0.01 },
+      ambientIntensity: { value: defaultLightSettings.ambientIntensity, min: 0, max: 20, step: 0.01 },
       ambientColor: defaultLightSettings.ambientColor
     }),
     Directional: folder({
-      dirIntensity: { value: defaultLightSettings.dirIntensity, min: 0, max: 2, step: 0.01 },
+      dirIntensity: { value: defaultLightSettings.dirIntensity, min: 0, max: 20, step: 0.01 },
       dirColor: defaultLightSettings.dirColor,
       position: folder({
-        dirX: { value: defaultLightSettings.dirX, min: -10, max: 10, step: 0.1 },
-        dirY: { value: defaultLightSettings.dirY, min: -10, max: 10, step: 0.1 },
-        dirZ: { value: defaultLightSettings.dirZ, min: 0, max: 20, step: 0.1 }
+        dirX: { value: defaultLightSettings.dirX, min: -360, max: 360, step: 0.1 },
+        dirY: { value: defaultLightSettings.dirY, min: -360, max: 360, step: 0.1 },
+        dirZ: { value: defaultLightSettings.dirZ, min: -360, max: 360, step: 0.1 }
       }),
       dirCastShadow: defaultLightSettings.dirCastShadow,
       showHelper: defaultLightSettings.showHelper,
