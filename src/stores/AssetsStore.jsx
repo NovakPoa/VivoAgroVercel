@@ -39,9 +39,8 @@ const assets = {
     //  GestaoMaquinario
     '/models/products/GestaoMaquinario/DispositivoMaquinario.glb',
     '/models/products/GestaoMaquinario/DispositivoMaquinarioSmall.glb',
-    '/models/products/GestaoMaquinario/TratorA3.glb',
-    '/models/products/GestaoMaquinario/TratorB3.glb',
-    '/models/products/GestaoMaquinario/TratorC3.glb',
+    '/models/products/GestaoMaquinario/Trator.glb',
+    '/models/products/GestaoMaquinario/Trator_IconeWifi.glb',
     '/models/products/GestaoMaquinario/MaquinarioNeon.glb',
     //  GestaoPecuaria
     '/models/products/GestaoPecuaria/DispositivosPecuaria.glb',
