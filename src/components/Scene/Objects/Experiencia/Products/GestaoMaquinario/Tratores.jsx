@@ -35,7 +35,7 @@ const MODELS = [
   },
 ];
 
-const findObjectMesh = (object, meshName = 'Trator_Attachment') => {
+const findObjectMesh = (object, meshName = 'Trator_PartesPrincipais01') => {
   const targetObject = object.getObjectByName(meshName);
   if (targetObject) {
     return targetObject;
