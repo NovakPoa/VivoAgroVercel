@@ -1,9 +1,9 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useMemo } from 'react';
 import { useGLTFAnimations } from './useGLTFAnimations';
 import * as THREE from 'three';
 import useAssetsStore from '../stores/AssetsStore';
 
-export const useTablet = (modelPath, videoPath, animateTablet) => {
+export const useTablet = (modelPath, videoPath, animateTablet, tabletID = '') => {
   const meshRef = useRef();
   const videoTextureRef = useRef(null);
   const videoRef = useRef(null);  
@@ -17,11 +17,16 @@ export const useTablet = (modelPath, videoPath, animateTablet) => {
   
   const { getVideo } = useAssetsStore();
 
+  const elementNames = useMemo(() => ({
+    screenMesh: `Screen${tabletID}`,
+    tabletAnimation: `Tablet${tabletID}_Levantando_Animacao`,
+  }), [tabletID]);
+
   // Encontra e armazena referência ao mesh da tela
   useEffect(() => {
     if (scene) {
 
-      const screenMesh = scene.getObjectByName('Screen');
+      const screenMesh = scene.getObjectByName(elementNames.screenMesh);
 
       if (screenMesh) {
         screenMeshRef.current = screenMesh;
@@ -30,7 +35,7 @@ export const useTablet = (modelPath, videoPath, animateTablet) => {
           originalMaterialRef.current = screenMesh.material.clone();
         }
       } else {
-        console.warn(`Mesh "${screenMeshName}" não encontrado no modelo ${modelPath}`);
+        console.warn(`Mesh ${elementNames.screenMesh} não encontrado no modelo ${modelPath}`);
       }
       
       // Cria a textura de vídeo
@@ -54,11 +59,7 @@ export const useTablet = (modelPath, videoPath, animateTablet) => {
     if (!videoRef.current) return;
     
     if (animateTablet) {
-      play('TabletAction', {
-        loop: false, 
-        timeScale: 2.4
-      });
-      play('ScreenAction', {// remover uma das duas animaçoes (corrigir no modelo glb com uma root unica)
+      play(elementNames.tabletAnimation, {
         loop: false, 
         timeScale: 2.4
       });
@@ -90,17 +91,12 @@ export const useTablet = (modelPath, videoPath, animateTablet) => {
         screenMeshRef.current.material.needsUpdate = true;
       }    
       
-      play('TabletAction', {
+      play(elementNames.tabletAnimation, {
         loop: false,
         timeScale: -2.4, // Velocidade negativa = animação reversa
         clampWhenFinished: true
       });
-      
-      play('ScreenAction', {// remover uma das duas animaçoes (corrigir no modelo glb com uma root unica)
-        loop: false,
-        timeScale: -2.4, // Velocidade negativa = animação reversa
-        clampWhenFinished: true
-      });      
+           
     }
   }, [animateTablet, play]);
   

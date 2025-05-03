@@ -24,9 +24,9 @@ const INITIAL_PLACEHOLDER_POSITIONS = [
 ];
 const PLACEHOLDER_LOOKAT_OFFSET = [0, 1.5, 0];
 const TABLET = {
-  position: [0.4, 1.2, 0.8],
-  rotation: [0, 0.2, 0],
-  scale: 0.015,
+  position: [0, 0, 0],
+  rotation: [0, 0, 0],
+  scale: 1,
 };
 
 const ClimaInteligenteScene = () => {

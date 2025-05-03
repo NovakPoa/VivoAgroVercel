@@ -5,7 +5,7 @@ const MODEL_PATH = '/models/products/GestaoMaquinario/TabletMaquinario.glb';
 const VIDEO_PATH = '/videos/TabletGestaoMaquinario.mp4';
 
 const TabletMaquinario = ({position, rotation = [0, 0, 0], scale = 1, animateTablet = false}) => {
-  const { scene, meshRef } = useTablet(MODEL_PATH, VIDEO_PATH, animateTablet);
+  const { scene, meshRef } = useTablet(MODEL_PATH, VIDEO_PATH, animateTablet, '02');
     
   if (!scene) return null;
 

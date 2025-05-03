@@ -42,7 +42,6 @@ const Camera = () => {
       // Tela mais larga - reduzir FOV levemente
       calculatedFOV = BASE_FOV - (5 * (aspectDifference - 1));
     }
-    console.log(Math.min(Math.max(calculatedFOV, MIN_FOV), MAX_FOV))
     // Limitar entre MIN_FOV e MAX_FOV
     return Math.min(Math.max(calculatedFOV, MIN_FOV), MAX_FOV);
   }, [aspectRatio, BASE_FOV]);
@@ -158,6 +157,7 @@ const Camera = () => {
         ref={cameraRef}
         makeDefault
         fov={adjustedFOV}
+        /* near={0.01} */
       />    
       <OrbitControls
         ref={controlsRef}
