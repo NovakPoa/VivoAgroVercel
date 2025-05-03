@@ -18,10 +18,10 @@ const assets = {
     '/models/vegetaçao/PlantaçaoDeSoja.glb',
     '/models/vegetaçao/ArvoresDistantes.glb',
     '/models/vegetaçao/VegetaçaoPerto.glb',
-    
+
     // Geral
     '/models/geral/Mesa.glb',
-    
+
     // Intro
     '/models/intro/LogoVivoAgro.glb',
     '/models/intro/IntroNeon.glb',
@@ -57,34 +57,29 @@ const assets = {
   ],
   textures: [
     // Skybox
-    '/textures/skybox/px.png',
-    '/textures/skybox/nx.png',
-    '/textures/skybox/py.png',
-    '/textures/skybox/ny.png',
-    '/textures/skybox/pz.png',
-    '/textures/skybox/nz.png',
+    '/textures/skybox/skybox.jpg',
 
     // HDR
     '/textures/environment.hdr',
-  ],   
+  ],
   images: [
     // Product images
     '/ui/agroCobertura.png',
     '/ui/climaInteligente.jpg',
     '/ui/gestaoMaquinario.jpg',
     '/ui/gestaoPecuaria.png'
-  ], 
+  ],
   videos: [
     '/videos/TabletAgroCobertura.mp4',
     '/videos/TabletGestaoMaquinario.mp4',
     '/videos/TabletGestaoPecuaria.mp4',
     '/videos/TabletClimaInteligente.mp4'
-  ],  
+  ],
   sounds: {
     // Interface
     BUTTON_CLICK: '/audio/Geral/Click.wav',
     SLOT_CLICK: '/audio/Geral/Grab.wav',
-    
+
     // Efeitos
     NEON_APPEAR: '/audio/Produtos/Geral/Swoosh.wav',
     ACTIVATION: '/audio/Produtos/Geral/Activation.wav',
@@ -96,20 +91,20 @@ const assets = {
     TRATOR_C: '/audio/Produtos/GestaoMaquinario/tractor.wav',
     VACA_A: '/audio/Produtos/GestaoPecuaria/Vaca-A.wav',
     VACA_B: '/audio/Produtos/GestaoPecuaria/Vaca-B.wav',
-    
+
     // Ambiente
     AMBIENT: '/audio/Fazenda/Ambiance.wav',
-  }    
+  }
 };
 
 const useAssetsStore = create((set, get) => ({
   isLoading: true,
   loadingProgress: 0,
-  totalAssets: assets.models.length + assets.textures.length + 
-               assets.images.length + assets.videos.length + 
-               Object.keys(assets.sounds).length,
+  totalAssets: assets.models.length + assets.textures.length +
+    assets.images.length + assets.videos.length +
+    Object.keys(assets.sounds).length,
   loadedAssets: 0,
-  
+
   //modelCache: {},
   textureCache: {},
   imageCache: {},
@@ -125,7 +120,7 @@ const useAssetsStore = create((set, get) => ({
     assets.models.forEach(modelPath => {
       useGLTF.preload(modelPath);
       incrementLoadedAssets();
-    });    
+    });
 
     // Carregar texturas
     assets.textures.forEach(texturePath => {
@@ -166,18 +161,18 @@ const useAssetsStore = create((set, get) => ({
     // Carregar images 
     assets.images.forEach(imagePath => {
       const img = new Image();
-      
+
       img.onload = () => {
         // Armazenar a imagem carregada no cache
         get().imageCache[imagePath] = img;
         incrementLoadedAssets();
       };
-      
+
       img.onerror = () => {
         console.error(`Erro ao carregar imagem: ${imagePath}`);
         incrementLoadedAssets();
       };
-      
+
       img.src = imagePath;
     });
 
@@ -188,25 +183,25 @@ const useAssetsStore = create((set, get) => ({
       video.loop = true;
       video.muted = true; // Necessario para autoplay sem interação
       video.playsInline = true;
-      
+
       // Para alguns navegadores é necessario definir o tamanho
       video.width = 1920;
       video.height = 1080;
-      
+
       // Indica que o vídeo está pronto para ser usado
       video.oncanplaythrough = () => {
         get().videoCache[videoPath] = video;
         incrementLoadedAssets();
       };
-      
+
       video.onerror = () => {
         console.error(`Erro ao carregar vídeo: ${videoPath}`);
         incrementLoadedAssets();
       };
-      
+
       video.src = videoPath;
       video.load();
-    });    
+    });
 
     Object.entries(assets.sounds).forEach(([soundId, soundPath]) => {
       const sound = new Howl({
@@ -231,7 +226,7 @@ const useAssetsStore = create((set, get) => ({
       const loadedAssets = state.loadedAssets + 1;
       const loadingProgress = (loadedAssets / state.totalAssets) * 100;
       const isLoading = loadedAssets < state.totalAssets;
-      
+
       return {
         loadedAssets,
         loadingProgress,
@@ -241,9 +236,9 @@ const useAssetsStore = create((set, get) => ({
   },
 
   // Obter modelo
-/*   getModel: (path) => {
-    return get().modelCache[path];
-  }, */
+  /*   getModel: (path) => {
+      return get().modelCache[path];
+    }, */
 
   // Obter textura 
   getTexture: (path) => {

@@ -4,49 +4,16 @@ import * as THREE from 'three';
 import useAssetsStore from '../../stores/AssetsStore';
 
 const Background = () => {
-  const { scene, camera } = useThree();
+  const { scene } = useThree();
   const { getTexture, isLoading } = useAssetsStore();
-  const skyboxRef = useRef();
-  
+
   useEffect(() => {
     if (!isLoading) {
-      const px = getTexture('/textures/skybox/px.png');
-      const nx = getTexture('/textures/skybox/nx.png');
-      const py = getTexture('/textures/skybox/py.png');
-      const ny = getTexture('/textures/skybox/ny.png');
-      const pz = getTexture('/textures/skybox/pz.png');
-      const nz = getTexture('/textures/skybox/nz.png');
-      
-      if (px && nx && py && ny && pz && nz) {
-        scene.background = null;
-        
-        const materials = [
-          new THREE.MeshBasicMaterial({ map: px, side: THREE.BackSide }),
-          new THREE.MeshBasicMaterial({ map: nx, side: THREE.BackSide }),
-          new THREE.MeshBasicMaterial({ map: py, side: THREE.BackSide }),
-          new THREE.MeshBasicMaterial({ map: ny, side: THREE.BackSide }),
-          new THREE.MeshBasicMaterial({ map: pz, side: THREE.BackSide }),
-          new THREE.MeshBasicMaterial({ map: nz, side: THREE.BackSide })
-        ];
-        
-        const skyboxGeo = new THREE.BoxGeometry(1000, 1000, 1000);
-        const skybox = new THREE.Mesh(skyboxGeo, materials);
-        
-        skybox.layers.set(0);
-        
-        scene.add(skybox);
-        
-        skyboxRef.current = skybox;
-      }
+      const skybox = getTexture('/textures/skybox/skybox.jpg');
+      skybox.mapping = THREE.EquirectangularReflectionMapping;
+      scene.background = skybox;
+      scene.backgroundRotation = (0, 0, 0);
     }
-    
-    return () => {
-      if (skyboxRef.current) {
-        scene.remove(skyboxRef.current);
-        skyboxRef.current.geometry.dispose();
-        skyboxRef.current.material.forEach(material => material.dispose());
-      }
-    };
   }, [isLoading, scene]);
 
   return null;
