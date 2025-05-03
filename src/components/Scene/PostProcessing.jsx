@@ -8,12 +8,14 @@ import {
 } from '@react-three/postprocessing';
 import { BlendFunction } from 'postprocessing';
 import * as THREE from 'three';
+import { useThree } from '@react-three/fiber'
 import { useControls, folder } from 'leva';
+import { toneMapping } from 'three/tsl';
 
 const defaultSettings = {
-  exposure: 1.0,
   toneMapping: THREE.NoToneMapping,
   middleGrey: 0.0,
+  avgLuminance: 1.0,
   maxLuminance: 0.0,
   bloomEnabled: false,
   bloomIntensity: 0.7,
@@ -31,7 +33,6 @@ const PostProcessing = () => {
 
   const settings = useControls({
     Renderer: folder({
-      exposure: { value: initialSettings.exposure, min: 0.1, max: 3, step: 0.01 },
       toneMapping: {
         options: {
           'No Tone Mapping': THREE.NoToneMapping,
@@ -43,6 +44,7 @@ const PostProcessing = () => {
         value: initialSettings.toneMapping
       },
       middleGrey: { value: initialSettings.middleGrey, min: 0.01, max: 1, step: 0.01 },
+      avgLuminance: { value: initialSettings.avgLuminance, min: 0.1, max: 3, step: 0.01 },
       maxLuminance: { value: initialSettings.maxLuminance, min: 1, max: 30, step: 0.5 }
     }),
     Bloom: folder({
@@ -60,14 +62,14 @@ const PostProcessing = () => {
   });
 
   return (
-    <EffectComposer ref={composerRef} multisampling={8}>
+    <EffectComposer ref={composerRef} multisampling={2}>
       <ToneMapping
         blendFunction={BlendFunction.NORMAL}
         adaptive={false}
         resolution={256}
         middleGrey={settings.middleGrey}
         maxLuminance={settings.maxLuminance}
-        avgLuminance={settings.exposure}
+        avgLuminance={settings.avgLuminance}
         adaptationRate={0.0}
         mode={settings.toneMapping}
       />

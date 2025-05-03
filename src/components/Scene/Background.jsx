@@ -11,12 +11,11 @@ const Background = () => {
     if (!isLoading) {
       const skybox = getTexture('/textures/skybox/skybox.jpg');
       skybox.mapping = THREE.EquirectangularReflectionMapping;
+      skybox.colorSpace = THREE.SRGBColorSpace;
 
       scene.background = skybox;
       scene.backgroundRotation = new THREE.Euler(0, 4.3, 0);
       scene.backgroundIntensity = 1;
-
-      // scene.environment = skybox;
     }
   }, [isLoading, scene]);
 
