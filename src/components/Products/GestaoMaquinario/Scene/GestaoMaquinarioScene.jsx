@@ -15,20 +15,14 @@ const SHOW_TABLET_DELAY = 4000;                 // inicia quando card com timer 
 const HIDE_TABLET_DELAY = 12000;                  // inicia quando card com timer termina
 const START_END_PRODUCT_DELAY = 13000;          // inicia quando card com timer termina  
 
-const SMALL_OBJECT_POSITION = [0, 1.2, 0.5];
 const SMALL_OBJECT_LOOKAT = [0, 0.8, 10];
-const CAMERA_TARGET = [0, 1.7, 10];
+const CAMERA_TARGET = [0, 1.4, 10];
 const INITIAL_PLACEHOLDER_POSITIONS = [
   [0, 0, 0],
   [0, 0, 0],
   [0, 0, 0],
 ];
 const PLACEHOLDER_LOOKAT_OFFSET = [0, 0, 0];
-const TABLET = {
-  position: [0, 0, 0],
-  rotation: [0, 0, 0],
-  scale: 1,
-};
 
 const GestaoMaquinarioScene = () => {
   const {
@@ -105,7 +99,6 @@ const GestaoMaquinarioScene = () => {
       {shouldRenderMainObject && dispositivoPosition && trackedTratorIndexRef.current >= 0 && (
         <DispositivoMaquinario 
           position={dispositivoPosition} 
-          scale={1.5}
           playSecondAnimation={shouldPlaySecondAnimation}
           skipProduct={shouldSkipProduct}
         />
@@ -121,19 +114,12 @@ const GestaoMaquinarioScene = () => {
       
       {shouldRenderSmallObject && (
         <DispositivoMaquinarioSmall 
-          position={SMALL_OBJECT_POSITION}
-          scale={0.08}
           isVisible={smallObjectVisible} 
           onAnimationOutEnded={handleSmallObjAnimationOutEnded}            
         />
       )}
 
-      <TabletMaquinario
-        position={TABLET.position}
-        rotation={TABLET.rotation}
-        scale={TABLET.scale}
-        animateTablet={animateTablet}
-      />
+      <TabletMaquinario animateTablet={animateTablet} />
     </group>
   );
 };

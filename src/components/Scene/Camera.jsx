@@ -5,7 +5,7 @@ import * as THREE from 'three';
 import gsap from 'gsap';
 import useCameraStore from '../../stores/CameraStore';
 
-const CAMERA_POSITION = [0, 1.7, 0];
+const CAMERA_POSITION = [0, 1.4, 0];
 
 const BASE_FOV = 60;
 const REFERENCE_ASPECT = 16/9;
