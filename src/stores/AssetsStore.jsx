@@ -15,7 +15,8 @@ const assets = {
 
     // Vegetação
     '/models/vegetaçao/Grama.glb',
-    '/models/vegetaçao/PlantaçaoDeSoja.glb',
+    '/models/vegetaçao/Soja.glb',
+    '/models/vegetaçao/SojaFundo.glb',
     '/models/vegetaçao/ArvoresDistantes.glb',
     '/models/vegetaçao/VegetaçaoPerto.glb',
 
