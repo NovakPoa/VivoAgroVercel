@@ -13,36 +13,35 @@ const DispositivoMaquinario = ({position, rotation = [0, 0, 0], scale = 1, playS
     if (!scene) return;
 
     if (!skipProduct) {
-      play('scale-in', { //conferir nome da animaçao
+/*       play('scale-in', {
         loop: false, 
         timeScale: 2.4
-      });
+      }); */
     } else {
-      jumpToEnd('scale-in');//conferir nome da animaçao
-      jumpToEnd('scaleInRings');//conferir nome da animaçao
-      play('animateRings', { //conferir nome da animaçao
+/*       jumpToEnd('scaleInRings');
+      play('animateRings', {
         loop: true, 
         timeScale: 2.4,
-      });       
+      });   */     
     }
   }, [scene, skipProduct, play, jumpToEnd]);
   
   useEffect(() => {
     if (playSecondAnimation) {
-      play('scaleIn2', { //conferir nome da animaçao
+/*       play('scaleIn2', {
         loop: false, 
         timeScale: 2.4,
         onFinish: onAnimationEnded
-      });
+      }); */
     }
   }, [play, playSecondAnimation]);
 
-  const onAnimationEnded = useCallback(() => {
-    play('animateLoop', { //conferir nome da animaçao
+/*   const onAnimationEnded = useCallback(() => {
+    play('animateLoop', {
       loop: true, 
       timeScale: 2.4,
     }); 
-  }, [play]); 
+  }, [play]);  */
 
   if (!scene) return null;
 

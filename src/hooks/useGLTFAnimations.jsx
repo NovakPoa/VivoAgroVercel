@@ -100,6 +100,7 @@ export function useGLTFAnimations(modelPath, options = {}) {
       clampWhenFinished = true,
       repetitions = Infinity,
       timeScale = 1.0,
+      startOffset = 0,
       onFinish = null,
       batchId = null
     } = options;
@@ -117,13 +118,22 @@ export function useGLTFAnimations(modelPath, options = {}) {
       callbacksRef.current[animName] = onFinish;
     }
 
-    if (timeScale < 0) {
-      action.reset(); 
+    action.reset();
+
+    if (startOffset > 0 && startOffset <= 1) {
+      const duration = action._clip.duration;
+      if (timeScale < 0) {
+        action.time = duration * (1 - startOffset);
+      } else {
+        action.time = duration * startOffset;
+      }
+    } else if (timeScale < 0) {
+      // Se não tem offset mas é reversa
       action.time = action._clip.duration;
-      action.play();
-    } else {
-      action.reset().play();
     }
+    
+    action.play();
+  
     setActiveAnimations(prev => new Set([...prev, animName]));
   }, []);
   

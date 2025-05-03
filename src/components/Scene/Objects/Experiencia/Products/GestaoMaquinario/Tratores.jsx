@@ -8,31 +8,34 @@ import useAssetsStore from '../../../../../../stores/AssetsStore';
 const MODELS = [
   {
     path: '/models/products/GestaoMaquinario/Trator.glb',
-    position: [-10, 0, 5],
-    rotation: [0, 0, 0],
+    position: [4, 0, 8],
+    rotation: [0, Math.PI / 2, 0],
     scale: 1,
     volume: 0.8,
-    soundId: 'TRATOR_A'
+    soundId: 'TRATOR_A',
+    animOffset: 0 // de 0 a 1
   },
   {
     path: '/models/products/GestaoMaquinario/Trator.glb',
-    position: [8, 0, 0],
-    rotation: [0, 0, 0],
+    position: [0, 0, 17],
+    rotation: [0, Math.PI / 2, 0],
     scale: 1,
     volume: 0.4,
-    soundId: 'TRATOR_B'
+    soundId: 'TRATOR_B',
+    animOffset: 0.3 // de 0 a 1
   },
   {
     path: '/models/products/GestaoMaquinario/Trator.glb',
-    position: [-9, 0, 0],
-    rotation: [0, 0, 0],
+    position: [-5, 0, 28],
+    rotation: [0, Math.PI / 2, 0],
     scale: 1,
     volume: 0.4,
-    soundId: 'TRATOR_C'
+    soundId: 'TRATOR_C',
+    animOffset: 0.7 // de 0 a 1
   },
 ];
 
-const findObjectMesh = (object, meshName = 'Roçadeira_-_ok_Procedural') => {
+const findObjectMesh = (object, meshName = 'Trator_Attachment') => {
   const targetObject = object.getObjectByName(meshName);
 
   if (targetObject && targetObject.isMesh) {
@@ -42,10 +45,11 @@ const findObjectMesh = (object, meshName = 'Roçadeira_-_ok_Procedural') => {
   return null;  
 };
 
-const Trator = forwardRef(({ path, position, rotation, scale, volume = 0.5, onMeshFound, index, soundId }, ref) => {
-  const { scene, playAll, stopAll } = useGLTFAnimations(path, {
-    cloneScene: false,
+const Trator = forwardRef(({ path, position, rotation, scale, volume = 0.5, animOffset = 0, onMeshFound, index, soundId }, ref) => {
+  const { scene, play, animations } = useGLTFAnimations(path, {
+    cloneScene: true,
   });
+  const hasStartedAnimation = useRef(false);
   const meshRef = useRef(null);
   const frameCounter = useRef(0);
   const soundIdRef = useRef(null);
@@ -60,9 +64,11 @@ const Trator = forwardRef(({ path, position, rotation, scale, volume = 0.5, onMe
         meshRef.current = objectMesh;
       }
 
-      playAll({ 
+      play('TratorAndando_Animação', {
         loop: true, 
-      });
+        timeScale: 2.4,
+        startOffset: animOffset
+      });      
       
       // Iniciar som do trator
       if (meshRef.current) {
@@ -145,6 +151,7 @@ const Tratores = ({ onObjectPositionUpdate }) => {
           scale={model.scale}
           volume={model.volume}
           soundId={model.soundId}
+          animOffset={model.animOffset}
           onMeshFound={onObjectPositionUpdate}
         />
       ))}

@@ -18,15 +18,15 @@ const DispositivoMaquinarioSmall = ({
   useEffect(() => {
     if (isVisible) {
       if (scene) {
-        play('scale-in', { 
+        play('MaquinarioMiniatura-Crescendo', { 
           loop: false, 
           timeScale: 3.0
         });
       }
     } else {
-      play('scale-out', { 
+      play('MaquinarioMiniatura-Crescendo', { 
         loop: false, 
-        timeScale: 3.0,
+        timeScale: -3.0,
         onFinish: onAnimationOutEnded
       });
     }
