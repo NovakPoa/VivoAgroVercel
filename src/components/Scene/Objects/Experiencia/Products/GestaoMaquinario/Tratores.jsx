@@ -7,7 +7,7 @@ import useAssetsStore from '../../../../../../stores/AssetsStore';
 
 const MODELS = [
   {
-    path: '/models/products/GestaoMaquinario/TratorA3.glb',
+    path: '/models/products/GestaoMaquinario/Trator.glb',
     position: [-10, 0, 5],
     rotation: [0, 0, 0],
     scale: 1,
@@ -15,7 +15,7 @@ const MODELS = [
     soundId: 'TRATOR_A'
   },
   {
-    path: '/models/products/GestaoMaquinario/TratorB3.glb',
+    path: '/models/products/GestaoMaquinario/Trator.glb',
     position: [8, 0, 0],
     rotation: [0, 0, 0],
     scale: 1,
@@ -23,7 +23,7 @@ const MODELS = [
     soundId: 'TRATOR_B'
   },
   {
-    path: '/models/products/GestaoMaquinario/TratorC3.glb',
+    path: '/models/products/GestaoMaquinario/Trator.glb',
     position: [-9, 0, 0],
     rotation: [0, 0, 0],
     scale: 1,
