@@ -12,7 +12,7 @@ const MODELS = [
     scale: 1
   },
   {
-    path: '/models/products/GestaoPecuaria/VacaHolandesa.glb',
+    path: '/models/products/GestaoPecuaria/VacaNelore.glb', // trocar
     position: [0, 0, 0],
     rotation: [0, 0, 0],
     scale: 1

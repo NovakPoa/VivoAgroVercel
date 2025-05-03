@@ -3,7 +3,7 @@ import { useGLTF } from '@react-three/drei';
 
 const MODEL_PATH = '/models/products/GestaoPecuaria/DispositivosPecuaria.glb';
 
-const DispositivosPecuaria = ({position, rotation = [0, 0, 0], scale = 1}) => {
+const DispositivosPecuaria = ({position = [0, 0, 0], rotation = [0, 0, 0], scale = 1}) => {
   const meshRef = useRef();
   const { scene } = useGLTF(MODEL_PATH);
   
