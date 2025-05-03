@@ -37,8 +37,7 @@ const MODELS = [
 
 const findObjectMesh = (object, meshName = 'Trator_Attachment') => {
   const targetObject = object.getObjectByName(meshName);
-
-  if (targetObject && targetObject.isMesh) {
+  if (targetObject) {
     return targetObject;
   }
   
@@ -46,10 +45,10 @@ const findObjectMesh = (object, meshName = 'Trator_Attachment') => {
 };
 
 const Trator = forwardRef(({ path, position, rotation, scale, volume = 0.5, animOffset = 0, onMeshFound, index, soundId }, ref) => {
-  const { scene, play, animations } = useGLTFAnimations(path, {
+  const { scene, play } = useGLTFAnimations(path, {
     cloneScene: true,
   });
-  const hasStartedAnimation = useRef(false);
+
   const meshRef = useRef(null);
   const frameCounter = useRef(0);
   const soundIdRef = useRef(null);

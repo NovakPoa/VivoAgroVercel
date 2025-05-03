@@ -37,7 +37,7 @@ export function useGLTFAnimations(modelPath, options = {}) {
     animations.forEach(clip => {
       const action = mixer.clipAction(clip);
       actionMap[clip.name] = action;
-      console.log(`Animação "${clip.name}" carregada.`);
+      //console.log(`Animação "${clip.name}" carregada.`);
     });
     
     actionsRef.current = actionMap;

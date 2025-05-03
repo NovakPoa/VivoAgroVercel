@@ -81,6 +81,7 @@ const GestaoMaquinarioScene = () => {
         }
         return newPositions;
       });
+
       // Atualizar a posição do dispositivo
       if (shouldRenderMainObject && trackedTratorIndexRef.current === tratorIndex) {
         setDispositivoPosition([position.x, position.y, position.z]);
