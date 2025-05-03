@@ -9,7 +9,7 @@ const productsStore = (set, get) => ({
     'agro-cobertura': 'completed',
     'gestao-maquinario': 'unlocked',
     'gestao-pecuaria': 'locked',
-    'clima-inteligente': 'locked',
+    'clima-inteligente': 'unlocked',
   },
   skipProduct: false,
   setSkipProduct: (value) => set({ skipProduct: value }),

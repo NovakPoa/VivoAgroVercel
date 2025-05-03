@@ -3,7 +3,7 @@ import { useGLTFAnimations } from '../../../../../../hooks/useGLTFAnimations';
 
 const MODEL_PATH = '/models/products/ClimaInteligente/Estacao.glb';
 
-const Estacao = ({position, rotation = [0, 0, 0], scale = 1, playSecondAnimation = false, skipProduct = false}) => {
+const Estacao = ({position = [0, 0, 0], rotation = [0, 0, 0], scale = 1, playSecondAnimation = false, skipProduct = false}) => {
   const meshRef = useRef();
   const { scene, play, jumpToEnd } = useGLTFAnimations(MODEL_PATH, {
     cloneScene: false,
@@ -13,12 +13,12 @@ const Estacao = ({position, rotation = [0, 0, 0], scale = 1, playSecondAnimation
     if (!scene) return;
 
     if (!skipProduct) {
-      play('scale-in', { //conferir nome da animaçao
+      play('EstacaoMeteorologicaCrescendo_Animacao', { 
         loop: false, 
         timeScale: 2.4
       });
     } else {
-      jumpToEnd('scale-in');//conferir nome da animaçao
+      jumpToEnd('EstacaoMeteorologicaCrescendo_Animacao');
       jumpToEnd('scaleInRings');//conferir nome da animaçao
       play('animateRings', { //conferir nome da animaçao
         loop: true, 
