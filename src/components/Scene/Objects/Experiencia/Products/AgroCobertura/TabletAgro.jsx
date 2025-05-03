@@ -5,7 +5,7 @@ const MODEL_PATH = '/models/products/AgroCobertura/TabletAgro.glb';
 const VIDEO_PATH = '/videos/TabletAgroCobertura.mp4';
 
 const TabletAgro = ({position, rotation = [0, 0, 0], scale = 1, animateTablet = false}) => {
-  const { scene, meshRef } = useTablet(MODEL_PATH, VIDEO_PATH, true, '01');
+  const { scene, meshRef } = useTablet(MODEL_PATH, VIDEO_PATH, animateTablet, '01');
     
   if (!scene) return null;
 
