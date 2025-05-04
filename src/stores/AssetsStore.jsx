@@ -52,11 +52,11 @@ const assets = {
     '/models/neons/TabletPecuaria.glb',
 
     // vegetaçao
-    '/models/vegetaçao/ArvoresDistantes.glb',
-    '/models/vegetaçao/Grama.glb',
-    '/models/vegetaçao/Soja.glb',
-    '/models/vegetaçao/SojaFundo.glb',
-    '/models/vegetaçao/VegetaçaoPerto.glb',
+    '/models/vegetacao/ArvoresDistantes.glb',
+    '/models/vegetacao/Grama.glb',
+    '/models/vegetacao/Soja.glb',
+    '/models/vegetacao/SojaFundo.glb',
+    '/models/vegetacao/VegetacaoPerto.glb',
   ],
   textures: [
     // Skybox

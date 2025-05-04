@@ -3,31 +3,31 @@ import { useGLTF } from '@react-three/drei';
 
 const MODELS = [
   {
-    path: '/models/vegetaçao/ArvoresDistantes.glb',
+    path: '/models/vegetacao/ArvoresDistantes.glb',
     position: [0, 0, 0],
     rotation: [0, 0, 0],
     scale: 1
   },
   {
-    path: '/models/vegetaçao/Grama.glb',
+    path: '/models/vegetacao/Grama.glb',
     position: [0, 0, 0],
     rotation: [0, 0, 0],
     scale: 1
   },
   {
-    path: '/models/vegetaçao/Soja.glb',
+    path: '/models/vegetacao/Soja.glb',
     position: [0, 0, 0],
     rotation: [0, 0, 0],
     scale: 1
   },
   {
-    path: '/models/vegetaçao/SojaFundo.glb',
+    path: '/models/vegetacao/SojaFundo.glb',
     position: [0, 0, 0],
     rotation: [0, 0, 0],
     scale: 1
   },
   {
-    path: '/models/vegetaçao/VegetaçaoPerto.glb',
+    path: '/models/vegetacao/VegetacaoPerto.glb',
     position: [0, 0, 0],
     rotation: [0, 0, 0],
     scale: 1
