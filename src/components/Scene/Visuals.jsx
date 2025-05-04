@@ -4,8 +4,6 @@ import { useControls } from 'leva';
 import * as THREE from 'three';
 import useAssetsStore from '../../stores/AssetsStore';
 
-const HDR_TEXTURE_PATH = '/textures/environment.hdr';
-
 const Visuals = () => {
   const { scene } = useThree();
   const { getTexture, isLoading } = useAssetsStore();

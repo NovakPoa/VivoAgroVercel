@@ -11,7 +11,7 @@ const assets = {
     '/models/fazenda/Casa/Casa.glb',
     '/models/fazenda/Cercas/Cercas.glb',
     '/models/fazenda/Galpao/Galpao.glb',
-    '/models/fazenda/Ornamentos/Ornamentos-2.glb',
+    '/models/fazenda/Ornamentos/Ornamentos.glb',
 
     // Vegetação
     '/models/vegetaçao/Grama.glb',
@@ -58,9 +58,6 @@ const assets = {
   textures: [
     // Skybox
     '/textures/skybox/skybox.jpg',
-
-    // HDR
-    '/textures/environment.hdr',
   ],
   images: [
     // Product images
