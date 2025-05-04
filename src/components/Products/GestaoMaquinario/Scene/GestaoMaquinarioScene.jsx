@@ -41,7 +41,7 @@ const GestaoMaquinarioScene = () => {
     shouldPlaySecondAnimation,
     shouldSkipProduct,
     shouldRenderNeon,
-    setShouldRenderNeon    
+    setShouldRenderNeon, 
   } = useProductScene(
     PRODUCT_ID,
     INITIAL_PLACEHOLDER_POSITIONS, 
@@ -63,6 +63,8 @@ const GestaoMaquinarioScene = () => {
 
   const [dispositivoPosition, setDispositivoPosition] = useState(selectedPosition);
   const [placeholderPositions, setPlaceholderPositions] = useState(INITIAL_PLACEHOLDER_POSITIONS);
+  const [neonPosition, setNeonPosition] = useState(false);
+  const [neonRotation, setNeonRotation] = useState(false);
 
   useEffect(() => {
     if (selectedIndex >= 0 && isCurrentProduct) {
@@ -74,6 +76,20 @@ const GestaoMaquinarioScene = () => {
         setDispositivoPosition(tratorPositionsRef.current[selectedIndex]);
       }
     }
+    switch (selectedIndex) {
+      case 0:
+        setNeonPosition([0, 0, 0]);
+        setNeonRotation([0, 0, 0]);
+        break;
+      case 1:
+        setNeonPosition([0, 0, 0]);
+        setNeonRotation([0, 0, 0]);
+        break;      
+      case 2:
+        setNeonPosition([0, 0, 0]);
+        setNeonRotation([0, 0, 0]);
+        break;
+    }    
   }, [selectedIndex, isCurrentProduct]);
 
   useEffect(() => {
@@ -119,7 +135,7 @@ const GestaoMaquinarioScene = () => {
       <Tratores onObjectPositionUpdate={handleObjectPositionUpdate} />
 
       {shouldRenderNeon && (
-        <MaquinarioNeon onAnimationEnd={() => setShouldRenderNeon(false)} />
+        <MaquinarioNeon position={neonPosition} rotation={neonRotation} onAnimationEnd={() => setShouldRenderNeon(false)} />
       )} 
 
       {shouldRenderMainObject && dispositivoPosition && trackedTratorIndexRef.current >= 0 && (
