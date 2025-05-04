@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect }from 'react';
 import Placeholders from '../../../Commons/Scene/Placeholders/Placeholders';
 import useProductScene from '../../../../hooks/useProductScene';
 import Antena from '../../../Scene/Objects/Experiencia/Products/AgroCobertura/Antena';
@@ -38,7 +38,8 @@ const AgroCoberturaScene = () => {
     shouldPlaySecondAnimation,
     shouldSkipProduct,
     shouldRenderNeon,
-    setShouldRenderNeon
+    setShouldRenderNeon,
+    selectedIndex
   } = useProductScene(
     PRODUCT_ID,
     INITIAL_PLACEHOLDER_POSITIONS, 
@@ -53,6 +54,26 @@ const AgroCoberturaScene = () => {
     PLACEHOLDER_LOOKAT_OFFSET
   );
 
+  const [neonPosition, setNeonPosition] = useState(false);
+  const [neonRotation, setNeonRotation] = useState(false);
+
+  useEffect(() => {
+    switch (selectedIndex) {
+      case 0:
+        setNeonPosition([0, 0, 0]);
+        setNeonRotation([0, 0, 0]);
+        break;
+      case 1:
+        setNeonPosition([0, 0, 0]);
+        setNeonRotation([0, 0.25, 0]);
+        break;      
+      case 2:
+        setNeonPosition([0, 0, 0]);
+        setNeonRotation([0, 0.55, 0]);
+        break;
+    }
+  }, [selectedIndex]);
+
   return (
     <group>
       {shouldRenderMainObject && selectedPosition && (
@@ -60,7 +81,7 @@ const AgroCoberturaScene = () => {
       )}   
 
       {shouldRenderNeon && (
-        <AgroNeon onAnimationEnd={() => setShouldRenderNeon(false)} />
+        <AgroNeon position={neonPosition} rotation={neonRotation} onAnimationEnd={() => setShouldRenderNeon(false)} />
       )}  
 
       {shouldRenderPlaceholders && (

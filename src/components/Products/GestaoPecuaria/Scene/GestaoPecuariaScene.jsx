@@ -61,6 +61,8 @@ const GestaoPecuariaScene = () => {
 
   const [dispositivoPosition, setDispositivoPosition] = useState(selectedPosition);
   const [placeholderPositions, setPlaceholderPositions] = useState(INITIAL_PLACEHOLDER_POSITIONS);
+  const [neonPosition, setNeonPosition] = useState(false);
+  const [neonRotation, setNeonRotation] = useState(false);
 
   useEffect(() => {
     if (selectedIndex >= 0 && isCurrentProduct) {
@@ -69,6 +71,16 @@ const GestaoPecuariaScene = () => {
         setDispositivoPosition(vacaPositionsRef.current[selectedIndex]);
       }
     }
+    switch (selectedIndex) {
+      case 0:
+        setNeonPosition([0, 0, 0]);
+        setNeonRotation([0, 0, 0]);
+        break;
+      case 1:
+        setNeonPosition([0, 0, 0]);
+        setNeonRotation([0, 0, 0]);
+        break;      
+    }    
   }, [selectedIndex, isCurrentProduct]);
 
   const handleObjectPositionUpdate = (position, vacaIndex) => {
@@ -95,7 +107,7 @@ const GestaoPecuariaScene = () => {
       <Vacas onObjectPositionUpdate={handleObjectPositionUpdate} />
 
       {shouldRenderNeon && (
-        <PecuariaNeon onAnimationEnd={() => setShouldRenderNeon(false)} />
+        <PecuariaNeon position={neonPosition} rotation={neonRotation} onAnimationEnd={() => setShouldRenderNeon(false)} />
       )} 
 
       {shouldRenderMainObject && dispositivoPosition && trackedVacaIndexRef.current >= 0 && (
