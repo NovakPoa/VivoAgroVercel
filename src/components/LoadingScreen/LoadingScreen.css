@@ -13,6 +13,16 @@
   color: white;
 }
 
+.loading-status-container {
+  height: 100px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
 .loading-content {
   text-align: center;
   max-width: 400px;
@@ -62,4 +72,28 @@ h1 {
 p {
   font-size: 16px;
   opacity: 0.8;
+}
+
+.start-button-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  text-align: center;
+}
+
+.start-button-container button {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
