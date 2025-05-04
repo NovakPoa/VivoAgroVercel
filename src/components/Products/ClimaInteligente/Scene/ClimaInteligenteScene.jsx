@@ -14,14 +14,14 @@ const SHOW_TABLET_DELAY = 4000;                 // inicia quando card com timer 
 const HIDE_TABLET_DELAY = 12000;                  // inicia quando card com timer termina
 const START_END_PRODUCT_DELAY = 13000;          // inicia quando card com timer termina  
 
-const SMALL_OBJECT_LOOKAT = [0, 0.8, 10];
 const CAMERA_TARGET = [0, 1.4, 10];
+const SMALL_OBJECT_LOOKAT = [0, 0.7, 10];
+const PLACEHOLDER_LOOKAT_OFFSET = [0, 1.5, 0];
 const INITIAL_PLACEHOLDER_POSITIONS = [
   [8, 0, 25],
   [0, 0, 10],
   [-3, 0, 12],
 ];
-const PLACEHOLDER_LOOKAT_OFFSET = [0, 1.5, 0];
 
 const ClimaInteligenteScene = () => {
   const {

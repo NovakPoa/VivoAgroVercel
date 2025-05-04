@@ -14,14 +14,14 @@ const SHOW_TABLET_DELAY = 4000;                 // inicia quando card com timer 
 const HIDE_TABLET_DELAY = 12000;                  // inicia quando card com timer termina
 const START_END_PRODUCT_DELAY = 13000;          // inicia quando card com timer termina  
 
-const SMALL_OBJECT_LOOKAT = [10, 0.8, 0];
 const CAMERA_TARGET = [10, 1.4, 0];
+const SMALL_OBJECT_LOOKAT = [10, 0.7, 0];
+const PLACEHOLDER_LOOKAT_OFFSET = [0, 30, 0];
 const INITIAL_PLACEHOLDER_POSITIONS = [
   [35, 0, -10],
   [40, 0, 0],
   [40, 0, 12],
 ];
-const PLACEHOLDER_LOOKAT_OFFSET = [0, 30, 0];
 
 const AgroCoberturaScene = () => {
   const {
