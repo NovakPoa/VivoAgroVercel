@@ -12,7 +12,7 @@ const Visuals = () => {
 
   const envSettings = useControls('Environment', {
     envMapEnabled: { value: true, label: 'Environment Map Enabled' },
-    envMapIntensity: { value: 0.5, min: 0, max: 3, step: 0.05, label: 'Intensity' },
+    envMapIntensity: { value: 0.75, min: 0, max: 3, step: 0.05, label: 'Intensity' },
     ambientLightEnabled: { value: false, label: 'Ambient Light Enabled' },
     ambientLightIntensity: { value: 1.0, min: 0, max: 2, step: 0.05, label: 'Light Intensity' },
     skyColor: { value: '#ffffff', label: 'Sky Color' },
