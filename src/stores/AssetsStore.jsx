@@ -56,7 +56,7 @@ const assets = {
     '/models/vegetaçao/Grama.glb',
     '/models/vegetaçao/Soja.glb',
     '/models/vegetaçao/SojaFundo.glb',
-    '/models/vegetaçao/VegetaçaoPerto.glb',
+    '/models/vegetaçao/VegetaçaoPerto.glb',
   ],
   textures: [
     // Skybox

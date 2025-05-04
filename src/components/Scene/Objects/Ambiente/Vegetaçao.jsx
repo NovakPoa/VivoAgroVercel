@@ -27,7 +27,7 @@ const MODELS = [
     scale: 1
   },
   {
-    path: '/models/vegetaçao/VegetaçaoPerto.glb',
+    path: '/models/vegetaçao/VegetaçaoPerto.glb',
     position: [0, 0, 0],
     rotation: [0, 0, 0],
     scale: 1
