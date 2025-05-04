@@ -18,19 +18,19 @@ const BrincoSmall = ({
   useEffect(() => {
     if (isVisible) {
       if (scene) {
-        play('scale-in', {
+        play('BrincoMiniatura-Crescendo', {
           loop: false,
           timeScale: 3.0
         });
-        play('MaquinarioMiniatura-Flutuando', {
+        play('BrincoMiniatura-Flutuando', {
           loop: true,
           timeScale: 1.0
         });
       }
     } else {
-      play('scale-out', {
+      play('BrincoMiniatura-Crescendo', {
         loop: false,
-        timeScale: 3.0,
+        timeScale: -3.0,
         onFinish: onAnimationOutEnded
       });
     }

@@ -18,18 +18,18 @@ const AntenaSmall = ({
   useEffect(() => {
     if (isVisible) {
       if (scene) {
-        play('AntenaCrescendo_Animacao', {
+        play('AntenaMiniatura_Crescendo', {
           loop: false,
           timeScale: 3.0
         });
 
-        play('AntenaMiniatura_Flutuando_Animacao', {
+        play('AntenaMiniatura_Flutuando', {
           loop: true,
           timeScale: 1.0
         });
       }
     } else {
-      play('AntenaCrescendo_Animacao', {
+      play('AntenaMiniatura_Crescendo', {
         loop: false,
         timeScale: -3.0,
         onFinish: onAnimationOutEnded

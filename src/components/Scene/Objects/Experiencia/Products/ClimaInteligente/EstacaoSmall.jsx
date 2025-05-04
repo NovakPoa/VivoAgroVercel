@@ -18,17 +18,17 @@ const EstacaoSmall = ({
   useEffect(() => {
     if (isVisible) {
       if (scene) {
-        play('EstacaoMeteorologicaCrescendo_Animacao', {
+        play('EstacaoMeteorologicaMiniatura_Crescendo', {
           loop: false,
           timeScale: 3.0
         });
-        play('EstacaoMeteorologicaMiniatura_Flutuando_Animacao', {
+        play('EstacaoMeteorologicaMiniatura_Flutuando', {
           loop: true,
           timeScale: 1.0
         });
       }
     } else {
-      play('EstacaoMeteorologicaCrescendo_Animacao', {
+      play('EstacaoMeteorologicaMiniatura_Crescendo', {
         loop: false,
         timeScale: -3.0,
         onFinish: onAnimationOutEnded
