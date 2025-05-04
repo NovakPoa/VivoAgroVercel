@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import useNeonEffect from '../../../../../../hooks/useNeonEffect';
 
-const MODEL_PATH = '/models/geral/NeonEstacaoMeteorologica.glb';
+const MODEL_PATH = '/models/neons/NeonEstacaoMeteorologica.glb';
 
 const ClimaNeon = ({
   position = [0, 0, 0],

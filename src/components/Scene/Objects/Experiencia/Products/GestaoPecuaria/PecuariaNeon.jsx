@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import useNeonEffect from '../../../../../../hooks/useNeonEffect';
 
-const MODEL_PATH = '/models/geral/NeonVaca.glb';
+const MODEL_PATH = '/models/neons/NeonVaca.glb';
 
 const PecuariaNeon = ({
   position = [0, 0, 0],

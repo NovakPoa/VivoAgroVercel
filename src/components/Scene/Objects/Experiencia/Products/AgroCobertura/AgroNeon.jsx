@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import useNeonEffect from '../../../../../../hooks/useNeonEffect';
 
-const MODEL_PATH = '/models/geral/NeonAntena.glb';
+const MODEL_PATH = '/models/neons/NeonAntena.glb';
 
 const AgroNeon = ({
   position = [0, 0, 0],

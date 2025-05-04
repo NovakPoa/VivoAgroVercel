@@ -6,54 +6,57 @@ import { Howl } from 'howler';
 
 const assets = {
   models: [
-    // Fazenda
-    '/models/fazenda/Solo/Solo.glb',
-    '/models/fazenda/Casa/Casa.glb',
-    '/models/fazenda/Cercas/Cercas.glb',
-    '/models/fazenda/Galpao/Galpao.glb',
-    '/models/fazenda/Ornamentos/Ornamentos.glb',
+    // fazenda
+    '/models/fazenda/Solo.glb',
+    '/models/fazenda/Casa.glb',
+    '/models/fazenda/Cercas.glb',
+    '/models/fazenda/Galpao.glb',
+    '/models/fazenda/Ornamentos.glb',
 
-    // Vegetação
+    // geral
+    '/models/geral/Mesas.glb',
+    '/models/geral/Placeholder.glb',
+
+    // intro
+    '/models/intro/Logo.glb',
+
+    // neons
+    '/models/neons/NeonCasa.glb',
+    '/models/neons/NeonAntena.glb',
+    '/models/neons/NeonTrator.glb',
+    '/models/neons/NeonVaca.glb',
+    '/models/neons/NeonEstacaoMeteorologica.glb',
+
+    // products
+    //  AgroCobertura
+    '/models/products/AgroCobertura/Antena.glb',
+    '/models/products/AgroCobertura/AntenaMiniatura.glb',
+    //  ClimaInteligente
+    '/models/products/ClimaInteligente/EstacaoMeteorologica.glb',
+    '/models/products/ClimaInteligente/EstacaoMeteorologicaMiniatura.glb',
+    //  GestaoMaquinario
+    '/models/products/GestaoMaquinario/DispositivoGestaoDeMaquinario-Miniatura.glb',
+    '/models/products/GestaoMaquinario/DispositivoGestaoDeMaquinario.glb',
+    '/models/products/GestaoMaquinario/Trator.glb',
+    //  GestaoPecuaria
+    '/models/products/GestaoPecuaria/Brinco.glb',
+    '/models/products/GestaoPecuaria/BrincoMiniatura.glb',
+    '/models/products/GestaoPecuaria/DispositivosPecuaria.glb',
+    '/models/products/GestaoPecuaria/VacaHolandesa.glb',
+    '/models/products/GestaoPecuaria/VacaNelore.glb',
+
+    // tablets
+    '/models/neons/TabletAgro.glb',
+    '/models/neons/TabletClima.glb',
+    '/models/neons/TabletMaquinario.glb',
+    '/models/neons/TabletPecuaria.glb',
+
+    // vegetaçao
+    '/models/vegetaçao/ArvoresDistantes.glb',
     '/models/vegetaçao/Grama.glb',
     '/models/vegetaçao/Soja.glb',
     '/models/vegetaçao/SojaFundo.glb',
-    '/models/vegetaçao/ArvoresDistantes.glb',
-    '/models/vegetaçao/VegetaçaoPerto.glb',
-
-    // Geral
-    '/models/geral/Mesa.glb',
-    '/models/geral/TabletAgro.glb',
-    '/models/geral/TabletMaquinario.glb',
-    '/models/geral/TabletPecuaria.glb',
-    '/models/geral/TabletClima.glb',
-    '/models/geral/NeonCasa.glb',
-    '/models/geral/NeonAntena.glb',
-    '/models/geral/NeonTrator.glb',
-    '/models/geral/NeonVaca.glb',
-    '/models/geral/NeonEstacaoMeteorologica.glb',
-
-    // Intro
-    '/models/intro/LogoVivoAgro.glb',
-
-    // Products
-    //  AgroCobertura
-    '/models/products/AgroCobertura/Antena.glb',
-    '/models/products/AgroCobertura/AntenaSmall.glb',
-    //  GestaoMaquinario
-    '/models/products/GestaoMaquinario/DispositivoMaquinario.glb',
-    '/models/products/GestaoMaquinario/DispositivoMaquinarioSmall.glb',
-    '/models/products/GestaoMaquinario/Trator.glb',
-    '/models/products/GestaoMaquinario/Trator_IconeWifi.glb',
-    //  GestaoPecuaria
-    '/models/products/GestaoPecuaria/DispositivosPecuaria.glb',
-    '/models/products/GestaoPecuaria/Brinco.glb',
-    '/models/products/GestaoPecuaria/BrincoSmall.glb',
-    '/models/products/GestaoPecuaria/VacaHolandesa.glb',
-    '/models/products/GestaoPecuaria/VacaNelore.glb',
-    //  ClimaInteligente
-    '/models/products/ClimaInteligente/Estacao.glb',
-    '/models/products/ClimaInteligente/EstacaoSmall.glb',
-
+    '/models/vegetaçao/VegetaçaoPerto.glb',
   ],
   textures: [
     // Skybox

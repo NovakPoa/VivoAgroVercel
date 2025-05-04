@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import useNeonEffect from '../../../../../hooks/useNeonEffect';
 import useIntroStore from '../../../../../stores/IntroStore';
 
-const MODEL_PATH = '/models/geral/NeonCasa.glb';
+const MODEL_PATH = '/models/neons/NeonCasa.glb';
 
 const IntroNeon = ({
   position = [0, 0, 0],

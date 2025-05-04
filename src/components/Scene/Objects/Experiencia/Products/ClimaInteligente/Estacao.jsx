@@ -1,9 +1,9 @@
 import React, { useRef, useEffect, useCallback } from 'react';
 import { useGLTFAnimations } from '../../../../../../hooks/useGLTFAnimations';
 
-const MODEL_PATH = '/models/products/ClimaInteligente/Estacao.glb';
+const MODEL_PATH = '/models/products/ClimaInteligente/EstacaoMeteorologica.glb';
 
-const Estacao = ({position = [0, 0, 0], rotation = [0, 0, 0], scale = 1, playSecondAnimation = false, skipProduct = false}) => {
+const Estacao = ({ position = [0, 0, 0], rotation = [0, 0, 0], scale = 1, playSecondAnimation = false, skipProduct = false }) => {
   const meshRef = useRef();
   const { scene, play, jumpToEnd } = useGLTFAnimations(MODEL_PATH, {
     cloneScene: false,
@@ -13,24 +13,24 @@ const Estacao = ({position = [0, 0, 0], rotation = [0, 0, 0], scale = 1, playSec
     if (!scene) return;
 
     if (!skipProduct) {
-      play('EstacaoMeteorologicaCrescendo_Animacao', { 
-        loop: false, 
+      play('EstacaoMeteorologicaCrescendo_Animacao', {
+        loop: false,
         timeScale: 2.4
       });
     } else {
       jumpToEnd('EstacaoMeteorologicaCrescendo_Animacao');
       jumpToEnd('scaleInRings');//conferir nome da animaçao
       play('animateRings', { //conferir nome da animaçao
-        loop: true, 
+        loop: true,
         timeScale: 2.4,
-      });       
+      });
     }
   }, [scene, skipProduct, play, jumpToEnd]);
 
   useEffect(() => {
     if (playSecondAnimation) {
       play('scaleIn2', { //conferir nome da animaçao
-        loop: false, 
+        loop: false,
         timeScale: 2.4,
         onFinish: onAnimationEnded
       });
@@ -39,20 +39,20 @@ const Estacao = ({position = [0, 0, 0], rotation = [0, 0, 0], scale = 1, playSec
 
   const onAnimationEnded = useCallback(() => {
     play('animateLoop', { //conferir nome da animaçao
-      loop: true, 
+      loop: true,
       timeScale: 2.4,
-    }); 
-  }, [play]); 
+    });
+  }, [play]);
 
   if (!scene) return null;
 
   return (
-    <primitive 
-      object={scene} 
+    <primitive
+      object={scene}
       ref={meshRef}
       position={position}
       rotation={rotation}
-      scale={scale}     
+      scale={scale}
     />
   );
 };

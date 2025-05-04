@@ -3,6 +3,12 @@ import { useGLTF } from '@react-three/drei';
 
 const MODELS = [
   {
+    path: '/models/vegetaçao/ArvoresDistantes.glb',
+    position: [0, 0, 0],
+    rotation: [0, 0, 0],
+    scale: 1
+  },
+  {
     path: '/models/vegetaçao/Grama.glb',
     position: [0, 0, 0],
     rotation: [0, 0, 0],
@@ -15,30 +21,24 @@ const MODELS = [
     scale: 1
   },
   {
-    path: '/models/vegetaçao/ArvoresDistantes.glb',
-    position: [0, 0, 0],
-    rotation: [0, 0, 0],
-    scale: 1
-  },
-  {
-    path: '/models/vegetaçao/VegetaçaoPerto.glb',
-    position: [0, 0, 0],
-    rotation: [0, 0, 0],
-    scale: 1
-  },
-  {
     path: '/models/vegetaçao/SojaFundo.glb',
     position: [0, 0, 0],
     rotation: [0, 0, 0],
     scale: 1
-  }  
+  },
+  {
+    path: '/models/vegetaçao/VegetaçaoPerto.glb',
+    position: [0, 0, 0],
+    rotation: [0, 0, 0],
+    scale: 1
+  }
 ];
 
 const Vegetaçao = () => {
   return (
     <group name="vegetacao">
       {MODELS.map((model, index) => (
-        <VegetacaoItem 
+        <VegetacaoItem
           key={index}
           path={model.path}
           position={model.position}
@@ -52,12 +52,12 @@ const Vegetaçao = () => {
 
 const VegetacaoItem = ({ path, position, rotation, scale }) => {
   const { scene } = useGLTF(path);
-  
+
   if (!scene) return null;
-  
+
   return (
-    <primitive 
-      object={scene} 
+    <primitive
+      object={scene}
       position={position}
       rotation={rotation}
       scale={scale}

@@ -1,11 +1,11 @@
 import React, { useRef, useCallback, useEffect } from 'react';
 import { useGLTFAnimations } from '../../../../../hooks/useGLTFAnimations';
 
-const MODEL_PATH = '/models/intro/LogoVivoAgro.glb';
+const MODEL_PATH = '/models/intro/Logo.glb';
 
 const IntroLogo = () => {
   const groupRef = useRef();
-  
+
   const { scene, play, playAll, stopAll } = useGLTFAnimations(MODEL_PATH, {
     cloneScene: false,
   });
@@ -15,8 +15,8 @@ const IntroLogo = () => {
   }, []);
 
   useEffect(() => {
-    playAll({ 
-      loop: false, 
+    playAll({
+      loop: false,
       onFinish: handleAnimationFinish
     });
   }, []);
@@ -25,9 +25,9 @@ const IntroLogo = () => {
   if (!scene) return null;
 
   return (
-    <group 
+    <group
       ref={groupRef}
-      position={[4, 0.24, -8]} 
+      position={[4, 0.24, -8]}
       rotation={[0, -0.0982, 0]}
       scale={1.4}
     >

@@ -1,21 +1,21 @@
 import React from 'react';
 import { useTablet } from '../../../../../../hooks/useTablet';
 
-const MODEL_PATH = '/models/geral/TabletAgro.glb';
+const MODEL_PATH = '/models/tablets/TabletAgro.glb';
 const VIDEO_PATH = '/videos/TabletAgroCobertura.mp4';
 
-const TabletAgro = ({position, rotation = [0, 0, 0], scale = 1, animateTablet = false}) => {
+const TabletAgro = ({ position, rotation = [0, 0, 0], scale = 1, animateTablet = false }) => {
   const { scene, meshRef } = useTablet(MODEL_PATH, VIDEO_PATH, animateTablet, '01');
-    
+
   if (!scene) return null;
 
   return (
-    <primitive 
-      object={scene} 
+    <primitive
+      object={scene}
       ref={meshRef}
       position={position}
       rotation={rotation}
-      scale={scale}     
+      scale={scale}
     />
   );
 };
