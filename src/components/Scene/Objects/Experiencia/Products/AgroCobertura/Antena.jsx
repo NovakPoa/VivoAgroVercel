@@ -3,6 +3,16 @@ import { useGLTFAnimations } from '../../../../../../hooks/useGLTFAnimations';
 
 const MODEL_PATH = '/models/products/AgroCobertura/Antena.glb';
 
+const findObjectMesh = (object, meshName) => {
+  const targetObject = object.getObjectByName(meshName);
+
+  if (targetObject && targetObject.isMesh) {
+    return targetObject;
+  }
+
+  return null;
+};
+
 const Antena = ({ position, rotation = [0, 0, 0], scale = 1, playSecondAnimation = false, skipProduct = false }) => {
   const meshRef = useRef();
   const { scene, play, jumpToEnd } = useGLTFAnimations(MODEL_PATH, {
@@ -11,6 +21,15 @@ const Antena = ({ position, rotation = [0, 0, 0], scale = 1, playSecondAnimation
 
   useEffect(() => {
     if (!scene) return;
+
+    // Desabilitando frustum culling
+    const objectNames = ['AntenaBase', 'AntenaTorre'];
+    objectNames.forEach(name => {
+      const objectMesh = findObjectMesh(scene, name);
+      if (objectMesh) {
+        objectMesh.frustumCulled = false;
+      }
+    });
 
     if (!skipProduct) {
       play('AntenaCrescendo_Animacao', {

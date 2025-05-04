@@ -12,14 +12,14 @@ const MODELS = [
     scale: 1
   },
   {
-    path: '/models/products/GestaoPecuaria/VacaNelore.glb', // trocar
+    path: '/models/products/GestaoPecuaria/VacaHolandesa.glb',
     position: [0, 0, 0],
     rotation: [0, 0, 0],
     scale: 1
   },
 ];
 
-const findObjectMesh = (object, meshName = 'Olho') => {
+const findObjectMesh = (object, meshName) => {
   const targetObject = object.getObjectByName(meshName);
 
   if (targetObject && targetObject.isMesh) {
@@ -38,15 +38,21 @@ const Vaca = forwardRef(({ path, position, rotation, scale, onMeshFound, index }
 
   useEffect(() => {
     if (scene) {
-      const objectMesh = findObjectMesh(scene);
-      if (objectMesh) {
-        meshRef.current = objectMesh;
-      }
+      // Desabilitando frustum culling
+      const objectNames = ['VacaNelore_1', 'VacaNelore_2', 'VacaHolandesa'];
+      objectNames.forEach(name => {
+        const objectMesh = findObjectMesh(scene, name);
+        if (objectMesh) {
+          // meshRef.current = objectMesh; // Mantém referência do último encontrado
+          objectMesh.frustumCulled = false;
+        }
+      });
 
       playAll({
         loop: true,
       });
     }
+
   }, [scene]);
 
   useFrame(() => {
@@ -71,7 +77,6 @@ const Vaca = forwardRef(({ path, position, rotation, scale, onMeshFound, index }
       position={position}
       rotation={rotation}
       scale={scale}
-      frustumCulled={false}
     />
   );
 });
