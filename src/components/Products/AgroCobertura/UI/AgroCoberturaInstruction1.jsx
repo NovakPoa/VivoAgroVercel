@@ -9,9 +9,9 @@ const AgroCoberturaInstruction1 = ({ isVisible }) => {
 
   return (
     <div className="instruction-container">
-      <Instruction 
-        title="Leve cobertura para sua propriedade" 
-        description="Escolha onde instalar" 
+      <Instruction
+        title="Leve cobertura para sua propriedade"
+        description="Clique em um dos botões abaixo e escolha onde instalar."
         isVisible={isVisible}
         onAnimationOutEnded={handleAnimationOutEnded}
       />

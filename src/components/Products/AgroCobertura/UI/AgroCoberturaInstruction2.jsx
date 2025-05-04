@@ -3,10 +3,10 @@ import InstructionWithTimer from '../../../Commons/UI/InstructionWithTimer/Instr
 
 const AgroCoberturaInstruction2 = ({ isVisible }) => {
   return (
-    <InstructionWithTimer 
+    <InstructionWithTimer
       isVisible={isVisible}
-      title="Estamos ativando sua antena" 
-      description="Você logo poderá acessar novas tecnologias para sua fazenda"
+      title="Estamos ativando sua antena"
+      description="Você logo poderá acessar novas tecnologias para sua fazenda."
       duration={4}
     />
   );
