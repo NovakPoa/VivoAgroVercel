@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Placeholders from '../../../Commons/Scene/Placeholders/Placeholders';
 import useProductScene from '../../../../hooks/useProductScene';
+import useCameraStore from '../../../../stores/CameraStore';
 import Tratores from '../../../Scene/Objects/Experiencia/Products/GestaoMaquinario/Tratores';
 import DispositivoMaquinario from '../../../Scene/Objects/Experiencia/Products/GestaoMaquinario/DispositivoMaquinario';
 import DispositivoMaquinarioSmall from '../../../Scene/Objects/Experiencia/Products/GestaoMaquinario/DispositivoMaquinarioSmall';
@@ -57,6 +58,8 @@ const GestaoMaquinarioScene = () => {
   
   const tratorPositionsRef = useRef(INITIAL_PLACEHOLDER_POSITIONS);
   const trackedTratorIndexRef = useRef(-1);
+  const isTrackingEnabledRef = useRef(false);
+  const { setCurrentTarget, stopFollowingTarget, startFollowingTarget} = useCameraStore();
 
   const [dispositivoPosition, setDispositivoPosition] = useState(selectedPosition);
   const [placeholderPositions, setPlaceholderPositions] = useState(INITIAL_PLACEHOLDER_POSITIONS);
@@ -64,11 +67,23 @@ const GestaoMaquinarioScene = () => {
   useEffect(() => {
     if (selectedIndex >= 0 && isCurrentProduct) {
       trackedTratorIndexRef.current = selectedIndex;
+      isTrackingEnabledRef.current = true;
+      startFollowingTarget();
+      
       if (tratorPositionsRef.current[selectedIndex]) {
         setDispositivoPosition(tratorPositionsRef.current[selectedIndex]);
       }
     }
   }, [selectedIndex, isCurrentProduct]);
+
+  useEffect(() => {
+    if (animateTablet || !isCurrentProduct) {
+      isTrackingEnabledRef.current = false;
+      stopFollowingTarget();
+    } else if (selectedIndex >= 0) {
+      isTrackingEnabledRef.current = true;
+    }
+  }, [animateTablet, isCurrentProduct, stopFollowingTarget, selectedIndex]);
 
   const handleObjectPositionUpdate = (position, tratorIndex) => {
     if (position) {
@@ -86,6 +101,16 @@ const GestaoMaquinarioScene = () => {
       if (shouldRenderMainObject && trackedTratorIndexRef.current === tratorIndex) {
         setDispositivoPosition([position.x, position.y, position.z]);
       }
+
+      // Atualizar posiçao do target da camera
+      if (isTrackingEnabledRef.current && isCurrentProduct && trackedTratorIndexRef.current === tratorIndex) {
+        const targetPosition = [
+          position.x + PLACEHOLDER_LOOKAT_OFFSET[0],
+          position.y + PLACEHOLDER_LOOKAT_OFFSET[1], 
+          position.z + PLACEHOLDER_LOOKAT_OFFSET[2]
+        ];
+        setCurrentTarget(targetPosition);
+      }      
     }
   };
 

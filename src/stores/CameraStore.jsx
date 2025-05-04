@@ -47,6 +47,20 @@ const cameraStore = (set, get) => ({
     cameraAnimate: false
   }),
   
+  isFollowingTarget: false,
+  
+  setCurrentTarget: (target) => set({
+    currentTarget: target,
+  }),
+  
+  startFollowingTarget: () => set({
+    isFollowingTarget: true
+  }),
+
+  stopFollowingTarget: () => set({
+    isFollowingTarget: false
+  }),
+
   resetCameraPosition: () => {
     set({ resetCamera: true });
     

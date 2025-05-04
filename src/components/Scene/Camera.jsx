@@ -1,6 +1,6 @@
 import { useEffect, useRef, useMemo } from 'react';
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
-import { useThree } from '@react-three/fiber';
+import { useThree, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import gsap from 'gsap';
 import useCameraStore from '../../stores/CameraStore';
@@ -27,7 +27,8 @@ const Camera = () => {
   const finishAnimation = useCameraStore(state => state.finishAnimation);
   const resetCamera = useCameraStore(state => state.resetCamera);
   const isFreeLookMode = useCameraStore(state => state.isFreeLookMode);
-  
+  const isFollowingTarget = useCameraStore(state => state.isFollowingTarget);
+
   const aspectRatio = size.width / size.height;
 
   const adjustedFOV = useMemo(() => {
@@ -95,61 +96,55 @@ const Camera = () => {
       if (gsapAnimationRef.current) {
         gsapAnimationRef.current.kill();
       }
-
+  
+      // Salvar o alvo inicial da animação
+      const initialTargetRef = [...currentTarget];
+  
       // Obter posição atual do target
       const currentX = controlsRef.current.target.x;
       const currentY = controlsRef.current.target.y;
       const currentZ = controlsRef.current.target.z;
-      const targetY = currentTarget[1];
-
-      // Calcular ângulos para animação circular horizontal
-      const startAngle = Math.atan2(currentZ, currentX);
-      const endAngle = Math.atan2(currentTarget[2], currentTarget[0]);
-      
-      // Calcular o raio atual
-      const currentRadius = Math.sqrt(currentX * currentX + currentZ * currentZ);
-
-      // Calcular o raio do target
-      const targetRadius = Math.sqrt(
-        currentTarget[0] * currentTarget[0] + 
-        currentTarget[2] * currentTarget[2]
-      );
-      
-      // Objeto para animar o ângulo e a altura Y
+  
       const animObj = { 
-        angle: startAngle,
-        y: currentY,
-        radius: currentRadius
+        progress: 0, 
       };
       
       // Criar animação com GSAP
       gsapAnimationRef.current = gsap.to(animObj, {
-        angle: endAngle,
-        y: targetY,
-        radius: targetRadius,
+        progress: 1,
         duration: animationDuration,
         ease: "power2.inOut", 
         onUpdate: () => {
-          // Calcular novas coordenadas X e Z baseadas no ângulo
-          const newX = Math.cos(animObj.angle) * animObj.radius;
-          const newZ = Math.sin(animObj.angle) * animObj.radius;
+
+          const t = animObj.progress;
           
-          // Atualizar a posição do target
-          controlsRef.current.target.set(newX, animObj.y, newZ);
+          const targetX = currentX * (1-t) + initialTargetRef[0] * t;
+          const targetY = currentY * (1-t) + initialTargetRef[1] * t;
+          const targetZ = currentZ * (1-t) + initialTargetRef[2] * t;
+
+          controlsRef.current.target.set(targetX, targetY, targetZ);
           controlsRef.current.update();
         },
         onComplete: () => {
-          controlsRef.current.target.set(
-            currentTarget[0],
-            currentTarget[1],
-            currentTarget[2]
-          );
-          controlsRef.current.update();
           finishAnimation();
         }
       });
     }
   }, [cameraAnimate]);
+
+  useFrame(() => {
+    if (controlsRef.current && isFollowingTarget && !cameraAnimate) {
+      // Interpolação leve para suavizar a transição
+      const lerpFactor = 0.02; 
+      
+      const targetX = controlsRef.current.target.x + (currentTarget[0] - controlsRef.current.target.x) * lerpFactor;
+      const targetY = controlsRef.current.target.y + (currentTarget[1] - controlsRef.current.target.y) * lerpFactor;
+      const targetZ = controlsRef.current.target.z + (currentTarget[2] - controlsRef.current.target.z) * lerpFactor;
+      
+      controlsRef.current.target.set(targetX, targetY, targetZ);
+      controlsRef.current.update();
+    }
+  });
 
   return (
     <>

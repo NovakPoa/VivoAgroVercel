@@ -139,6 +139,7 @@ const useProductScene = (
     if (isCurrentProduct) {
       setShowFirstInstruction(false);
       setShowFirstInteraction(false);
+      
       animateToTarget(position.map((value, index) => value + placeholderLookAtOffset[index]), 1);
 
       timerToStartFirstAnimation(position);
