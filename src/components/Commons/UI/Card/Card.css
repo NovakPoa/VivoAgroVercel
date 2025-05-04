@@ -50,6 +50,8 @@
 
 .card-title {
   font-size: 20px;
+  /* font-size: 22px; */
+  /* text-wrap: balance; */
   font-weight: bold;
   margin: 12px 0;
   color: #283943;
@@ -58,7 +60,7 @@
 }
 
 .card-description {
-  font-size: 15px;
+  font-size: 17px;
   line-height: 20px;
   color: #283943;
   margin-bottom: 24px;
