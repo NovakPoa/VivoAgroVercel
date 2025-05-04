@@ -4,24 +4,26 @@ import PreloadedImage from '../PreloadedImage/PreloadedImage';
 import { ANIMATION_DURATIONS } from '../../../../config/animationUIConfig';
 import './Card.css';
 
-const Card = ({ 
-  title, 
-  description, 
-  showImage = true, 
-  imageUrl, 
-  firstButton = true, 
+const Card = ({
+  title,
+  description,
+  showImage = true,
+  imageUrl,
+  firstButton = true,
   firstButtonShowIcon = true,
-  secondButton = true, 
-  firstButtonText, 
-  secondButtonText, 
-  firstButtonOnClick, 
+  secondButton = true,
+  firstButtonText,
+  secondButtonText,
+  firstButtonOnClick,
   secondButtonOnClick,
   isVisible = true,
   onAnimationOutEnded,
-  position = 'center'
+  position = 'center',
+  purpleTitle = false,
+  showCheckIcon = false
 }) => {
   const [animState, setAnimState] = useState('initial'); // 'initial', 'visible', 'hiding'
-  
+
   useEffect(() => {
     if (isVisible) {
       setAnimState('visible')
@@ -29,7 +31,7 @@ const Card = ({
       setAnimState('hiding');
     }
   }, [isVisible]);
-  
+
   useEffect(() => {
     if (animState === 'hiding') {
       const endTimer = setTimeout(() => { if (onAnimationOutEnded) onAnimationOutEnded(); }, ANIMATION_DURATIONS.CARD.SCALE_OUT);
@@ -42,12 +44,13 @@ const Card = ({
     '--card-scale-out-duration': `${ANIMATION_DURATIONS.CARD.SCALE_OUT}ms`
   };
 
-  const animClass = 
+  const animClass =
     animState === 'initial' ? 'hidden' :
-    animState === 'visible' ? 'visible' : 
-    'hiding';
+      animState === 'visible' ? 'visible' :
+        'hiding';
 
   const positionClass = `card-position-${position}`;
+  const titleClass = purpleTitle ? 'card-title purple-title' : 'card-title';
 
   return (
     <div className={`card ${animClass} ${positionClass}`} style={style}>
@@ -56,8 +59,11 @@ const Card = ({
           <PreloadedImage src={imageUrl} alt={title} />
         </div>
       )}
+      {showCheckIcon && (
+        <img src="./ui/icons/check-icon.png" alt="Check Icon" className="card-check-icon" />
+      )}
       <div className="card-content">
-        <h2 className="card-title">{title}</h2>
+        <h2 className={titleClass}>{title}</h2>
         <p className="card-description">{description}</p>
         {(firstButton || secondButton) && (
           <div className="card-buttons">

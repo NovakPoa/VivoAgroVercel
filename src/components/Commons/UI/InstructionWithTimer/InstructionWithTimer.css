@@ -4,7 +4,7 @@
 }
 
 .timer-title {
-  font-size: 14px;
+  font-size: 16px;
   margin-bottom: 8px;
   color: #660099;
   text-align: center;
@@ -25,27 +25,27 @@
   height: 100%;
   background-color: #660099;
   border-radius: 4px;
-  transition: width 1s linear; 
-  will-change: width; 
-  transform: translateZ(0); 
+  transition: width 1s linear;
+  will-change: width;
+  transform: translateZ(0);
 }
 
 .timer-text {
   position: absolute;
   top: -20px;
   right: 0;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: bold;
   color: #660099;
 }
 
-@media screen and (max-width: 768px) { 
+@media screen and (max-width: 768px) {
   .timer-container {
     margin-bottom: 4px;
   }
 }
 
-@media screen and (max-width: 480px) { 
+@media screen and (max-width: 480px) {
   .timer-container {
     height: 8px;
     margin-bottom: 4px;

@@ -9,18 +9,20 @@ const EndCard = ({ isVisible, onContinueClick, onSkipClick }) => {
 
   return (
     <div className="card-container">
-      <Card 
+      <Card
         title={`Você concluiu a experiência
           Vivo Agro`}
-        description="Entre em contato com nossa equipe de vendas para descobrir quais são as melhores soluções para o seu agronegócio." 
+        description="Entre em contato com nossa equipe de vendas para descobrir quais são as melhores soluções para o seu agronegócio."
         showImage={false}
         imageUrl="#"
         firstButton={true}
         firstButtonText="Recomeçar experiência"
         firstButtonOnClick={onContinueClick}
-        secondButton={false}  
-        isVisible={isVisible} 
-        onAnimationOutEnded={handleAnimationOutEnded}              
+        secondButton={false}
+        isVisible={isVisible}
+        onAnimationOutEnded={handleAnimationOutEnded}
+        purpleTitle={true}
+        showCheckIcon={true}
       />
     </div>
   );

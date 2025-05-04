@@ -9,17 +9,18 @@ const IntroCard = ({ isVisible, onButtonClick }) => {
 
   return (
     <div className="card-container">
-      <Card 
-        title="Bem-vindo à experiência Vivo Agro" 
-        description="Descubra como as nossas soluções de tecnologia podem ajudar na sua fazenda." 
+      <Card
+        title="Bem-vindo à experiência Vivo Agro"
+        description="Descubra como as nossas soluções de tecnologia podem ajudar na sua fazenda."
         showImage={false}
         firstButton={true}
         firstButtonText="Começar"
         firstButtonOnClick={onButtonClick}
         secondButton={false}
-        isVisible={isVisible} 
-        onAnimationOutEnded={handleAnimationOutEnded}  
+        isVisible={isVisible}
+        onAnimationOutEnded={handleAnimationOutEnded}
         position="bottom"
+        purpleTitle={true}
       />
     </div>
   );

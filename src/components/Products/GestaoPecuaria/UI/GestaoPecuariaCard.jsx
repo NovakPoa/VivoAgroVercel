@@ -7,13 +7,13 @@ const GestaoPecuariaCard = ({ isVisible, onContinueClick, onSkipClick }) => {
 
   if (!shouldRender) return null;
 
-  const imageUrl = "/ui/gestaoPecuaria.png";
+  const imageUrl = "/ui/gestaoPecuaria.jpg";
 
   return (
     <div className="card-container">
-      <Card 
-        title="Gestão Pecuária" 
-        description="Monitore seu rebanho remotamente e digitalize as principais atividades do manejo." 
+      <Card
+        title="Gestão Pecuária"
+        description="Monitore seu rebanho remotamente e digitalize as principais atividades do manejo."
         showImage={true}
         imageUrl={imageUrl}
         firstButton={true}
@@ -21,9 +21,9 @@ const GestaoPecuariaCard = ({ isVisible, onContinueClick, onSkipClick }) => {
         firstButtonOnClick={onContinueClick}
         secondButton={true}
         secondButtonText="Não possuo gado"
-        secondButtonOnClick={onSkipClick}  
-        isVisible={isVisible} 
-        onAnimationOutEnded={handleAnimationOutEnded}       
+        secondButtonOnClick={onSkipClick}
+        isVisible={isVisible}
+        onAnimationOutEnded={handleAnimationOutEnded}
       />
     </div>
   );

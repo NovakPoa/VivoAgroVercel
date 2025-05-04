@@ -31,17 +31,17 @@ const DashboardCard = ({ isVisible = true, onAnimationOutEnded, onResetClick }) 
     '--dash-scale-out-duration': `${ANIMATION_DURATIONS.DASHBOARD.SCALE_OUT}ms`
   };
 
-  const animClass = 
+  const animClass =
     animState === 'initial' ? 'hidden' :
-    animState === 'visible' ? 'visible' : 
-    'hiding';
+      animState === 'visible' ? 'visible' :
+        'hiding';
 
   const handleProductClick = useCallback((productName) => {
     setShowDashboard(false);
     const timer = setTimeout(() => {
       setCurrentProduct(productName);
       setStartProduct(true);
-    }, ANIMATION_DURATIONS.DASHBOARD.SCALE_OUT);   
+    }, ANIMATION_DURATIONS.DASHBOARD.SCALE_OUT);
   }, []);
 
   const handleResetClick = useCallback(() => {
@@ -56,7 +56,7 @@ const DashboardCard = ({ isVisible = true, onAnimationOutEnded, onResetClick }) 
         <button className="sidebar-button active">
           <img src="./ui/icons/vivo-icon-dark.png" alt="Vivo Icon" />
         </button>
-        <button 
+        <button
           className="sidebar-button"
           onClick={handleResetClick}
           title="Reiniciar experiência"
@@ -65,9 +65,9 @@ const DashboardCard = ({ isVisible = true, onAnimationOutEnded, onResetClick }) 
         </button>
       </div>
       <div className="main-buttons">
-        <ImageButton status={productsStatus['agro-cobertura']} title="AGRO COBERTURA" onClick={() => handleProductClick('agro-cobertura')} imageUrl="/ui/agroCobertura.png" />
+        <ImageButton status={productsStatus['agro-cobertura']} title="AGRO COBERTURA" onClick={() => handleProductClick('agro-cobertura')} imageUrl="/ui/agroCobertura.jpg" />
         <ImageButton status={productsStatus['gestao-maquinario']} title="GESTÃO DE MAQUINÁRIO" onClick={() => handleProductClick('gestao-maquinario')} imageUrl="/ui/gestaoMaquinario.jpg" />
-        <ImageButton status={productsStatus['gestao-pecuaria']} title="GESTÃO PECUÁRIA" onClick={() => handleProductClick('gestao-pecuaria')} imageUrl="/ui/gestaoPecuaria.png" />
+        <ImageButton status={productsStatus['gestao-pecuaria']} title="GESTÃO PECUÁRIA" onClick={() => handleProductClick('gestao-pecuaria')} imageUrl="/ui/gestaoPecuaria.jpg" />
         <ImageButton status={productsStatus['clima-inteligente']} title="CLIMA INTELIGENTE" onClick={() => handleProductClick('clima-inteligente')} imageUrl="/ui/climaInteligente.jpg" />
       </div>
     </div>

@@ -8,7 +8,7 @@
   max-height: 96vh;
   border-radius: 20px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
+  /* overflow: hidden; */
   background-color: #fff;
   margin: 0 auto;
   position: absolute;
@@ -22,12 +22,12 @@
 }
 
 .card.card-position-top {
-  top: 20px;
+  top: 5%;
   transform: translateX(-50%);
 }
 
 .card.card-position-bottom {
-  bottom: 20px;
+  bottom: 5%;
   transform: translateX(-50%);
 }
 
@@ -35,40 +35,58 @@
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   overflow: hidden;
-  width: 100%; 
+  width: 100%;
   height: 208px;
   background-size: cover;
   background-position: top;
 }
 
 .card-content {
-  width: 100%; 
+  width: 100%;
   padding: 24px;
   text-align: center;
   box-sizing: border-box;
 }
+
 .card-title {
-  font-size: 20px; 
+  font-size: 20px;
+  /* font-size: 22px; */
+  /* text-wrap: balance; */
   font-weight: bold;
   margin: 12px 0;
-  color: #283943; 
+  color: #283943;
   font-family: 'Roboto', sans-serif;
   white-space: pre-line;
 }
 
 .card-description {
-  font-size: 15px;
+  font-size: 17px;
   line-height: 20px;
-  color: #283943; 
+  color: #283943;
   margin-bottom: 24px;
-  font-family: 'Roboto', sans-serif; 
+  font-family: 'Roboto', sans-serif;
 }
 
 .card-buttons {
   display: flex;
   flex-direction: column;
-  align-items: center; 
+  align-items: center;
   gap: 8px;
+}
+
+/* purple title prop */
+.purple-title {
+  color: #660099 !important;
+}
+
+/* checkmark icon */
+.card-check-icon {
+  position: absolute;
+  height: 45px;
+  width: auto;
+  right: -8px;
+  top: -20px;
+  z-index: 3;
 }
 
 /* height breakpoints */
@@ -76,82 +94,152 @@
   .card-image-wrapper {
     height: 180px;
   }
+
   .card-content {
     padding: 20px;
-  }  
+  }
 }
 
 @media screen and (max-height: 420px) {
   .card-image-wrapper {
     height: 160px;
   }
+
   .card-content {
     padding-top: 10px;
     padding-bottom: 16px;
-  }  
+  }
 }
 
 @media screen and (max-height: 380px) {
   .card-title {
-    font-size: clamp(16px, 5vh, 20px); 
+    font-size: clamp(16px, 5vh, 20px);
     margin: clamp(6px, 3vh, 12px) 0;
   }
+
   .card-description {
     font-size: clamp(13px, 4vh, 15px);
     line-height: clamp(16px, 5vh, 20px);
     margin-bottom: clamp(10px, 6vh, 24px);
-  }  
+  }
 }
 
 /* width breakpoints */
 @media screen and (max-width: 320px) {
   .card-title {
-    font-size: clamp(16px, 6vw, 20px); 
+    font-size: clamp(16px, 6vw, 20px);
     margin-top: 0px;
     margin-bottom: 6px;
   }
+
   .card-description {
     font-size: clamp(13px, 4vw, 15px);
     line-height: clamp(16px, 7vw, 20px);
     margin-bottom: clamp(10px, 6vw, 24px);
-  }  
+  }
 }
 
 /* Animação */
 @keyframes cardScaleInCenter {
-  0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
-  70% { transform: translate(-50%, -50%) scale(1.05); opacity: 1; }
-  100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  0% {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0;
+  }
+
+  70% {
+    transform: translate(-50%, -50%) scale(1.05);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
 }
 
 @keyframes cardScaleOutCenter {
-  0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-  30% { transform: translate(-50%, -50%) scale(1.05); opacity: 0.8; }
-  100% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+
+  30% {
+    transform: translate(-50%, -50%) scale(1.05);
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0;
+  }
 }
 
 @keyframes cardScaleInTop {
-  0% { transform: translateX(-50%) scale(0.8); opacity: 0; }
-  70% { transform: translateX(-50%) scale(1.05); opacity: 1; }
-  100% { transform: translateX(-50%) scale(1); opacity: 1; }
+  0% {
+    transform: translateX(-50%) scale(0.8);
+    opacity: 0;
+  }
+
+  70% {
+    transform: translateX(-50%) scale(1.05);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(-50%) scale(1);
+    opacity: 1;
+  }
 }
 
 @keyframes cardScaleOutTop {
-  0% { transform: translateX(-50%) scale(1); opacity: 1; }
-  30% { transform: translateX(-50%) scale(1.05); opacity: 0.8; }
-  100% { transform: translateX(-50%) scale(0.8); opacity: 0; }
+  0% {
+    transform: translateX(-50%) scale(1);
+    opacity: 1;
+  }
+
+  30% {
+    transform: translateX(-50%) scale(1.05);
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: translateX(-50%) scale(0.8);
+    opacity: 0;
+  }
 }
 
 @keyframes cardScaleInBottom {
-  0% { transform: translateX(-50%) scale(0.8); opacity: 0; }
-  70% { transform: translateX(-50%) scale(1.05); opacity: 1; }
-  100% { transform: translateX(-50%) scale(1); opacity: 1; }
+  0% {
+    transform: translateX(-50%) scale(0.8);
+    opacity: 0;
+  }
+
+  70% {
+    transform: translateX(-50%) scale(1.05);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(-50%) scale(1);
+    opacity: 1;
+  }
 }
 
 @keyframes cardScaleOutBottom {
-  0% { transform: translateX(-50%) scale(1); opacity: 1; }
-  30% { transform: translateX(-50%) scale(1.05); opacity: 0.8; }
-  100% { transform: translateX(-50%) scale(0.8); opacity: 0; }
+  0% {
+    transform: translateX(-50%) scale(1);
+    opacity: 1;
+  }
+
+  30% {
+    transform: translateX(-50%) scale(1.05);
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: translateX(-50%) scale(0.8);
+    opacity: 0;
+  }
 }
 
 .card.card-position-center.visible {

@@ -3,10 +3,10 @@ import InstructionWithTimer from '../../../Commons/UI/InstructionWithTimer/Instr
 
 const GestaoMaquinarioInstruction2 = ({ isVisible }) => {
   return (
-    <InstructionWithTimer 
+    <InstructionWithTimer
       isVisible={isVisible}
       title="Estamos conectando seus sensores"
-      description="Você logo poderá acessar os dados da sua frota"
+      description="Você logo poderá acessar os dados da sua frota."
       duration={4}
     />
   );

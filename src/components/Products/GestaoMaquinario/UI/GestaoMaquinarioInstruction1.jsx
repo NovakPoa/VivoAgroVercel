@@ -9,11 +9,11 @@ const GestaoMaquinarioInstruction1 = ({ isVisible }) => {
 
   return (
     <div className="instruction-container">
-      <Instruction 
-        title="Instale o dispositivo para conectar sua frota" 
-        description="Escolha onde instalar" 
-        isVisible={isVisible}  
-        onAnimationOutEnded={handleAnimationOutEnded}      
+      <Instruction
+        title="Instale o dispositivo para conectar sua frota"
+        description="Clique nos botões abaixo para instalar em um dos tratores."
+        isVisible={isVisible}
+        onAnimationOutEnded={handleAnimationOutEnded}
       />
     </div>
   );
