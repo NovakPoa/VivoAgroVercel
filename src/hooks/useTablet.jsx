@@ -6,7 +6,7 @@ import useAssetsStore from '../stores/AssetsStore';
 export const useTablet = (modelPath, videoPath, animateTablet, tabletID = '') => {
   const meshRef = useRef();
   const videoTextureRef = useRef(null);
-  const videoRef = useRef(null);  
+  const videoRef = useRef(null);
   const screenMeshRef = useRef(null);
   const originalMaterialRef = useRef(null);
   const hasAnimatedBeforeRef = useRef(false);
@@ -14,12 +14,12 @@ export const useTablet = (modelPath, videoPath, animateTablet, tabletID = '') =>
   const { scene, play } = useGLTFAnimations(modelPath, {
     cloneScene: false,
   });
-  
+
   const { getVideo } = useAssetsStore();
 
   const elementNames = useMemo(() => ({
     screenMesh: `Screen${tabletID}`,
-    tabletAnimation: `Tablet${tabletID}_Levantando_Animacao`,
+    tabletAnimation: `Tablet${tabletID}-Levantando`,
   }), [tabletID]);
 
   // Encontra e armazena referência ao mesh da tela
@@ -37,18 +37,18 @@ export const useTablet = (modelPath, videoPath, animateTablet, tabletID = '') =>
       } else {
         console.warn(`Mesh ${elementNames.screenMesh} não encontrado no modelo ${modelPath}`);
       }
-      
+
       // Cria a textura de vídeo
       const video = getVideo(videoPath);
       if (video) {
         video.loop = false;
         videoRef.current = video;
-        
+
         const videoTexture = new THREE.VideoTexture(video);
         videoTexture.minFilter = THREE.LinearFilter;
         videoTexture.magFilter = THREE.LinearFilter;
         videoTexture.format = THREE.RGBAFormat;
-        
+
         videoTextureRef.current = videoTexture;
       }
     }
@@ -57,10 +57,10 @@ export const useTablet = (modelPath, videoPath, animateTablet, tabletID = '') =>
   // Controla a reprodução do vídeo
   useEffect(() => {
     if (!videoRef.current) return;
-    
+
     if (animateTablet) {
       play(elementNames.tabletAnimation, {
-        loop: false, 
+        loop: false,
         timeScale: 2.4
       });
 
@@ -79,8 +79,8 @@ export const useTablet = (modelPath, videoPath, animateTablet, tabletID = '') =>
         videoRef.current.currentTime = 0;
         videoRef.current.play().catch(err => {
           console.warn('Erro ao reproduzir vídeo automaticamente:', err);
-        });        
-      }, 1200);   
+        });
+      }, 1400);
     } else if (hasAnimatedBeforeRef.current) {
       // Pausa o vídeo
       videoRef.current.pause();
@@ -89,21 +89,21 @@ export const useTablet = (modelPath, videoPath, animateTablet, tabletID = '') =>
       if (originalMaterialRef.current && screenMeshRef.current) {
         screenMeshRef.current.material = originalMaterialRef.current.clone();
         screenMeshRef.current.material.needsUpdate = true;
-      }    
-      
+      }
+
       play(elementNames.tabletAnimation, {
         loop: false,
         timeScale: -2.4, // Velocidade negativa = animação reversa
         clampWhenFinished: true
       });
-           
+
     }
   }, [animateTablet, play]);
-  
+
   // Atualiza a textura do vídeo quando o quadro é renderizado
   useEffect(() => {
     let id;
-    
+
     if (animateTablet && videoRef.current && videoTextureRef.current) {
       const updateVideoTexture = () => {
         if (!videoRef.current.paused) {
@@ -113,9 +113,9 @@ export const useTablet = (modelPath, videoPath, animateTablet, tabletID = '') =>
           id = null;
         }
       };
-      
-      id = setInterval(updateVideoTexture, 1000/30);
-      
+
+      id = setInterval(updateVideoTexture, 1000 / 30);
+
       videoRef.current.addEventListener('ended', () => {
         if (id) {
           clearInterval(id);
@@ -123,7 +123,7 @@ export const useTablet = (modelPath, videoPath, animateTablet, tabletID = '') =>
         }
       });
     }
-    
+
     return () => {
       if (id) clearInterval(id);
       if (videoRef.current) {

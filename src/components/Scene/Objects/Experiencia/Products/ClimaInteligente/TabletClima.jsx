@@ -5,7 +5,7 @@ const MODEL_PATH = '/models/tablets/TabletClima.glb';
 const VIDEO_PATH = '/videos/TabletClimaInteligente.mp4';
 
 const TabletClima = ({ position, rotation = [0, 0, 0], scale = 1, animateTablet = false }) => {
-  const { scene, meshRef } = useTablet(MODEL_PATH, VIDEO_PATH, animateTablet, '03');
+  const { scene, meshRef } = useTablet(MODEL_PATH, VIDEO_PATH, animateTablet, '04');
 
   if (!scene) return null;
 
