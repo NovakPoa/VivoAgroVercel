@@ -2,20 +2,20 @@ import React, { useEffect } from 'react';
 import useNeonEffect from '../../../../../hooks/useNeonEffect';
 import useIntroStore from '../../../../../stores/IntroStore';
 
-const MODEL_PATH = '/models/intro/IntroNeon.glb';
+const MODEL_PATH = '/models/geral/NeonCasa.glb';
 
-const IntroNeon = ({ 
-  position = [8, 6, -5], 
-  rotation = [0, 3.14, 0], 
-  scale = [3, 1, 1], 
+const IntroNeon = ({
+  position = [0, 0, 0],
+  rotation = [0, 0, 0],
+  scale = [1, 1, 1],
   animationDuration = 6,
-  fadeOutDuration = 1, 
-  useXCoord = true,
+  fadeOutDuration = 1,
+  useXCoord = false,
   invertDirection = false,
   bloomStrength = 2.0
 }) => {
   const { setIntroNeonVisibility } = useIntroStore();
-  
+
   const { modelRef, startAnimation } = useNeonEffect({
     modelPath: MODEL_PATH,
     baseColor: '#660099',
@@ -34,7 +34,7 @@ const IntroNeon = ({
   }, []);
 
   return (
-    <group 
+    <group
       ref={modelRef}
       position={position}
       rotation={rotation}

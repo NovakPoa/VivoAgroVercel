@@ -1,20 +1,20 @@
 import React, { useEffect } from 'react';
 import useNeonEffect from '../../../../../../hooks/useNeonEffect';
 
-const MODEL_PATH = '/models/products/AgroCobertura/AgroNeon.glb';
+const MODEL_PATH = '/models/geral/NeonAntena.glb';
 
-const AgroNeon = ({ 
-  position = [8, 6, -2], 
-  rotation = [0, 3.14, 0], 
-  scale = [3, 1, 1], 
+const AgroNeon = ({
+  position = [0, 0, 0],
+  rotation = [0, 0, 0],
+  scale = [1, 1, 1],
   animationDuration = 6,
-  fadeOutDuration = 1, 
-  useXCoord = true,
+  fadeOutDuration = 1,
+  useXCoord = false,
   invertDirection = false,
   bloomStrength = 2.0,
-  onAnimationEnd = () => {}
+  onAnimationEnd = () => { }
 }) => {
-  
+
   const { modelRef, startAnimation } = useNeonEffect({
     modelPath: MODEL_PATH,
     baseColor: '#660099',
@@ -32,7 +32,7 @@ const AgroNeon = ({
   }, []);
 
   return (
-    <group 
+    <group
       ref={modelRef}
       position={position}
       rotation={rotation}
