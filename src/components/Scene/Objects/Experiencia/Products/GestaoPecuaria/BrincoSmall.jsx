@@ -22,6 +22,10 @@ const BrincoSmall = ({
           loop: false, 
           timeScale: 3.0
         });
+        play('MaquinarioMiniatura-Flutuando', { 
+          loop: true, 
+          timeScale: 1.0
+        });         
       }
     } else {
       play('scale-out', { 

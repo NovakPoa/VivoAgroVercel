@@ -22,6 +22,11 @@ const AntenaSmall = ({
           loop: false, 
           timeScale: 3.0
         });
+
+        play('AntenaMiniatura_Flutuando_Animacao', { 
+          loop: true, 
+          timeScale: 1.0
+        });        
       }
     } else {
       play('AntenaCrescendo_Animacao', { 

@@ -22,6 +22,10 @@ const EstacaoSmall = ({
           loop: false, 
           timeScale: 3.0
         });
+        play('EstacaoMeteorologicaMiniatura_Flutuando_Animacao', { 
+          loop: true, 
+          timeScale: 1.0
+        });         
       }
     } else {
       play('EstacaoMeteorologicaCrescendo_Animacao', { 

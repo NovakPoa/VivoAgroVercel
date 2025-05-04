@@ -14,7 +14,7 @@ const DispositivoMaquinarioSmall = ({
   const { scene, play } = useGLTFAnimations(MODEL_PATH, {
     cloneScene: false,
   });
-  
+
   useEffect(() => {
     if (isVisible) {
       if (scene) {
@@ -22,6 +22,10 @@ const DispositivoMaquinarioSmall = ({
           loop: false, 
           timeScale: 3.0
         });
+        play('MaquinarioMiniatura-Flutuando', { 
+          loop: true, 
+          timeScale: 1.0
+        });         
       }
     } else {
       play('MaquinarioMiniatura-Crescendo', { 
