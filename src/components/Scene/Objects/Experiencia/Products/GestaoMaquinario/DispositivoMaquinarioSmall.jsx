@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import { useGLTFAnimations } from '../../../../../../hooks/useGLTFAnimations';
 
-const MODEL_PATH = '/models/products/GestaoMaquinario/BrincoMiniatura.glb';
+const MODEL_PATH = '/models/products/GestaoMaquinario/DispositivoGestaoDeMaquinario-Miniatura.glb';
 
 const DispositivoMaquinarioSmall = ({
   position,
