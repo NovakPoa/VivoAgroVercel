@@ -35,8 +35,8 @@ const assets = {
     '/models/products/ClimaInteligente/EstacaoMeteorologica.glb',
     '/models/products/ClimaInteligente/EstacaoMeteorologicaMiniatura.glb',
     //  GestaoMaquinario
-    '/models/products/GestaoMaquinario/DispositivoGestaoDeMaquinario-Miniatura.glb',
-    '/models/products/GestaoMaquinario/DispositivoGestaoDeMaquinario.glb',
+    '/models/products/GestaoMaquinario/Brinco.glb',
+    '/models/products/GestaoMaquinario/BrincoMiniatura.glb',
     '/models/products/GestaoMaquinario/Trator.glb',
     //  GestaoPecuaria
     '/models/products/GestaoPecuaria/Brinco.glb',
