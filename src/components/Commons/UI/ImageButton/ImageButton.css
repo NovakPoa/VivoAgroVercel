@@ -63,7 +63,7 @@
 
 .unlocked-overlay {
   background-color: #660099;
-  animation: pulseOverlay 2s ease-in-out infinite;
+  animation: pulseOverlay 1.5s ease-in-out infinite;
   opacity: 0;
 }
 
@@ -100,7 +100,7 @@
   }
 
   50% {
-    opacity: 0.2;
+    opacity: 0.4;
   }
 
   100% {
