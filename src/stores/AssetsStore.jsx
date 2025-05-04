@@ -58,6 +58,9 @@ const assets = {
   textures: [
     // Skybox
     '/textures/skybox/skybox.jpg',
+
+    // Environment
+    '/textures/skybox/environment.jpg',
   ],
   images: [
     // Product images

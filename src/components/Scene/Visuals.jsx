@@ -12,11 +12,14 @@ const Visuals = () => {
 
   const envSettings = useControls('Environment', {
     envMapEnabled: { value: true, label: 'Environment Map Enabled' },
-    envMapIntensity: { value: 0.75, min: 0, max: 3, step: 0.05, label: 'Intensity' },
-    ambientLightEnabled: { value: false, label: 'Ambient Light Enabled' },
-    ambientLightIntensity: { value: 1.0, min: 0, max: 2, step: 0.05, label: 'Light Intensity' },
-    skyColor: { value: '#ffffff', label: 'Sky Color' },
-    groundColor: { value: '#ffffff', label: 'Ground Color' }
+    envMapIntensity: { value: 1.0, min: 0, max: 3, step: 0.05, label: 'Intensity' },
+    envMapX: { value: 0, min: 0, max: 360, step: 0.05, label: 'Env Map X Rotation' },
+    envMapY: { value: 0, min: 0, max: 360, step: 0.05, label: 'Env Map Y Rotation' },
+    envMapZ: { value: 0, min: 0, max: 360, step: 0.05, label: 'Env Map Z Rotation' },
+    ambientLightEnabled: { value: true, label: 'Ambient Light Enabled' },
+    ambientLightIntensity: { value: 1.5, min: 0, max: 2, step: 0.05, label: 'Light Intensity' },
+    skyColor: { value: '#000000', label: 'Sky Color' },
+    groundColor: { value: '#bce1ff', label: 'Ground Color' }
   });
 
 
@@ -41,8 +44,12 @@ const Visuals = () => {
   const updateVisualSettings = () => {
     // Environment map
     if (envSettings.envMapEnabled) {
-      scene.environment = scene.background;
+      const environment = getTexture('/textures/skybox/environment.jpg');
+      environment.mapping = THREE.EquirectangularReflectionMapping;
+      environment.colorSpace = THREE.SRGBColorSpace;
+      scene.environment = environment;
       scene.environmentIntensity = envSettings.envMapIntensity;
+      scene.environmentRotation = new THREE.Euler(envSettings.envMapX, envSettings.envMapY, envSettings.envMapZ);
     } else {
       scene.environment = null;
     }
