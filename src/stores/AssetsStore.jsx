@@ -11,7 +11,7 @@ const assets = {
     '/models/fazenda/Casa/Casa.glb',
     '/models/fazenda/Cercas/Cercas.glb',
     '/models/fazenda/Galpao/Galpao.glb',
-    '/models/fazenda/Ornamentos/Ornamentos-2.glb',
+    '/models/fazenda/Ornamentos/Ornamentos.glb',
 
     // Vegetação
     '/models/vegetaçao/Grama.glb',
@@ -58,16 +58,13 @@ const assets = {
   textures: [
     // Skybox
     '/textures/skybox/skybox.jpg',
-
-    // HDR
-    '/textures/environment.hdr',
   ],
   images: [
     // Product images
-    '/ui/agroCobertura.png',
+    '/ui/agroCobertura.jpg',
     '/ui/climaInteligente.jpg',
     '/ui/gestaoMaquinario.jpg',
-    '/ui/gestaoPecuaria.png'
+    '/ui/gestaoPecuaria.jpg'
   ],
   videos: [
     '/videos/TabletAgroCobertura.mp4',
@@ -77,23 +74,23 @@ const assets = {
   ],
   sounds: {
     // Interface
-    BUTTON_CLICK: '/audio/Geral/Click.wav',
-    SLOT_CLICK: '/audio/Geral/Grab.wav',
+    BUTTON_CLICK: '/audio/Geral/Click.mp3',
+    SLOT_CLICK: '/audio/Geral/Grab.mp3',
 
     // Efeitos
-    NEON_APPEAR: '/audio/Produtos/Geral/Swoosh.wav',
-    ACTIVATION: '/audio/Produtos/Geral/Activation.wav',
-    ENDING: '/audio/Produtos/Geral/Ending.wav',
+    NEON_APPEAR: '/audio/Produtos/Geral/Swoosh.mp3',
+    ACTIVATION: '/audio/Produtos/Geral/Activation.mp3',
+    ENDING: '/audio/Produtos/Geral/Ending.mp3',
 
     // Sons de produtos
-    TRATOR_A: '/audio/Produtos/GestaoMaquinario/tractor.wav',
-    TRATOR_B: '/audio/Produtos/GestaoMaquinario/tractor.wav',
-    TRATOR_C: '/audio/Produtos/GestaoMaquinario/tractor.wav',
-    VACA_A: '/audio/Produtos/GestaoPecuaria/Vaca-A.wav',
-    VACA_B: '/audio/Produtos/GestaoPecuaria/Vaca-B.wav',
+    TRATOR_A: '/audio/Produtos/GestaoMaquinario/tractor.mp3',
+    TRATOR_B: '/audio/Produtos/GestaoMaquinario/tractor.mp3',
+    TRATOR_C: '/audio/Produtos/GestaoMaquinario/tractor.mp3',
+    VACA_A: '/audio/Produtos/GestaoPecuaria/Vaca-A.mp3',
+    VACA_B: '/audio/Produtos/GestaoPecuaria/Vaca-B.mp3',
 
     // Ambiente
-    AMBIENT: '/audio/Fazenda/Ambiance.wav',
+    AMBIENT: '/audio/Fazenda/Ambiance.mp3',
   }
 };
 

@@ -3,10 +3,10 @@ import InstructionWithTimer from '../../../Commons/UI/InstructionWithTimer/Instr
 
 const GestaoPecuariaInstruction2 = ({ isVisible }) => {
   return (
-    <InstructionWithTimer 
+    <InstructionWithTimer
       isVisible={isVisible}
-      title="Estamos ativando o monitoramento" 
-      description="Você logo poderá acompanhar os dados de saúde de seus animais" 
+      title="Estamos ativando o monitoramento"
+      description="Você logo poderá acompanhar os dados de saúde de seus animais."
       duration={4}
     />
   );

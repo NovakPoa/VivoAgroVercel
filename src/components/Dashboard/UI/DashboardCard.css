@@ -13,7 +13,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 10;   
+  z-index: 10;
 }
 
 .sidebar-buttons {
@@ -35,7 +35,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 22px;
 }
 
 .sidebar-button.active {
@@ -61,10 +61,12 @@
     transform: translate(-50%, -50%) scale(0.8);
     opacity: 0;
   }
+
   70% {
     transform: translate(-50%, -50%) scale(1.05);
     opacity: 1;
   }
+
   100% {
     transform: translate(-50%, -50%) scale(1);
     opacity: 1;
@@ -76,10 +78,12 @@
     transform: translate(-50%, -50%) scale(1);
     opacity: 1;
   }
+
   30% {
     transform: translate(-50%, -50%) scale(1.05);
     opacity: 0.8;
   }
+
   100% {
     transform: translate(-50%, -50%) scale(0.8);
     opacity: 0;
@@ -100,11 +104,11 @@
 }
 
 /* height breakpoints */
- @media screen and (max-height: 440px) {
+@media screen and (max-height: 440px) {
   .main-buttons {
     gap: clamp(4px, 2vh, 8px);
     padding-top: clamp(6px, 4vh, 24px);
-    padding-bottom: clamp(6px, 4vh, 24px); 
+    padding-bottom: clamp(6px, 4vh, 24px);
   }
 }
 
@@ -113,34 +117,43 @@
   .main-buttons {
     gap: clamp(4px, 2vw, 8px);
     padding-left: clamp(12px, 3vw, 24px);
-    padding-right: clamp(12px, 3vw, 24px); 
-  } 
+    padding-right: clamp(12px, 3vw, 24px);
+  }
+
   .sidebar-buttons {
-    padding-left: clamp(12px, 3vw, 24px); 
-  }  
+    padding-left: clamp(12px, 3vw, 24px);
+  }
+
   .sidebar-button {
     width: clamp(30px, 6vw, 40px);
     height: clamp(30px, 6vw, 40px);
-  }  
+  }
+
   .sidebar-button img {
     width: clamp(20px, 4.6vw, 28px);
     height: clamp(20px, 4.6vw, 28px);
-  }  
+  }
 
 }
+
 @media (max-width: 576px) {
   .dashboard-card {
     flex-direction: column-reverse;
+    /* max-width: 720px; */
+    width: 90%;
   }
+
   .main-buttons {
-    grid-template-columns: 1fr; 
-    overflow-y: auto; 
-    padding-bottom: clamp(0px, 2vh, 18px);     
-  } 
+    grid-template-columns: 1fr;
+    overflow-y: auto;
+    padding-bottom: clamp(0px, 2vh, 18px);
+  }
+
   .sidebar-buttons {
+    /* display: none; */
     flex-direction: row;
-    justify-content: center;
+    justify-content: left;
     padding-top: 8px;
     padding-bottom: 16px;
-  }   
+  }
 }

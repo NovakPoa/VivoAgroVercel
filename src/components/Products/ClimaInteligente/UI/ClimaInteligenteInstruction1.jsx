@@ -9,9 +9,9 @@ const ClimaInteligenteInstruction1 = ({ isVisible }) => {
 
   return (
     <div className="instruction-container">
-      <Instruction 
-        title="Instale a estação meteorológica" 
-        description="Escolha onde instalar" 
+      <Instruction
+        title="Instale a estação meteorológica"
+        description="Clique em um dos botões abaixo e obtenha acesso aos dados climáticos."
         isVisible={isVisible}
         onAnimationOutEnded={handleAnimationOutEnded}
       />

@@ -3,10 +3,10 @@ import InstructionWithTimer from '../../../Commons/UI/InstructionWithTimer/Instr
 
 const ClimaInteligenteInstruction2 = ({ isVisible }) => {
   return (
-    <InstructionWithTimer 
+    <InstructionWithTimer
       isVisible={isVisible}
-      title="Estamos iniciando sua estação meteorológica" 
-      description="Você logo terá acesso aos dados climáticos" 
+      title="Estamos iniciando sua estação meteorológica"
+      description="Você logo terá acesso aos dados climáticos da sua fazenda."
       duration={4}
     />
   );
