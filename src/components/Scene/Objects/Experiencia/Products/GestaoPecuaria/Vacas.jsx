@@ -25,7 +25,7 @@ const findObjectMesh = (object, meshName = 'Olho') => {
   if (targetObject && targetObject.isMesh) {
     return targetObject;
   }
-  
+
   return null;
 };
 
@@ -42,20 +42,20 @@ const Vaca = forwardRef(({ path, position, rotation, scale, onMeshFound, index }
       if (objectMesh) {
         meshRef.current = objectMesh;
       }
-      
-      playAll({ 
-        loop: true, 
-      });      
+
+      playAll({
+        loop: true,
+      });
     }
   }, [scene]);
-  
+
   useFrame(() => {
     if (meshRef.current) {
       frameCounter.current += 1;
-      
+
       const worldPos = new THREE.Vector3();
       meshRef.current.getWorldPosition(worldPos);
-      
+
       if (onMeshFound) {
         onMeshFound(worldPos, index);
       }
@@ -63,14 +63,15 @@ const Vaca = forwardRef(({ path, position, rotation, scale, onMeshFound, index }
   });
 
   if (!scene) return null;
-  
+
   return (
-    <primitive 
+    <primitive
       ref={ref}
-      object={scene} 
+      object={scene}
       position={position}
       rotation={rotation}
       scale={scale}
+      frustumCulled={false}
     />
   );
 });
@@ -81,7 +82,7 @@ const Vacas = ({ onObjectPositionUpdate }) => {
   const soundIdRef = useRef(null);
   const isPlayingRef = useRef(false);
   const timerRef = useRef(null);
-  
+
   const SOUND_POSITION = [0, 1.6, -3];
 
   const soundConfig = {
@@ -92,17 +93,17 @@ const Vacas = ({ onObjectPositionUpdate }) => {
     minPitch: 0.8,
     maxPitch: 1.2
   };
-  
+
   // Função para reproduzir um som aleatório
   const playRandomSound = () => {
     if (isPlayingRef.current) return;
-    
+
     const soundId = Math.random() > 0.5 ? 'VACA_A' : 'VACA_B';
-    const volume = Math.random() * 
+    const volume = Math.random() *
       (soundConfig.maxVolume - soundConfig.minVolume) + soundConfig.minVolume;
-    const rate = Math.random() * 
+    const rate = Math.random() *
       (soundConfig.maxPitch - soundConfig.minPitch) + soundConfig.minPitch;
-    
+
     // Reproduzir o som em posição fixa
     const id = playSound(soundId, {
       volume,
@@ -115,34 +116,34 @@ const Vacas = ({ onObjectPositionUpdate }) => {
         scheduleNextSound();
       }
     });
-    
+
     isPlayingRef.current = true;
     soundIdRef.current = { id, soundId };
   };
-  
+
   // Agendar o próximo som
   const scheduleNextSound = () => {
-    const delay = (Math.random() * 
-      (soundConfig.maxTimeBetweenSounds - soundConfig.minTimeBetweenSounds) + 
+    const delay = (Math.random() *
+      (soundConfig.maxTimeBetweenSounds - soundConfig.minTimeBetweenSounds) +
       soundConfig.minTimeBetweenSounds) * 1000;
-    
+
     timerRef.current = setTimeout(() => {
       playRandomSound();
     }, delay);
   };
-  
+
   useEffect(() => {
     // Iniciar os sons com um pequeno atraso inicial
     timerRef.current = setTimeout(() => {
       playRandomSound();
     }, 500);
-    
+
     // Cleanup
     return () => {
       if (timerRef.current) {
         clearTimeout(timerRef.current);
       }
-      
+
       if (soundIdRef.current) {
         stopSound(soundIdRef.current.soundId, soundIdRef.current.id);
         soundIdRef.current = null;
@@ -153,7 +154,7 @@ const Vacas = ({ onObjectPositionUpdate }) => {
   return (
     <group name="vacas">
       {MODELS.map((model, index) => (
-        <Vaca 
+        <Vaca
           key={index}
           index={index}
           ref={el => vacaRefs.current[index] = el}
