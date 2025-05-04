@@ -7,13 +7,13 @@ const AgroCoberturaCard = ({ isVisible, onContinueClick, onSkipClick }) => {
 
   if (!shouldRender) return null;
 
-  const imageUrl = "/ui/agroCobertura.png";
+  const imageUrl = "/ui/agroCobertura.jpg";
 
   return (
     <div className="card-container">
-      <Card 
-        title="Agro Cobertura" 
-        description="Conectividade é o primeiro passo para tornar sua fazenda tecnológica." 
+      <Card
+        title="Agro Cobertura"
+        description="Conectividade é o primeiro passo para tornar sua fazenda tecnológica."
         showImage={true}
         imageUrl={imageUrl}
         firstButton={true}
@@ -21,9 +21,9 @@ const AgroCoberturaCard = ({ isVisible, onContinueClick, onSkipClick }) => {
         firstButtonOnClick={onContinueClick}
         secondButton={true}
         secondButtonText="Já possuo conectividade"
-        secondButtonOnClick={onSkipClick}   
-        isVisible={isVisible}  
-        onAnimationOutEnded={handleAnimationOutEnded}    
+        secondButtonOnClick={onSkipClick}
+        isVisible={isVisible}
+        onAnimationOutEnded={handleAnimationOutEnded}
       />
     </div>
   );

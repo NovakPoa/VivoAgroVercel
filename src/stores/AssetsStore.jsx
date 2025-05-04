@@ -64,10 +64,10 @@ const assets = {
   ],
   images: [
     // Product images
-    '/ui/agroCobertura.png',
+    '/ui/agroCobertura.jpg',
     '/ui/climaInteligente.jpg',
     '/ui/gestaoMaquinario.jpg',
-    '/ui/gestaoPecuaria.png'
+    '/ui/gestaoPecuaria.jpg'
   ],
   videos: [
     '/videos/TabletAgroCobertura.mp4',
