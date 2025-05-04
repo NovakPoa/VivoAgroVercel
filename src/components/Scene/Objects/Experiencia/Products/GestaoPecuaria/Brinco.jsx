@@ -13,14 +13,14 @@ const Brinco = ({position, rotation = [0, 0, 0], scale = 1, playSecondAnimation 
     if (!scene) return;
 
     if (!skipProduct) {
-      play('scale-in', { //conferir nome da animaçao
+      play('BrincoEncaixando', {
         loop: false, 
         timeScale: 2.4
       });
     } else {
-      jumpToEnd('scale-in');//conferir nome da animaçao
-      jumpToEnd('scaleInRings');//conferir nome da animaçao
-      play('animateRings', { //conferir nome da animaçao
+      jumpToEnd('BrincoEncaixando');
+      jumpToEnd('scaleIn2');//conferir nome da animaçao
+      play('animateLoop', { //conferir nome da animaçao
         loop: true, 
         timeScale: 2.4,
       });       

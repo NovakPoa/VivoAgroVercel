@@ -6,30 +6,31 @@ import useSoundStore from '../../../../../../stores/SoundStore';
 
 const MODELS = [
   {
-    path: '/models/products/GestaoPecuaria/VacaNelore.glb',
-    position: [0, 0, 0],
-    rotation: [0, 0, 0],
-    scale: 1
-  },
-  {
     path: '/models/products/GestaoPecuaria/VacaHolandesa.glb',
     position: [0, 0, 0],
     rotation: [0, 0, 0],
-    scale: 1
+    scale: 1,
+    attachName: 'RigREarTip'
+  },  
+  {
+    path: '/models/products/GestaoPecuaria/VacaNelore.glb',
+    position: [0, 0, 0],
+    rotation: [0, 0, 0],
+    scale: 1,
+    attachName: 'RigLEarTip'
   },
 ];
 
 const findObjectMesh = (object, meshName) => {
   const targetObject = object.getObjectByName(meshName);
-
-  if (targetObject && targetObject.isMesh) {
+  if (targetObject) {
     return targetObject;
   }
-
-  return null;
+  
+  return null;  
 };
 
-const Vaca = forwardRef(({ path, position, rotation, scale, onMeshFound, index }, ref) => {
+const Vaca = forwardRef(({ path, position, rotation, scale, onMeshFound, index, attachName }, ref) => {
   const { scene, playAll, stopAll } = useGLTFAnimations(path, {
     cloneScene: false,
   });
@@ -43,10 +44,14 @@ const Vaca = forwardRef(({ path, position, rotation, scale, onMeshFound, index }
       objectNames.forEach(name => {
         const objectMesh = findObjectMesh(scene, name);
         if (objectMesh) {
-          // meshRef.current = objectMesh; // Mantém referência do último encontrado
           objectMesh.frustumCulled = false;
         }
       });
+
+      const objectAttach = findObjectMesh(scene, attachName);
+      if (objectAttach) {
+        meshRef.current = objectAttach;
+      }
 
       playAll({
         loop: true,
@@ -167,6 +172,7 @@ const Vacas = ({ onObjectPositionUpdate }) => {
           position={model.position}
           rotation={model.rotation}
           scale={model.scale}
+          attachName={model.attachName}
           onMeshFound={onObjectPositionUpdate}
         />
       ))}
