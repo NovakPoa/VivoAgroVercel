@@ -8,7 +8,7 @@
   max-height: 96vh;
   border-radius: 20px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
+  /* overflow: hidden; */
   background-color: #fff;
   margin: 0 auto;
   position: absolute;
@@ -72,6 +72,21 @@
   flex-direction: column;
   align-items: center;
   gap: 8px;
+}
+
+/* purple title prop */
+.purple-title {
+  color: #660099 !important;
+}
+
+/* checkmark icon */
+.card-check-icon {
+  position: absolute;
+  height: 45px;
+  width: auto;
+  right: -8px;
+  top: -20px;
+  z-index: 3;
 }
 
 /* height breakpoints */
