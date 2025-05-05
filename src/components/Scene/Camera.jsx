@@ -9,7 +9,6 @@ const CAMERA_POSITION = [0, 1.4, 0];
 
 const BASE_FOV = 60;
 const REFERENCE_ASPECT = 16/9;
-const FOV_ADJUSTMENT_FACTOR = 0.4; 
 const MIN_FOV = 50;
 const MAX_FOV = 70;
 
