@@ -101,6 +101,12 @@ const GestaoMaquinarioScene = () => {
     }
   }, [animateTablet, isCurrentProduct, stopFollowingTarget, selectedIndex]);
 
+  useEffect(() => {
+    if (shouldSkipProduct && isCurrentProduct) {
+      trackedTratorIndexRef.current = 1;
+    }
+  }, [shouldSkipProduct, isCurrentProduct]);
+
   const handleObjectPositionUpdate = (position, tratorIndex) => {
     if (position) {
       tratorPositionsRef.current[tratorIndex] = [position.x, position.y, position.z]; 

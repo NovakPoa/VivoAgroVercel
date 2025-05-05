@@ -83,6 +83,12 @@ const GestaoPecuariaScene = () => {
     }    
   }, [selectedIndex, isCurrentProduct]);
 
+  useEffect(() => {
+    if (shouldSkipProduct && isCurrentProduct) {
+      trackedVacaIndexRef.current = 1;
+    }
+  }, [shouldSkipProduct, isCurrentProduct]);
+
   const handleObjectPositionUpdate = (position, vacaIndex) => {
     if (position) {
       vacaPositionsRef.current[vacaIndex] = [position.x, position.y, position.z]; 
