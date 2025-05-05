@@ -71,13 +71,15 @@ const Camera = () => {
   useEffect(() => {
     if (controlsRef.current) { 
       if (isFreeLookMode) {
-        controlsRef.current.minDistance = 0.1;
-        controlsRef.current.maxDistance = 0.1;
+        controlsRef.current.minDistance = 0.01;
+        controlsRef.current.maxDistance = 0.01;
         controlsRef.current.enableRotate = true;
-      } else {
+      } else {        
         controlsRef.current.minDistance = 0;
         controlsRef.current.maxDistance = 100;
         controlsRef.current.enableRotate = false;
+
+        //camera.position.set(CAMERA_POSITION[0], CAMERA_POSITION[1], CAMERA_POSITION[2]);
 
         const direction = new THREE.Vector3();
         camera.getWorldDirection(direction);
