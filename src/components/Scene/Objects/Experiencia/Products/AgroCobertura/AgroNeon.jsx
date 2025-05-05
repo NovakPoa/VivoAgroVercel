@@ -9,6 +9,7 @@ const AgroNeon = ({
   scale = [1, 1, 1],
   instanceCount = 4,
   instanceOffset = [0.7, 0, 0],
+  instanceOpacities = null, // New parameter for per-instance opacities
   animationDuration = 6,
   fadeOutDuration = 1,
   useXCoord = false,
@@ -20,7 +21,8 @@ const AgroNeon = ({
   const { modelRef, startAnimation } = useNeonEffect({
     modelPath: MODEL_PATH,
     instanceCount,
-    instanceOffset,       
+    instanceOffset,
+    instanceOpacities,
     baseColor: '#660099',
     glowColor: '#9933FF',
     useXCoord,
