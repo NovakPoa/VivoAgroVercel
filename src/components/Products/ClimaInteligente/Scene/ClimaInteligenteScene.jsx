@@ -9,10 +9,10 @@ import ClimaNeon from '../../../Scene/Objects/Experiencia/Products/ClimaIntelige
 const PRODUCT_ID = 'clima-inteligente';
 const START_NEON_DELAY = 0;                     // inicia quando slot é selecionado
 const START_FIRST_ANIMATION_DELAY = 3000;      // inicia quando slot é selecionado
-const SHOW_TIMER_CARD_DELAY = 6000;            // inicia quando slot é selecionado
+const SHOW_TIMER_CARD_DELAY = 5000;            // inicia quando slot é selecionado
 const SHOW_TABLET_DELAY = 5000;                 // inicia quando card com timer termina
 const HIDE_TABLET_DELAY = 17000;                  // inicia quando card com timer termina
-const START_END_PRODUCT_DELAY = 18500;          // inicia quando card com timer termina  
+const START_END_PRODUCT_DELAY = 18000;          // inicia quando card com timer termina  
 
 const CAMERA_TARGET = [0, 1.4, 10];
 const SMALL_OBJECT_LOOKAT = [0, 0.7, 10];

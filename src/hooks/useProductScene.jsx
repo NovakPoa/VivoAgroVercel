@@ -9,8 +9,8 @@ import useComponentVisibility from './useComponentVisibility';
 import useSoundStore from '../stores/SoundStore';
 
 const useProductScene = (
-  productId, 
-  initialPlaceholderPositions, 
+  productId,
+  initialPlaceholderPositions,
   cameraTarget,
   startNeonDelay = 0, // inicia quando slot é selecionado
   startFirstAnimationDelay = 0, // inicia quando slot é selecionado
@@ -21,18 +21,18 @@ const useProductScene = (
   smallObjectLookAt,
   placeholderLookAtOffset = [0, 1.5, 0],
 ) => {
-  const { currentProduct, setLastProductName, skipProduct }  = useProductsStore();  
-  const { 
-    showInteraction, 
-    setShowFirstInstruction, 
+  const { currentProduct, setLastProductName, skipProduct } = useProductsStore();
+  const {
+    showInteraction,
+    setShowFirstInstruction,
     setShowSecondInstruction,
-    setTimerCompleteCallback, 
+    setTimerCompleteCallback,
     setShowInteraction,
     showFirstInteraction,
     setShowFirstInteraction,
     showSecondInteraction,
     setShowSecondInteraction
-  } = useInteractionStore(); 
+  } = useInteractionStore();
   const { setShowDashboard } = useDashboardStore();
   const { setSlotsLength, setShowSlots, setSelectedIndex, selectedIndex } = useSlotsStore();
   const { registerProductTarget, animateToTarget } = useCameraStore();
@@ -44,9 +44,9 @@ const useProductScene = (
   const [isCurrentProduct, setIsCurrentProduct] = useState(false);
   const [shouldPlaySecondAnimation, setShouldPlaySecondAnimation] = useState(false);
   const [selectedPosition, setSelectedPosition] = useState(null);
-  const [placeholderPositions, setPlaceholderPositions] = useState (initialPlaceholderPositions || []);
+  const [placeholderPositions, setPlaceholderPositions] = useState(initialPlaceholderPositions || []);
   const [animateTablet, setAnimateTablet] = useState(false);
-  const [shouldSkipProduct, setShouldSkipProduct] = useState (skipProduct);
+  const [shouldSkipProduct, setShouldSkipProduct] = useState(skipProduct);
 
   // Placeholders Visibility
   const [placeholdersVisible, setPlaceholdersVisible] = useState(false);
@@ -66,18 +66,18 @@ const useProductScene = (
       registerProductTarget(productId, cameraTarget);
     }
   }, []);
-  
+
   // Gerenciar o estado do produto atual
   useEffect(() => {
     const isThisProductCurrent = currentProduct === productId;
     setIsCurrentProduct(isThisProductCurrent);
   }, [currentProduct, productId]);
-  
+
   // Iniciar primeira interação
   useEffect(() => {
     if (showInteraction && isCurrentProduct) {
 
-      animateToTarget(smallObjectLookAt, 1);
+      animateToTarget(smallObjectLookAt, 2);
 
       setShouldRenderMainObject(false);
       setShouldPlaySecondAnimation(false);
@@ -124,23 +124,23 @@ const useProductScene = (
     useProductsStore.getState().completeProduct(currentProduct);
     setLastProductName(currentProduct);
     setShowInteraction(false);
-    
+
     if (currentProduct === 'clima-inteligente') {
       setTimeout(() => {
         setShowEndCard(true);
-      }, 1000);      
+      }, 1000);
     } else {
       setShowDashboard(true);
-    }    
-  }, [ currentProduct ]);
+    }
+  }, [currentProduct]);
 
   // Callbacks
   const handleSlotClick = useCallback((position) => {
     if (isCurrentProduct) {
       setShowFirstInstruction(false);
       setShowFirstInteraction(false);
-      
-      animateToTarget(position.map((value, index) => value + placeholderLookAtOffset[index]), 1);
+
+      animateToTarget(position.map((value, index) => value + placeholderLookAtOffset[index]), 3);
 
       timerToStartFirstAnimation(position);
       timerToStartNeonAnimation();
@@ -153,9 +153,9 @@ const useProductScene = (
     setShowSecondInteraction(false);
 
     playSound('ACTIVATION', { volume: 0.7 });
-    
+
     setShouldPlaySecondAnimation(true);
-    
+
     timerToShowTablet();
     timerToHideTablet();
     timerToEndProduct();
@@ -165,7 +165,7 @@ const useProductScene = (
     setTimeout(() => {
       if (isCurrentProduct) {
         setShouldRenderNeon(true);
-      }  
+      }
     }, startNeonDelay);
   }, [isCurrentProduct]);
 
@@ -174,7 +174,7 @@ const useProductScene = (
       setSelectedPosition(position);
       if (isCurrentProduct) {
         setShouldRenderMainObject(true);
-      }      
+      }
     }, startFirstAnimationDelay);
   }, [isCurrentProduct]);
 
