@@ -14,7 +14,7 @@ const Visuals = () => {
     envMapEnabled: { value: true, label: 'Environment Map Enabled' },
     envMapIntensity: { value: 1.0, min: 0, max: 3, step: 0.05, label: 'Intensity' },
     envMapX: { value: 0, min: 0, max: 360, step: 0.05, label: 'Env Map X Rotation' },
-    envMapY: { value: 0, min: 0, max: 360, step: 0.05, label: 'Env Map Y Rotation' },
+    envMapY: { value: 3.14, min: 0, max: 360, step: 0.05, label: 'Env Map Y Rotation' },
     envMapZ: { value: 0, min: 0, max: 360, step: 0.05, label: 'Env Map Z Rotation' },
     ambientLightEnabled: { value: true, label: 'Ambient Light Enabled' },
     ambientLightIntensity: { value: 1.5, min: 0, max: 2, step: 0.05, label: 'Light Intensity' },
