@@ -19,8 +19,8 @@ const Estacao = ({ position = [0, 0, 0], rotation = [0, 0, 0], scale = 1, playSe
       });
     } else {
       jumpToEnd('EstacaoMeteorologicaCrescendo_Animacao');
-      jumpToEnd('scaleInRings');//conferir nome da animaçao
-      play('animateRings', { //conferir nome da animaçao
+      jumpToEnd('scaleIn2');//conferir nome da animaçao
+      play('animateLoop', { //conferir nome da animaçao
         loop: true,
         timeScale: 2.4,
       });
