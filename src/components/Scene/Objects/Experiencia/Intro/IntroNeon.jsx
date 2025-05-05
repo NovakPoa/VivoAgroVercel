@@ -8,20 +8,22 @@ const IntroNeon = ({
   position = [0, 0, 0],
   rotation = [0, 0, 0],
   scale = [1, 1, 1],
-  instanceCount = 4,
-  instanceOffset = [0.7, 0, 0],
+  instanceCount = 5,
+  instanceOffset = [0.14, 0, 0],
+  instanceOpacities = [0.1, 0.3, 0.1, 0.8, 0.1],
   animationDuration = 6,
   fadeOutDuration = 1,
   useXCoord = false,
   invertDirection = false,
-  bloomStrength = 2.0
+  bloomStrength = 3.0
 }) => {
   const { setIntroNeonVisibility } = useIntroStore();
 
   const { modelRef, startAnimation } = useNeonEffect({
     modelPath: MODEL_PATH,
     instanceCount,
-    instanceOffset,    
+    instanceOffset,
+    instanceOpacities,
     baseColor: '#660099',
     glowColor: '#9933FF',
     useXCoord,

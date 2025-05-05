@@ -15,8 +15,9 @@ const Intro = () => {
   const { animateToTarget, setFreeLookMode } = useCameraStore();
 
   useEffect(() => {
-    setShowCard(true); 
-  } , []);
+    setShowCard(true);
+    // setIntroNeonVisibility(true); // NEON DEBUGGING: UNCOMMENT THIS
+  }, []);
 
   const timerToStartProduct = useCallback(() => {
     setTimeout(() => {
@@ -31,7 +32,7 @@ const Intro = () => {
       animateToTarget([7, 2.2, -3], 1.5);
       setTimeout(() => {
         animateToTarget([10, 2.3, 0], 1.5);
-      }, 2000);      
+      }, 2000);
 
     }, START_NEON_DELAY);
   }, []);
@@ -47,7 +48,7 @@ const Intro = () => {
     setFreeLookMode(false);
     timerToStartLogoAnimation();
     timerToStartNeonAnimation();
-    timerToStartProduct();   
+    timerToStartProduct();
   }, []);
 
   return (

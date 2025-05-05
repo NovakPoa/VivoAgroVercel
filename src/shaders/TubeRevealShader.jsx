@@ -4,13 +4,13 @@ const TubeRevealShader = {
   uniforms: {
     baseColor: { value: new THREE.Color('#660099') },
     emissiveColor: { value: new THREE.Color('#9933FF') },
-    emissiveIntensity: { value: 2.0 }, 
+    emissiveIntensity: { value: 2.0 },
     progress: { value: 1.2 },
     glowWidth: { value: 0.05 },
     fadeWidth: { value: 0.1 },
     useXCoord: { value: true },
     invertDirection: { value: false },
-    bloomStrength: { value: 2.0 }, 
+    bloomStrength: { value: 2.0 },
     opacity: { value: 1.0 }
   },
   vertexShader: `
@@ -70,7 +70,7 @@ const TubeRevealShader = {
       float rimFactor = 1.0 - NdotV;
       
       // Efeito de borda simples com suavização
-      float rimIntensity = smoothstep(0.2, 0.7, rimFactor);
+      float rimIntensity = smoothstep(0.4, 0.5, rimFactor);
       
       // Cor base + emissiva nas bordas 
       vec3 rimColor = mix(
@@ -101,7 +101,7 @@ export default TubeRevealShader;
 export const createTubeRevealMaterial = ({
   baseColor = '#660099',
   emissiveColor = '#9933FF',
-  emissiveIntensity = 2.0, 
+  emissiveIntensity = 2.0,
   progress = 1.2,
   glowWidth = 0.05,
   fadeWidth = 0.1,
@@ -128,8 +128,9 @@ export const createTubeRevealMaterial = ({
     transparent: true,
     side: THREE.DoubleSide,
     blending: THREE.AdditiveBlending,
-    toneMapped: false
+    toneMapped: false,
+    depthWrite: false
   });
-  
+
   return material;
 };
