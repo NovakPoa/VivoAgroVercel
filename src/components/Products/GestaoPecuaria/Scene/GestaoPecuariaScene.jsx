@@ -11,12 +11,12 @@ import PecuariaNeon from '../../../Scene/Objects/Experiencia/Products/GestaoPecu
 const PRODUCT_ID = 'gestao-pecuaria';
 const START_NEON_DELAY = 0;                 // inicia quando slot é selecionado
 const START_FIRST_ANIMATION_DELAY = 3000;      // inicia quando slot é selecionado
-const SHOW_TIMER_CARD_DELAY = 5000;            // inicia quando slot é selecionado
-const SHOW_TABLET_DELAY = 4000;                 // inicia quando card com timer termina
-const HIDE_TABLET_DELAY = 12000;                  // inicia quando card com timer termina
-const START_END_PRODUCT_DELAY = 13000;          // inicia quando card com timer termina  
+const SHOW_TIMER_CARD_DELAY = 6000;            // inicia quando slot é selecionado
+const SHOW_TABLET_DELAY = 5000;                 // inicia quando card com timer termina
+const HIDE_TABLET_DELAY = 17000;                  // inicia quando card com timer termina
+const START_END_PRODUCT_DELAY = 18500;          // inicia quando card com timer termina  
 
-const CAMERA_TARGET =  [0, 1.4, -10];
+const CAMERA_TARGET = [0, 1.4, -10];
 const SMALL_OBJECT_LOOKAT = [0, 0.7, -10];
 const PLACEHOLDER_LOOKAT_OFFSET = [0, 0, 0];
 const INITIAL_PLACEHOLDER_POSITIONS = [
@@ -35,24 +35,24 @@ const GestaoPecuariaScene = () => {
     shouldRenderPlaceholders,
     placeholdersVisible,
     shouldRenderSmallObject,
-    smallObjectVisible,    
+    smallObjectVisible,
     handlePlaceholderAnimationOutEnded,
     handleSmallObjAnimationOutEnded,
     shouldPlaySecondAnimation,
     shouldSkipProduct,
     shouldRenderNeon,
-    setShouldRenderNeon      
+    setShouldRenderNeon
   } = useProductScene(
     PRODUCT_ID,
-    INITIAL_PLACEHOLDER_POSITIONS, 
+    INITIAL_PLACEHOLDER_POSITIONS,
     CAMERA_TARGET,
     START_NEON_DELAY,
     START_FIRST_ANIMATION_DELAY,
     SHOW_TIMER_CARD_DELAY,
     SHOW_TABLET_DELAY,
     HIDE_TABLET_DELAY,
-    START_END_PRODUCT_DELAY,  
-    SMALL_OBJECT_LOOKAT, 
+    START_END_PRODUCT_DELAY,
+    SMALL_OBJECT_LOOKAT,
     PLACEHOLDER_LOOKAT_OFFSET
   );
 
@@ -79,8 +79,8 @@ const GestaoPecuariaScene = () => {
       case 1:
         setNeonPosition([0, 0, 0]);
         setNeonRotation([0, 0, 0]);
-        break;      
-    }    
+        break;
+    }
   }, [selectedIndex, isCurrentProduct]);
 
   useEffect(() => {
@@ -91,7 +91,7 @@ const GestaoPecuariaScene = () => {
 
   const handleObjectPositionUpdate = (position, vacaIndex) => {
     if (position) {
-      vacaPositionsRef.current[vacaIndex] = [position.x, position.y, position.z]; 
+      vacaPositionsRef.current[vacaIndex] = [position.x, position.y, position.z];
       // Atualizar os placeholders
       setPlaceholderPositions(prevPositions => {
         const newPositions = [...prevPositions];
@@ -110,7 +110,7 @@ const GestaoPecuariaScene = () => {
   return (
     <group>
       <DispositivosPecuaria />
-      <Vacas 
+      <Vacas
         onObjectPositionUpdate={handleObjectPositionUpdate}
         playSecondAnimation={shouldPlaySecondAnimation}
         skipProduct={shouldSkipProduct}
@@ -118,29 +118,29 @@ const GestaoPecuariaScene = () => {
 
       {shouldRenderNeon && (
         <PecuariaNeon position={neonPosition} rotation={neonRotation} onAnimationEnd={() => setShouldRenderNeon(false)} />
-      )} 
+      )}
 
       {shouldRenderMainObject && dispositivoPosition && trackedVacaIndexRef.current >= 0 && (
-        <Brinco 
-          position={dispositivoPosition} 
+        <Brinco
+          position={dispositivoPosition}
           playSecondAnimation={shouldPlaySecondAnimation}
           skipProduct={shouldSkipProduct}
         />
       )}
 
       {shouldRenderPlaceholders && (
-        <Placeholders 
+        <Placeholders
           placeholderPositions={placeholderPositions}
           scale={[0.3, 0.6, 0.3]}
           isVisible={placeholdersVisible}
           onAnimationOutEnded={handlePlaceholderAnimationOutEnded}
         />
       )}
-      
+
       {shouldRenderSmallObject && (
-        <BrincoSmall 
-          isVisible={smallObjectVisible} 
-          onAnimationOutEnded={handleSmallObjAnimationOutEnded}            
+        <BrincoSmall
+          isVisible={smallObjectVisible}
+          onAnimationOutEnded={handleSmallObjAnimationOutEnded}
         />
       )}
 
@@ -150,4 +150,4 @@ const GestaoPecuariaScene = () => {
 };
 
 export default GestaoPecuariaScene;
-  
+

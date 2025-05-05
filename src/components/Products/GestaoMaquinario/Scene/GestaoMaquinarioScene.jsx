@@ -11,10 +11,10 @@ import MaquinarioNeon from '../../../Scene/Objects/Experiencia/Products/GestaoMa
 const PRODUCT_ID = 'gestao-maquinario';
 const START_NEON_DELAY = 0;                 // inicia quando slot é selecionado
 const START_FIRST_ANIMATION_DELAY = 3000;      // inicia quando slot é selecionado
-const SHOW_TIMER_CARD_DELAY = 5000;            // inicia quando slot é selecionado
-const SHOW_TABLET_DELAY = 4000;                 // inicia quando card com timer termina
-const HIDE_TABLET_DELAY = 12000;                  // inicia quando card com timer termina
-const START_END_PRODUCT_DELAY = 13000;          // inicia quando card com timer termina  
+const SHOW_TIMER_CARD_DELAY = 6000;            // inicia quando slot é selecionado
+const SHOW_TABLET_DELAY = 5000;                 // inicia quando card com timer termina
+const HIDE_TABLET_DELAY = 17000;                  // inicia quando card com timer termina
+const START_END_PRODUCT_DELAY = 18500;          // inicia quando card com timer termina  
 
 const CAMERA_TARGET = [0, 1.4, 10];
 const SMALL_OBJECT_LOOKAT = [0, 0.7, 10];
@@ -35,31 +35,31 @@ const GestaoMaquinarioScene = () => {
     shouldRenderPlaceholders,
     placeholdersVisible,
     shouldRenderSmallObject,
-    smallObjectVisible,    
+    smallObjectVisible,
     handlePlaceholderAnimationOutEnded,
     handleSmallObjAnimationOutEnded,
     shouldPlaySecondAnimation,
     shouldSkipProduct,
     shouldRenderNeon,
-    setShouldRenderNeon, 
+    setShouldRenderNeon,
   } = useProductScene(
     PRODUCT_ID,
-    INITIAL_PLACEHOLDER_POSITIONS, 
+    INITIAL_PLACEHOLDER_POSITIONS,
     CAMERA_TARGET,
     START_NEON_DELAY,
     START_FIRST_ANIMATION_DELAY,
     SHOW_TIMER_CARD_DELAY,
     SHOW_TABLET_DELAY,
     HIDE_TABLET_DELAY,
-    START_END_PRODUCT_DELAY,  
-    SMALL_OBJECT_LOOKAT,  
-    PLACEHOLDER_LOOKAT_OFFSET 
+    START_END_PRODUCT_DELAY,
+    SMALL_OBJECT_LOOKAT,
+    PLACEHOLDER_LOOKAT_OFFSET
   );
-  
+
   const tratorPositionsRef = useRef(INITIAL_PLACEHOLDER_POSITIONS);
   const trackedTratorIndexRef = useRef(-1);
   const isTrackingEnabledRef = useRef(false);
-  const { setCurrentTarget, stopFollowingTarget, startFollowingTarget} = useCameraStore();
+  const { setCurrentTarget, stopFollowingTarget, startFollowingTarget } = useCameraStore();
 
   const [dispositivoPosition, setDispositivoPosition] = useState(selectedPosition);
   const [placeholderPositions, setPlaceholderPositions] = useState(INITIAL_PLACEHOLDER_POSITIONS);
@@ -71,7 +71,7 @@ const GestaoMaquinarioScene = () => {
       trackedTratorIndexRef.current = selectedIndex;
       isTrackingEnabledRef.current = true;
       startFollowingTarget();
-      
+
       if (tratorPositionsRef.current[selectedIndex]) {
         setDispositivoPosition(tratorPositionsRef.current[selectedIndex]);
       }
@@ -84,12 +84,12 @@ const GestaoMaquinarioScene = () => {
       case 1:
         setNeonPosition([0, 0, 0]);
         setNeonRotation([0, 0, 0]);
-        break;      
+        break;
       case 2:
         setNeonPosition([0, 0, 0]);
         setNeonRotation([0, 0, 0]);
         break;
-    }    
+    }
   }, [selectedIndex, isCurrentProduct]);
 
   useEffect(() => {
@@ -109,7 +109,7 @@ const GestaoMaquinarioScene = () => {
 
   const handleObjectPositionUpdate = (position, tratorIndex) => {
     if (position) {
-      tratorPositionsRef.current[tratorIndex] = [position.x, position.y, position.z]; 
+      tratorPositionsRef.current[tratorIndex] = [position.x, position.y, position.z];
       // Atualizar os placeholders
       setPlaceholderPositions(prevPositions => {
         const newPositions = [...prevPositions];
@@ -128,17 +128,17 @@ const GestaoMaquinarioScene = () => {
       if (isTrackingEnabledRef.current && isCurrentProduct && trackedTratorIndexRef.current === tratorIndex) {
         const targetPosition = [
           position.x + PLACEHOLDER_LOOKAT_OFFSET[0],
-          position.y + PLACEHOLDER_LOOKAT_OFFSET[1], 
+          position.y + PLACEHOLDER_LOOKAT_OFFSET[1],
           position.z + PLACEHOLDER_LOOKAT_OFFSET[2]
         ];
         setCurrentTarget(targetPosition);
-      }      
+      }
     }
   };
 
   return (
     <group>
-      <Tratores 
+      <Tratores
         onObjectPositionUpdate={handleObjectPositionUpdate}
         playSecondAnimation={shouldPlaySecondAnimation}
         skipProduct={shouldSkipProduct}
@@ -146,29 +146,29 @@ const GestaoMaquinarioScene = () => {
 
       {shouldRenderNeon && (
         <MaquinarioNeon position={neonPosition} rotation={neonRotation} onAnimationEnd={() => setShouldRenderNeon(false)} />
-      )} 
+      )}
 
       {shouldRenderMainObject && dispositivoPosition && trackedTratorIndexRef.current >= 0 && (
-        <DispositivoMaquinario 
-          position={dispositivoPosition} 
+        <DispositivoMaquinario
+          position={dispositivoPosition}
           playSecondAnimation={shouldPlaySecondAnimation}
           skipProduct={shouldSkipProduct}
         />
       )}
 
       {shouldRenderPlaceholders && (
-        <Placeholders 
+        <Placeholders
           placeholderPositions={placeholderPositions}
           scale={[1, 2, 1]}
           isVisible={placeholdersVisible}
           onAnimationOutEnded={handlePlaceholderAnimationOutEnded}
         />
       )}
-      
+
       {shouldRenderSmallObject && (
-        <DispositivoMaquinarioSmall 
-          isVisible={smallObjectVisible} 
-          onAnimationOutEnded={handleSmallObjAnimationOutEnded}            
+        <DispositivoMaquinarioSmall
+          isVisible={smallObjectVisible}
+          onAnimationOutEnded={handleSmallObjAnimationOutEnded}
         />
       )}
 

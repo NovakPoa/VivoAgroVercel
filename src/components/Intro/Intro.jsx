@@ -4,9 +4,9 @@ import useIntroStore from '../../stores/IntroStore';
 import useCameraStore from '../../stores/CameraStore';
 import useProductsStore from '../../stores/ProductsStore';
 
-const START_PRODUCTS_DELAY = 6000;
+const START_PRODUCTS_DELAY = 10000;
 const START_NEON_DELAY = 0;
-const START_LOGO_DELAY = 4000;
+const START_LOGO_DELAY = 4500;
 
 const Intro = () => {
   const [showCard, setShowCard] = useState(false);
@@ -29,10 +29,10 @@ const Intro = () => {
   const timerToStartNeonAnimation = useCallback(() => {
     setTimeout(() => {
       setIntroNeonVisibility(true);
-      animateToTarget([7, 2.2, -3], 1.5);
+      animateToTarget([7, 2.2, -5.5], 3);
       setTimeout(() => {
-        animateToTarget([10, 2.3, 0], 1.5);
-      }, 2000);
+        animateToTarget([10, 2.3, 0], 3);
+      }, 8000);
 
     }, START_NEON_DELAY);
   }, []);
