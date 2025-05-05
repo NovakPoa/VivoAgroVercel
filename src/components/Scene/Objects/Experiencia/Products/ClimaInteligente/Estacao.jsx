@@ -13,14 +13,14 @@ const Estacao = ({ position = [0, 0, 0], rotation = [0, 0, 0], scale = 1, playSe
     if (!scene) return;
 
     if (!skipProduct) {
-      play('EstacaoMeteorologicaCrescendo_Animacao', {
+      play('EstacaoMeteorologica-Crescendo', {
         loop: false,
         timeScale: 2.4
       });
     } else {
-      jumpToEnd('EstacaoMeteorologicaCrescendo_Animacao');
-      jumpToEnd('scaleIn2');//conferir nome da animaçao
-      play('animateLoop', { //conferir nome da animaçao
+      jumpToEnd('EstacaoMeteorologica-Crescendo');
+      jumpToEnd('EstacaoMeteorologicaVFX-Crescendo');//conferir nome da animaçao
+      play('EstacaoMeteorologicaVFX-Loop', { //conferir nome da animaçao
         loop: true,
         timeScale: 2.4,
       });
@@ -29,7 +29,7 @@ const Estacao = ({ position = [0, 0, 0], rotation = [0, 0, 0], scale = 1, playSe
 
   useEffect(() => {
     if (playSecondAnimation) {
-      play('scaleIn2', { //conferir nome da animaçao
+      play('EstacaoMeteorologicaVFX-Crescendo', { //conferir nome da animaçao
         loop: false,
         timeScale: 2.4,
         onFinish: onAnimationEnded
@@ -38,7 +38,7 @@ const Estacao = ({ position = [0, 0, 0], rotation = [0, 0, 0], scale = 1, playSe
   }, [play, playSecondAnimation]);
 
   const onAnimationEnded = useCallback(() => {
-    play('animateLoop', { //conferir nome da animaçao
+    play('EstacaoMeteorologicaVFX-Loop', { //conferir nome da animaçao
       loop: true,
       timeScale: 2.4,
     });

@@ -1,4 +1,4 @@
-import React, { useRef, forwardRef, useEffect, useCallback} from 'react';
+import React, { useRef, forwardRef, useEffect, useCallback } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { useGLTFAnimations } from '../../../../../../hooks/useGLTFAnimations';
 import * as THREE from 'three';
@@ -40,8 +40,8 @@ const findObjectMesh = (object, meshName = 'Trator_Attachment') => {
   if (targetObject) {
     return targetObject;
   }
-  
-  return null;  
+
+  return null;
 };
 
 const Trator = forwardRef(({ path, position, rotation, scale, volume = 0.5, animOffset = 0, onMeshFound, index, soundId, playSecondAnimation = false, skipProduct = false }, ref) => {
@@ -63,38 +63,38 @@ const Trator = forwardRef(({ path, position, rotation, scale, volume = 0.5, anim
         meshRef.current = objectMesh;
       }
 
-      play('TratorAndando_Animação', {
-        loop: true, 
+      play('Trator-Loop', {
+        loop: true,
         timeScale: 2.4,
         startOffset: animOffset
-      });      
-      
+      });
+
       // Iniciar som do trator
       if (meshRef.current) {
         const worldPos = new THREE.Vector3();
         meshRef.current.getWorldPosition(worldPos);
-        
+
         soundIdRef.current = playSound(soundId, {
           volume: volume,
           spatial: true,
           loop: true,
-          position: [worldPos.x, worldPos.y, worldPos.z],      
+          position: [worldPos.x, worldPos.y, worldPos.z],
         });
 
         soundRef.current = useAssetsStore.getState().getSound(soundId);
-        
+
         if (soundRef.current) {
           soundRef.current.pannerAttr({
             panningModel: 'HRTF',
-            refDistance: 20,    
-            rolloffFactor: 0.5, 
+            refDistance: 20,
+            rolloffFactor: 0.5,
             distanceModel: 'linear',
             maxDistance: 80
           }, soundIdRef.current);
         }
       }
     }
-    
+
     // Cleanup ao desmontar
     return () => {
       if (soundIdRef.current) {
@@ -103,24 +103,24 @@ const Trator = forwardRef(({ path, position, rotation, scale, volume = 0.5, anim
       }
     };
   }, [scene, playSound, stopSound, volume, soundId, index]);
-  
+
 
   useEffect(() => {
     if (!scene) return;
 
     if (skipProduct) {
-      jumpToEnd('scaleInVFXTrator');  //conferir nome da animaçao - scale in VFX
-      play('loopVFXTrator', {         //conferir nome da animaçao - loop VFX
-        loop: true, 
+      jumpToEnd('TratorVFX-Crescendo');  //conferir nome da animaçao - scale in VFX
+      play('Trator-Loop', {         //conferir nome da animaçao - loop VFX
+        loop: true,
         timeScale: 2.4,
-      });   
+      });
     }
   }, [skipProduct, play, jumpToEnd]);
-  
+
   useEffect(() => {
     if (playSecondAnimation) {
-      play('scaleInVFXTrator', {      //conferir nome da animaçao
-        loop: false, 
+      play('TratorVFX-Crescendo', {      //conferir nome da animaçao
+        loop: false,
         timeScale: 2.4,
         onFinish: onAnimationEnded
       });
@@ -128,19 +128,19 @@ const Trator = forwardRef(({ path, position, rotation, scale, volume = 0.5, anim
   }, [play, playSecondAnimation]);
 
   const onAnimationEnded = useCallback(() => {
-    play('loopVFXTrator', {           //conferir nome da animaçao
-      loop: true, 
+    play('TratorVFX-Loop', {           //conferir nome da animaçao
+      loop: true,
       timeScale: 2.4,
-    }); 
-  }, [play]); 
+    });
+  }, [play]);
 
   useFrame(() => {
     if (meshRef.current && soundRef.current && soundIdRef.current) {
       frameCounter.current += 1;
-      
+
       const worldPos = new THREE.Vector3();
       meshRef.current.getWorldPosition(worldPos);
-      
+
       if (soundIdRef.current) {
         soundRef.current.pos(worldPos.x, worldPos.y, worldPos.z, soundIdRef.current);
       }
@@ -152,11 +152,11 @@ const Trator = forwardRef(({ path, position, rotation, scale, volume = 0.5, anim
   });
 
   if (!scene) return null;
-  
+
   return (
-    <primitive 
+    <primitive
       ref={ref}
-      object={scene} 
+      object={scene}
       position={position}
       rotation={rotation}
       scale={scale}
@@ -166,11 +166,11 @@ const Trator = forwardRef(({ path, position, rotation, scale, volume = 0.5, anim
 
 const Tratores = ({ onObjectPositionUpdate, playSecondAnimation = false, skipProduct = false }) => {
   const tratorRefs = useRef([]);
-  
+
   return (
     <group name="tratores">
       {MODELS.map((model, index) => (
-        <Trator 
+        <Trator
           key={index}
           index={index}
           ref={el => tratorRefs.current[index] = el}
@@ -183,7 +183,7 @@ const Tratores = ({ onObjectPositionUpdate, playSecondAnimation = false, skipPro
           animOffset={model.animOffset}
           onMeshFound={onObjectPositionUpdate}
           playSecondAnimation={playSecondAnimation}
-          skipProduct={skipProduct}          
+          skipProduct={skipProduct}
         />
       ))}
     </group>

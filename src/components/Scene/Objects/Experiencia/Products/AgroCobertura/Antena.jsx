@@ -23,7 +23,7 @@ const Antena = ({ position, rotation = [0, 0, 0], scale = 1, playSecondAnimation
     if (!scene) return;
 
     // Desabilitando frustum culling
-    const objectNames = ['AntenaBase', 'AntenaTorre'];
+    const objectNames = ['AntenaBase', 'AntenaTorre', '4G700MHz_1', '4G700MHz_2', 'AntenaTorus'];
     objectNames.forEach(name => {
       const objectMesh = findObjectMesh(scene, name);
       if (objectMesh) {
@@ -32,34 +32,34 @@ const Antena = ({ position, rotation = [0, 0, 0], scale = 1, playSecondAnimation
     });
 
     if (!skipProduct) {
-      play('AntenaCrescendo_Animacao', {
+      play('Antena-Crescendo', {
         loop: false,
-        timeScale: 2.4
+        timeScale: 0.35
       });
     } else {
-      jumpToEnd('AntenaCrescendo_Animacao');
-      jumpToEnd('scaleInRings');//conferir nome da animaçao
-      play('animateRings', { //conferir nome da animaçao
+      jumpToEnd('Antena-Crescendo');
+      jumpToEnd('AntenaVFX-Crescendo');//conferir nome da animaçao
+      play('AntenaVFX-Loop', { //conferir nome da animaçao
         loop: true,
-        timeScale: 2.4,
+        timeScale: 0.5,
       });
     }
   }, [scene, skipProduct, play, jumpToEnd]);
 
   useEffect(() => {
     if (playSecondAnimation) {
-      play('scaleInRings', { //conferir nome da animaçao
+      play('AntenaVFX-Crescendo', { //conferir nome da animaçao
         loop: false,
-        timeScale: 2.4,
+        timeScale: 0.5,
         onFinish: onAnimationEnded
       });
     }
   }, [play, playSecondAnimation]);
 
   const onAnimationEnded = useCallback(() => {
-    play('animateRings', { //conferir nome da animaçao
+    play('AntenaVFX-Loop', { //conferir nome da animaçao
       loop: true,
-      timeScale: 2.4,
+      timeScale: 0.5,
     });
   }, [play]);
 

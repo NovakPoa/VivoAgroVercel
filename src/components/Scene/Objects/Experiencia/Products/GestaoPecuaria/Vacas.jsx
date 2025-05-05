@@ -1,4 +1,4 @@
-import React, { useRef, forwardRef, useEffect, useCallback} from 'react';
+import React, { useRef, forwardRef, useEffect, useCallback } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { useGLTFAnimations } from '../../../../../../hooks/useGLTFAnimations';
 import * as THREE from 'three';
@@ -11,15 +11,15 @@ const MODELS = [
     rotation: [0, 0, 0],
     scale: 1,
     attachName: 'RigREarTip',
-    idleAnimName: 'VacaComendo02_Animacao',
-  },  
+    idleAnimName: 'Vaca-Loop',
+  },
   {
     path: '/models/products/GestaoPecuaria/VacaNelore.glb',
     position: [0, 0, 0],
     rotation: [0, 0, 0],
     scale: 1,
     attachName: 'RigLEarTip',
-    idleAnimName: 'VacaEmPe01_Animacao',
+    idleAnimName: 'Vaca-Loop',
   },
 ];
 
@@ -28,8 +28,8 @@ const findObjectMesh = (object, meshName) => {
   if (targetObject) {
     return targetObject;
   }
-  
-  return null;  
+
+  return null;
 };
 
 const Vaca = forwardRef(({ path, position, rotation, scale, onMeshFound, index, attachName, idleAnimName, playSecondAnimation = false, skipProduct = false }, ref) => {
@@ -56,7 +56,7 @@ const Vaca = forwardRef(({ path, position, rotation, scale, onMeshFound, index, 
       }
 
       play(idleAnimName, {
-        loop: true, 
+        loop: true,
       });
     }
 
@@ -66,18 +66,18 @@ const Vaca = forwardRef(({ path, position, rotation, scale, onMeshFound, index, 
     if (!scene) return;
 
     if (skipProduct) {
-      jumpToEnd('scaleInVFXVaca');  //conferir nome da animaçao - scale in VFX
-      play('loopVFXVaca', {         //conferir nome da animaçao - loop VFX
-        loop: true, 
+      jumpToEnd('VacaVFX-Crescendo');  //conferir nome da animaçao - scale in VFX
+      play('VacaVFX-Loop', {         //conferir nome da animaçao - loop VFX
+        loop: true,
         timeScale: 2.4,
-      });   
+      });
     }
   }, [skipProduct, play, jumpToEnd]);
-  
+
   useEffect(() => {
     if (playSecondAnimation) {
-      play('scaleInVFXVaca', {      //conferir nome da animaçao
-        loop: false, 
+      play('VacaVFX-Crescendo', {      //conferir nome da animaçao
+        loop: false,
         timeScale: 2.4,
         onFinish: onAnimationEnded
       });
@@ -85,11 +85,11 @@ const Vaca = forwardRef(({ path, position, rotation, scale, onMeshFound, index, 
   }, [play, playSecondAnimation]);
 
   const onAnimationEnded = useCallback(() => {
-    play('loopVFXVaca', {           //conferir nome da animaçao
-      loop: true, 
+    play('VacaVFX-Loop', {           //conferir nome da animaçao
+      loop: true,
       timeScale: 2.4,
-    }); 
-  }, [play]); 
+    });
+  }, [play]);
 
   useFrame(() => {
     if (meshRef.current) {
@@ -117,7 +117,7 @@ const Vaca = forwardRef(({ path, position, rotation, scale, onMeshFound, index, 
   );
 });
 
-const Vacas = ({ onObjectPositionUpdate, playSecondAnimation = false, skipProduct = false}) => {
+const Vacas = ({ onObjectPositionUpdate, playSecondAnimation = false, skipProduct = false }) => {
   const vacaRefs = useRef([]);
   const { playSound, stopSound } = useSoundStore();
   const soundIdRef = useRef(null);
