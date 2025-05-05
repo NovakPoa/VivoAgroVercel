@@ -27,9 +27,9 @@ const IntroLogo = () => {
   return (
     <group
       ref={groupRef}
-      position={[4, 0.24, -8]}
-      rotation={[0, -0.0982, 0]}
-      scale={1.4}
+      position={[0, 0, 0]}
+      rotation={[0, 0, 0]}
+      scale={1}
     >
       <primitive object={scene} />
     </group>
