@@ -96,36 +96,56 @@ const Camera = () => {
       if (gsapAnimationRef.current) {
         gsapAnimationRef.current.kill();
       }
-  
-      // Salvar o alvo inicial da animação
-      const initialTargetRef = [...currentTarget];
-  
+
       // Obter posição atual do target
       const currentX = controlsRef.current.target.x;
       const currentY = controlsRef.current.target.y;
       const currentZ = controlsRef.current.target.z;
-  
+      const targetY = currentTarget[1];
+
+      // Calcular ângulos para animação circular horizontal
+      const startAngle = Math.atan2(currentZ, currentX);
+      const endAngle = Math.atan2(currentTarget[2], currentTarget[0]);
+      
+      // Calcular o raio atual
+      const currentRadius = Math.sqrt(currentX * currentX + currentZ * currentZ);
+
+      // Calcular o raio do target
+      const targetRadius = Math.sqrt(
+        currentTarget[0] * currentTarget[0] + 
+        currentTarget[2] * currentTarget[2]
+      );
+      
+      // Objeto para animar o ângulo e a altura Y
       const animObj = { 
-        progress: 0, 
+        angle: startAngle,
+        y: currentY,
+        radius: currentRadius
       };
       
       // Criar animação com GSAP
       gsapAnimationRef.current = gsap.to(animObj, {
-        progress: 1,
+        angle: endAngle,
+        y: targetY,
+        radius: targetRadius,
         duration: animationDuration,
         ease: "power2.inOut", 
         onUpdate: () => {
-
-          const t = animObj.progress;
+          // Calcular novas coordenadas X e Z baseadas no ângulo
+          const newX = Math.cos(animObj.angle) * animObj.radius;
+          const newZ = Math.sin(animObj.angle) * animObj.radius;
           
-          const targetX = currentX * (1-t) + initialTargetRef[0] * t;
-          const targetY = currentY * (1-t) + initialTargetRef[1] * t;
-          const targetZ = currentZ * (1-t) + initialTargetRef[2] * t;
-
-          controlsRef.current.target.set(targetX, targetY, targetZ);
+          // Atualizar a posição do target
+          controlsRef.current.target.set(newX, animObj.y, newZ);
           controlsRef.current.update();
         },
         onComplete: () => {
+          controlsRef.current.target.set(
+            currentTarget[0],
+            currentTarget[1],
+            currentTarget[2]
+          );
+          controlsRef.current.update();
           finishAnimation();
         }
       });
