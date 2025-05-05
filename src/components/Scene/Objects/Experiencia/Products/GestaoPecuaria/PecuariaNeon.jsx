@@ -7,6 +7,8 @@ const PecuariaNeon = ({
   position = [0, 0, 0],
   rotation = [0, 0, 0],
   scale = [1, 1, 1],
+  instanceCount = 4,
+  instanceOffset = [0.7, 0, 0],
   animationDuration = 6,
   fadeOutDuration = 1,
   useXCoord = false,
@@ -17,6 +19,8 @@ const PecuariaNeon = ({
 
   const { modelRef, startAnimation } = useNeonEffect({
     modelPath: MODEL_PATH,
+    instanceCount,
+    instanceOffset,         
     baseColor: '#660099',
     glowColor: '#9933FF',
     useXCoord,

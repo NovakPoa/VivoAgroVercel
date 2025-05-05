@@ -4,9 +4,12 @@ import { useFrame } from '@react-three/fiber';
 import gsap from 'gsap';
 import { createTubeRevealMaterial } from '../shaders/TubeRevealShader';
 import useSoundStore from '../stores/SoundStore';
+import * as THREE from 'three';
 
 const useNeonEffect = ({
   modelPath,
+  instanceCount = 1,
+  instanceOffset = [0, 0, 0],  
   // Shader props
   baseColor = '#660099',
   glowColor = '#9933FF',
@@ -34,46 +37,65 @@ const useNeonEffect = ({
   const { playSound, stopSound } = useSoundStore();
 
   useEffect(() => {
-    if (!scene) return;
-
-    const clonedScene = scene.clone();
+    if (!scene || !modelRef.current) return;
+    
+    // Limpar instâncias anteriores
+    while (modelRef.current.children.length > 0) {
+      modelRef.current.remove(modelRef.current.children[0]);
+    }
+  
     shaderMaterials.current = [];
-    
-    // Aplicar o shader material a todos os meshes
-    clonedScene.traverse((child) => {
-      if (child.isMesh) {
-        const shaderMaterial = createTubeRevealMaterial({
-          baseColor,
-          glowColor,
-          progress: 1.0,
-          glowWidth: 0.05,
-          fadeWidth: 0.1,
-          useXCoord,
-          invertDirection,
-          bloomStrength,
-          opacity: 1.0
-        });
-        
-        shaderMaterials.current.push(shaderMaterial);
-        child.material = shaderMaterial;
-      }
-    });
-    
-    if (modelRef.current) {
-      while (modelRef.current.children.length > 0) {
-        modelRef.current.remove(modelRef.current.children[0]);
-      }
+ 
+    for (let i = 0; i < instanceCount; i++) {
+      // Clonar a cena para todas as instâncias 
+      const clonedScene = i === 0 ? scene.clone() : scene.clone();
+      
+      // Aplicar shader material
+      //if (i === 0) { } // Alterar material pra cada instância
+      clonedScene.traverse((child) => {
+        if (child.isMesh) {
+          const shaderMaterial = createTubeRevealMaterial({
+            baseColor,
+            glowColor,
+            progress: 1.2,
+            glowWidth: 0.05,
+            fadeWidth: 0.1,
+            useXCoord,
+            invertDirection,
+            bloomStrength,
+            opacity: 1.0
+          });
+          shaderMaterials.current.push(shaderMaterial);
+          child.material = shaderMaterial;
+        }
+      });
+  
+      // Posicionar todas as instâncias com offset
+      clonedScene.position.set(
+        instanceOffset[0] * i,  
+        instanceOffset[1] * i,
+        instanceOffset[2] * i
+      );
       
       modelRef.current.add(clonedScene);
-    }
 
+    }
     return () => {
       shaderMaterials.current.forEach(material => {
         if (material.dispose) material.dispose();
       });
     };
-  }, [scene, baseColor, glowColor, useXCoord, invertDirection, bloomStrength]);
-  
+  }, [
+    scene, 
+    baseColor, 
+    glowColor, 
+    useXCoord, 
+    invertDirection, 
+    bloomStrength, 
+    instanceCount, 
+    instanceOffset
+  ]);
+
   // Função para iniciar a animação
   const startAnimation = () => {
     animationStage.current = 'intro';
