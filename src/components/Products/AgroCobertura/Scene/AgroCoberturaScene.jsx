@@ -61,7 +61,7 @@ const AgroCoberturaScene = () => {
     switch (selectedIndex) {
       case 0:
         setNeonPosition([0, 0, 0]);
-        setNeonRotation([0, 0, 0]);
+        setNeonRotation([0, 0.55, 0]);
         break;
       case 1:
         setNeonPosition([0, 0, 0]);
@@ -69,7 +69,7 @@ const AgroCoberturaScene = () => {
         break;      
       case 2:
         setNeonPosition([0, 0, 0]);
-        setNeonRotation([0, 0.55, 0]);
+        setNeonRotation([0, 0, 0]);
         break;
     }
   }, [selectedIndex]);
@@ -87,7 +87,7 @@ const AgroCoberturaScene = () => {
       {shouldRenderPlaceholders && (
         <Placeholders 
           placeholderPositions={placeholderPositions}
-          scale={[3, 8, 3]}
+          scale={[3, 9, 3]}
           isVisible={placeholdersVisible} 
           onAnimationOutEnded={handlePlaceholderAnimationOutEnded}
         />
