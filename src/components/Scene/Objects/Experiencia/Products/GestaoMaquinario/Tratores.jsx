@@ -1,4 +1,4 @@
-import React, { useRef, forwardRef, useEffect } from 'react';
+import React, { useRef, forwardRef, useEffect, useCallback} from 'react';
 import { useFrame } from '@react-three/fiber';
 import { useGLTFAnimations } from '../../../../../../hooks/useGLTFAnimations';
 import * as THREE from 'three';
@@ -44,8 +44,8 @@ const findObjectMesh = (object, meshName = 'Trator_Attachment') => {
   return null;  
 };
 
-const Trator = forwardRef(({ path, position, rotation, scale, volume = 0.5, animOffset = 0, onMeshFound, index, soundId }, ref) => {
-  const { scene, play } = useGLTFAnimations(path, {
+const Trator = forwardRef(({ path, position, rotation, scale, volume = 0.5, animOffset = 0, onMeshFound, index, soundId, playSecondAnimation = false, skipProduct = false }, ref) => {
+  const { scene, play, jumpToEnd } = useGLTFAnimations(path, {
     cloneScene: true,
   });
 
@@ -104,6 +104,36 @@ const Trator = forwardRef(({ path, position, rotation, scale, volume = 0.5, anim
     };
   }, [scene, playSound, stopSound, volume, soundId, index]);
   
+
+  useEffect(() => {
+    if (!scene) return;
+
+    if (skipProduct) {
+      jumpToEnd('scaleInVFXTrator');  //conferir nome da animaçao - scale in VFX
+      play('loopVFXTrator', {         //conferir nome da animaçao - loop VFX
+        loop: true, 
+        timeScale: 2.4,
+      });   
+    }
+  }, [skipProduct, play, jumpToEnd]);
+  
+  useEffect(() => {
+    if (playSecondAnimation) {
+      play('scaleInVFXTrator', {      //conferir nome da animaçao
+        loop: false, 
+        timeScale: 2.4,
+        onFinish: onAnimationEnded
+      });
+    }
+  }, [play, playSecondAnimation]);
+
+  const onAnimationEnded = useCallback(() => {
+    play('loopVFXTrator', {           //conferir nome da animaçao
+      loop: true, 
+      timeScale: 2.4,
+    }); 
+  }, [play]); 
+
   useFrame(() => {
     if (meshRef.current && soundRef.current && soundIdRef.current) {
       frameCounter.current += 1;
@@ -134,7 +164,7 @@ const Trator = forwardRef(({ path, position, rotation, scale, volume = 0.5, anim
   );
 });
 
-const Tratores = ({ onObjectPositionUpdate }) => {
+const Tratores = ({ onObjectPositionUpdate, playSecondAnimation = false, skipProduct = false }) => {
   const tratorRefs = useRef([]);
   
   return (
@@ -152,6 +182,8 @@ const Tratores = ({ onObjectPositionUpdate }) => {
           soundId={model.soundId}
           animOffset={model.animOffset}
           onMeshFound={onObjectPositionUpdate}
+          playSecondAnimation={playSecondAnimation}
+          skipProduct={skipProduct}          
         />
       ))}
     </group>

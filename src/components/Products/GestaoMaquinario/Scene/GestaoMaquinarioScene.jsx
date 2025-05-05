@@ -132,7 +132,11 @@ const GestaoMaquinarioScene = () => {
 
   return (
     <group>
-      <Tratores onObjectPositionUpdate={handleObjectPositionUpdate} />
+      <Tratores 
+        onObjectPositionUpdate={handleObjectPositionUpdate}
+        playSecondAnimation={shouldPlaySecondAnimation}
+        skipProduct={shouldSkipProduct}
+      />
 
       {shouldRenderNeon && (
         <MaquinarioNeon position={neonPosition} rotation={neonRotation} onAnimationEnd={() => setShouldRenderNeon(false)} />
