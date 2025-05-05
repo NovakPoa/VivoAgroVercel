@@ -159,6 +159,7 @@ const GestaoMaquinarioScene = () => {
       {shouldRenderPlaceholders && (
         <Placeholders 
           placeholderPositions={placeholderPositions}
+          scale={[1, 2, 1]}
           isVisible={placeholdersVisible}
           onAnimationOutEnded={handlePlaceholderAnimationOutEnded}
         />

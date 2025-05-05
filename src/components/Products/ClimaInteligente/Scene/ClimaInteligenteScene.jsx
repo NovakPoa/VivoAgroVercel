@@ -87,6 +87,7 @@ const ClimaInteligenteScene = () => {
       {shouldRenderPlaceholders && (
         <Placeholders 
           placeholderPositions={placeholderPositions}
+          scale={[1, 3, 1]}
           isVisible={placeholdersVisible}
           onAnimationOutEnded={handlePlaceholderAnimationOutEnded}
         />

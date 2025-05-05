@@ -15,8 +15,4 @@ export const ANIMATION_DURATIONS = {
     SCALE_IN: 500,
     SCALE_OUT: 350
   },
-  PLACEHOLDER: {
-    SCALE_IN: 500,
-    SCALE_OUT: 500
-  },  
 };

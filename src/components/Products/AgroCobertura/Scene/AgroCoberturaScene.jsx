@@ -87,6 +87,7 @@ const AgroCoberturaScene = () => {
       {shouldRenderPlaceholders && (
         <Placeholders 
           placeholderPositions={placeholderPositions}
+          scale={[3, 8, 3]}
           isVisible={placeholdersVisible} 
           onAnimationOutEnded={handlePlaceholderAnimationOutEnded}
         />

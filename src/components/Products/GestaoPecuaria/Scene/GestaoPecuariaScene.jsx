@@ -131,6 +131,7 @@ const GestaoPecuariaScene = () => {
       {shouldRenderPlaceholders && (
         <Placeholders 
           placeholderPositions={placeholderPositions}
+          scale={[0.3, 0.6, 0.3]}
           isVisible={placeholdersVisible}
           onAnimationOutEnded={handlePlaceholderAnimationOutEnded}
         />
