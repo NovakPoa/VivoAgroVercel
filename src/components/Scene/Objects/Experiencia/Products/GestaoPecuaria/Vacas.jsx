@@ -1,4 +1,4 @@
-import React, { useRef, forwardRef, useEffect } from 'react';
+import React, { useRef, forwardRef, useEffect, useCallback} from 'react';
 import { useFrame } from '@react-three/fiber';
 import { useGLTFAnimations } from '../../../../../../hooks/useGLTFAnimations';
 import * as THREE from 'three';
@@ -10,14 +10,16 @@ const MODELS = [
     position: [0, 0, 0],
     rotation: [0, 0, 0],
     scale: 1,
-    attachName: 'RigREarTip'
+    attachName: 'RigREarTip',
+    idleAnimName: 'VacaComendo02_Animacao',
   },  
   {
     path: '/models/products/GestaoPecuaria/VacaNelore.glb',
     position: [0, 0, 0],
     rotation: [0, 0, 0],
     scale: 1,
-    attachName: 'RigLEarTip'
+    attachName: 'RigLEarTip',
+    idleAnimName: 'VacaEmPe01_Animacao',
   },
 ];
 
@@ -30,8 +32,8 @@ const findObjectMesh = (object, meshName) => {
   return null;  
 };
 
-const Vaca = forwardRef(({ path, position, rotation, scale, onMeshFound, index, attachName }, ref) => {
-  const { scene, playAll, stopAll } = useGLTFAnimations(path, {
+const Vaca = forwardRef(({ path, position, rotation, scale, onMeshFound, index, attachName, idleAnimName, playSecondAnimation = false, skipProduct = false }, ref) => {
+  const { scene, play, stop, jumpToEnd } = useGLTFAnimations(path, {
     cloneScene: false,
   });
   const meshRef = useRef(null);
@@ -53,12 +55,41 @@ const Vaca = forwardRef(({ path, position, rotation, scale, onMeshFound, index, 
         meshRef.current = objectAttach;
       }
 
-      playAll({
-        loop: true,
+      play(idleAnimName, {
+        loop: true, 
       });
     }
 
   }, [scene]);
+
+  useEffect(() => {
+    if (!scene) return;
+
+    if (skipProduct) {
+      jumpToEnd('scaleInVFXVaca');  //conferir nome da animaçao - scale in VFX
+      play('loopVFXVaca', {         //conferir nome da animaçao - loop VFX
+        loop: true, 
+        timeScale: 2.4,
+      });   
+    }
+  }, [skipProduct, play, jumpToEnd]);
+  
+  useEffect(() => {
+    if (playSecondAnimation) {
+      play('scaleInVFXVaca', {      //conferir nome da animaçao
+        loop: false, 
+        timeScale: 2.4,
+        onFinish: onAnimationEnded
+      });
+    }
+  }, [play, playSecondAnimation]);
+
+  const onAnimationEnded = useCallback(() => {
+    play('loopVFXVaca', {           //conferir nome da animaçao
+      loop: true, 
+      timeScale: 2.4,
+    }); 
+  }, [play]); 
 
   useFrame(() => {
     if (meshRef.current) {
@@ -86,7 +117,7 @@ const Vaca = forwardRef(({ path, position, rotation, scale, onMeshFound, index, 
   );
 });
 
-const Vacas = ({ onObjectPositionUpdate }) => {
+const Vacas = ({ onObjectPositionUpdate, playSecondAnimation = false, skipProduct = false}) => {
   const vacaRefs = useRef([]);
   const { playSound, stopSound } = useSoundStore();
   const soundIdRef = useRef(null);
@@ -173,7 +204,10 @@ const Vacas = ({ onObjectPositionUpdate }) => {
           rotation={model.rotation}
           scale={model.scale}
           attachName={model.attachName}
+          idleAnimName={model.idleAnimName}
           onMeshFound={onObjectPositionUpdate}
+          playSecondAnimation={playSecondAnimation}
+          skipProduct={skipProduct}
         />
       ))}
     </group>

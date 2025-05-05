@@ -104,7 +104,11 @@ const GestaoPecuariaScene = () => {
   return (
     <group>
       <DispositivosPecuaria />
-      <Vacas onObjectPositionUpdate={handleObjectPositionUpdate} />
+      <Vacas 
+        onObjectPositionUpdate={handleObjectPositionUpdate}
+        playSecondAnimation={shouldPlaySecondAnimation}
+        skipProduct={shouldSkipProduct}
+      />
 
       {shouldRenderNeon && (
         <PecuariaNeon position={neonPosition} rotation={neonRotation} onAnimationEnd={() => setShouldRenderNeon(false)} />

@@ -47,7 +47,7 @@ export default function useProductNavigation() {
       setShowCard(true);
       return;
     }
-
+    setSkipProduct(false);
     const showCardOffset = -500;
     const duration = 2;
     const delay = duration * 1000 + showCardOffset;

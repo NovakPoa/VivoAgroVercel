@@ -18,32 +18,10 @@ const Brinco = ({position, rotation = [0, 0, 0], scale = 1, playSecondAnimation 
         timeScale: 2.4
       });
     } else {
-      jumpToEnd('BrincoEncaixando');
-      jumpToEnd('scaleIn2');//conferir nome da animaçao
-      play('animateLoop', { //conferir nome da animaçao
-        loop: true, 
-        timeScale: 2.4,
-      });       
+      jumpToEnd('BrincoEncaixando');     
     }
   }, [scene, skipProduct, play, jumpToEnd]);
   
-  useEffect(() => {
-    if (playSecondAnimation) {
-      play('scaleIn2', { //conferir nome da animaçao
-        loop: false, 
-        timeScale: 2.4,
-        onFinish: onAnimationEnded
-      });
-    }
-  }, [play, playSecondAnimation]);
-
-  const onAnimationEnded = useCallback(() => {
-    play('animateLoop', { //conferir nome da animaçao
-      loop: true, 
-      timeScale: 2.4,
-    }); 
-  }, [play]); 
-
   if (!scene) return null;
 
   return (
