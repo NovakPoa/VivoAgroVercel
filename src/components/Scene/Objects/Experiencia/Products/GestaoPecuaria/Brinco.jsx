@@ -3,7 +3,7 @@ import { useGLTFAnimations } from '../../../../../../hooks/useGLTFAnimations';
 
 const MODEL_PATH = '/models/products/GestaoPecuaria/Brinco.glb';
 
-const Brinco = ({position, rotation = [0, 0, 0], scale = 1, playSecondAnimation = false, skipProduct = false}) => {
+const Brinco = ({ position, rotation = [2, 0.7, 0.4], scale = 1.1, playSecondAnimation = false, skipProduct = false }) => {
   const meshRef = useRef();
   const { scene, play, jumpToEnd } = useGLTFAnimations(MODEL_PATH, {
     cloneScene: false,
@@ -14,23 +14,23 @@ const Brinco = ({position, rotation = [0, 0, 0], scale = 1, playSecondAnimation 
 
     if (!skipProduct) {
       play('BrincoEncaixando', {
-        loop: false, 
+        loop: false,
         timeScale: 2.4
       });
     } else {
-      jumpToEnd('BrincoEncaixando');     
+      jumpToEnd('BrincoEncaixando');
     }
   }, [scene, skipProduct, play, jumpToEnd]);
-  
+
   if (!scene) return null;
 
   return (
-    <primitive 
-      object={scene} 
+    <primitive
+      object={scene}
       ref={meshRef}
       position={position}
       rotation={rotation}
-      scale={scale}     
+      scale={scale}
     />
   );
 };
