@@ -120,7 +120,7 @@ const useNeonEffect = ({
         ease: "sine.inOut",
         immediateRender: true,
         onComplete: () => {
-          startFadeOut(); // DEBUGGING
+          startFadeOut(); // NEON DEBUGGING: COMMENT THIS
         }
       }
     );

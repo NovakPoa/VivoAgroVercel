@@ -16,7 +16,7 @@ const Intro = () => {
 
   useEffect(() => {
     setShowCard(true);
-    // setIntroNeonVisibility(true); // DEBUGGING
+    // setIntroNeonVisibility(true); // NEON DEBUGGING: UNCOMMENT THIS
   }, []);
 
   const timerToStartProduct = useCallback(() => {
