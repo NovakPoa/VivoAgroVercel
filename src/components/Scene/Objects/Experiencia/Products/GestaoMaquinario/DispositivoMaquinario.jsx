@@ -3,7 +3,7 @@ import { useGLTFAnimations } from '../../../../../../hooks/useGLTFAnimations';
 
 const MODEL_PATH = '/models/products/GestaoMaquinario/DispositivoGestaoDeMaquinario.glb';
 
-const DispositivoMaquinario = ({ position = [0, 0, 0], rotation = [0, 0, 0], scale = 1, playSecondAnimation = false, skipProduct = false }) => {
+const DispositivoMaquinario = ({ position = [0, 0, 0], rotation = [0, 0, 0], scale = 2, playSecondAnimation = false, skipProduct = false }) => {
   const meshRef = useRef();
   const { scene, play, jumpToEnd } = useGLTFAnimations(MODEL_PATH, {
     cloneScene: false,
