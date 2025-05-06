@@ -30,15 +30,16 @@ const PreloadedImage = ({ src, alt, className = '' }) => {
   }, [src]);
 
   return (
-    <>
+    <div className={`preloaded-image-container ${className} ${isLoaded ? 'loaded' : 'loading'}`}>
+      {!isLoaded && <div className="image-placeholder"></div>}
       {(isLoaded && imageSrc) && (
         <img 
           src={imageSrc}
           alt={alt}
-          className={`${className} `}
+          className="preloaded-image"
         />
       )}
-    </>
+    </div>
   );
 };
 

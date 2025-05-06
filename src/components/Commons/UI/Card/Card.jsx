@@ -55,14 +55,12 @@ const Card = ({
   return (
     <div className={`card ${animClass} ${positionClass}`} style={style}>
       {showImage && (
-        <div className="card-image-wrapper">            
-          <div className="card-image-prel">
-            <PreloadedImage src={imageUrl} alt={title} className='card-image-prelimg'/>
-          </div>
+        <div className="card-image-wrapper">
+          <PreloadedImage src={imageUrl} alt={title} />
         </div>
       )}
       {showCheckIcon && (
-        <PreloadedImage src='/ui/icons/check-icon.png' alt='Check Icon' className='card-check-icon' />
+        <img src="./ui/icons/check-icon.png" alt="Check Icon" className="card-check-icon" />
       )}
       <div className="card-content">
         <h2 className={titleClass}>{title}</h2>

@@ -29,7 +29,7 @@ const ImageButton = ({ imageUrl, title, status, onClick }) => {
         <PreloadedImage 
           src={imageUrl} 
           alt={title} 
-          className="ib-image-prel" 
+          className="preloaded-image" 
         />
       </div>
       
@@ -38,7 +38,7 @@ const ImageButton = ({ imageUrl, title, status, onClick }) => {
       )}
 
       {status === 'completed' && (
-        <PreloadedImage src='/ui/icons/check-icon.png' alt='Check Icon'  className='icon check-icon' />
+        <img src="./ui/icons/check-icon.png" alt="Check Icon" className="icon check-icon" />
       )}
       <div className="title">{title}</div>
     </div>

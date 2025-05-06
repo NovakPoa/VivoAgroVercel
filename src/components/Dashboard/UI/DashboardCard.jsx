@@ -5,7 +5,6 @@ import { RiResetRightFill } from "react-icons/ri";
 import useProductsStore from '../../../stores/ProductsStore';
 import useDashboardStore from '../../../stores/DashboardStore';
 import { ANIMATION_DURATIONS } from '../../../config/animationUIConfig';
-import PreloadedImage from '../../Commons/UI/PreloadedImage/PreloadedImage';
 
 const DashboardCard = ({ isVisible = true, onAnimationOutEnded, onResetClick }) => {
   const { productsStatus, setCurrentProduct, setStartProduct } = useProductsStore();
@@ -55,7 +54,7 @@ const DashboardCard = ({ isVisible = true, onAnimationOutEnded, onResetClick }) 
     <div className={`dashboard-card ${animClass}`} style={style} >
       <div className="sidebar-buttons">
         <button className="sidebar-button active">
-          <PreloadedImage src='/ui/icons/vivo-icon-dark.png' alt="Vivo Icon" />
+          <img src="./ui/icons/vivo-icon-dark.png" alt="Vivo Icon" />
         </button>
         <button
           className="sidebar-button"

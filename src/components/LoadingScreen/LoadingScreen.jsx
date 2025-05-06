@@ -6,7 +6,7 @@ import './LoadingScreen.css';
 import { Canvas } from '@react-three/fiber'; */
 
 const LoadingScreen = () => {
-  const { isLoading, loadingProgress, loadAllAssets, getUIImage } = useAssetsStore();
+  const { isLoading, loadingProgress, loadAllAssets } = useAssetsStore();
   const [smoothProgress, setSmoothProgress] = useState(0);
   const [userStarted, setUserStarted] = useState(false);
   const requestRef = useRef(null);
@@ -51,10 +51,7 @@ const LoadingScreen = () => {
   return (
     <div className="loading-screen">
       <div className="loading-content">
-        {getUIImage('/ui/icons/vivo-icon.png') ? 
-          <img src={getUIImage('/ui/icons/vivo-icon.png').src} alt="Vivo Agro" className="loading-logo" /> :
-          <div className="loading-logo-placeholder"></div>
-        }        
+        <img src="/ui/icons/vivo-icon.png" alt="Vivo Agro" className="loading-logo" />
         <h1>Vivo Agro</h1>
         
         <div className="loading-status-container">

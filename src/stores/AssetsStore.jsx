@@ -4,14 +4,6 @@ import { useGLTF } from '@react-three/drei';
 import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader';
 import { Howl } from 'howler';
 
-// Função para gerenciar caminhos de assets
-const basePath = import.meta.env.BASE_URL;
-const getPath = (path) => {
-  const cleanPath = path.startsWith('/') ? path.substring(1) : path;
-  return basePath.endsWith('/') ? `${basePath}${cleanPath}` : `${basePath}/${cleanPath}`;
-};
-
-// Lista de assets usando os caminhos originais (sem aplicar getPath ainda)
 const assets = {
   models: [
     // fazenda
@@ -78,12 +70,7 @@ const assets = {
     '/ui/agroCobertura.jpg',
     '/ui/climaInteligente.jpg',
     '/ui/gestaoMaquinario.jpg',
-    '/ui/gestaoPecuaria.jpg',
-
-    // UI Icons
-    '/ui/icons/vivo-icon.png',
-    '/ui/icons/vivo-icon-dark.png',
-    '/ui/icons/check-icon.png'    
+    '/ui/gestaoPecuaria.jpg'
   ],
   videos: [
     '/videos/TabletAgroCobertura.mp4',
@@ -121,6 +108,7 @@ const useAssetsStore = create((set, get) => ({
     Object.keys(assets.sounds).length,
   loadedAssets: 0,
 
+  //modelCache: {},
   textureCache: {},
   imageCache: {},
   videoCache: {},
@@ -131,77 +119,69 @@ const useAssetsStore = create((set, get) => ({
     const textureLoader = new TextureLoader();
     const rgbeLoader = new RGBELoader();
 
-    // Carregar modelos - Aplicar getPath em cada caminho
+    // Carregar modelos
     assets.models.forEach(modelPath => {
-      // Usar getPath para obter caminho correto
-      const path = getPath(modelPath);
-      useGLTF.preload(path);
+      useGLTF.preload(modelPath);
       incrementLoadedAssets();
     });
 
-    // Carregar texturas - Aplicar getPath em cada caminho
+    // Carregar texturas
     assets.textures.forEach(texturePath => {
-      // Obter caminho ajustado
-      const path = getPath(texturePath);
-      
       // Verificar se é um arquivo HDR
-      if (path.endsWith('.hdr')) {
+      if (texturePath.endsWith('.hdr')) {
         rgbeLoader.load(
-          path, // Usar path com getPath aplicado
+          texturePath,
           (loadedTexture) => {
-            get().textureCache[texturePath] = loadedTexture; // Armazenar com chave original
+            get().textureCache[texturePath] = loadedTexture;
             incrementLoadedAssets();
           },
           (progress) => {
-            // Progress callback
+            // 
           },
           (error) => {
-            console.error(`Erro carregando HDR ${path}:`, error);
+            console.error(`Erro carregando HDR ${texturePath}:`, error);
             incrementLoadedAssets();
           }
         );
       } else {
         textureLoader.load(
-          path, // Usar path com getPath aplicado
+          texturePath,
           (loadedTexture) => {
-            get().textureCache[texturePath] = loadedTexture; // Armazenar com chave original
+            get().textureCache[texturePath] = loadedTexture;
             incrementLoadedAssets();
           },
           (progress) => {
-            // Progress callback
+            // 
           },
           (error) => {
-            console.error(`Erro carregando textura ${path}:`, error);
+            console.error(`Erro carregando textura ${texturePath}:`, error);
             incrementLoadedAssets();
           }
         );
       }
     });
 
-    // Carregar imagens - Aplicar getPath em cada caminho
+    // Carregar images 
     assets.images.forEach(imagePath => {
       const img = new Image();
-      const path = getPath(imagePath);
 
       img.onload = () => {
-        // Armazenar a imagem carregada no cache usando o caminho original como chave
+        // Armazenar a imagem carregada no cache
         get().imageCache[imagePath] = img;
         incrementLoadedAssets();
       };
 
       img.onerror = () => {
-        console.error(`Erro ao carregar imagem: ${path}`);
+        console.error(`Erro ao carregar imagem: ${imagePath}`);
         incrementLoadedAssets();
       };
 
-      img.src = path; // Usar path com getPath aplicado
+      img.src = imagePath;
     });
 
-    // Carregar vídeos - Aplicar getPath em cada caminho
+    // Carregar vídeos
     assets.videos.forEach(videoPath => {
       const video = document.createElement('video');
-      const path = getPath(videoPath);
-      
       video.crossOrigin = 'anonymous';
       video.loop = true;
       video.muted = true; // Necessario para autoplay sem interação
@@ -213,36 +193,34 @@ const useAssetsStore = create((set, get) => ({
 
       // Indica que o vídeo está pronto para ser usado
       video.oncanplaythrough = () => {
-        get().videoCache[videoPath] = video; // Armazenar com chave original
+        get().videoCache[videoPath] = video;
         incrementLoadedAssets();
       };
 
       video.onerror = () => {
-        console.error(`Erro ao carregar vídeo: ${path}`);
+        console.error(`Erro ao carregar vídeo: ${videoPath}`);
         incrementLoadedAssets();
       };
 
-      video.src = path; // Usar path com getPath aplicado
+      video.src = videoPath;
       video.load();
     });
 
-    // Carregar sons - Aplicar getPath em cada caminho
     Object.entries(assets.sounds).forEach(([soundId, soundPath]) => {
-      const path = getPath(soundPath);
-      
       const sound = new Howl({
-        src: [path], // Usar path com getPath aplicado
+        src: [soundPath],
         preload: true,
         onload: () => {
           get().soundCache[soundId] = sound;
           incrementLoadedAssets();
         },
         onloaderror: (id, error) => {
-          console.error(`Erro ao carregar som ${soundId} (${path}):`, error);
+          console.error(`Erro ao carregar som ${soundId}:`, error);
           incrementLoadedAssets();
         }
       });
     });
+
   },
 
   // Atualizar o progresso
@@ -260,25 +238,28 @@ const useAssetsStore = create((set, get) => ({
     });
   },
 
-  // Métodos de acesso permanecem os mesmos, mas agora usam caches com caminhos consistentes
+  // Obter modelo
+  /*   getModel: (path) => {
+      return get().modelCache[path];
+    }, */
+
+  // Obter textura 
   getTexture: (path) => {
     return get().textureCache[path];
   },
-  
+  // Obter imagem
   getUIImage: (path) => {
     return get().imageCache[path];
   },
-  
+  // Obter video
   getVideo: (path) => {
     return get().videoCache[path];
   },
-  
+  // Obter sounds
   getSound: (soundId) => {
     return get().soundCache[soundId];
   },
 
-  // Adicionando um utilitário getPath para uso em outros componentes
-  getPath: (path) => getPath(path)
 }));
 
 export default useAssetsStore;
