@@ -41,6 +41,20 @@
   background-position: top;
 }
 
+.card-image-prel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.card-image-prelimg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+} 
+
 .card-content {
   width: 100%;
   padding: 24px;
