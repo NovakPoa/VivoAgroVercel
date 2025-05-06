@@ -69,7 +69,7 @@ const Vaca = forwardRef(({ path, position, rotation, scale, onMeshFound, index, 
       jumpToEnd('VacaVFX-Crescendo');  //conferir nome da animaçao - scale in VFX
       play('VacaVFX-Loop', {         //conferir nome da animaçao - loop VFX
         loop: true,
-        timeScale: 2.4,
+        timeScale: 0.15,
       });
     }
   }, [skipProduct, play, jumpToEnd]);
@@ -78,7 +78,7 @@ const Vaca = forwardRef(({ path, position, rotation, scale, onMeshFound, index, 
     if (playSecondAnimation) {
       play('VacaVFX-Crescendo', {      //conferir nome da animaçao
         loop: false,
-        timeScale: 2.4,
+        timeScale: 0.2,
         onFinish: onAnimationEnded
       });
     }
@@ -87,7 +87,7 @@ const Vaca = forwardRef(({ path, position, rotation, scale, onMeshFound, index, 
   const onAnimationEnded = useCallback(() => {
     play('VacaVFX-Loop', {           //conferir nome da animaçao
       loop: true,
-      timeScale: 2.4,
+      timeScale: 0.15,
     });
   }, [play]);
 

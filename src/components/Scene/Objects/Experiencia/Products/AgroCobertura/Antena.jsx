@@ -41,7 +41,7 @@ const Antena = ({ position, rotation = [0, 0, 0], scale = 1, playSecondAnimation
       jumpToEnd('AntenaVFX-Crescendo');//conferir nome da animaçao
       play('AntenaVFX-Loop', { //conferir nome da animaçao
         loop: true,
-        timeScale: 0.5,
+        timeScale: 0.2,
       });
     }
   }, [scene, skipProduct, play, jumpToEnd]);
@@ -50,7 +50,7 @@ const Antena = ({ position, rotation = [0, 0, 0], scale = 1, playSecondAnimation
     if (playSecondAnimation) {
       play('AntenaVFX-Crescendo', { //conferir nome da animaçao
         loop: false,
-        timeScale: 0.5,
+        timeScale: 0.35,
         onFinish: onAnimationEnded
       });
     }
@@ -59,7 +59,7 @@ const Antena = ({ position, rotation = [0, 0, 0], scale = 1, playSecondAnimation
   const onAnimationEnded = useCallback(() => {
     play('AntenaVFX-Loop', { //conferir nome da animaçao
       loop: true,
-      timeScale: 0.5,
+      timeScale: 0.15,
     });
   }, [play]);
 

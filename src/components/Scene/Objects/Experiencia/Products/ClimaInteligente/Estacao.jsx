@@ -15,14 +15,14 @@ const Estacao = ({ position = [0, 0, 0], rotation = [0, 0, 0], scale = 1, playSe
     if (!skipProduct) {
       play('EstacaoMeteorologica-Crescendo', {
         loop: false,
-        timeScale: 2.4
+        timeScale: 0.35
       });
     } else {
       jumpToEnd('EstacaoMeteorologica-Crescendo');
       jumpToEnd('EstacaoMeteorologicaVFX-Crescendo');//conferir nome da animaçao
       play('EstacaoMeteorologicaVFX-Loop', { //conferir nome da animaçao
         loop: true,
-        timeScale: 2.4,
+        timeScale: 0.15,
       });
     }
   }, [scene, skipProduct, play, jumpToEnd]);
@@ -31,7 +31,7 @@ const Estacao = ({ position = [0, 0, 0], rotation = [0, 0, 0], scale = 1, playSe
     if (playSecondAnimation) {
       play('EstacaoMeteorologicaVFX-Crescendo', { //conferir nome da animaçao
         loop: false,
-        timeScale: 2.4,
+        timeScale: 0.2,
         onFinish: onAnimationEnded
       });
     }
@@ -40,7 +40,7 @@ const Estacao = ({ position = [0, 0, 0], rotation = [0, 0, 0], scale = 1, playSe
   const onAnimationEnded = useCallback(() => {
     play('EstacaoMeteorologicaVFX-Loop', { //conferir nome da animaçao
       loop: true,
-      timeScale: 2.4,
+      timeScale: 0.15,
     });
   }, [play]);
 
