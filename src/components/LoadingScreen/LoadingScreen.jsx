@@ -68,7 +68,7 @@ const LoadingScreen = () => {
           ) : (
             // Exibe o progresso de carregamento
             <>
-              <p>Carregando...</p>
+              <p>Carregando</p>
               <div className="loading-bar-container">
                 <div 
                   className="loading-bar-progress" 
