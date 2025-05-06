@@ -8,16 +8,16 @@ import useCameraStore from '../../stores/CameraStore';
 const CAMERA_POSITION = [0, 1.4, 0];
 
 const BASE_FOV = 60;
-const REFERENCE_ASPECT = 16/9;
+const REFERENCE_ASPECT = 16 / 9;
 const MIN_FOV = 50;
-const MAX_FOV = 70;
+const MAX_FOV = 80;
 
 const Camera = () => {
   const controlsRef = useRef();
   const cameraRef = useRef();
   const gsapAnimationRef = useRef(null);
   const { camera } = useThree();
-  const { size} = useThree();
+  const { size } = useThree();
 
   // Obtendo estados do CameraStore para animação
   const cameraAnimate = useCameraStore(state => state.cameraAnimate);
@@ -31,13 +31,13 @@ const Camera = () => {
   const aspectRatio = size.width / size.height;
 
   const adjustedFOV = useMemo(() => {
-  
+
     const aspectDifference = aspectRatio / REFERENCE_ASPECT;
     let calculatedFOV;
-  
+
     if (aspectDifference < 1) {
       // Tela mais estreita/alta (mobile) - aumentar FOV
-      calculatedFOV = BASE_FOV + (10 * (1 - aspectDifference));
+      calculatedFOV = BASE_FOV + (30 * (1 - aspectDifference));
     } else {
       // Tela mais larga - reduzir FOV levemente
       calculatedFOV = BASE_FOV - (5 * (aspectDifference - 1));
@@ -50,30 +50,30 @@ const Camera = () => {
   useEffect(() => {
     if (controlsRef.current) {
       camera.position.set(CAMERA_POSITION[0], CAMERA_POSITION[1], CAMERA_POSITION[2]);
-      
+
       controlsRef.current.target.set(
         CAMERA_POSITION[0] + 0.1,
-        CAMERA_POSITION[1] + 0.006, 
+        CAMERA_POSITION[1] + 0.006,
         CAMERA_POSITION[2]
       );
-      
+
       controlsRef.current.enableZoom = false;
       controlsRef.current.enablePan = false;
       controlsRef.current.enableDamping = true;
       controlsRef.current.dampingFactor = 0.1;
       controlsRef.current.rotateSpeed = 0.25;
-      
+
       controlsRef.current.update();
     }
   }, [camera]);
 
   useEffect(() => {
-    if (controlsRef.current) { 
+    if (controlsRef.current) {
       if (isFreeLookMode) {
         controlsRef.current.minDistance = 0.01;
         controlsRef.current.maxDistance = 0.01;
         controlsRef.current.enableRotate = true;
-      } else {        
+      } else {
         controlsRef.current.minDistance = 0;
         controlsRef.current.maxDistance = 100;
         controlsRef.current.enableRotate = false;
@@ -83,8 +83,8 @@ const Camera = () => {
         const direction = new THREE.Vector3();
         camera.getWorldDirection(direction);
         const lookDistance = 10;
-        direction.multiplyScalar(lookDistance);  
-        const targetPosition = camera.position.clone().add(direction);      
+        direction.multiplyScalar(lookDistance);
+        const targetPosition = camera.position.clone().add(direction);
         controlsRef.current.target.copy(targetPosition);
       }
       controlsRef.current.update();
@@ -107,35 +107,35 @@ const Camera = () => {
       // Calcular ângulos para animação circular horizontal
       const startAngle = Math.atan2(currentZ, currentX);
       const endAngle = Math.atan2(currentTarget[2], currentTarget[0]);
-      
+
       // Calcular o raio atual
       const currentRadius = Math.sqrt(currentX * currentX + currentZ * currentZ);
 
       // Calcular o raio do target
       const targetRadius = Math.sqrt(
-        currentTarget[0] * currentTarget[0] + 
+        currentTarget[0] * currentTarget[0] +
         currentTarget[2] * currentTarget[2]
       );
-      
+
       // Objeto para animar o ângulo e a altura Y
-      const animObj = { 
+      const animObj = {
         angle: startAngle,
         y: currentY,
         radius: currentRadius
       };
-      
+
       // Criar animação com GSAP
       gsapAnimationRef.current = gsap.to(animObj, {
         angle: endAngle,
         y: targetY,
         radius: targetRadius,
         duration: animationDuration,
-        ease: "power2.inOut", 
+        ease: "power2.inOut",
         onUpdate: () => {
           // Calcular novas coordenadas X e Z baseadas no ângulo
           const newX = Math.cos(animObj.angle) * animObj.radius;
           const newZ = Math.sin(animObj.angle) * animObj.radius;
-          
+
           // Atualizar a posição do target
           controlsRef.current.target.set(newX, animObj.y, newZ);
           controlsRef.current.update();
@@ -156,12 +156,12 @@ const Camera = () => {
   useFrame(() => {
     if (controlsRef.current && isFollowingTarget && !cameraAnimate) {
       // Interpolação leve para suavizar a transição
-      const lerpFactor = 0.02; 
-      
+      const lerpFactor = 0.02;
+
       const targetX = controlsRef.current.target.x + (currentTarget[0] - controlsRef.current.target.x) * lerpFactor;
       const targetY = controlsRef.current.target.y + (currentTarget[1] - controlsRef.current.target.y) * lerpFactor;
       const targetZ = controlsRef.current.target.z + (currentTarget[2] - controlsRef.current.target.z) * lerpFactor;
-      
+
       controlsRef.current.target.set(targetX, targetY, targetZ);
       controlsRef.current.update();
     }
@@ -173,8 +173,8 @@ const Camera = () => {
         ref={cameraRef}
         makeDefault
         fov={adjustedFOV}
-        /* near={0.01} */
-      />    
+      /* near={0.01} */
+      />
       <OrbitControls
         ref={controlsRef}
         makeDefault
