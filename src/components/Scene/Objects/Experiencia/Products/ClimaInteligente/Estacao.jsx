@@ -31,7 +31,7 @@ const Estacao = ({ position = [0, 0, 0], rotation = [0, 0, 0], scale = 1, playSe
     if (playSecondAnimation) {
       play('EstacaoMeteorologicaVFX-Crescendo', { //conferir nome da animaçao
         loop: false,
-        timeScale: 0.2,
+        timeScale: 0.35,
         onFinish: onAnimationEnded
       });
     }
