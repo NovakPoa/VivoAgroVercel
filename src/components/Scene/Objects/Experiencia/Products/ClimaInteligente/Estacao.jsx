@@ -19,7 +19,7 @@ const Estacao = ({ position = [0, 0, 0], rotation = [0, 0, 0], scale = 1, playSe
       });
     } else {
       jumpToEnd('EstacaoMeteorologica-Crescendo');
-      jumpToEnd('EstacaoMeteorologicaVFX-Crescendo');//conferir nome da animaçao
+      play('EstacaoMeteorologicaVFX-Crescendo');//conferir nome da animaçao
       play('EstacaoMeteorologicaVFX-Loop', { //conferir nome da animaçao
         loop: true,
         timeScale: 0.15,

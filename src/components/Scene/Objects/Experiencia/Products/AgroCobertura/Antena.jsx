@@ -38,7 +38,7 @@ const Antena = ({ position, rotation = [0, 0, 0], scale = 1, playSecondAnimation
       });
     } else {
       jumpToEnd('Antena-Crescendo');
-      jumpToEnd('AntenaVFX-Crescendo');//conferir nome da animaçao
+      play('AntenaVFX-Crescendo');//conferir nome da animaçao
       play('AntenaVFX-Loop', { //conferir nome da animaçao
         loop: true,
         timeScale: 0.2,

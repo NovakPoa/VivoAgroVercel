@@ -66,7 +66,7 @@ const Vaca = forwardRef(({ path, position, rotation, scale, onMeshFound, index, 
     if (!scene) return;
 
     if (skipProduct) {
-      jumpToEnd('VacaVFX-Crescendo');  //conferir nome da animaçao - scale in VFX
+      play('VacaVFX-Crescendo');  //conferir nome da animaçao - scale in VFX
       play('VacaVFX-Loop', {         //conferir nome da animaçao - loop VFX
         loop: true,
         timeScale: 0.15,
