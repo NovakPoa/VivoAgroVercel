@@ -31,7 +31,7 @@ jobs:
       - name: NPM Install          
         run: npm install
       - name: NPM Build         
-        run: npm run build
+        run: npm run deploy
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
