@@ -1,21 +1,17 @@
-import { Canvas } from "@react-three/fiber";
-import { useState } from "react";
+import React, { useState } from 'react';
+import Scene from '../Scene/Scene';
+import LoadingScreen from '../LoadingScreen/LoadingScreen';
+import useAssetsStore from '../../stores/AssetsStore';
+import { Leva } from 'leva';
 
 export default function App() {
-  const [lightColor, setLightColor] = useState("red");
-
-  const handleClick = () => {
-    setLightColor(lightColor === "red" ? "blue" : "red");
-  };
+  const { isLoading } = useAssetsStore();
 
   return (
-    <Canvas>
-      <ambientLight intensity={0.1} />
-      <directionalLight color={lightColor} position={[0, 0, 5]} />
-      <mesh onClick={handleClick}>
-        <boxGeometry args={[2, 2, 2]} />
-        <meshStandardMaterial />
-      </mesh>
-    </Canvas>
+    <>
+      <LoadingScreen />
+      {!isLoading && <Scene />}
+      <Leva hidden />
+    </>
   );
 }

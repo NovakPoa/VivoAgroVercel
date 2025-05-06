@@ -1,0 +1,68 @@
+.primary-button,
+.secondary-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-family: 'Roboto', sans-serif;
+  cursor: pointer;
+  width: 100%;
+  max-width: 320px;
+  transition: background-color 0.3s ease, width 0.3s ease, padding 0.3s ease, font-size 0.3s ease;
+}
+
+.primary-button {
+  background-color: #660099;
+  color: white;
+}
+
+.primary-button:hover {
+  background-color: #8e4eae;
+}
+
+.secondary-button {
+  background-color: #E6E6E6;
+  color: #283943;
+}
+
+.secondary-button:hover {
+  background-color: #d1d1d1;
+}
+
+.button-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+}
+
+.button-text {
+  white-space: nowrap;
+}
+
+.button-disabled {
+  pointer-events: none;
+  cursor: default;
+}
+
+/* height breakpoints */
+@media screen and (max-height: 380px) {
+
+  .primary-button,
+  .secondary-button {
+    font-size: clamp(12px, 3vh, 14px);
+    padding: clamp(8px, 2.5vh, 10px) 20px;
+  }
+}
+
+/* width breakpoints */
+@media screen and (max-width: 320px) {
+
+  .primary-button,
+  .secondary-button {
+    font-size: clamp(12px, 5vw, 14px);
+    padding: clamp(8px, 4vw, 10px) 20px;
+  }
+}

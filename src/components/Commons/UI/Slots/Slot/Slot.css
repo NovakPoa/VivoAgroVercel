@@ -1,0 +1,133 @@
+.slot-ui-container {
+  position: relative;
+  width: 25%;
+  height: auto;
+  aspect-ratio: 1;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 10px;
+}
+
+.slot-ui-container:hover {
+  transform: scale(1.1);
+}
+
+.slot-ui-container.active {
+  transform: scale(1.15);
+}
+
+.slot-ui-container .slot-circle {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 3px solid white;
+  background-color: rgba(150, 0, 255, 0.55);
+  position: absolute;
+  animation: slotPulse 1.2s infinite ease-in-out;
+}
+
+.slot-ui-container:hover .slot-circle {
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+  animation: none;
+}
+
+.slot-ui-container.active .slot-circle {
+  border-width: 3px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+  background-color: rgba(150, 0, 255, 0.2);
+  animation: none;
+}
+
+.slot-ui-container.middle-slot {
+  margin-top: 40px;
+}
+
+/* Animação */
+@keyframes slotScaleIn {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  70% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes slotScaleOut {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  30% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+@keyframes slotActiveOut {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  40% {
+    transform: scale(1.4);
+    opacity: 0.7;
+  }
+
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+@keyframes slotPulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+  }
+
+  50% {
+    transform: scale(0.9);
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
+  }
+
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+  }
+}
+
+.slot-ui-container.hidden {
+  transform: scale(0);
+  opacity: 0;
+}
+
+.slot-ui-container.visible {
+  animation: slotScaleIn var(--slot-scale-in-duration, 500ms) ease-out forwards;
+}
+
+.slot-ui-container.hiding {
+  animation: slotScaleOut var(--slot-scale-out-duration, 500ms) ease-in forwards;
+}
+
+.slot-ui-container.active.hiding {
+  animation: slotActiveOut var(--slot-scale-out-duration, 500ms) ease-in forwards;
+  pointer-events: none;
+}
