@@ -18,9 +18,9 @@ const CAMERA_TARGET = [0, 1.4, 10];
 const SMALL_OBJECT_LOOKAT = [0, 0.7, 10];
 const PLACEHOLDER_LOOKAT_OFFSET = [0, 1.5, 0];
 const INITIAL_PLACEHOLDER_POSITIONS = [
-  [8, 0, 25],
-  [0, 0, 10],
-  [-3, 0, 12],
+  [7, 0, 22],
+  [0, 0, 3],
+  [-4, 0, 15],
 ];
 
 const ClimaInteligenteScene = () => {
