@@ -37,7 +37,7 @@ const Camera = () => {
 
     if (aspectDifference < 1) {
       // Tela mais estreita/alta (mobile) - aumentar FOV
-      calculatedFOV = BASE_FOV + (30 * (1 - aspectDifference));
+      calculatedFOV = BASE_FOV + (15 * (1 - aspectDifference));
     } else {
       // Tela mais larga - reduzir FOV levemente
       calculatedFOV = BASE_FOV - (5 * (aspectDifference - 1));
@@ -70,8 +70,8 @@ const Camera = () => {
   useEffect(() => {
     if (controlsRef.current) {
       if (isFreeLookMode) {
-        controlsRef.current.minDistance = 0.01;
-        controlsRef.current.maxDistance = 0.01;
+        controlsRef.current.minDistance = 0.1;
+        controlsRef.current.maxDistance = 0.1;
         controlsRef.current.enableRotate = true;
       } else {
         controlsRef.current.minDistance = 0;

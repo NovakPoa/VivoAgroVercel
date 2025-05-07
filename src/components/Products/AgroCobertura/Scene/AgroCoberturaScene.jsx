@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Placeholders from '../../../Commons/Scene/Placeholders/Placeholders';
 import useProductScene from '../../../../hooks/useProductScene';
+import useCameraStore from '../../../../stores/CameraStore';
 import Antena from '../../../Scene/Objects/Experiencia/Products/AgroCobertura/Antena';
 import AntenaSmall from '../../../Scene/Objects/Experiencia/Products/AgroCobertura/AntenaSmall';
 import AgroNeon from '../../../Scene/Objects/Experiencia/Products/AgroCobertura/AgroNeon';
@@ -39,7 +40,8 @@ const AgroCoberturaScene = () => {
     shouldSkipProduct,
     shouldRenderNeon,
     setShouldRenderNeon,
-    selectedIndex
+    selectedIndex,
+    isCurrentProduct
   } = useProductScene(
     PRODUCT_ID,
     INITIAL_PLACEHOLDER_POSITIONS,
@@ -57,7 +59,15 @@ const AgroCoberturaScene = () => {
   const [neonPosition, setNeonPosition] = useState(false);
   const [neonRotation, setNeonRotation] = useState(false);
 
+  const isTrackingEnabledRef = useRef(false);
+  const { setCurrentTarget, stopFollowingTarget, startFollowingTarget } = useCameraStore();
+
   useEffect(() => {
+    if (selectedIndex >= 0 && isCurrentProduct) {
+      isTrackingEnabledRef.current = true;
+      startFollowingTarget();
+    }
+
     switch (selectedIndex) {
       case 0:
         setNeonPosition([0, 0, 0]);
@@ -73,6 +83,13 @@ const AgroCoberturaScene = () => {
         break;
     }
   }, [selectedIndex]);
+
+  useEffect(() => {
+    if (animateTablet) {
+      isTrackingEnabledRef.current = false;
+      stopFollowingTarget();
+    }
+  }, [animateTablet, stopFollowingTarget]);
 
   return (
     <group>
