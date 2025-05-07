@@ -48,6 +48,9 @@ const useProductScene = (
   const [animateTablet, setAnimateTablet] = useState(false);
   const [shouldSkipProduct, setShouldSkipProduct] = useState(skipProduct);
 
+  // Lidar com ordem dos frames
+  const tabletRef = useRef(false);
+
   // Placeholders Visibility
   const [placeholdersVisible, setPlaceholdersVisible] = useState(false);
   const [shouldRenderPlaceholders, handlePlaceholderAnimationOutEnded] = useComponentVisibility(placeholdersVisible);
@@ -187,13 +190,15 @@ const useProductScene = (
 
   const timerToShowTablet = useCallback(() => { // inicia quando timer do card termina
     setTimeout(() => {
-      animateToTarget(cameraTarget, 1);
+      tabletRef.current = true;
       setAnimateTablet(true);
+      animateToTarget(cameraTarget, 1);
     }, showTabletDelay);
   }, []);
 
   const timerToHideTablet = useCallback(() => { // inicia quando timer do card termina
     setTimeout(() => {
+      tabletRef.current = false;
       setAnimateTablet(false);
     }, hideTabletDelay);
   }, []);
@@ -224,7 +229,8 @@ const useProductScene = (
     shouldPlaySecondAnimation,
     shouldSkipProduct,
     setShouldRenderNeon,
-    shouldRenderNeon
+    shouldRenderNeon,
+    tabletRef
   };
 };
 

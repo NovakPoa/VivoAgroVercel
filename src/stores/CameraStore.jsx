@@ -37,6 +37,7 @@ const cameraStore = (set, get) => ({
   // Animar câmera para um target específico
   animateToTarget: (target, duration = 2) => {
     set({
+      isFollowingTarget: false,
       cameraAnimate: true,
       currentTarget: target,
       animationDuration: duration

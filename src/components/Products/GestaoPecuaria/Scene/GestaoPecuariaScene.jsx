@@ -42,7 +42,8 @@ const GestaoPecuariaScene = () => {
     shouldPlaySecondAnimation,
     shouldSkipProduct,
     shouldRenderNeon,
-    setShouldRenderNeon
+    setShouldRenderNeon,
+    tabletRef
   } = useProductScene(
     PRODUCT_ID,
     INITIAL_PLACEHOLDER_POSITIONS,
@@ -120,7 +121,7 @@ const GestaoPecuariaScene = () => {
       }
 
       // Atualizar posiçao do target da camera
-      if (isTrackingEnabledRef.current && isCurrentProduct && trackedVacaIndexRef.current === vacaIndex) {
+      if (isTrackingEnabledRef.current && isCurrentProduct && trackedVacaIndexRef.current === vacaIndex && !tabletRef.current) {
         const targetPosition = [
           position.x + PLACEHOLDER_LOOKAT_OFFSET[0],
           position.y + PLACEHOLDER_LOOKAT_OFFSET[1],
