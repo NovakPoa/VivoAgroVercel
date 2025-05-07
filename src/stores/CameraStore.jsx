@@ -1,17 +1,17 @@
 import { create } from 'zustand';
 
 const cameraStore = (set, get) => ({
-  currentTarget: [0, 0, 0], 
-  
+  currentTarget: [0, 0, 0],
+
   // Controle de animação
   cameraAnimate: false,
   animationDuration: 2,
-  
+
   // Armazenar targets por produto
   productTargets: {},
   resetCamera: false,
-  
-  isFreeLookMode: true, 
+
+  isFreeLookMode: false, // Govak - Tiramos para não ter free look
   setFreeLookMode: (isEnabled) => set({ isFreeLookMode: isEnabled }),
 
   // Registrar target para um produto
@@ -21,7 +21,7 @@ const cameraStore = (set, get) => ({
       [productId]: target
     }
   })),
-  
+
   // Animar câmera para olhar para o target do produto
   animateToProduct: (productId, duration = 2) => {
     const target = get().productTargets[productId];
@@ -33,7 +33,7 @@ const cameraStore = (set, get) => ({
       });
     }
   },
-  
+
   // Animar câmera para um target específico
   animateToTarget: (target, duration = 2) => {
     set({
@@ -42,17 +42,17 @@ const cameraStore = (set, get) => ({
       animationDuration: duration
     });
   },
-  
+
   finishAnimation: () => set({
     cameraAnimate: false
   }),
-  
+
   isFollowingTarget: false,
-  
+
   setCurrentTarget: (target) => set({
     currentTarget: target,
   }),
-  
+
   startFollowingTarget: () => set({
     isFollowingTarget: true
   }),
@@ -63,7 +63,7 @@ const cameraStore = (set, get) => ({
 
   resetCameraPosition: () => {
     set({ resetCamera: true });
-    
+
     setTimeout(() => {
       set({ resetCamera: false });
     }, 100);
