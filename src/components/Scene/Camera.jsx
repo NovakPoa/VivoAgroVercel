@@ -70,8 +70,8 @@ const Camera = () => {
   useEffect(() => {
     if (controlsRef.current) {
       if (isFreeLookMode) {
-        controlsRef.current.minDistance = 0.01;
-        controlsRef.current.maxDistance = 0.01;
+        controlsRef.current.minDistance = 0.1;
+        controlsRef.current.maxDistance = 0.1;
         controlsRef.current.enableRotate = true;
       } else {
         controlsRef.current.minDistance = 0;
