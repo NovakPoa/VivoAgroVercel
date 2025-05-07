@@ -37,7 +37,7 @@ const Camera = () => {
 
     if (aspectDifference < 1) {
       // Tela mais estreita/alta (mobile) - aumentar FOV
-      calculatedFOV = BASE_FOV + (30 * (1 - aspectDifference));
+      calculatedFOV = BASE_FOV + (15 * (1 - aspectDifference));
     } else {
       // Tela mais larga - reduzir FOV levemente
       calculatedFOV = BASE_FOV - (5 * (aspectDifference - 1));

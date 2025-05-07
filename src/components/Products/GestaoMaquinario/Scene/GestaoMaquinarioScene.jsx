@@ -42,6 +42,7 @@ const GestaoMaquinarioScene = () => {
     shouldSkipProduct,
     shouldRenderNeon,
     setShouldRenderNeon,
+    tabletRef
   } = useProductScene(
     PRODUCT_ID,
     INITIAL_PLACEHOLDER_POSITIONS,
@@ -93,13 +94,11 @@ const GestaoMaquinarioScene = () => {
   }, [selectedIndex, isCurrentProduct]);
 
   useEffect(() => {
-    if (animateTablet || !isCurrentProduct) {
+    if (animateTablet) {
       isTrackingEnabledRef.current = false;
       stopFollowingTarget();
-    } else if (selectedIndex >= 0) {
-      isTrackingEnabledRef.current = true;
     }
-  }, [animateTablet, isCurrentProduct, stopFollowingTarget, selectedIndex]);
+  }, [animateTablet, stopFollowingTarget]);
 
   useEffect(() => {
     if (shouldSkipProduct && isCurrentProduct) {
@@ -125,7 +124,7 @@ const GestaoMaquinarioScene = () => {
       }
 
       // Atualizar posiçao do target da camera
-      if (isTrackingEnabledRef.current && isCurrentProduct && trackedTratorIndexRef.current === tratorIndex) {
+      if (isTrackingEnabledRef.current && isCurrentProduct && trackedTratorIndexRef.current === tratorIndex && !tabletRef.current) {
         const targetPosition = [
           position.x + PLACEHOLDER_LOOKAT_OFFSET[0],
           position.y + PLACEHOLDER_LOOKAT_OFFSET[1],
